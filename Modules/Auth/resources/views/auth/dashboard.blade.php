@@ -1,3 +1,6 @@
 <h1>Dashboard</h1>
 
-<a href="{{ route('user.logout') }}">Logout</a>
+<form  action="{{ route('user.logout') }}" method="POST">
+    @csrf
+    <button type="submit">Logout</button>
+</form>

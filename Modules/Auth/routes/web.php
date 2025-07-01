@@ -8,10 +8,15 @@ use Modules\Auth\Http\Controllers\LoginController;
 //     Route::resource('auths', AuthController::class)->names('auth');
 // });
 
-Route::get('/', [LoginController::class, 'index'])->name('user.login');
-Route::post('/auth/login', [LoginController::class, 'store'])->name('user.login.store');
 
+// Guest Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('user.login');
+    Route::post('/user/login', [LoginController::class, 'store'])->name('user.login.store');
+});
 
-Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('user.dashboard');
-Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
-
+// Authenticated Routes 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('user.dashboard');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('user.logout');
+});

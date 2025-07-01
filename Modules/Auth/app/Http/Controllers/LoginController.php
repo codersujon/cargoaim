@@ -14,6 +14,9 @@ class LoginController extends Controller {
      * Index
      */
     public function index(){
+        if(Auth::check()){
+            return redirect()->route('user.dashboard');
+        }
         return view('auth::auth.login');
     }
 
@@ -49,7 +52,7 @@ class LoginController extends Controller {
     /**
      * Logout
      */
-     public function logout(Request $request){
+    public function logout(Request $request){
         Auth::logout(); // Logs out the current user
 
         $request->session()->invalidate(); // Invalidates the session
