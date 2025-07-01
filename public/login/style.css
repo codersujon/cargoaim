@@ -1,0 +1,130 @@
+.settings-button {
+    position: fixed;
+    top: 20px;
+    right: 0px;
+    padding: 10px 20px 10px 15px;
+    background-color: #3c34db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    border-radius: 30% 0% 0 30%;
+}
+
+.settings-button:hover {
+    background-color: #2980b9;
+}
+
+.settings-button i {
+    animation: spin 2s linear infinite;
+}
+
+/* Keyframes to rotate the icon */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #f9f9f9;
+    box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-left: 2px solid #ddd;
+    border-radius: 2px 0 0 2px;
+    z-index: 9999;
+    /* <-- Add this line */
+}
+
+.popup.open {
+    right: 0;
+}
+
+.popup-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.popup .color-picker {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.popup .color-picker:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.popup .color-picker-label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.settings-button.popup-open {
+    right: 300px;
+    /* Move the settings button to the left side of the popup */
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.popup-close:hover {
+    background-color: #c0392b;
+}
+
+.btn-theme {
+    z-index: 1;
+    position: relative;
+}
+
+@media (max-width: 600px) {
+    .popup {
+        width: 250px;
+        right: -250px;
+    }
+
+    .settings-button.popup-open {
+        right: 250px;
+    }
+}
+
+.info {
+    display: none;
+    /* Hide all slides by default */
+}
+
+.info.active {
+    display: block;
+    /* Show only active slide */
+}
