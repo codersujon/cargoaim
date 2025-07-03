@@ -14429,7 +14429,8 @@ html[data-bs-theme="dark"] #light-dark-mode .ti-moon::before {
 }
 .side-nav > .side-nav-item.active .side-nav-link.active {
   color: var(--osen-menu-item-active-color);
-  background: var(--osen-menu-item-active-bg);
+  background: none;
+  /* background: var(--osen-menu-item-active-bg); */
 }
 html[data-sidenav-size="condensed"]:not([data-layout="topnav"]) .app-topbar {
   z-index: 1005;

@@ -1,6 +1,3 @@
-
-
-
 {{-- // $basicInfo = \App\Models\BasicInformation::where('id', 1)->first(); --}}
 
 
@@ -9,19 +6,19 @@
     <a href="" class="logo">
         <span class="logo-light">
             <span class="logo-lg">
-                {{-- <img src="{{ asset('public/upload/' . $basicInfo->logo) }}" alt="logo"> --}}
+                <img src="{{ asset('upload/bscImg11745038891.jpg') }}" alt="logo">
             </span>
             <span class="logo-sm">
-                {{-- <img src="{{ asset('public/upload/' . $basicInfo->logo) }}"
-                    alt="small logo"> --}}
+                <img src="{{ asset('upload/bscImg11745038891.jpg') }}"
+                    alt="small logo">
             </span>
         </span>
 
         <span class="logo-dark">
-           {{-- <span class="logo-lg"><img src="{{ asset('public/upload/' . $basicInfo->logo) }}"
+           <span class="logo-lg"><img src="{{ asset('upload/bscImg11745038891.jpg') }}"
                     alt="dark logo"></span>
-            <span class="logo-sm"><img src="{{ asset('public/upload/' . $basicInfo->logo) }}"
-                    alt="small logo"></span> --}}
+            <span class="logo-sm"><img src="{{ asset('upload/bscImg11745038891.jpg') }}"
+                    alt="small logo"></span>
         </span>
     </a>
 

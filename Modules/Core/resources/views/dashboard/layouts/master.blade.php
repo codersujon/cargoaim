@@ -24,9 +24,9 @@
     <!-- App favicon -->
      {{-- <link rel="shortcut icon" href="{{ asset('upload/' . $basicInfo->favIcon) }}"> --}}
 
-    <!---- font-awesome ------>
+    {{-- <!---- font-awesome ------>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!---- font-awesome ------>
+    <!---- font-awesome ------> --}}
 
     <!-- Theme Config Js -->
     <script src="{{ asset('backend') }}/assets/js/config.js"></script>
@@ -182,8 +182,11 @@
 
     <script src="{{ asset('backend') }}/flatpickr.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     
-    {{-- @include('euens.customjs.js') --}}
+    
+    <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
+
     
     @yield('script')
 
