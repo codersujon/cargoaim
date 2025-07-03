@@ -3,7 +3,7 @@
 
 <div class="sidenav-menu">
     <!-- Brand Logo -->
-    <a href="" class="logo">
+    <a href="{{ route('user.dashboard') }}" class="logo">
         <span class="logo-light">
             <span class="logo-lg">
                 <img src="{{ asset('upload/bscImg11745038891.jpg') }}" alt="logo">
@@ -54,7 +54,7 @@
             </li>
 
             <li class="side-nav-item">
-                <a href="" class="side-nav-link">
+                <a href="{{ url('language') }}" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-language"></i></span>
                     <span class="menu-text"> Language </span>
                    {{-- <span class="menu-text"> {{ transText('language_menu') }} </span>  --}}

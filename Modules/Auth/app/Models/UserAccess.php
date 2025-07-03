@@ -22,7 +22,8 @@ class UserAccess extends Authenticatable
     protected $fillable = [
         'rowId',
         'userId',
-        'userPassword'
+        'userPassword',
+        'user_language'
     ];
 
     // protected static function newFactory(): UserAccessFactory
