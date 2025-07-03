@@ -1,17 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
 
+{{-- <html lang="en"> --}}
+<html lang="en" data-sidenav-size="condensed" data-bs-theme="light" data-menu-color="dark" data-topbar-color="light" data-layout-mode="fluid">
 
 <!-- Mirrored from coderthemes.com/osen/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Apr 2025 04:49:51 GMT -->
+
 <head>
     <meta charset="utf-8" />
-    <title>Cargoaim @yield('title', '')</title>
+
+    
+    {{--  $basicInfo = \App\Models\BasicInformation::where('id', 1)->first(); --}}
+
+    <title> Dashboard </title>
+    {{-- <title> {{ $basicInfo? $basicInfo->name : '' }} @yield('titleHeader') </title> --}}
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
+     {{-- <link rel="shortcut icon" href="{{ asset('upload/' . $basicInfo->favIcon) }}"> --}}
+
+    {{-- <!---- font-awesome ------>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!---- font-awesome ------> --}}
 
     <!-- Theme Config Js -->
     <script src="{{ asset('backend') }}/assets/js/config.js"></script>
@@ -24,643 +39,94 @@
 
     <!-- Icons css -->
     <link href="{{ asset('backend') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/dataTables.css" />
+
+    <!-- flatpickr -->
+    <link href="{{ asset('backend') }}/flatpickr.css" rel="stylesheet" type="text/css" />
+    <!-- flatpickr -->
+
+   
+    
 </head>
 
+
+
 <body>
+
+    @php
+        $color = Modules\Core\Models\ColorManage::where('user_info', 'SuperAdmin')->where('active_color', 1)->first();
+    @endphp
+
+    @if($color)
+       
+        <style>
+            :root {
+                --osen-menu-bg-first: {{ $color->sidebar_left_color }} !important;
+                --osen-menu-bg-secondary: {{ $color->sidebar_right_color }};
+                --osen-menu-item-color: {{ $color->sidebar_text_color }} !important;
+                --osen-menu-bg: {{ $color->sidebar_left_color }} !important;
+
+
+                --osen-topbar-bg: {{ $color->layout_left_color }} !important;
+                --osen-topbar-bg-secondary: {{ $color->layout_right_color }} !important;
+                --osen-topbar-user-border: {{ $color->sidebar_text_color }} !important;
+                --osen-topbar-user-bg: {{ $color->layout_left_color }} !important;
+                
+                --osen-secondary-bg: {{ $color->card_body_color }} !important;
+                --osen-body-color-new: {{ $color->card_text_color }} !important;
+
+                --osen-card-header-color: {{ $color->card_header_color }} !important;
+                --osen-card-header-text-color: {{ $color->card_border_color }} !important;
+                --osen-card-title-color: {{ $color->card_border_color }} !important;
+                --osen-btn-bg-primary: {{ $color->btn_primary_color }};
+                --osen-btn-bg-success: {{ $color->btn_success_color }};
+                --osen-btn-bg-danger: {{ $color->btn_danger_color }};
+                --osen-btn-bg-info: {{ $color->btn_info_color }};
+                --osen-btn-bg-warning: {{ $color->btn_warning_color }};
+                --osen-btn-bg-secondary: {{ $color->btn_secondary_color }};
+                --osen-btn-bg-dark: {{ $color->btn_dark_color }};
+                --osen-table-header-bg-color: {{ $color->table_header_bg_color }};
+                --osen-table-header-text-color: {{ $color->table_header_text_color }};
+                --osen-body-color: {{ $color->table_text_color }} !important;
+                --osen-light: {{ $color->table_header_border_color }} !important;
+                --osen-topbar-item-color: {{ $color->sidebar_text_color }} !important;
+                --osen-topbar-item-hover-color: {{ $color->sidebar_text_hover_color }} !important;
+                --osen-side-bar-hover-color: {{ $color->sidebar_menu_hover_color }} !important;
+                --osen-menu-item-active-bg: {{ $color->sidebar_menu_hover_color }} !important;
+                --osen-menu-item-hover-bg: {{ $color->sidebar_menu_hover_color }} !important;
+                --osen-input-border-color: {{ $color->input_border_color }} !important;
+                --osen-background-color: {{ $color->body_bg_color }} !important;
+                --osen-border-color: {{ $color->border_dashed }} !important;
+                --osen-inp-select-bg-color: {{ $color->inp_select_bg }} !important;
+                --osen-inp-select-fcus-color: {{ $color->inp_focus_bg }} !important;
+                --osen-border-inp-select-color: {{ $color->inp_focus_border }} !important;
+                --osen-border-inp-select-active-color: {{ $color->inp_selected_border }} !important;
+                --osen-inp-suggestions-box-bg-color: {{ $color->inp_suggest_bg }} !important;
+                --osen-inp-search-spinner-color: {{ $color->inp_search_spinner }} !important;
+
+                /* --osen-menu-item-color: {{ $color->sidebar_text_color }} !important; */
+            }
+        </style>
+    @endif
+
+
+
     <!-- Begin page -->
     <div class="wrapper">
 
         
         <!-- Sidenav Menu Start -->
-        <div class="sidenav-menu">
-
-            <!-- Brand Logo -->
-            <a href="index.html" class="logo">
-                <span class="logo-light">
-                    <span class="logo-lg"><img src="{{ asset('backend') }}/assets/images/logo.png" alt="logo"></span>
-                    <span class="logo-sm"><img src="{{ asset('backend') }}/assets/images/logo-sm.png" alt="small logo"></span>
-                </span>
-
-                <span class="logo-dark">
-                    <span class="logo-lg"><img src="{{ asset('backend') }}/assets/images/logo-dark.png" alt="dark logo"></span>
-                    <span class="logo-sm"><img src="{{ asset('backend') }}/assets/images/logo-sm.png" alt="small logo"></span>
-                </span>
-            </a>
-
-            <!-- Sidebar Hover Menu Toggle Button -->
-            <button class="button-sm-hover">
-                <i class="ti ti-circle align-middle"></i>
-            </button>
-
-            <!-- Full Sidebar Menu Close Button -->
-            <button class="button-close-fullsidebar">
-                <i class="ti ti-x align-middle"></i>
-            </button>
-
-            <div data-simplebar>
-
-                <!--- Sidenav Menu -->
-                <ul class="side-nav">
-                    <li class="side-nav-title">Dash</li>
-
-                    <li class="side-nav-item">
-                        <a href="index.html" class="side-nav-link">
-                            <span class="menu-icon"><i class="ti ti-dashboard"></i></span>
-                            <span class="menu-text"> Sales </span>
-                        </a>
-                    </li>
-
-                    <li class="side-nav-title mt-2">Apps & Pages</li>
-
-                    <li class="side-nav-item">
-                        <a href="apps-chat.html" class="side-nav-link">
-                            <span class="menu-icon"><i class="ti ti-message"></i></span>
-                            <span class="menu-text"> Chat </span>
-                        </a>
-                    </li>
-
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarHospital" aria-expanded="false" aria-controls="sidebarHospital" class="side-nav-link">
-                            <span class="menu-icon"><i class="ti ti-medical-cross"></i></span>
-                            <span class="menu-text"> Hospital</span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarHospital">
-                            <ul class="sub-menu">
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-doctors.html" class="side-nav-link">
-                                        <span class="menu-text">Doctors</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-doctor-details.html" class="side-nav-link">
-                                        <span class="menu-text">Doctor Details</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-add-doctors.html" class="side-nav-link">
-                                        <span class="menu-text">Add Doctors</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-patients.html" class="side-nav-link">
-                                        <span class="menu-text">Patients</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-patient-details.html" class="side-nav-link">
-                                        <span class="menu-text">Patient Details</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-add-patients.html" class="side-nav-link">
-                                        <span class="menu-text">Add Patients</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-appointments.html" class="side-nav-link">
-                                        <span class="menu-text">Appointments</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-payments.html" class="side-nav-link">
-                                        <span class="menu-text">Payments</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-departments.html" class="side-nav-link">
-                                        <span class="menu-text">Departments</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-reviews.html" class="side-nav-link">
-                                        <span class="menu-text">Reviews</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-contacts.html" class="side-nav-link">
-                                        <span class="menu-text">Hospital Contacts</span>
-                                    </a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="apps-hospital-staffs.html" class="side-nav-link">
-                                        <span class="menu-text">Staffs</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                </ul>
-
-                <div class="clearfix"></div>
-            </div>
-        </div>
+            @include('core::dashboard.partials.sidebar')
         <!-- Sidenav Menu End -->
         
 
         <!-- Topbar Start -->
-        <header class="app-topbar">
-            <div class="page-container topbar-menu">
-                <div class="d-flex align-items-center gap-2">
-
-                    <!-- Brand Logo -->
-                    <a href="index.html" class="logo">
-                        <span class="logo-light">
-                            <span class="logo-lg"><img src="{{ asset('backend') }}/assets/images/logo.png" alt="logo"></span>
-                            <span class="logo-sm"><img src="{{ asset('backend') }}/assets/images/logo-sm.png" alt="small logo"></span>
-                        </span>
-
-                        <span class="logo-dark">
-                            <span class="logo-lg"><img src="{{ asset('backend') }}/assets/images/logo-dark.png" alt="dark logo"></span>
-                            <span class="logo-sm"><img src="{{ asset('backend') }}/assets/images/logo-sm.png" alt="small logo"></span>
-                        </span>
-                    </a>
-
-                    <!-- Sidebar Menu Toggle Button -->
-                    <button class="sidenav-toggle-button px-2">
-                        <i class="ti ti-menu-deep fs-24"></i>
-                    </button>
-
-                    <!-- Horizontal Menu Toggle Button -->
-                    <button class="topnav-toggle-button px-2" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
-                        <i class="ti ti-menu-deep fs-22"></i>
-                    </button>
-
-                    <!-- Button Trigger Search Modal -->
-                    <div class="topbar-search text-muted d-none d-xl-flex gap-2 align-items-center" data-bs-toggle="modal" data-bs-target="#searchModal" type="button">
-                        <i class="ti ti-search fs-18"></i>
-                        <span class="me-2">Search something..</span>
-                        <span class="ms-auto fw-medium">⌘K</span>
-                    </div>
-
-                    <!-- Mega Menu Dropdown -->
-                    <div class="topbar-item d-none d-md-flex">
-                        <div class="dropdown">
-                            <a href="#" class="topbar-link btn btn-link px-2 dropdown-toggle drop-arrow-none fw-medium" data-bs-toggle="dropdown" data-bs-trigger="hover" data-bs-offset="0,17" aria-haspopup="false" aria-expanded="false">
-                                Pages <i class="ti ti-chevron-down ms-1"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-xxl p-0">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <div class="p-3">
-                                            <h5 class="mb-2 fw-semibold">UI Components</h5>
-                                            <ul class="list-unstyled megamenu-list">
-                                                <li>
-                                                    <a href="#!">Widgets</a>
-                                                </li>
-                                                <li>
-                                                    <a href="extended-dragula.html">Dragula</a>
-                                                </li>
-                                                <li>
-                                                    <a href="ui-dropdowns.html">Dropdowns</a>
-                                                </li>
-                                                <li>
-                                                    <a href="extended-ratings.html">Ratings</a>
-                                                </li>
-                                                <li>
-                                                    <a href="extended-sweetalerts.html">Sweet Alerts</a>
-                                                </li>
-                                                <li>
-                                                    <a href="extended-scrollbar.html">Scrollbar</a>
-                                                </li>
-                                                <li>
-                                                    <a href="form-range-slider.html">Range Slider</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="p-3">
-                                            <h5 class="mb-2 fw-semibold">Applications</h5>
-                                            <ul class="list-unstyled megamenu-list">
-                                                <li>
-                                                    <a href="apps-ecommerce-products.html">eCommerce Pages</a>
-                                                </li>
-                                                <li>
-                                                    <a href="apps-hospital-doctors.html">Hospital</a>
-                                                </li>
-                                                <li>
-                                                    <a href="apps-email.html">Email</a>
-                                                </li>
-                                                <li>
-                                                    <a href="apps-calendar.html">Calendar</a>
-                                                </li>
-                                                <li>
-                                                    <a href="apps-kanban.html">Kanban Board</a>
-                                                </li>
-                                                <li>
-                                                    <a href="apps-invoices.html">Invoice Management</a>
-                                                </li>
-                                                <li>
-                                                    <a href="pages-pricing.html">Pricing</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4 bg-light bg-opacity-50">
-                                        <div class="p-3">
-                                            <h5 class="mb-2 fw-semibold">Extra Pages</h5>
-                                            <ul class="list-unstyled megamenu-list">
-                                                <li>
-                                                    <a href="javascript:void(0);">Left Sidebar with User</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">Menu Collapsed</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">Small Left Sidebar</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">New Header Style</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">My Account</a>
-                                                </li>
-                                                <li>
-                                                    <a href="pages-coming-soon.html">Maintenance & Coming Soon</a>
-                                                </li>
-                                            </ul>
-                                        </div> <!-- end .bg-light-->
-                                    </div> <!-- end col-->
-                                </div> <!-- end row-->
-                            </div> <!-- .dropdown-menu-->
-                        </div> <!-- .dropdown-->
-                    </div> <!-- end topbar-item -->
-                </div>
-
-                <div class="d-flex align-items-center gap-2">
-
-                    <!-- Search for small devices -->
-                    <div class="topbar-item d-flex d-xl-none">
-                        <button class="topbar-link" data-bs-toggle="modal" data-bs-target="#searchModal" type="button">
-                            <i class="ti ti-search fs-22"></i>
-                        </button>
-                    </div>
-
-                    <!-- Language Dropdown -->
-                    <div class="topbar-item">
-                        <div class="dropdown">
-                            <button class="topbar-link" data-bs-toggle="dropdown" data-bs-offset="0,25" type="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ asset('backend') }}/assets/images/flags/us.svg" alt="user-image" class="w-100 rounded" height="18" id="selected-language-image">
-                            </button>
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="en">
-                                    <img src="{{ asset('backend') }}/assets/images/flags/us.svg" alt="user-image" class="me-1 rounded" height="18" data-translator-image> <span class="align-middle">English</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item" data-translator-lang="hi">
-                                    <img src="{{ asset('backend') }}/assets/images/flags/in.svg" alt="user-image" class="me-1 rounded" height="18" data-translator-image> <span class="align-middle">Hindi</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{ asset('backend') }}/assets/images/flags/de.svg" alt="user-image" class="me-1 rounded" height="18"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{ asset('backend') }}/assets/images/flags/it.svg" alt="user-image" class="me-1 rounded" height="18"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{ asset('backend') }}/assets/images/flags/es.svg" alt="user-image" class="me-1 rounded" height="18"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="{{ asset('backend') }}/assets/images/flags/ru.svg" alt="user-image" class="me-1 rounded" height="18"> <span class="align-middle">Russian</span>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Notification Dropdown -->
-                    <div class="topbar-item">
-                        <div class="dropdown">
-                            <button class="topbar-link dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown" data-bs-offset="0,25" type="button" data-bs-auto-close="outside" aria-haspopup="false" aria-expanded="false">
-                                <i class="ti ti-bell animate-ring fs-22"></i>
-                                <span class="noti-icon-badge"></span>
-                            </button>
-
-                            <div class="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg" style="min-height: 300px;">
-                                <div class="p-3 border-bottom border-dashed">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="m-0 fs-16 fw-semibold"> Notifications</h6>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="dropdown">
-                                                <a href="#" class="dropdown-toggle drop-arrow-none link-dark" data-bs-toggle="dropdown" data-bs-offset="0,15" aria-expanded="false">
-                                                    <i class="ti ti-settings fs-22 align-middle"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);" class="dropdown-item">Mark as Read</a>
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);" class="dropdown-item">Delete All</a>
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);" class="dropdown-item">Do not Disturb</a>
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);" class="dropdown-item">Other Settings</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="position-relative z-2 card shadow-none rounded-0" style="max-height: 300px;" data-simplebar>
-                                    <!-- item-->
-                                    <div class="dropdown-item notification-item py-2 text-wrap active" id="notification-1">
-                                        <span class="d-flex align-items-center">
-                                            <span class="me-3 position-relative flex-shrink-0">
-                                                <img src="{{ asset('backend') }}/assets/images/users/avatar-2.jpg" class="avatar-md rounded-circle" alt="" />
-                                                <span class="position-absolute rounded-pill bg-danger notification-badge">
-                                                    <i class="ti ti-message-circle"></i>
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
-                                            </span>
-                                            <span class="flex-grow-1 text-muted">
-                                                <span class="fw-medium text-body">Glady Haid</span> commented on <span class="fw-medium text-body">paces admin status</span>
-                                                <br />
-                                                <span class="fs-12">25m ago</span>
-                                            </span>
-                                            <span class="notification-item-close">
-                                                <button type="button" class="btn btn-ghost-danger rounded-circle btn-sm btn-icon" data-dismissible="#notification-1">
-                                                    <i class="ti ti-x fs-16"></i>
-                                                </button>
-                                            </span>
-                                        </span>
-                                    </div>
-
-                                    <!-- item-->
-                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-2">
-                                        <span class="d-flex align-items-center">
-                                            <span class="me-3 position-relative flex-shrink-0">
-                                                <img src="{{ asset('backend') }}/assets/images/users/avatar-4.jpg" class="avatar-md rounded-circle" alt="" />
-                                                <span class="position-absolute rounded-pill bg-info notification-badge">
-                                                    <i class="ti ti-currency-dollar"></i>
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
-                                            </span>
-                                            <span class="flex-grow-1 text-muted">
-                                                <span class="fw-medium text-body">Tommy Berry</span> donated <span class="text-success">$100.00</span> for <span class="fw-medium text-body">Carbon removal program</span>
-                                                <br />
-                                                <span class="fs-12">58m ago</span>
-                                            </span>
-                                            <span class="notification-item-close">
-                                                <button type="button" class="btn btn-ghost-danger rounded-circle btn-sm btn-icon" data-dismissible="#notification-2">
-                                                    <i class="ti ti-x fs-16"></i>
-                                                </button>
-                                            </span>
-                                        </span>
-                                    </div>
-
-                                    <!-- item-->
-                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-3">
-                                        <span class="d-flex align-items-center">
-                                            <div class="avatar-md flex-shrink-0 me-3">
-                                                <span class="avatar-title bg-success-subtle text-success rounded-circle fs-22">
-                                                    <iconify-icon icon="solar:wallet-money-bold-duotone"></iconify-icon>
-                                                </span>
-                                            </div>
-                                            <span class="flex-grow-1 text-muted">
-                                                You withdraw a <span class="fw-medium text-body">$500</span> by <span class="fw-medium text-body">New York ATM</span>
-                                                <br />
-                                                <span class="fs-12">2h ago</span>
-                                            </span>
-                                            <span class="notification-item-close">
-                                                <button type="button" class="btn btn-ghost-danger rounded-circle btn-sm btn-icon" data-dismissible="#notification-3">
-                                                    <i class="ti ti-x fs-16"></i>
-                                                </button>
-                                            </span>
-                                        </span>
-                                    </div>
-
-                                    <!-- item-->
-                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-4">
-                                        <span class="d-flex align-items-center">
-                                            <span class="me-3 position-relative flex-shrink-0">
-                                                <img src="{{ asset('backend') }}/assets/images/users/avatar-7.jpg" class="avatar-md rounded-circle" alt="" />
-                                                <span class="position-absolute rounded-pill bg-secondary notification-badge">
-                                                    <i class="ti ti-plus"></i>
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
-                                            </span>
-                                            <span class="flex-grow-1 text-muted">
-                                                <span class="fw-medium text-body">Richard Allen</span> followed you in <span class="fw-medium text-body">Facebook</span>
-                                                <br />
-                                                <span class="fs-12">3h ago</span>
-                                            </span>
-                                            <span class="notification-item-close">
-                                                <button type="button" class="btn btn-ghost-danger rounded-circle btn-sm btn-icon" data-dismissible="#notification-4">
-                                                    <i class="ti ti-x fs-16"></i>
-                                                </button>
-                                            </span>
-                                        </span>
-                                    </div>
-
-                                    <!-- item-->
-                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-5">
-                                        <span class="d-flex align-items-center">
-                                            <span class="me-3 position-relative flex-shrink-0">
-                                                <img src="{{ asset('backend') }}/assets/images/users/avatar-10.jpg" class="avatar-md rounded-circle" alt="" />
-                                                <span class="position-absolute rounded-pill bg-danger notification-badge">
-                                                    <i class="ti ti-heart-filled"></i>
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
-                                            </span>
-                                            <span class="flex-grow-1 text-muted">
-                                                <span class="fw-medium text-body">Victor Collier</span> liked you recent photo in <span class="fw-medium text-body">Instagram</span>
-                                                <br />
-                                                <span class="fs-12">10h ago</span>
-                                            </span>
-                                            <span class="notification-item-close">
-                                                <button type="button" class="btn btn-ghost-danger rounded-circle btn-sm btn-icon" data-dismissible="#notification-5">
-                                                    <i class="ti ti-x fs-16"></i>
-                                                </button>
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div style="height: 300px;" class="d-flex align-items-center justify-content-center text-center position-absolute top-0 bottom-0 start-0 end-0 z-1">
-                                    <div>
-                                        <iconify-icon icon="line-md:bell-twotone-alert-loop" class="fs-80 text-secondary mt-2"></iconify-icon>
-                                        <h4 class="fw-semibold mb-0 fst-italic lh-base mt-3">Hey! 👋 <br />You have no any notifications</h4>
-                                    </div>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);" class="dropdown-item notification-item position-fixed z-2 bottom-0 text-center text-reset text-decoration-underline link-offset-2 fw-bold notify-item border-top border-light py-2">
-                                    View All
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Apps Dropdown -->
-                    <div class="topbar-item d-none d-sm-flex">
-                        <div class="dropdown">
-                            <button class="topbar-link dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown" data-bs-offset="0,25" type="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="ti ti-apps fs-22"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg p-0">
-                                <div class="p-2">
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/slack.svg" alt="slack">
-                                                <span>Slack</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/gitlab.svg" alt="Github">
-                                                <span>Gitlab</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/dribbble.svg" alt="dribbble">
-                                                <span>Dribbble</span>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/bitbucket.svg" alt="bitbucket">
-                                                <span>Bitbucket</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/dropbox.svg" alt="dropbox">
-                                                <span>Dropbox</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/google-cloud.svg" alt="G Suite">
-                                                <span>G Cloud</span>
-                                            </a>
-                                        </div>
-                                    </div> <!-- end row-->
-
-                                    <div class="row g-0">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/aws.svg" alt="bitbucket">
-                                                <span>AWS</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/digital-ocean.svg" alt="dropbox">
-                                                <span>Server</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="{{ asset('backend') }}/assets/images/brands/bootstrap.svg" alt="G Suite">
-                                                <span>Bootstrap</span>
-                                            </a>
-                                        </div>
-                                    </div> <!-- end row-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Button Trigger Customizer Offcanvas -->
-                    <div class="topbar-item d-none d-sm-flex">
-                        <button class="topbar-link" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas" type="button">
-                            <i class="ti ti-settings fs-22"></i>
-                        </button>
-                    </div>
-
-                    <!-- Light/Dark Mode Button -->
-                    <div class="topbar-item d-none d-sm-flex">
-                        <button class="topbar-link" id="light-dark-mode" type="button">
-                            <i class="ti ti-moon fs-22"></i>
-                        </button>
-                    </div>
-
-                    <!-- User Dropdown -->
-                    <div class="topbar-item nav-user">
-                        <div class="dropdown">
-                            <a class="topbar-link dropdown-toggle drop-arrow-none px-2" data-bs-toggle="dropdown" data-bs-offset="0,19" type="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ asset('backend') }}/assets/images/users/avatar-1.jpg" width="32" class="rounded-circle me-lg-2 d-flex" alt="user-image">
-                                <span class="d-lg-flex flex-column gap-1 d-none">
-                                    <h5 class="my-0">Dhanoo K.</h5>
-                                    <h6 class="my-0 fw-normal">Premium</h6>
-                                </span>
-                                <i class="ti ti-chevron-down d-none d-lg-block align-middle ms-2"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <!-- item-->
-                                <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Welcome !</h6>
-                                </div>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <i class="ti ti-user-hexagon me-1 fs-17 align-middle"></i>
-                                    <span class="align-middle">My Account</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <i class="ti ti-wallet me-1 fs-17 align-middle"></i>
-                                    <span class="align-middle">Wallet : <span class="fw-semibold">$985.25</span></span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <i class="ti ti-settings me-1 fs-17 align-middle"></i>
-                                    <span class="align-middle">Settings</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <i class="ti ti-lifebuoy me-1 fs-17 align-middle"></i>
-                                    <span class="align-middle">Support</span>
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <i class="ti ti-lock-square-rounded me-1 fs-17 align-middle"></i>
-                                    <span class="align-middle">Lock Screen</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="{{ route('user.logout') }}" class="dropdown-item active fw-semibold text-danger">
-                                    <i class="ti ti-logout me-1 fs-17 align-middle"></i>
-                                    <span class="align-middle">Sign Out</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+            @include('core::dashboard.partials.topbar')
         <!-- Topbar End -->
 
         <!-- Search Modal -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        {{-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content bg-transparent">
                     <div class="card mb-1">
@@ -672,7 +138,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
@@ -685,22 +151,7 @@
             </div> <!-- container -->
 
             <!-- Footer Start -->
-            <footer class="footer">
-                <div class="page-container">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start">
-                            <script>document.write(new Date().getFullYear())</script> © Osen - By <span class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">Coderthemes</span>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-md-end footer-links d-none d-md-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+                @include('core::dashboard.partials.footer')
             <!-- end Footer -->
 
         </div>
@@ -713,376 +164,12 @@
     <!-- END wrapper -->
 
     <!-- Theme Settings -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
-        <div class="d-flex align-items-center gap-2 px-3 py-3 offcanvas-header border-bottom border-dashed">
-            <h5 class="flex-grow-1 mb-0">Theme Settings</h5>
+    @include('core::dashboard.partials.theme_settings')
 
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
 
-        <div class="offcanvas-body p-0 h-100" data-simplebar>
-            <div class="p-3 border-bottom border-dashed">
-                <h5 class="mb-3 fs-16 fw-bold">Color Scheme</h5>
 
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-light" value="light">
-                            <label class="form-check-label p-3 w-100 d-flex justify-content-center align-items-center" for="layout-color-light">
-                                <iconify-icon icon="solar:sun-bold-duotone" class="fs-32 text-muted"></iconify-icon>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Light</h5>
-                    </div>
 
-                    <div class="col-4">
-                        <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-dark" value="dark">
-                            <label class="form-check-label p-3 w-100 d-flex justify-content-center align-items-center" for="layout-color-dark">
-                                <iconify-icon icon="solar:cloud-sun-2-bold-duotone" class="fs-32 text-muted"></iconify-icon>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Dark</h5>
-                    </div>
-                </div>
-            </div>
 
-            <div class="p-3 border-bottom border-dashed">
-                <h5 class="mb-3 fs-16 fw-bold">Layout Mode</h5>
-
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-layout-mode" id="layout-mode-fluid" value="fluid">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="layout-mode-fluid">
-                                <div>
-                                    <span class="d-flex h-100">
-                                        <span class="flex-shrink-0">
-                                            <span class="bg-light d-flex h-100 border-end flex-column p-1 px-2">
-                                                <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
-                                                <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                                <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                                <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                                <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            </span>
-                                        </span>
-                                        <span class="flex-grow-1">
-                                            <span class="d-flex h-100 flex-column rounded-2">
-                                                <span class="bg-light d-block p-1"></span>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <span class="d-flex h-100 flex-column">
-                                        <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
-                                            <span class="d-block p-1 bg-dark-subtle rounded me-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
-                                        </span>
-                                        <span class="bg-light d-block p-1"></span>
-                                    </span>
-                                </div>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Fluid</h5>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-layout-mode" id="data-layout-detached" value="detached">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="data-layout-detached">
-                                <span class="d-flex h-100 flex-column">
-                                    <span class="bg-light d-flex p-1 align-items-center border-bottom ">
-                                        <span class="d-block p-1 bg-dark-subtle rounded me-1"></span>
-                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
-                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
-                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
-                                        <span class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
-                                    </span>
-                                    <span class="d-flex h-100 p-1 px-2">
-                                        <span class="flex-shrink-0">
-                                            <span class="bg-light d-flex h-100 flex-column p-1 px-2">
-                                                <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                                <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                                <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100"></span>
-                                            </span>
-                                        </span>
-                                    </span>
-                                    <span class="bg-light d-block p-1 mt-auto px-2"></span>
-                                </span>
-
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Detached</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-3 border-bottom border-dashed">
-                <h5 class="mb-3 fs-16 fw-bold">Topbar Color</h5>
-
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-light" value="light">
-                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="topbar-color-light">
-                                <span class="d-flex align-items-center justify-content-center h-100">
-                                    <span class="p-2 d-inline-flex shadow rounded-circle bg-white"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Light</h5>
-                    </div>
-
-                    <div class="col-3">
-                        <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-dark" value="dark">
-                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="topbar-color-dark">
-                                <span class="d-flex align-items-center justify-content-center h-100">
-                                    <span class="p-2 d-inline-flex shadow rounded-circle bg-dark"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Dark</h5>
-                    </div>
-
-                    <div class="col-3">
-                        <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-brand" value="brand">
-                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="topbar-color-brand">
-                                <span class="d-flex align-items-center justify-content-center h-100">
-                                    <span class="p-2 d-inline-flex shadow rounded-circle bg-primary"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Gradient</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-3 border-bottom border-dashed">
-                <h5 class="mb-3 fs-16 fw-bold">Menu Color</h5>
-
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-menu-color" id="sidenav-color-light" value="light">
-                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="sidenav-color-light">
-                                <span class="d-flex align-items-center justify-content-center h-100">
-                                    <span class="p-2 d-inline-flex shadow rounded-circle bg-white"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Light</h5>
-                    </div>
-
-                    <div class="col-3" style="--ct-dark-rgb: 64,73,84;">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-menu-color" id="sidenav-color-dark" value="dark">
-                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="sidenav-color-dark">
-                                <span class="d-flex align-items-center justify-content-center h-100">
-                                    <span class="p-2 d-inline-flex shadow rounded-circle bg-dark"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Dark</h5>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-menu-color" id="sidenav-color-brand" value="brand">
-                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="sidenav-color-brand">
-                                <span class="d-flex align-items-center justify-content-center h-100">
-                                    <span class="p-2 d-inline-flex shadow rounded-circle bg-primary"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Brand</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-3 .border-bottom .border-dashed">
-                <h5 class="mb-3 fs-16 fw-bold">Sidebar Size</h5>
-
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-default" value="default">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-default">
-                                <span class="d-flex h-100">
-                                    <span class="flex-shrink-0">
-                                        <span class="bg-light d-flex h-100 border-end  flex-column p-1 px-2">
-                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                        </span>
-                                    </span>
-                                    <span class="flex-grow-1">
-                                        <span class="d-flex h-100 flex-column">
-                                            <span class="bg-light d-block p-1"></span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Default</h5>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-compact" value="compact">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-compact">
-                                <span class="d-flex h-100">
-                                    <span class="flex-shrink-0">
-                                        <span class="bg-light d-flex h-100 border-end  flex-column p-1">
-                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                        </span>
-                                    </span>
-                                    <span class="flex-grow-1">
-                                        <span class="d-flex h-100 flex-column">
-                                            <span class="bg-light d-block p-1"></span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Compact</h5>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-small" value="condensed">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-small">
-                                <span class="d-flex h-100">
-                                    <span class="flex-shrink-0">
-                                        <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
-                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                        </span>
-                                    </span>
-                                    <span class="flex-grow-1">
-                                        <span class="d-flex h-100 flex-column">
-                                            <span class="bg-light d-block p-1"></span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Condensed</h5>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-small-hover" value="sm-hover">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-small-hover">
-                                <span class="d-flex h-100">
-                                    <span class="flex-shrink-0">
-                                        <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
-                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                            <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
-                                        </span>
-                                    </span>
-                                    <span class="flex-grow-1">
-                                        <span class="d-flex h-100 flex-column">
-                                            <span class="bg-light d-block p-1"></span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Hover View</h5>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-full" value="full">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-full">
-                                <span class="d-flex h-100">
-                                    <span class="flex-shrink-0">
-                                        <span class="d-flex h-100 flex-column">
-                                            <span class="d-block p-1 bg-dark-subtle mb-1"></span>
-                                        </span>
-                                    </span>
-                                    <span class="flex-grow-1">
-                                        <span class="d-flex h-100 flex-column">
-                                            <span class="bg-light d-block p-1"></span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Full Layout</h5>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="form-check sidebar-setting card-radio">
-                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-fullscreen" value="fullscreen">
-                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-fullscreen">
-                                <span class="d-flex h-100">
-                                    <span class="flex-grow-1">
-                                        <span class="d-flex h-100 flex-column">
-                                            <span class="bg-light d-block p-1"></span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <h5 class="fs-14 text-center text-muted mt-2">Hidden</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-3 border-bottom border-dashed d-none">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="fs-16 fw-bold mb-0">Container Width</h5>
-
-                    <div class="btn-group radio" role="group">
-                        <input type="radio" class="btn-check" name="data-container-position" id="container-width-fixed" value="fixed">
-                        <label class="btn btn-sm btn-soft-primary w-sm" for="container-width-fixed">Full</label>
-
-                        <input type="radio" class="btn-check" name="data-container-position" id="container-width-scrollable" value="scrollable">
-                        <label class="btn btn-sm btn-soft-primary w-sm ms-0" for="container-width-scrollable">Boxed</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-3 border-bottom border-dashed d-none">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="fs-16 fw-bold mb-0">Layout Position</h5>
-
-                    <div class="btn-group radio" role="group">
-                        <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-fixed" value="fixed">
-                        <label class="btn btn-sm btn-soft-primary w-sm" for="layout-position-fixed">Fixed</label>
-
-                        <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-scrollable" value="scrollable">
-                        <label class="btn btn-sm btn-soft-primary w-sm ms-0" for="layout-position-scrollable">Scrollable</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="d-flex align-items-center gap-2 px-3 py-2 offcanvas-header border-top border-dashed">
-            <button type="button" class="btn w-50 btn-soft-danger" id="reset-layout">Reset</button>
-            <button type="button" class="btn w-50 btn-soft-info">Buy Now</button>
-        </div>
-
-    </div>
 
     <!-- Vendor js -->
     <script src="{{ asset('backend') }}/assets/js/vendor.min.js"></script>
@@ -1090,11 +177,62 @@
     <!-- App js -->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
-    <!-- Apex Chart js -->
-    <script src="{{ asset('backend') }}/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/dataTables.js"></script>
 
-    <!-- Projects Analytics Dashboard App js -->
-    <script src="{{ asset('backend') }}/assets/js/pages/dashboard-sales.js"></script>
+
+    <script src="{{ asset('backend') }}/flatpickr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+    
+    <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
+
+    
+    @yield('script')
+
+
+    <script>
+        const sweetAlertConfirmation = {
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        };
+
+        const toastConfiguration = {
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true
+        };
+
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+            
+        } );
+
+
+        // ✅ Loader Hide on Page Load
+        // window.addEventListener("load", function () {
+        //     // ✅ Just hide the spinner
+        //     setTimeout(() => {
+        //         document.getElementById("loader").style.display = "none";
+        //     }, 400);
+        // });
+
+        // window.addEventListener("beforeunload", function () {
+        //     // ✅ Just show the spinner only
+        //     document.getElementById("loader").style.display = "block";
+        // });
+
+
+    </script>
+
+
 
 </body>
 

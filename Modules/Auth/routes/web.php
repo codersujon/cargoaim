@@ -17,5 +17,5 @@ Route::middleware('guest')->group(function () {
 
 // Authenticated Routes 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('user.logout');
 });
