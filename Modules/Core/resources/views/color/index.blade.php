@@ -13,6 +13,8 @@
             opacity: 0;
             cursor: pointer;
         }
+       
+
     </style>
     <div class="row pt-3">
         <div class="col-lg-12">
@@ -44,16 +46,10 @@
                 
                     <!-- Desktop view (visible only on md and up) -->
                     <div class="d-none d-md-flex justify-content-between align-items-center w-100">
-                        <h4 class="card-title mb-0">
-                            color settings
-                            {{-- {{ transText('color_settings_btn') }} --}}
-                        </h4>
+                        <h4 class="card-title mb-0">{{ transText('color_settings_btn') }}</h4>
                 
                         <div class="input-group w-25 mx-3">
-                            <label class="input-group-text" for="inputGroupSelect01" style="width: auto;">
-                                Choose a Color Pattern
-                                {{-- {{ transText('ccp_label') }} --}}
-                            </label>
+                            <label class="input-group-text" for="inputGroupSelect01" style="width: auto;">{{ transText('ccp_label') }}</label>
                             <select name="color_pattern" id="color_pattern" class="form-control form-select">
                                 <option value="">-- Choose a Color Pattern --</option>
                                 @foreach ($colorPatterns as $colorPattern)
@@ -65,14 +61,8 @@
                         </div>
                 
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-danger" id="btn_save">
-                                Save
-                                {{-- {{ transText('save_and_apply_btn') }} --}}
-                            </button>
-                            <button type="button" class="btn btn-primary btn_new_color_pattern">
-                                Save
-                                {{-- {{ transText('save_and_apply_btn') }} --}}
-                            </button>
+                            <button type="button" class="btn btn-danger" id="btn_save">{{ transText('save_and_apply_btn') }}</button>
+                            <button type="button" class="btn btn-primary btn_new_color_pattern">{{ transText('save_and_apply_btn') }}</button>
                         </div>
                     </div>
                 </div><!-- end card header -->
@@ -82,7 +72,7 @@
 
 
                 <div class="card-body">
-                    <form id="form" name="form" class="form-horizontal" method="POST" action="{{ url('color') }}" enctype="multipart/form-data">
+                    <form id="form" name="form" class="form-horizontal" method="POST" action="{{ url('color_settings') }}" enctype="multipart/form-data">
                         @csrf()
                         <div class="layout-color-wrapper">
 
@@ -91,11 +81,11 @@
                             <input type="hidden" name="color_pattern" id="color_patterns" value="{{ $data->color_pattern }}">
 
                             <!-- New Color Pattern --> 
-                            <div class="row color-inputs" id="new_pattern" style="display: none;">
+                            <div class="row color-inputs mt-3" id="new_pattern" style="display: none;">
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="row">
                                         <div class="col-5 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">COLOR PATTERN</h5>
+                                            <h5 class="d-none d-sm-block"> COLOR PATTERN</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
                                             <h5 class="d-block d-sm-none"> COLOR PATTERN:</h5>
@@ -105,35 +95,23 @@
                                             <input type="text" class="form-control" id="new_color_pattern" placeholder="Enter your color pattern name">                                                
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-4 mb-2">
-                                            <button type="submit" class="btn btn-success" id="btn_save_color_pattern" style="display: none"> 
-                                                Save
-                                                {{-- {{ transText('save_btn') }}  --}}
-                                            </button>
-                                            <button type="submit" class="btn btn-danger" id="btn_close_color_pattern"> 
-                                                Save
-                                                {{-- {{ transText('close_btn') }}  --}}
-                                            </button>
+                                            <button type="submit" class="btn btn-success" id="btn_save_color_pattern" style="display: none"> {{ transText('save_btn') }} </button>
+                                            <button type="submit" class="btn btn-danger" id="btn_close_color_pattern"> {{ transText('close_btn') }} </button>
                                         </div>
                                     </div>                                    
                                 </div>
                             </div>
-                            <br>
+                            </br>
 
                             <!-- Bar Color --> 
                             <div class="row color-inputs">
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="row">
                                         <div class="col-6 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">
-                                                Bar Color
-                                                {{-- {{ transText('bar_color') }} --}}
-                                            </h5>
+                                            <h5 class="d-none d-sm-block">{{ transText('bar_color') }}</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
-                                            <h5 class="d-block d-sm-none">
-                                                Bar Color
-                                                {{-- {{ transText('bar_color') }} --}}
-                                                 :</h5>
+                                            <h5 class="d-block d-sm-none">{{ transText('bar_color') }} :</h5>
                                         </div>
                                                                              
                                         
@@ -142,7 +120,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="layout_left_box" style="width: 50px; height: 25px; background-color: {{ $data->layout_left_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="layout_left_color" name="layout_left_color" value="{{ $data->layout_left_color }}">
-                                                <input type="color" id="layout_left_picker" value="{{ $data->layout_left_color }}" class="form-control form-control-color" title="topbar1_color_label">
+                                                <input type="color" id="layout_left_picker" value="{{ $data->layout_left_color }}" class="form-control form-control-color" title="{{ transText('topbar1_color_label') }}">
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
@@ -150,15 +128,15 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="layout_right_box" style="width: 50px; height: 25px; background-color: {{ $data->layout_right_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="layout_right_color" name="layout_right_color" value="{{ $data->layout_right_color }}">
-                                                <input type="color" id="layout_right_picker" value="{{ $data->layout_right_color }}" class="form-control form-control-color" title="topbar2_color_label">
+                                                <input type="color" id="layout_right_picker" value="{{ $data->layout_right_color }}" class="form-control form-control-color" title="{{ transText('topbar2_color_label') }}">
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
                                             <!-- Sidebar Left Color Picker -->
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="sidebar_left_box" style="width: 50px; height: 25px; background-color: {{ $data->sidebar_left_color }};"></div>
-                                                <input type="text" class="form-control text-center" id="sidebar_left_color" name="sidebar_left_color" value="{{ $data->sidebar_left_color }}" title="sidebar1_color">
-                                                <input type="color" id="sidebar_left_picker" value="{{ $data->sidebar_left_color }}" class="form-control form-control-color" title="sidebar1_color">
+                                                <input type="text" class="form-control text-center" id="sidebar_left_color" name="sidebar_left_color" value="{{ $data->sidebar_left_color }}" title="{{ transText('sidebar1_color') }}">
+                                                <input type="color" id="sidebar_left_picker" value="{{ $data->sidebar_left_color }}" class="form-control form-control-color" title="{{ transText('sidebar1_color') }}">
                                             </div>
                                         </div>
                                     </div>                                    
@@ -170,8 +148,8 @@
                                             <!-- Sidebar Right Color Picker -->
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="sidebar_right_box" style="width: 50px; height: 25px; background-color: {{ $data->sidebar_right_color }};"></div>
-                                                <input type="text" class="form-control text-center" id="sidebar_right_color" name="sidebar_right_color" value="{{ $data->sidebar_right_color }}" title="sidebar2_color">
-                                                <input type="color" id="sidebar_right_picker" value="{{ $data->sidebar_right_color }}" class="form-control form-control-color" title="sidebar2_color">
+                                                <input type="text" class="form-control text-center" id="sidebar_right_color" name="sidebar_right_color" value="{{ $data->sidebar_right_color }}" title="{{ transText('sidebar2_color') }}">
+                                                <input type="color" id="sidebar_right_picker" value="{{ $data->sidebar_right_color }}" class="form-control form-control-color" title="{{ transText('sidebar2_color') }}">
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
@@ -179,7 +157,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="sidebar_menu_hover_box" style="width: 50px; height: 25px; background-color: {{ $data->sidebar_menu_hover_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="sidebar_menu_hover_color" name="sidebar_menu_hover_color" value="{{ $data->sidebar_menu_hover_color }}" title="Sidebar Menu Hover Color">
-                                                <input type="color" id="sidebar_menu_hover_picker" value="{{ $data->sidebar_menu_hover_color }}" class="form-control form-control-color" title="sidebar_menu_hover">
+                                                <input type="color" id="sidebar_menu_hover_picker" value="{{ $data->sidebar_menu_hover_color }}" class="form-control form-control-color" title="{{ transText('sidebar_menu_hover') }}">
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
@@ -187,7 +165,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="sidebar_text_box" style="width: 50px; height: 25px; background-color: {{ $data->sidebar_text_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="sidebar_text_color" name="sidebar_text_color" value="{{ $data->sidebar_text_color }}">
-                                                <input type="color" id="sidebar_text_picker" value="{{ $data->sidebar_text_color }}" class="form-control form-control-color" title="side_and_topbar_text">
+                                                <input type="color" id="sidebar_text_picker" value="{{ $data->sidebar_text_color }}" class="form-control form-control-color" title="{{ transText('side_and_topbar_text') }}">
                                             </div>
                                         </div>
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
@@ -195,7 +173,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="sidebar_text_hover_box" style="width: 50px; height: 25px; background-color: {{ $data->sidebar_text_hover_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="sidebar_text_hover_color" name="sidebar_text_hover_color" value="{{ $data->sidebar_text_hover_color }}">
-                                                <input type="color" id="sidebar_text_hover_picker" value="{{ $data->sidebar_text_hover_color }}" class="form-control form-control-color" title="side_and_topbar_text_hover">
+                                                <input type="color" id="sidebar_text_hover_picker" value="{{ $data->sidebar_text_hover_color }}" class="form-control form-control-color" title="{{ transText('side_and_topbar_text_hover') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -208,23 +186,17 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="row">
                                         <div class="col-6 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">
-                                                card_color
-                                                {{-- {{ transText('card_color') }} --}}
-                                            </h5>
+                                            <h5 class="d-none d-sm-block">{{ transText('card_color') }}</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
-                                            <h5 class="d-block d-sm-none">
-                                                card_color
-                                                {{-- {{ transText('card_color') }}  --}}:
-                                            </h5>
+                                            <h5 class="d-block d-sm-none">{{ transText('card_color') }} :</h5>
                                         </div>
                                         <!-- Card Header Color Picker -->
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="card_header_box" style="width: 50px; height: 25px; background-color: {{ $data->card_header_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="card_header_color" name="card_header_color" value="{{ $data->card_header_color }}">
-                                                <input type="color" id="card_header_picker" value="{{ $data->card_header_color }}" class="form-control form-control-color" title="card_header_color_label">
+                                                <input type="color" id="card_header_picker" value="{{ $data->card_header_color }}" class="form-control form-control-color" title="{{ transText('card_header_color_label') }}">
                                             </div>
                                         </div>
                                         <!-- Card Border Color Picker -->
@@ -232,7 +204,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="card_border_box" style="width: 50px; height: 25px; background-color: {{ $data->card_border_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="card_border_color" name="card_border_color" value="{{ $data->card_border_color }}">
-                                                <input type="color" id="card_border_picker" value="{{ $data->card_border_color }}" class="form-control form-control-color" title="card_header_text_color">
+                                                <input type="color" id="card_border_picker" value="{{ $data->card_border_color }}" class="form-control form-control-color" title="{{ transText('card_header_text_color') }}">
                                             </div>
                                         </div> 
                                         <!-- Card Body Color Picker -->
@@ -240,7 +212,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="card_body_box" style="width: 50px; height: 25px; background-color: {{ $data->card_body_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="card_body_color" name="card_body_color" value="{{ $data->card_body_color }}">
-                                                <input type="color" id="card_body_picker" value="{{ $data->card_body_color }}" class="form-control form-control-color" title="card_body_color">
+                                                <input type="color" id="card_body_picker" value="{{ $data->card_body_color }}" class="form-control form-control-color" title="{{ transText('card_body_color') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -252,7 +224,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="card_text_box" style="width: 50px; height: 25px; background-color: {{ $data->card_text_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="card_text_color" name="card_text_color" value="{{ $data->card_text_color }}">
-                                                <input type="color" id="card_text_picker" value="{{ $data->card_text_color }}" class="form-control form-control-color" title="card_text_color">
+                                                <input type="color" id="card_text_picker" value="{{ $data->card_text_color }}" class="form-control form-control-color" title="{{ transText('card_text_color') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -265,23 +237,17 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="row">
                                         <div class="col-6 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">
-                                                table_color
-                                                {{-- {{ transText('table_color') }} --}}
-                                            </h5>
+                                            <h5 class="d-none d-sm-block">{{ transText('table_color') }}</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
-                                            <h5 class="d-block d-sm-none">
-                                                table_color
-                                                {{-- {{ transText('table_color') }}  --}}
-                                                :</h5>
+                                            <h5 class="d-block d-sm-none">{{ transText('table_color') }} :</h5>
                                         </div>
                                         <!-- Table Header bg Color Picker -->
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="table_header_bg_box" style="width: 50px; height: 25px; background-color: {{ $data->table_header_bg_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="table_header_bg_color" name="table_header_bg_color" value="{{ $data->table_header_bg_color }}">
-                                                <input type="color" id="table_header_bg_picker" value="{{ $data->table_header_bg_color }}" class="form-control form-control-color" title="table_heder_bg_Color">
+                                                <input type="color" id="table_header_bg_picker" value="{{ $data->table_header_bg_color }}" class="form-control form-control-color" title="{{ transText('table_heder_bg_Color') }}">
                                             </div>
                                         </div>
                                         <!-- Table Header Text Color Picker -->
@@ -289,7 +255,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="table_header_text_box" style="width: 50px; height: 25px; background-color: {{ $data->table_header_text_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="table_header_text_color" name="table_header_text_color" value="{{ $data->table_header_text_color }}">
-                                                <input type="color" id="table_header_text_picker" value="{{ $data->table_header_text_color }}" class="form-control form-control-color" title="table_header_text_color">
+                                                <input type="color" id="table_header_text_picker" value="{{ $data->table_header_text_color }}" class="form-control form-control-color" title="{{ transText('table_header_text_color') }}">
                                             </div>
                                         </div>
                                         <!--Table Body Text Color Picker -->
@@ -297,7 +263,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="table_text_box" style="width: 50px; height: 25px; background-color: {{ $data->table_text_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="table_text_color" name="table_text_color" value="{{ $data->table_text_color }}">
-                                                <input type="color" id="table_text_picker" value="{{ $data->table_text_color }}" class="form-control form-control-color" title="table_body_text_color">
+                                                <input type="color" id="table_text_picker" value="{{ $data->table_text_color }}" class="form-control form-control-color" title="{{ transText('table_body_text_color') }}">
                                             </div>
                                         </div> 
                                     </div>
@@ -309,7 +275,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="table_header_border_box" style="width: 50px; height: 25px; background-color: {{ $data->table_header_border_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="table_header_border_color" name="table_header_border_color" value="{{ $data->table_header_border_color }}">
-                                                <input type="color" id="table_header_border_picker" value="{{ $data->table_header_border_color }}" class="form-control form-control-color" title="table_border_color">
+                                                <input type="color" id="table_header_border_picker" value="{{ $data->table_header_border_color }}" class="form-control form-control-color" title="{{ transText('table_border_color') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -322,23 +288,17 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="row">
                                         <div class="col-6 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">
-                                                button_color
-                                                {{-- {{ transText('button_color') }} --}}
-                                            </h5>
+                                            <h5 class="d-none d-sm-block">{{ transText('button_color') }}</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
-                                            <h5 class="d-block d-sm-none">
-                                                button_color
-                                                {{-- {{ transText('button_color') }}  --}}
-                                                :</h5>
+                                            <h5 class="d-block d-sm-none">{{ transText('button_color') }} :</h5>
                                         </div>
                                         <!-- Success Button Color Picker -->
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="btn_success_box" style="width: 50px; height: 25px; background-color: {{ $data->btn_success_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="btn_success_color" name="btn_success_color" value="{{ $data->btn_success_color }}">
-                                                <input type="color" id="btn_success_picker" value="{{ $data->btn_success_color }}" class="form-control form-control-color" title="success_button_color">
+                                                <input type="color" id="btn_success_picker" value="{{ $data->btn_success_color }}" class="form-control form-control-color" title="{{ transText('success_button_color') }}">
                                             </div>
                                         </div>
                                         <!-- Danger Button Color Picker -->
@@ -346,7 +306,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="btn_danger_box" style="width: 50px; height: 25px; background-color: {{ $data->btn_danger_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="btn_danger_color" name="btn_danger_color" value="{{ $data->btn_danger_color }}">
-                                                <input type="color" id="btn_danger_picker" value="{{ $data->btn_danger_color }}" class="form-control form-control-color" title="danger_button_color">
+                                                <input type="color" id="btn_danger_picker" value="{{ $data->btn_danger_color }}" class="form-control form-control-color" title="{{ transText('danger_button_color') }}">
                                             </div>
                                         </div>
                                         <!--Info Button Color Picker -->
@@ -354,7 +314,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="btn_info_box" style="width: 50px; height: 25px; background-color: {{ $data->btn_info_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="btn_info_color" name="btn_info_color" value="{{ $data->btn_info_color }}">
-                                                <input type="color" id="btn_info_picker" value="{{ $data->btn_info_color }}" class="form-control form-control-color" title="info_button_color">
+                                                <input type="color" id="btn_info_picker" value="{{ $data->btn_info_color }}" class="form-control form-control-color" title="{{ transText('info_button_color') }}">
                                             </div>
                                         </div>
                                     </div>                                    
@@ -366,7 +326,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="btn_warning_box" style="width: 50px; height: 25px; background-color: {{ $data->btn_warning_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="btn_warning_color" name="btn_warning_color" value="{{ $data->btn_warning_color }}">
-                                                <input type="color" id="btn_warning_picker" value="{{ $data->btn_warning_color }}" class="form-control form-control-color" title="warning_button_color">	
+                                                <input type="color" id="btn_warning_picker" value="{{ $data->btn_warning_color }}" class="form-control form-control-color" title="{{ transText('warning_button_color') }}">	
                                             </div>
                                         </div>
                                         <!-- Primary Button Color Picker -->
@@ -374,7 +334,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="btn_primary_box" style="width: 50px; height: 25px; background-color: {{ $data->btn_primary_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="btn_primary_color" name="btn_primary_color" value="{{ $data->btn_primary_color }}">
-                                                <input type="color" id="btn_primary_picker" value="{{ $data->btn_primary_color }}" class="form-control form-control-color" title="primary_button_color">
+                                                <input type="color" id="btn_primary_picker" value="{{ $data->btn_primary_color }}" class="form-control form-control-color" title="{{ transText('primary_button_color') }}">
                                             </div>
                                         </div>
                                         <!-- Secondary Button Color Picker -->
@@ -382,7 +342,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="btn_secondary_box" style="width: 50px; height: 25px; background-color: {{ $data->btn_secondary_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="btn_secondary_color" name="btn_secondary_color" value="{{ $data->btn_secondary_color }}">
-                                                <input type="color" id="btn_secondary_picker" value="{{ $data->btn_secondary_color }}" class="form-control form-control-color" title="secondary_button_color">
+                                                <input type="color" id="btn_secondary_picker" value="{{ $data->btn_secondary_color }}" class="form-control form-control-color" title="{{ transText('secondary_button_color') }}">
                                             </div>
                                         </div>
                                         <!-- Dark Button Color Picker -->
@@ -390,7 +350,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="btn_dark_box" style="width: 50px; height: 25px; background-color: {{ $data->btn_dark_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="btn_dark_color" name="btn_dark_color" value="{{ $data->btn_dark_color }}">
-                                                <input type="color" id="btn_dark_picker" value="{{ $data->btn_dark_color }}" class="form-control form-control-color" title="dark_button_color">
+                                                <input type="color" id="btn_dark_picker" value="{{ $data->btn_dark_color }}" class="form-control form-control-color" title="{{ transText('dark_button_color') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -406,16 +366,10 @@
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <div class="row">
                                         <div class="col-6 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">
-                                                input_color
-                                                {{-- {{ transText('input_color') }} --}}
-                                            </h5>
+                                            <h5 class="d-none d-sm-block">{{ transText('input_color') }}</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
-                                            <h5 class="d-block d-sm-none">
-                                                input_color
-                                                {{-- {{ transText('input_color') }}  --}}
-                                                :</h5>
+                                            <h5 class="d-block d-sm-none">{{ transText('input_color') }} :</h5>
                                         </div>
                                         
                                         <!-- Input Border Color Picker -->
@@ -423,7 +377,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="input_border_box" style="width: 50px; height: 25px; background-color: {{ $data->input_border_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="input_border_color" name="input_border_color" value="{{ $data->input_border_color }}">
-                                                <input type="color" id="input_border_picker" value="{{ $data->input_border_color }}" class="form-control form-control-color" title="input_border_color">
+                                                <input type="color" id="input_border_picker" value="{{ $data->input_border_color }}" class="form-control form-control-color" title="{{ transText('input_border_color') }}">
                                             </div>
                                         </div> 
 
@@ -434,7 +388,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="inp_focus_border_box" style="width: 50px; height: 25px; background-color: {{ $data->inp_focus_border }};"></div>
                                                 <input type="text" class="form-control text-center" id="inp_focus_border" name="inp_focus_border" value="{{ $data->inp_focus_border }}">
-                                                <input type="color" id="inp_focus_border_picker" value="{{ $data->inp_focus_border }}" class="form-control form-control-color" title="inp_focus_border_color">
+                                                <input type="color" id="inp_focus_border_picker" value="{{ $data->inp_focus_border }}" class="form-control form-control-color" title="{{ transText('inp_focus_border_color') }}">
                                             </div>
                                         </div>
                                         <!-- Input Focus Background Color Picker -->
@@ -442,7 +396,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="inp_focus_bg_box" style="width: 50px; height: 25px; background-color: {{ $data->inp_focus_bg }};"></div>
                                                 <input type="text" class="form-control text-center" id="inp_focus_bg" name="inp_focus_bg" value="{{ $data->inp_focus_bg }}">
-                                                <input type="color" id="inp_focus_bg_picker" value="{{ $data->inp_focus_bg }}" class="form-control form-control-color" title="inp_focus_bg_color">
+                                                <input type="color" id="inp_focus_bg_picker" value="{{ $data->inp_focus_bg }}" class="form-control form-control-color" title="{{ transText('inp_focus_bg_color') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -454,7 +408,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="inp_selected_border_box" style="width: 50px; height: 25px; background-color: {{ $data->inp_selected_border }};"></div>
                                                 <input type="text" class="form-control text-center" id="inp_selected_border" name="inp_selected_border" value="{{ $data->inp_selected_border }}">
-                                                <input type="color" id="inp_selected_border_picker" value="{{ $data->inp_selected_border }}" class="form-control form-control-color" title="inp_selected_border_color">
+                                                <input type="color" id="inp_selected_border_picker" value="{{ $data->inp_selected_border }}" class="form-control form-control-color" title="{{ transText('inp_selected_border_color') }}">
                                             </div>
                                         </div> 
                                         <!-- Input Select Background Color Picker -->
@@ -462,7 +416,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="inp_select_bg_box" style="width: 50px; height: 25px; background-color: {{ $data->inp_select_bg }};"></div>
                                                 <input type="text" class="form-control text-center" id="inp_select_bg" name="inp_select_bg" value="{{ $data->inp_select_bg }}">
-                                                <input type="color" id="inp_select_bg_picker" value="{{ $data->inp_select_bg }}" class="form-control form-control-color" title="inp_select_bg_color">
+                                                <input type="color" id="inp_select_bg_picker" value="{{ $data->inp_select_bg }}" class="form-control form-control-color" title="{{ transText('inp_select_bg_color') }}">
                                             </div>
                                         </div> 
                                         <!-- Input Suggestions Box Color Picker -->
@@ -470,7 +424,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="inp_suggest_bg_box" style="width: 50px; height: 25px; background-color: {{ $data->inp_suggest_bg }};"></div>
                                                 <input type="text" class="form-control text-center" id="inp_suggest_bg" name="inp_suggest_bg" value="{{ $data->inp_suggest_bg }}">
-                                                <input type="color" id="inp_suggest_bg_picker" value="{{ $data->inp_suggest_bg }}" class="form-control form-control-color" title="inp_suggest_bg_color">
+                                                <input type="color" id="inp_suggest_bg_picker" value="{{ $data->inp_suggest_bg }}" class="form-control form-control-color" title="{{ transText('inp_suggest_bg_color') }}">
                                             </div>
                                         </div> 
                                         <!-- Input Search Spinner Color Picker -->
@@ -478,7 +432,7 @@
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="inp_search_spinner_box" style="width: 50px; height: 25px; background-color: {{ $data->inp_search_spinner }};"></div>
                                                 <input type="text" class="form-control text-center" id="inp_search_spinner" name="inp_search_spinner" value="{{ $data->inp_search_spinner }}">
-                                                <input type="color" id="inp_search_spinner_picker" value="{{ $data->inp_search_spinner }}" class="form-control form-control-color" title="inp_search_spinner_color">
+                                                <input type="color" id="inp_search_spinner_picker" value="{{ $data->inp_search_spinner }}" class="form-control form-control-color" title="{{ transText('inp_search_spinner_color') }}">
                                             </div>
                                         </div> 
                                     </div>
@@ -495,43 +449,31 @@
                                     <div class="row">
                                         <!-- Body background Color Picker -->
                                         <div class="col-6 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">
-                                                bg_color
-                                                {{-- {{ transText('bg_color') }} --}}
-                                            </h5>
+                                            <h5 class="d-none d-sm-block">{{ transText('bg_color') }}</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
-                                            <h5 class="d-block d-sm-none">
-                                                bg_color
-                                                {{-- {{ transText('bg_color') }}  --}}
-                                                :</h5>
+                                            <h5 class="d-block d-sm-none">{{ transText('bg_color') }} :</h5>
                                         </div>
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="body_bg_color_box" style="width: 50px; height: 25px; background-color: {{ $data->body_bg_color }};"></div>
                                                 <input type="text" class="form-control text-center" id="body_bg_color" name="body_bg_color" value="{{ $data->body_bg_color }}">
-                                                <input type="color" id="body_bg_color_picker" value="{{ $data->body_bg_color }}" class="form-control form-control-color" title="bg_color">
+                                                <input type="color" id="body_bg_color_picker" value="{{ $data->body_bg_color }}" class="form-control form-control-color" title="{{ transText('bg_color') }}">
                                             </div>
                                         </div>
 
                                         <!-- Border Dashed Color Picker -->
                                         <div class="col-6 col-md-3 col-lg-3 d-flex align-items-center ps-md-3">
-                                            <h5 class="d-none d-sm-block">
-                                                border_dashed_color
-                                                {{-- {{ transText('border_dashed_color') }} --}}
-                                            </h5>
+                                            <h5 class="d-none d-sm-block">{{ transText('border_dashed_color') }}</h5>
                                             <h5 class="d-none d-sm-block ms-auto">:</h5>
                                         
-                                            <h5 class="d-block d-sm-none">
-                                                border_dashed_color
-                                                {{-- {{ transText('border_dashed_color') }}  --}}
-                                                :</h5>
+                                            <h5 class="d-block d-sm-none">{{ transText('border_dashed_color') }} :</h5>
                                         </div>
                                         <div class="col-6 col-md-3 col-lg-3 mb-2">
                                             <div class="input-group align-items-center">
                                                 <div class="input-group-text" id="border_dashed_box" style="width: 50px; height: 25px; background-color: {{ $data->border_dashed }};"></div>
                                                 <input type="text" class="form-control text-center" id="border_dashed" name="border_dashed" value="{{ $data->border_dashed }}">
-                                                <input type="color" id="border_dashed_picker" value="{{ $data->border_dashed }}" class="form-control form-control-color" title="border_dashed_color">
+                                                <input type="color" id="border_dashed_picker" value="{{ $data->border_dashed }}" class="form-control form-control-color" title="{{ transText('border_dashed_color') }}">
                                             </div>
                                         </div> 
                                     </div>
@@ -541,8 +483,7 @@
 
                         <div class="text-center col-sm-offset-2 col-sm-12 my-4">
                             <button type="submit" class="btn btn-success" id="btn_update">
-                                update_and_apply_btn
-                                {{-- {{ transText('update_and_apply_btn') }} --}}
+                                {{ transText('update_and_apply_btn') }}
                             </button>                            
                                                        
                         </div>                        

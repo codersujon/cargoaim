@@ -41,30 +41,26 @@
             <li class="side-nav-item">
                 <a href="" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-dashboard"></i></span>
-                    <span class="menu-text"> basic info</span>
-                    {{-- <span class="menu-text"> {{ transText('basic_info_menu') }} </span>  --}}
+                    <span class="menu-text"> {{ transText('basic_info_menu') }} </span> 
                 </a>
             </li>
             <li class="side-nav-item">
                 <a href="" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-building-hospital"></i></span>
-                    <span class="menu-text"> login page slider </span>
-                     {{-- <span class="menu-text"> {{ transText('login_page_slider_menu') }} </span> --}}
+                     <span class="menu-text"> {{ transText('login_page_slider_menu') }} </span>
                 </a>
             </li>
 
             <li class="side-nav-item">
                 <a href="{{ url('language') }}" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-language"></i></span>
-                    <span class="menu-text"> Language </span>
-                   {{-- <span class="menu-text"> {{ transText('language_menu') }} </span>  --}}
+                   <span class="menu-text"> {{ transText('language_menu') }} </span> 
                 </a>
             </li>
             <li class="side-nav-item">
                 <a href="" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-file"></i></span>
-                    <span class="menu-text"> Eu Ics2 </span>
-                    {{-- <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span>  --}}
+                    <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
                 </a>
             </li>
 

@@ -28,8 +28,6 @@ class LanguageSelectController extends Controller
             session(['locale' => $locale]);
             app()->setLocale($locale);
 
-            // $superadmin = Auth::guard('web')->user();
-            // dd($superadmin->rowId);
 
             // যদি লগইনকৃত সুপারঅ্যাডমিন থাকে, তাহলে তার ভাষা আপডেট করি
             if ($superadmin = Auth::guard('web')->user()) {
