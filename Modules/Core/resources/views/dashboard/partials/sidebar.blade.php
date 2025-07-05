@@ -38,12 +38,12 @@
         <ul class="side-nav">
             <li class="side-nav-title">Dash</li>
 
-            <li class="side-nav-item">
+            {{-- <li class="side-nav-item">
                 <a href="" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-dashboard"></i></span>
                     <span class="menu-text"> {{ transText('basic_info_menu') }} </span> 
                 </a>
-            </li>
+            </li> --}}
             <li class="side-nav-item">
                 <a href="{{ url('login_page_slider') }}" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-building-hospital"></i></span>

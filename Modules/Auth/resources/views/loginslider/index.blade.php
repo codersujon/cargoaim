@@ -28,7 +28,7 @@
                                             <!-- Switch-->
                                             <div>
                                                 <input type="checkbox" id="customSwitchStatus{{ $item->id }}" data-id="{{ $item->id }}"
-                                                    {{ $item->status == 1 ? 'checked' : '' }} data-switch="success" class="toggle-status" />
+                                                    {{ $item->status == 'A' ? 'checked' : '' }} data-switch="success" class="toggle-status" />
                                                 <label for="customSwitchStatus{{ $item->id }}" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
                                             </div>
                                         </td>
@@ -173,14 +173,15 @@
 
             $('body').on('change', '.toggle-status', function () {
                 var id = $(this).data('id');
-                var newStatus = $(this).is(':checked') ? 1 : 0;
+                var newStatus = $(this).is(':checked') ? 'A' : 'I'; // A = Active, I = Inactive
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('active.status') }}", // use named route
+                    url: "{{ route('active.status') }}",
                     data: {
                         id: id,
-                        status: newStatus
+                        status: newStatus,
+                        _token: '{{ csrf_token() }}'
                     },
                     success: function (response) {
                         const Toast = Swal.mixin({
@@ -197,7 +198,7 @@
 
                         Toast.fire({
                             icon: 'success',
-                            title: newStatus === 1 ? 'Activated successfully!' : 'Deactivated successfully!'
+                            title: newStatus === 'A' ? 'Activated successfully!' : 'Deactivated successfully!'
                         });
                     },
                     error: function (xhr) {
@@ -209,6 +210,7 @@
                     }
                 });
             });
+
 
 
 

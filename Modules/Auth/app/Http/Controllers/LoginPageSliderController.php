@@ -37,7 +37,7 @@ class LoginPageSliderController extends Controller
             [
                 'title' => $request->title,
                 'description' => $request->description,
-                'status' => 1,
+                'status' => 'A',
             ]
         );
 

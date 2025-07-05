@@ -17369,8 +17369,8 @@ input[data-switch] {
   display: none;
 }
 input[data-switch] + label {
-  width: 56px;
-  height: 24px;
+  width: 55px;
+  height: 20px;
   background-color: var(--osen-tertiary-bg);
   background-image: none;
   border-radius: 2rem;
@@ -17387,12 +17387,12 @@ input[data-switch] + label:before {
   display: block;
   font-family: inherit;
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   line-height: 24px;
   position: absolute;
   right: 3px;
   margin: 0 0.21667rem;
-  top: 0;
+  top: -2px;
   text-align: center;
   min-width: 1.66667rem;
   overflow: hidden;
@@ -17407,8 +17407,8 @@ input[data-switch] + label:after {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 2rem;
-  height: 18px;
-  width: 18px;
+  height: 14px;
+  width: 14px;
   top: 3px;
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;

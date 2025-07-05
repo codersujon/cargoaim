@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longtext('description');
-            $table->string('status');
+            $table->string('status')->comment('A=Active, I=Inactive');
             $table->timestamps();
         });
     }
