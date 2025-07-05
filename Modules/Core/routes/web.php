@@ -8,9 +8,9 @@ use Modules\Core\Http\Controllers\ColorManageController;
 use Modules\Core\Http\Controllers\LanguageController;
 use Modules\Core\Http\Controllers\LanguageSelectController;
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('cores', CoreController::class)->names('core');
-});
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::resource('cores', CoreController::class)->names('core');
+// });
 
 
 Route::middleware(['auth'])->group(function () {

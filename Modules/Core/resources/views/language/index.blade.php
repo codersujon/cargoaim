@@ -206,18 +206,18 @@
                 ],
                 '{{ transText("edit") }}',
                 '{{ transText("update_btn") }}',
-                function () {
-                    // callback after data is loaded
-                    $('#message_id_to_call').prop('readonly', true); // make it read-only during edit
-                }
+                // function () {
+                //     // callback after data is loaded
+                //     $('#message_id_to_call').prop('readonly', true); // make it read-only during edit
+                // }
             );
             
             // ✅ Edit বাটনে ক্লিক করার সময় message_id_to_call কে read-only করে দিচ্ছে
-            $(document).on('click', '#edit', function () {
-                setTimeout(function () {
-                    $('#message_id_to_call').prop('readonly', true);
-                }, 300); // delay দিয়ে wait করানো হচ্ছে যেন modal open হয়
-            });
+            // $(document).on('click', '#edit', function () {
+            //     setTimeout(function () {
+            //         $('#message_id_to_call').prop('readonly', true);
+            //     }, 300); // delay দিয়ে wait করানো হচ্ছে যেন modal open হয়
+            // });
 
             // Delete Button Click
             handleDeleteAction(

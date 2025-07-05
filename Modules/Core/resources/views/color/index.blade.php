@@ -72,7 +72,7 @@
 
 
                 <div class="card-body">
-                    <form id="form" name="form" class="form-horizontal" method="POST" action="{{ url('color_settings') }}" enctype="multipart/form-data">
+                    <form id="form" name="form" class="form-horizontal" method="POST" action="{{ url('color') }}" enctype="multipart/form-data">
                         @csrf()
                         <div class="layout-color-wrapper">
 
