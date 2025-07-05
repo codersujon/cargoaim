@@ -1,5 +1,6 @@
 @extends('core::dashboard.layouts.master')
-@section('title', "| Menu Management")
+
+@section('title', "| Language Manage")
 
 @section('content')
     <div class="row pt-3">
@@ -11,12 +12,14 @@
                             <thead>
                                 <tr>
                                     <th>{{ transText('sn_th') }}</th>
-                                    <th>{{ transText('title_th') }}</th>
-                                    <th>{{ transText('name_route_th') }}</th>
-                                    <th>{{ transText('parent_id_th') }}</th>
-                                    <th>{{ transText('order_th') }}</th>
-                                    <th>{{ transText('status_th') }}</th>
-                                    <th>{{ transText('module_name_th') }}</th>
+                                    <th>{{ transText('type_th') }}</th>
+                                    <th>{{ transText('message_th') }}</th>
+                                    <th>{{ transText('en_th') }}</th>
+                                    <th>{{ transText('bn_th') }}</th>
+                                    <th>{{ transText('cn_th') }}</th>
+                                    <th>{{ transText('tn_th') }}</th>
+                                    <th>{{ transText('vn_th') }}</th>
+                                    <th>{{ transText('kn_th') }} </th>
                                     <th>{{ transText('remarks_th') }} </th>
                                     <th>{{ transText('action_th') }} </th>
                                 </tr>
@@ -123,7 +126,6 @@
     </div>
     <!-- The Modal End-->
 @endsection
-
 @section('script')    
     <script type="text/javascript">
         $(document).ready(function () {
@@ -164,6 +166,8 @@
                                     <td>${item.bn ?? ''}</td>
                                     <td>${item.cn ?? ''}</td>
                                     <td>${item.th ?? ''}</td>
+                                    <td>${item.vn ?? ''}</td>
+                                    <td>${item.kh ?? ''}</td>
                                     <td>${item.remarks ?? ''}</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
@@ -228,6 +232,9 @@
                     errorMessage: 'Something went wrong!'
                 }
             );
+
+
+
         });
     </script>
 @endsection

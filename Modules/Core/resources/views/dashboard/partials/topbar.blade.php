@@ -8,7 +8,7 @@
         <div class="d-flex align-items-center gap-2">
 
             <!-- Brand Logo -->
-            <a href="" class="logo">
+            <a href="{{ route('user.dashboard') }}" class="logo">
                 <span class="logo-light">
                     <span class="logo-lg">
                         <img src="{{ asset('upload/bscImg11745038891.jpg') }}" alt="logo">
@@ -229,11 +229,11 @@
             <!-- Language Dropdown -->
             <div class="topbar-item">
                 <div class="dropdown">
-                    {{-- @php
+                    @php
                         use Illuminate\Support\Facades\DB;
                         use Illuminate\Support\Facades\Auth;
 
-                        $excludedColumns = ['id', 'apply_on_type', 'message_id_to_call', 'row_id', 'remarks', 'created_at', 'updated_at'];
+                        $excludedColumns = ['row_id', 'apply_on_type', 'message_id_to_call', 'remarks', 'created_at', 'updated_at'];
                         $table = 'language';
                         $database = DB::getDatabaseName();
 
@@ -244,34 +244,36 @@
                             ORDER BY ORDINAL_POSITION
                         ", [$database, $table]);
 
-                        $user = Auth::guard('superadmin')->user();
+                        $user = Auth::guard('web')->user();
 
                         // ইউজারের ভাষা থেকে ফ্ল্যাগ ফাইল খোঁজা
                         $userLang = $user->user_language ?? 'en';  // ডিফল্ট en
+                        
                         $flag = 'default.png';
                         $extensions = ['svg', 'png', 'jpg'];
 
                         foreach ($extensions as $ext) {
-                            $relativePath = "dashboard/assets/images/flags/{$userLang}.{$ext}";
+                            $relativePath = "backend/assets/images/flags/{$userLang}.{$ext}";
                             if (file_exists(public_path($relativePath))) {
                                 $flag = "{$userLang}.{$ext}";
                                 break;
                             }
                         }
 
-                        $flagUrl = asset("public/dashboard/assets/images/flags/" . $flag);
-                    @endphp --}}
+                        $flagUrl = asset("backend/assets/images/flags/" . $flag);
+                        
+                    @endphp
 
                     <!-- সিলেক্টেড ভাষার ফ্ল্যাগ -->
                     <button class="topbar-link" data-bs-offset="0,25" type="button"
                         aria-haspopup="false" aria-expanded="false">
-                        {{-- <img src="{{ $flagUrl }}" alt="user-language-flag"
-                            class="w-100 rounded" height="18" id="selected-language-image"> --}}
+                        <img src="{{ $flagUrl }}" alt="user-language-flag"
+                            class="w-100 rounded" height="18" id="selected-language-image">
                     </button>
 
                     <!-- ড্রপডাউন ভাষার তালিকা -->
                     <div class="dropdown-menu dropdown-menu-end">
-                        {{-- @foreach ($columns as $column)
+                        @foreach ($columns as $column)
                             @if (!in_array($column->COLUMN_NAME, $excludedColumns))
                                 @php
                                     $firstWord = explode(' ', trim($column->COLUMN_COMMENT))[0];
@@ -279,14 +281,14 @@
                                     $columnName = $column->COLUMN_NAME;
 
                                     foreach ($extensions as $ext) {
-                                        $relativePath = "dashboard/assets/images/flags/{$columnName}.{$ext}";
+                                        $relativePath = "backend/assets/images/flags/{$columnName}.{$ext}";
                                         if (file_exists(public_path($relativePath))) {
                                             $flag = "{$columnName}.{$ext}";
                                             break;
                                         }
                                     }
 
-                                    $flagUrl = asset("public/dashboard/assets/images/flags/" . $flag);
+                                    $flagUrl = asset("backend/assets/images/flags/" . $flag);
                                 @endphp
 
                                 <a href="{{ route('lang.switch', $column->COLUMN_NAME) }}" class="dropdown-item" data-translator-lang="{{ $column->COLUMN_NAME }}">
@@ -294,7 +296,7 @@
                                     <span class="align-middle">{{ $firstWord }}</span>
                                 </a>
                             @endif
-                        @endforeach --}}
+                        @endforeach
                     </div>
 
                 </div>
@@ -516,7 +518,7 @@
                 <div class="dropdown">
                     <a class="topbar-link dropdown-toggle drop-arrow-none px-2"
                         data-bs-offset="0,19" type="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('public/dashboard') }}/assets/images/users/avatar-1.jpg" width="32"
+                        <img src="{{ asset('backend') }}/assets/images/users/avatar-1.jpg" width="32"
                             class="rounded-circle me-lg-2 d-flex" alt="user-image">
                         <span class="d-lg-flex flex-column gap-1 d-none">
                             <h5 class="my-0">Dhanoo K.</h5>
