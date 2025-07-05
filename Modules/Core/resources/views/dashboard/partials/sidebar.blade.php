@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li class="side-nav-item">
-                <a href="" class="side-nav-link">
+                <a href="{{ url('login_page_slider') }}" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-building-hospital"></i></span>
                      <span class="menu-text"> {{ transText('login_page_slider_menu') }} </span>
                 </a>

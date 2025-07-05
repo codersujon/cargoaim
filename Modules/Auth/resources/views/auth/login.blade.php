@@ -5,7 +5,7 @@
 
     @php
         // $basicInfo = \App\Models\BasicInformation::where('id', 1)->first();
-        // $sliders = \App\Models\LoginPageContentSlider::orderBy('id', 'asc')->get();
+        $sliders = \Modules\Auth\Models\LoginPageSlider::where('status', 1)->orderBy('id', 'asc')->get();
     @endphp
 
     <title>Cargoaim</title>
@@ -46,14 +46,14 @@
                 <div class="col-lg-6 col-md-12 bg-img">
                     <div class="bg-img-inner">
 
-                        {{-- @foreach ($sliders as $slider)
+                        @foreach ($sliders as $slider)
                             <div class="info">
                                 <div class="center">
                                     <h1>{{ $slider->title }}</h1>
                                 </div>
                                 <p>{{ $slider->description }}</p>
                             </div>
-                        @endforeach --}}
+                        @endforeach
 
                     </div>
                 </div>

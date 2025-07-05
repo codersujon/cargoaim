@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Http\Controllers\AuthController;
 use Modules\Auth\Http\Controllers\LoginController;
+use Modules\Auth\Http\Controllers\LoginPageSliderController;
 
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     Route::resource('auths', AuthController::class)->names('auth');
@@ -18,4 +19,7 @@ Route::middleware('guest')->group(function () {
 // Authenticated Routes 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('user.logout');
+
+    Route::resource('login_page_slider', LoginPageSliderController::class);
+    Route::post('active_status', [LoginPageSliderController::class, 'status'])->name('active.status');
 });
