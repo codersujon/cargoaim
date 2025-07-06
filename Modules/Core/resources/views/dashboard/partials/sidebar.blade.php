@@ -1,23 +1,24 @@
-{{-- // $basicInfo = \App\Models\BasicInformation::where('id', 1)->first(); --}}
-
+@php
+    $profile = \Modules\Auth\Models\Profile::first();
+@endphp
 
 <div class="sidenav-menu">
     <!-- Brand Logo -->
     <a href="{{ route('user.dashboard') }}" class="logo">
         <span class="logo-light">
             <span class="logo-lg">
-                <img src="{{ asset('upload/bscImg11745038891.jpg') }}" alt="logo">
+                <img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}" alt="logo">
             </span>
             <span class="logo-sm">
-                <img src="{{ asset('upload/bscImg11745038891.jpg') }}"
+                <img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
                     alt="small logo">
             </span>
         </span>
 
         <span class="logo-dark">
-           <span class="logo-lg"><img src="{{ asset('upload/bscImg11745038891.jpg') }}"
+           <span class="logo-lg"><img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
                     alt="dark logo"></span>
-            <span class="logo-sm"><img src="{{ asset('upload/bscImg11745038891.jpg') }}"
+            <span class="logo-sm"><img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
                     alt="small logo"></span>
         </span>
     </a>
@@ -44,6 +45,7 @@
                     <span class="menu-text"> {{ transText('basic_info_menu') }} </span> 
                 </a>
             </li> --}}
+            
             <li class="side-nav-item">
                 <a href="{{ url('login_page_slider') }}" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-building-hospital"></i></span>
@@ -68,7 +70,6 @@
             
 
              {{-- <li class="side-nav-title mt-2">Apps & Pages</li>
-            
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarBaseUI" aria-expanded="false"
                     aria-controls="sidebarBaseUI" class="side-nav-link">

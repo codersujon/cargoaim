@@ -12,13 +12,19 @@ class LoginPageSliderController extends Controller
     public function index()
     {
         $data = LoginPageSlider::orderBy('id', 'asc')->get();
-        return view('auth::loginslider.index', compact('data'));
+        return view('auth::login_slider.index', compact('data'));
     }
 
     public function status(Request $request)
     {
         LoginPageSlider::where('id', $request->id)->update(['status' => $request->status]);
         return response()->json(['success' => true]);
+    }
+
+    public function fetch()
+    {
+        $data = LoginPageSlider::orderBy('id', 'asc')->get();
+        return response()->json($data);
     }
 
     public function create(){}
@@ -41,11 +47,9 @@ class LoginPageSliderController extends Controller
             ]
         );
 
-        if ($request->id != 0) {
-            return redirect()->back()->with('success', 'Updated successfully!!!');
-        } else {
-            return redirect()->back()->with('success', 'Inserted successfully!!!');
-        }
+        $message = $request->id != 0 ? transText('f_upd_msg') : transText('f_ins_msg');
+
+        return response()->json(['success' => true, 'message' => $message]);
     }
 
 
@@ -61,7 +65,7 @@ class LoginPageSliderController extends Controller
 
     public function destroy($id) 
     {
-        $data = LoginPageSlider::find($id);
+        $data = LoginPageSlider::where('id', $id)->first();
 
         if (!$data) {
             return response()->json(['error' => 'Data not found.']);

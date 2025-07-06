@@ -17,9 +17,9 @@
                                     <th>{{ transText('en_th') }}</th>
                                     <th>{{ transText('bn_th') }}</th>
                                     <th>{{ transText('cn_th') }}</th>
-                                    <th>{{ transText('tn_th') }}</th>
+                                    <th>{{ transText('th_th') }}</th>
                                     <th>{{ transText('vn_th') }}</th>
-                                    <th>{{ transText('kn_th') }} </th>
+                                    <th>{{ transText('kh_th') }} </th>
                                     <th>{{ transText('remarks_th') }} </th>
                                     <th>{{ transText('action_th') }} </th>
                                 </tr>
@@ -49,72 +49,137 @@
                     <form id="form" name="form" class="form-horizontal" method="POST"
                         action="{{ url('language') }}" enctype="multipart/form-data">
                         @csrf()
-                        <div class="row">
-                            <input type="hidden" name="row_id" id="row_id">
 
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="basic-addon1">{{ transText('type_label') }}</span>
-                                    <input type="text" name="apply_on_type" id="apply_on_type" class="form-control" placeholder="{{ transText('type_placeholder') }}" required autocomplete="off">
-                                </div>
-                            </div>
+                        <div class="table-responsive border border-2 rounded">
+                            <table class="table table-borderless mt-1 table_not_caption">
+                                <tbody class="mx-2">
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <input type="hidden" name="row_id" id="row_id">
 
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('message_label') }}</span>
-                                    <input type="text" name="message_id_to_call" id="message_id_to_call" class="form-control" placeholder="{{ transText('message_placeholder') }}" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('en_label') }} </span>
-                                    <input type="text" name="en" id="en" class="form-control" placeholder="{{ transText('en_placeholder') }}" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('bn_label') }}</span>
-                                    <input type="text" name="bn" id="bn" class="form-control" placeholder="{{ transText('bn_placeholder') }}" autocomplete="off">
-                                </div>
-                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('type_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="apply_on_type" id="apply_on_type" class="form-control" placeholder="{{ transText('type_placeholder') }}" required autocomplete="off" style="margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
 
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('cn_label') }} </span>
-                                    <input type="text" name="cn" id="cn" class="form-control" placeholder="{{ transText('cn_placeholder') }}" autocomplete="off">
-                                </div>
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('message_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="message_id_to_call" id="message_id_to_call" class="form-control" placeholder="{{ transText('message_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('en_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="en" id="en" class="form-control" placeholder="{{ transText('en_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('bn_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="bn" id="bn" class="form-control" placeholder="{{ transText('bn_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('cn_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="cn" id="cn" class="form-control" placeholder="{{ transText('cn_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('th_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="th" id="th" class="form-control" placeholder="{{ transText('th_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('vn_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="vn" id="vn" class="form-control" placeholder="{{ transText('vn_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('kh_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="kh" id="kh" class="form-control" placeholder="{{ transText('kh_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('remarks_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="remarks" id="remarks" class="form-control" placeholder="{{ transText('remarks_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="text-end col-sm-offset-2 col-sm-12 my-1 px-1">
+                                <button type="button" class="btn btn-success" id="close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    {{ transText('close_btn') }}
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="saveBtn">SAVE</button>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('tn_label') }}  </span>
-                                    <input type="text" name="th" id="th" class="form-control" placeholder="{{ transText('tn_placeholder') }}" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('vn_label') }} </span>
-                                    <input type="text" name="vn" id="vn" class="form-control" placeholder="{{ transText('vn_placeholder') }}" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('kn_label') }} </span>
-                                    <input type="text" name="kh" id="kh" class="form-control" placeholder="{{ transText('kn_placeholder') }}" autocomplete="off">
-                                </div>
-                            </div>                            
-                            <div class="col-sm-12 col-md-12 col-lg-12 mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('remarks_label') }} </span>
-                                    <input type="text" name="remarks" id="remarks" class="form-control" placeholder="{{ transText('remarks_placeholder') }}" autocomplete="off">
-                                </div>
-                            </div>                            
-                        </div>
-                        <div class="text-end col-sm-offset-2 col-sm-12 mt-2">
-                            <button type="button" class="btn btn-success" id="close" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                {{ transText('close_btn') }}
-                            </button>
-                            <button type="submit" class="btn btn-primary" id="saveBtn"></button>
                         </div>
                     </form>
                 </div>
@@ -228,7 +293,7 @@
                     confirmTitle: 'Are you sure?',
                     confirmText: 'You want to delete this item?',
                     confirmBtnText: 'Yes, delete it!',
-                    successMessage: 'Deleted Successfully!',
+                    successMessage: '{{ transText("fd_del_msg")}}',
                     errorMessage: 'Something went wrong!'
                 }
             );

@@ -58,7 +58,7 @@ class LanguageController extends Controller
             $validated
         );
 
-        $message = $request->row_id != 0 ? 'Updated successfully!' : 'Inserted successfully!';
+        $message = $request->row_id != 0 ? transText('f_upd_msg') :  transText('f_ins_msg');
 
         return response()->json(['success' => true, 'message' => $message, 'data' => $data]);
     }

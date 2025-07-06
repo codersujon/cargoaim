@@ -186,12 +186,7 @@
     
     
     <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
-
-    
-    @yield('script')
-
-
-    <script>
+<script>
         const sweetAlertConfirmation = {
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -209,6 +204,8 @@
             timer: 1000,
             timerProgressBar: true
         };
+
+        
 
         $(document).ready( function () {
             $('#myTable').DataTable();
@@ -231,6 +228,21 @@
 
 
     </script>
+    
+    @if (session('success'))
+        <script>
+            const Toast = Swal.mixin(toastConfiguration);
+            Toast.fire({
+                icon: 'success',
+                title: "{{ session('success') }}"
+            });
+        </script>
+    @endif
+    
+    @yield('script')
+
+
+   
 
 
 

@@ -4,17 +4,16 @@
 <head>
 
     @php
-        // $basicInfo = \App\Models\BasicInformation::where('id', 1)->first();
-        $sliders = \Modules\Auth\Models\LoginPageSlider::where('status', 1)->orderBy('id', 'asc')->get();
+        $profile = \Modules\Auth\Models\Profile::first();
+        $sliders = \Modules\Auth\Models\LoginPageSlider::where('status', 'A')->orderBy('id', 'asc')->get();
     @endphp
 
-    <title>Cargoaim</title>
-    {{-- <title>{{ $basicInfo ? $basicInfo->name : '' }}</title> --}}
+    <title>{{ $profile ? $profile->name : '' }}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
     <!-- External CSS libraries -->
-    {{-- <link rel="shortcut icon" href="{{ asset('upload/' . $basicInfo->favIcon) }}" type="image/x-icon" /> --}}
+    <link rel="shortcut icon" href="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}" type="image/x-icon" />
 
     <link type="text/css" rel="stylesheet" href="{{ asset('login') }}/assets/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet"
@@ -63,7 +62,7 @@
                         <div class="form-section-innner">
                             <div class="logo clearfix">
                                 <a href="login-13.html">
-                                    {{-- <img src="{{ asset('upload/' . $basicInfo->logo) }}" alt="logo" /> --}}
+                                    <img src="{{ asset('upload/' . ($profile->fav_icon ?? 'default.png')) }}" alt="logo" />
                                 </a>
                             </div>
                             <h3>Sign Into Your Account</h3>

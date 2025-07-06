@@ -1,6 +1,6 @@
-{{-- @php
-    $basicInfo = \App\Models\BasicInformation::where('id', 1)->first();
-@endphp --}}
+@php
+    $profile = \Modules\Auth\Models\Profile::first();
+@endphp
 
 
 <header class="app-topbar">
@@ -11,17 +11,17 @@
             <a href="{{ route('user.dashboard') }}" class="logo">
                 <span class="logo-light">
                     <span class="logo-lg">
-                        <img src="{{ asset('upload/bscImg11745038891.jpg') }}" alt="logo">
+                        <img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}" alt="logo">
                     </span>
                     <span class="logo-sm">
-                        <img src="{{ asset('upload/bscImg11745038891.jpg') }}" alt="small logo">
+                        <img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}" alt="small logo">
                     </span>
                 </span>
 
                 <span class="logo-dark">
-                    <span class="logo-lg"><img src="{{ asset('upload/bscImg11745038891.jpg') }}"
+                    <span class="logo-lg"><img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
                             alt="dark logo"></span>
-                    <span class="logo-sm"><img src="{{ asset('upload/bscImg11745038891.jpg') }}"
+                    <span class="logo-sm"><img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
                             alt="small logo"></span>
                 </span>
             </a>
@@ -533,9 +533,9 @@
                         </div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">
+                        <a href="{{ url('profile') }}" class="dropdown-item">
                             <i class="ti ti-user-hexagon me-1 fs-17 align-middle"></i>
-                            <span class="align-middle">My Account</span>
+                            <span class="align-middle">My Profile</span>
                         </a>
 
                         <!-- item-->
