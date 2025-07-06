@@ -18,7 +18,7 @@
                                     <th class="text-center">{{ transText('action_th') }}</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="dataBody">
                                 @foreach ($data as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
@@ -69,31 +69,50 @@
                     <form id="form" name="form" class="form-horizontal" method="POST"
                         action="{{ url('login_page_slider') }}" enctype="multipart/form-data">
                         @csrf()
-                        <div class="row">
-                            <input type="hidden" name="id" id="id">
 
-                            <div class="mb-2">
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="basic-addon1">{{ transText('title_label') }}</span>
-                                    <input type="text" name="title" id="title" class="form-control" placeholder="{{ transText('title_placeholder') }}" required>
-                                </div>                                
-                            </div>
+                        <div class="table-responsive border border-2 rounded">
+                            <table class="table table-borderless mt-1 table_not_caption">
+                                <tbody class="mx-2">
 
-                            <div class="mb-2">
-                                <div class="input-group">
-                                    <span class="input-group-text">{{ transText('description_label') }}</span>
-                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control"
-                                        placeholder="{{ transText('description_placeholder') }}"></textarea>
-                                </div>
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <input type="hidden" name="id" id="id">
+
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('title_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="title" id="title" class="form-control" placeholder="{{ transText('title_placeholder') }}" required autocomplete="off" style="margin-bottom: 4px;">
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                    <tr class="border-bottom border-dashed">
+                                        <th>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span style="margin-left: 10px;">{{ transText('description_label') }}</span>
+                                                <span style="margin-right: 10px;">:</span>
+                                            </div>
+                                        </th>
+                                        <td>
+                                            <textarea name="description" id="description" cols="30" rows="2" class="form-control" placeholder="{{ transText('description_placeholder') }}" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;"></textarea>
+                                        </td>
+                                        <td style="width: 10px;"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="text-end col-sm-offset-2 col-sm-12 my-1 px-1">
+                                <button type="button" class="btn btn-success" id="close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    {{ transText('close_btn') }}
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="saveBtn">SAVE</button>
                             </div>
                         </div>
-                        <div class="text-end col-sm-offset-2 col-sm-12 mt-2">
-                            <button type="button" class="btn btn-success" id="close" data-bs-dismiss="modal"
-                                aria-label="Close">
-                                {{ transText('close_btn') }}
-                            </button>
-                            <button type="submit" class="btn btn-primary" id="saveBtn"></button>
-                        </div>
+                        
                     </form>
                 </div>
 
@@ -128,20 +147,67 @@
                 showModalForCreateNew(save, createNew);
             });
 
+            submitFormWithAjax('#form', "{{ url('login_page_slider') }}", loadTableData);
+
+
+            // Load Table Data Function
+            function loadTableData() {
+                $.get("{{ url('lps_fetch') }}", function (data) {
+                    let html = '';
+                    let i = 1;
+
+                    data.forEach(function (item) {
+                        let checked = item.status === 'A' ? 'checked' : '';
+                        html += `<tr>
+                                    <td>${i++}</td>
+                                    <td>${item.title ?? ''}</td>
+                                    <td>${item.description ?? ''}</td>
+                                    <td>
+                                        <div>
+                                            <input type="checkbox" id="customSwitchStatus${item.id}" data-id="${item.id}"
+                                                ${checked} data-switch="success" class="toggle-status" />
+                                            <label for="customSwitchStatus${item.id}" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button" id="edit" data-id="${item.id}" class="btn btn-sm btn-info me-2">
+                                                <i class="ti ti-edit"></i>
+                                            </button>
+                                            <button type="button" id="delete" data-id="${item.id}" class="btn btn-sm btn-danger">
+                                                <i class="ti ti-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>`;
+                    });
+
+                    $('#myTable').DataTable().destroy(); // destroy old table
+                    $('#dataBody').html(html);           // insert new rows
+                    $('#myTable').DataTable();           // reinitialize DataTable
+                });
+            }
+
+            // Initial load
+            loadTableData();
+
+
             /*------------------Click to Edit Button------------------*/
             // Edit Button Click
-            loadEditDataToModal(
+             loadEditDataToModal(
                 '#edit',
                 "{{ route('login_page_slider.index') }}",
                 '#bs-example-modal-lg',
                 [
                     { selector: '#id', key: 'id' },
                     { selector: '#title', key: 'title' },
-                    { selector: '#description', key: 'description' },                   
+                    { selector: '#description', key: 'description' },
                 ],
                 '{{ transText("edit") }}',
-                '{{ transText("update_btn") }}'
+                '{{ transText("update_btn") }}',
             );
+
+
 
             $('body').on('click', '#delete', function() {
                 var id = $(this).data("id");
@@ -155,7 +221,7 @@
                                 const Toast = Swal.mixin(toastConfiguration);
                                 Toast.fire({
                                     icon: "success",
-                                    title: "Deleted Successfully!!!"
+                                    title: '{{ transText("fd_del_msg")}}',
                                 });
                             }
                         });
@@ -168,49 +234,37 @@
                 $('#ajaxModel').modal('hide');
             });
 
-
-
+            function toggleStatusUpdate(id, status, url) {
+                $.post(url, {
+                    id, status, _token: '{{ csrf_token() }}'
+                })
+                .done(() => {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: status === 'A' ? 'Activated!' : 'Deactivated!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                })
+                .fail(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
+                    });
+                });
+            }
 
             $('body').on('change', '.toggle-status', function () {
-                var id = $(this).data('id');
-                var newStatus = $(this).is(':checked') ? 'A' : 'I'; // A = Active, I = Inactive
+                const id = $(this).data('id');
+                const status = $(this).is(':checked') ? 'A' : 'I';
+                const url = "{{ route('active.status') }}";
 
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('active.status') }}",
-                    data: {
-                        id: id,
-                        status: newStatus,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function (response) {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        });
-
-                        Toast.fire({
-                            icon: 'success',
-                            title: newStatus === 'A' ? 'Activated successfully!' : 'Deactivated successfully!'
-                        });
-                    },
-                    error: function (xhr) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Something went wrong! Please try again later.",
-                        });
-                    }
-                });
+                toggleStatusUpdate(id, status, url);
             });
-
 
 
 

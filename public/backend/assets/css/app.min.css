@@ -20913,3 +20913,9 @@ thead th {
 }
 
 /* suggestions box end */
+
+
+
+.table_not_caption > :not(caption) > * > * {
+  padding: 0rem 0rem !important;
+}
