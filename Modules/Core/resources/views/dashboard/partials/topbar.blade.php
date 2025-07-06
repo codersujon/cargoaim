@@ -39,7 +39,7 @@
             
 
             <!-- Mega Menu Dropdown -->
-            <div class="topbar-item d-none d-md-flex">
+            {{-- <div class="topbar-item d-none d-md-flex">
                 <div class="dropdown">
                     <a href="#" class="topbar-link btn btn-link px-2 dropdown-toggle drop-arrow-none fw-medium"
                          data-bs-trigger="hover" data-bs-offset="0,17" aria-haspopup="false"
@@ -135,11 +135,11 @@
                         </div> <!-- end row-->
                     </div> <!-- .dropdown-menu-->
                 </div> <!-- .dropdown-->
-            </div> 
+            </div>  --}}
             <!-- end topbar-item -->
 
             <!-- Mega Menu Dropdown -->
-            <div class="topbar-item d-none d-md-flex">
+            {{-- <div class="topbar-item d-none d-md-flex">
                 <div class="dropdown">
                     <a href="#" class="topbar-link btn btn-link px-2 dropdown-toggle drop-arrow-none fw-medium" data-bs-trigger="hover" data-bs-offset="0,17" aria-haspopup="false"
                         aria-expanded="false">
@@ -210,8 +210,22 @@
                         </div> <!-- end row-->
                     </div> <!-- .dropdown-menu-->
                 </div> <!-- .dropdown-->
-            </div> 
+            </div>  --}}
             <!-- end topbar-item -->
+
+
+            {{-- Mega Menu Dropdown --}}
+            <div class="topbar_menu">
+                <ul>
+                    <li><a href="#">NMS</a></li>
+                    <li><a href="#">Schedule</a></li>
+                    <li><a href="#">Tariff</a></li>
+                    <li><a href="#">Sales</a></li>
+                    <li><a href="#">CS & DOC</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </div>
 
         </div>
 
