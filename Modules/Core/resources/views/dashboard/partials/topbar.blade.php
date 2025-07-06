@@ -213,20 +213,47 @@
             </div>  --}}
             <!-- end topbar-item -->
 
-
             {{-- Mega Menu Dropdown --}}
             <div class="topbar_menu">
                 <ul>
-                    <li><a href="#">NMS</a></li>
-                    <li><a href="#">Schedule</a></li>
-                    <li><a href="#">Tariff</a></li>
-                    <li><a href="#">Sales</a></li>
-                    <li><a href="#">CS & DOC</a></li>
-                    <li><a href="#">Reports</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> NMS <i class="fa-solid fa-angles-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management CRM</a></li>
+                            <li><a href=""><i class="fas fa-pen-nib"></i> User Interface Design</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> Database Managment</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-briefcase"></i> Schedule <i class="fa-solid fa-angles-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href=""><i class="fas fa-briefcase"></i> Feeder Schedule</a></li>
+                            <li><a href=""><i class="fas fa-pen-nib"></i> Mother Schedule</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> PRE /ONC Entry</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> Career's Mother Lane</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> Port 2 Port Routing</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> VSL to VSL Link</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> Port to Port Check</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa-solid fa-tags"></i> Tariff</a></li>
+                    <li><a href="#"><i class="fa-solid fa-dollar-sign"></i> Sales</a></li>
+                    <li><a href="#"><i class="fa-solid fa-headset"></i> CS & DOC</a></li>
+                    <li><a href="#"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+                    <li>
+                        <a href="#">
+                            <i class="fa-solid fa-cog"></i> Settings
+                            <i class="fa-solid fa-angles-down"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management CRM</a></li>
+                            <li><a href=""><i class="fas fa-pen-nib"></i> User Interface Design</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> Database Managment</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-
         </div>
 
         <div class="d-flex align-items-center gap-2">
