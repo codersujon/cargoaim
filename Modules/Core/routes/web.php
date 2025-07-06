@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Core\Http\Controllers\MenuController;
 use Modules\Core\Http\Controllers\CoreController;
 use Modules\Core\Http\Controllers\DashboardController;
 use Modules\Core\Http\Controllers\ColorManageController;
@@ -23,4 +24,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('language_fetch', [LanguageController::class, 'fetch']);
 
     Route::get('lang/{locale}', [LanguageSelectController::class, 'switch'])->name('lang.switch');
+});
+
+
+// Menu
+Route::middleware(['auth'])->group(function () {
+    Route::resource('menu', MenuController::class)->except(['show']);
 });

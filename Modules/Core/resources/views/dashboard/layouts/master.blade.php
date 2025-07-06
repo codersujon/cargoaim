@@ -15,18 +15,14 @@
     {{-- <title> {{ $basicInfo? $basicInfo->name : '' }} @yield('titleHeader') </title> --}}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
+    <meta content="CargoAIM is an ERP (Enterprise Resource Planning) software specifically designed for freight forwarders" name="description" />
+    <meta content="Cargoaim" name="author" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <!-- App favicon -->
      {{-- <link rel="shortcut icon" href="{{ asset('upload/' . $basicInfo->favIcon) }}"> --}}
-
-    {{-- <!---- font-awesome ------>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!---- font-awesome ------> --}}
 
     <!-- Theme Config Js -->
     <script src="{{ asset('backend') }}/assets/js/config.js"></script>
@@ -46,8 +42,7 @@
     <link href="{{ asset('backend') }}/flatpickr.css" rel="stylesheet" type="text/css" />
     <!-- flatpickr -->
 
-   
-    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 
