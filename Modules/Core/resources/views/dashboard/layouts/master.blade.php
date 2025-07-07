@@ -9,20 +9,20 @@
     <meta charset="utf-8" />
 
     
-    {{--  $basicInfo = \App\Models\BasicInformation::where('id', 1)->first(); --}}
+    @php
+        $profile = \Modules\Auth\Models\Profile::first();
+    @endphp
 
-    <title> Dashboard </title>
-    {{-- <title> {{ $basicInfo? $basicInfo->name : '' }} @yield('titleHeader') </title> --}}
+    <title> {{ $profile? $profile->name : '' }} </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="CargoAIM is an ERP (Enterprise Resource Planning) software specifically designed for freight forwarders" name="description" />
     <meta content="Cargoaim" name="author" />
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <!-- App favicon -->
-     {{-- <link rel="shortcut icon" href="{{ asset('upload/' . $basicInfo->favIcon) }}"> --}}
+    <link rel="shortcut icon" href="{{ asset('upload/' . $profile->fav_icon) }}">
 
     <!-- Theme Config Js -->
     <script src="{{ asset('backend') }}/assets/js/config.js"></script>
@@ -43,6 +43,7 @@
     <!-- flatpickr -->
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
 </head>
 
 
@@ -54,7 +55,6 @@
     @endphp
 
     @if($color)
-       
         <style>
             :root {
                 --osen-menu-bg-first: {{ $color->sidebar_left_color }} !important;
@@ -165,7 +165,6 @@
 
 
 
-
     <!-- Vendor js -->
     <script src="{{ asset('backend') }}/assets/js/vendor.min.js"></script>
 
@@ -176,12 +175,14 @@
 
 
     <script src="{{ asset('backend') }}/flatpickr.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     
     
     <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
-<script>
+    
+    <script>
         const sweetAlertConfirmation = {
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -206,21 +207,6 @@
             $('#myTable').DataTable();
             
         } );
-
-
-        // ✅ Loader Hide on Page Load
-        // window.addEventListener("load", function () {
-        //     // ✅ Just hide the spinner
-        //     setTimeout(() => {
-        //         document.getElementById("loader").style.display = "none";
-        //     }, 400);
-        // });
-
-        // window.addEventListener("beforeunload", function () {
-        //     // ✅ Just show the spinner only
-        //     document.getElementById("loader").style.display = "block";
-        // });
-
 
     </script>
     

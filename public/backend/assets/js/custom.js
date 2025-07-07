@@ -1,12 +1,7 @@
-
-
- 
-
     // CSRF Token setup for all AJAX requests
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
-
 
     function showModalForCreateNew(saveText, createNewText) {
         $('#loader').fadeIn();
@@ -22,6 +17,24 @@
         }, 800);
     }
 
+    ///---- Fetch Data Load ---///
+    function loadTableData({ url, tableId = 'myTable', tableBodyId = 'dataBody', rowTemplate }) {
+        $.get(url, function (data) {
+            let html = '';
+            let i = 1;
+
+            data.forEach(function (item) {
+                html += rowTemplate(item, i++);
+            });
+
+            if ($.fn.DataTable.isDataTable('#' + tableId)) {
+                $('#' + tableId).DataTable().destroy();
+            }
+
+            $('#' + tableBodyId).html(html);
+            $('#' + tableId).DataTable();
+        });
+    }
 
     // Form Submit
     function submitFormWithAjax(formSelector, url, reloadCallback) {
@@ -125,8 +138,7 @@
         });
     }
 
-
-    // Edit Data
+    //---- Edit Data Start----//
     function loadEditDataToModal(editBtnSelector, editUrlPrefix, modalSelector, fieldMappings, modalTitleText, saveBtnText, callback = null) {
         $('body').on('click', editBtnSelector, function () {
             let id = $(this).data('id');
@@ -163,56 +175,80 @@
     function getNestedValue(obj, path) {
         return path.split('.').reduce((o, key) => (o && o[key] !== undefined ? o[key] : ''), obj);
     }
+    //--- Edit Data End -----/////
 
 
     // Delete Button Click
-    function handleDeleteAction(deleteBtnSelector, deleteUrlPrefix, onSuccessCallback = null, customMessages = {}) {
-        const messages = {
-            confirmTitle: customMessages.confirmTitle || 'Are you sure?',
-            confirmText: customMessages.confirmText || 'You want to delete this item?',
-            confirmBtnText: customMessages.confirmBtnText || 'Yes, delete it!',
-            successMessage: customMessages.successMessage || 'Deleted Successfully!',
-            errorMessage: customMessages.errorMessage || 'Something went wrong!',
-        };
-
-        $('body').on('click', deleteBtnSelector, function () {
+    function handleDelete(buttonSelector, deleteUrl, reloadCallback) {
+        $('body').on('click', buttonSelector, function () {
             const id = $(this).data("id");
 
-            Swal.fire({
-                title: messages.confirmTitle,
-                text: messages.confirmText,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: messages.confirmBtnText
-            }).then((res) => {
-                if (res.isConfirmed) {
+            Swal.fire(sweetAlertConfirmation).then((result) => {
+                if (result.isConfirmed) {
+                    let url = '';
+                    if (typeof deleteUrl === 'function') {
+                        url = deleteUrl(id); // callback থেকে URL নেয়া
+                    } else {
+                        url = deleteUrl.endsWith('/') ? deleteUrl + id : deleteUrl + '/' + id; // স্ট্রিং হলে
+                    }
+
                     $.ajax({
                         type: "DELETE",
-                        url: `${deleteUrlPrefix}/${id}`,
-                        success: function () {
-                            Swal.fire({
-                                toast: true,
-                                icon: 'success',
-                                position: 'top-end',
-                                title: messages.successMessage,
-                                showConfirmButton: false,
-                                timer: 3000
+                        url: url,
+                        success: function (data) {
+                            const Toast = Swal.mixin(toastConfiguration);
+                            Toast.fire({
+                                icon: "success",
+                                title: '{{ transText("fd_del_msg") }}',
                             });
 
-                            if (typeof onSuccessCallback === "function") {
-                                onSuccessCallback();
+                            if (typeof reloadCallback === 'function') {
+                                reloadCallback();
                             }
                         },
                         error: function () {
-                            Swal.fire('Error', messages.errorMessage, 'error');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong while deleting.'
+                            });
                         }
                     });
                 }
             });
+
+            return false;
         });
     }
+
+    
+    //----- Data Active and Inactive Start------/////
+    function toggleStatusUpdate(id, status, url) {
+        $.post(url, { id, status })
+            .done(() => {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: status === 'A' ? 'Activated!' : 'Deactivated!',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+            })
+            .fail(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!'
+                });
+            });
+    }
+    //----- Data Active and Inactive End------///// 
+
+    
+
+
 
     ///----- select box select function Start-----/////
     function loadSelectOptions({
@@ -248,9 +284,6 @@
             }
         });
     }
-
-
-
 
     ///----- City Name ------///
     function loadDependentDropdown(url, sourceSelector, targetSelector, postKey = 'id') {
@@ -600,6 +633,14 @@
             backdrop: 'static', // Modal বাইরে ক্লিক করলে বন্ধ হবে না
             keyboard: true      // ESC চাপলে modal বন্ধ হবে
         });
+
+
+
+
+
+       
+
+
     });
 
 

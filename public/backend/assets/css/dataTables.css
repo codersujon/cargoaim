@@ -626,7 +626,7 @@ div.dt-container {
 div.dt-container .dt-search input {
   border: 1px solid #aaa;
   border-radius: 3px;
-  padding: 5px;
+  padding: 2px;
   background-color: transparent;
   color: inherit;
   margin-left: 3px;
@@ -639,7 +639,7 @@ div.dt-container .dt-input {
   color: inherit;
 }
 div.dt-container select.dt-input {
-  padding: 4px;
+  padding: 2px;
 }
 div.dt-container .dt-paging .dt-paging-button {
   box-sizing: border-box;

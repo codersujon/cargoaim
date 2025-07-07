@@ -51,11 +51,10 @@
                                     <td>{{ $data->copyright ?? ''}}</td>
                                 </tr>
 
-                                
                                 <tr>
-                                    <td colspan="4" class="text-center pt-4">
+                                    <td colspan="4" class="text-center pt-2">
                                         <button type="button" id="edit" data-id="{{ $data?->id }}" class="btn btn-primary">
-                                            <i class="ti ti-edit"></i>
+                                            <i class="fa-solid fa-pen-to-square"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -193,8 +192,7 @@
                                 </tbody>
                             </table>
                             <div class="text-end col-sm-offset-2 col-sm-12 my-1 px-1">
-                                <button type="button" class="btn btn-success" id="close" data-bs-dismiss="modal"
-                                    aria-label="Close">
+                                <button type="button" class="btn btn-success" id="close" data-bs-dismiss="modal" aria-label="Close">
                                     {{ transText('close_btn') }}
                                 </button>
                                 <button type="submit" class="btn btn-primary" id="saveBtn">SAVE</button>

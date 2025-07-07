@@ -10,9 +10,6 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-.app-topbar {
-    padding: 8px 0.75rem;
-}
 
 .topbar_menu a {
     display: block;

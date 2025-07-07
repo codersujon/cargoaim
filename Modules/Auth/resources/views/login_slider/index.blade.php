@@ -73,7 +73,6 @@
                         <div class="table-responsive border border-2 rounded">
                             <table class="table table-borderless mt-1 table_not_caption">
                                 <tbody class="mx-2">
-
                                     <tr class="border-bottom border-dashed">
                                         <th>
                                             <input type="hidden" name="id" id="id">
@@ -127,10 +126,10 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#myTable').on('draw.dt', function() {
-                // Language label যোগ করা
-                if ($('.language-manage-label').length === 0) {
-                    var languageLabel = @json(transText('login_page_slider_ch'));
-                    $('.dt-length').before('<span class="language-manage-label" style="margin-right: 10px; font-weight: bold;">' + languageLabel + '</span>');
+                // Card Header যোগ করা
+                if ($('.table_details').length === 0) {
+                    var cardHeader = @json(transText('login_page_slider_ch'));
+                    $('.dt-length').before('<span class="table_details" style="margin-right: 10px; font-weight: bold;">' + cardHeader + '</span>');
                 }
 
                 // Add button যোগ করা
@@ -147,50 +146,40 @@
                 showModalForCreateNew(save, createNew);
             });
 
-            submitFormWithAjax('#form', "{{ url('login_page_slider') }}", loadTableData);
+            const dataRowTemplate = (item, index) => `
+                <tr>
+                    <td>${index}</td>
+                    <td>${item.title ?? ''}</td>
+                    <td>${item.description ?? ''}</td>
+                    <td>
+                        <div>
+                            <input type="checkbox" id="customSwitchStatus${item.id}" data-id="${item.id}"
+                                ${item.status === 'A' ? 'checked' : ''} class="toggle-status" data-switch="success" />
+                            <label for="customSwitchStatus${item.id}" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" id="edit" data-id="${item.id}" class="btn btn-sm btn-info me-2">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                            <button type="button" id="delete" data-id="${item.id}" class="btn btn-sm btn-danger">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>`;
 
+            const reloadTable = () => loadTableData({
+                url: "{{ url('lps_fetch') }}",
+                tableId: 'myTable',
+                tableBodyId: 'dataBody',
+                rowTemplate: dataRowTemplate
+            });
 
-            // Load Table Data Function
-            function loadTableData() {
-                $.get("{{ url('lps_fetch') }}", function (data) {
-                    let html = '';
-                    let i = 1;
+            reloadTable();
 
-                    data.forEach(function (item) {
-                        let checked = item.status === 'A' ? 'checked' : '';
-                        html += `<tr>
-                                    <td>${i++}</td>
-                                    <td>${item.title ?? ''}</td>
-                                    <td>${item.description ?? ''}</td>
-                                    <td>
-                                        <div>
-                                            <input type="checkbox" id="customSwitchStatus${item.id}" data-id="${item.id}"
-                                                ${checked} data-switch="success" class="toggle-status" />
-                                            <label for="customSwitchStatus${item.id}" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <button type="button" id="edit" data-id="${item.id}" class="btn btn-sm btn-info me-2">
-                                                <i class="ti ti-edit"></i>
-                                            </button>
-                                            <button type="button" id="delete" data-id="${item.id}" class="btn btn-sm btn-danger">
-                                                <i class="ti ti-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>`;
-                    });
-
-                    $('#myTable').DataTable().destroy(); // destroy old table
-                    $('#dataBody').html(html);           // insert new rows
-                    $('#myTable').DataTable();           // reinitialize DataTable
-                });
-            }
-
-            // Initial load
-            loadTableData();
-
+            submitFormWithAjax('#form', "{{ url('login_page_slider') }}", reloadTable);
 
             /*------------------Click to Edit Button------------------*/
             // Edit Button Click
@@ -207,57 +196,18 @@
                 '{{ transText("update_btn") }}',
             );
 
+            /*------------------Click to Delete Button------------------*/
+            // Delete Button Click
+            handleDelete('#delete', 'login_page_slider', reloadTable);
 
-
-            $('body').on('click', '#delete', function() {
-                var id = $(this).data("id");
-                Swal.fire(sweetAlertConfirmation).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "DELETE",
-                            url: 'login_page_slider/' + id,
-                            success: function(data) {
-                                window.location = 'login_page_slider';
-                                const Toast = Swal.mixin(toastConfiguration);
-                                Toast.fire({
-                                    icon: "success",
-                                    title: '{{ transText("fd_del_msg")}}',
-                                });
-                            }
-                        });
-                    }
-                });
-                return false;
-            });
-
+            // Modal Close
             $('#close').click(function() {
                 $('#ajaxModel').modal('hide');
             });
 
-            function toggleStatusUpdate(id, status, url) {
-                $.post(url, {
-                    id, status, _token: '{{ csrf_token() }}'
-                })
-                .done(() => {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: status === 'A' ? 'Activated!' : 'Deactivated!',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true
-                    });
-                })
-                .fail(() => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!'
-                    });
-                });
-            }
 
+            
+            //----- Data Active and Inactive ------/////
             $('body').on('change', '.toggle-status', function () {
                 const id = $(this).data('id');
                 const status = $(this).is(':checked') ? 'A' : 'I';
