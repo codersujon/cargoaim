@@ -216,13 +216,12 @@
             {{-- Mega Menu Dropdown --}}
             <div class="topbar_menu">
                 <ul>
-                    <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
                     <li>
                         <a href="#"><i class="fa-solid fa-briefcase"></i> NMS <i class="fa-solid fa-angles-down"></i></a>
                         <ul class="submenu">
-                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management CRM</a></li>
+                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management</a></li>
                             <li><a href=""><i class="fas fa-pen-nib"></i> User Interface Design</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> Database Managment</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> Database Management</a></li>
                         </ul>
                     </li>
                     <li>
@@ -247,9 +246,9 @@
                             <i class="fa-solid fa-angles-down"></i>
                         </a>
                         <ul class="submenu">
-                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management CRM</a></li>
+                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management</a></li>
                             <li><a href=""><i class="fas fa-pen-nib"></i> User Interface Design</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> Database Managment</a></li>
+                            <li><a href=""><i class="fas fa-database"></i> Database Management</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -12,7 +12,9 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "nwidart/laravel-modules": "^12.0"
+        "nwidart/laravel-modules": "^12.0",
+        "php-flasher/flasher-laravel": "^2.1",
+        "php-flasher/flasher-toastr-symfony": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -31,7 +33,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "modules/Core/app/Helpers/helper.php"
+            "modules/Core/app/Helpers/helper.php",
+            "Modules/Core/app/Helpers/flasher.php"
         ]
     },
     "autoload-dev": {

@@ -29,11 +29,15 @@ class LoginController extends Controller {
         $user = UserAccess::where('userId', $credentials['userId'])->first();
 
         if (! $user) {
-            return back()->with('error', 'User not found.');
+            flasher_error('User not found.', [
+                'timeout' => 3000,
+                'position' => 'top-right',
+            ]);
+            return back();
         }
 
         // Password Check
-        if ($user->userPassword === $credentials['password']) {
+        if ($user && $user->userPassword === $credentials['password']) {
             
             // Upgrade Password to Hash 
             // $user->update([
@@ -41,9 +45,19 @@ class LoginController extends Controller {
             // ]); 
 
             Auth::login($user);
+            // Flash message for successful login
+            flasher_success('Logged in successfully!', [
+                'timeout' => 3000,
+                'position' => 'top-right',
+            ]);
             return redirect()->intended('/dashboard');
+
         }else{
-            return redirect()->back()->with('error', 'Invalid Credentials');
+            flasher_error('Invalid credentials', [
+                'timeout' => 3000,
+                'position' => 'top-right',
+            ]);
+            return redirect()->back();
         }
 
         
@@ -57,8 +71,13 @@ class LoginController extends Controller {
 
         $request->session()->invalidate(); // Invalidates the session
         $request->session()->regenerateToken(); // Regenerates CSRF token
-
-        return redirect()->route('user.login')->with('success', 'You have been logged out.');
+        
+        // Flash message for logout success
+        flasher_success('User Logout Successfully!', [
+            'timeout' => 3000,
+            'position' => 'bottom-right',
+        ]);
+        return redirect()->route('user.login');
     }
 
     /**
