@@ -1,13 +1,23 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'Modules/Core/resources/assets/css/custom-icon.css',
+            ],
             refresh: true,
         }),
-        tailwindcss(),
     ],
+    resolve: {
+        alias: {
+            '@core': path.resolve(__dirname, 'Modules/Core/resources/assets'),
+            '@corefonts': path.resolve(__dirname, 'Modules/Core/resources/fonts'),
+        },
+    },
 });
