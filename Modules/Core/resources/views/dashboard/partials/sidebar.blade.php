@@ -54,26 +54,26 @@
 
             <li class="side-nav-item">
                 <a href="" class="side-nav-link">
-                    <span class="menu-icon">DOC</span>
-                    <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
+                    <span class="sf_menu">DOC</span>
+                    <span class="menu-text"> {{ transText('booking_documentation') }} </span> 
                 </a>
             </li>
 
              <li class="side-nav-item">
                 <a href="" class="side-nav-link">
-                    <span class="menu-icon">LOG</span>
+                    <span class="sf_menu">LOG</span>
                     <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
                 </a>
             </li>
             <li class="side-nav-item">
                 <a href="" class="side-nav-link">
-                    <span class="menu-icon">ACC</span>
+                    <span class="sf_menu">ACC</span>
                     <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
                 </a>
             </li>
              <li class="side-nav-item">
                 <a href="" class="side-nav-link">
-                    <span class="menu-icon">CHA</span>
+                    <span class="sf_menu">CHA</span>
                     <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
                 </a>
             </li>
