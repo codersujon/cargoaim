@@ -183,7 +183,6 @@
 
     <script src="{{ asset('backend') }}/flatpickr.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     
     
@@ -208,6 +207,16 @@
             timerProgressBar: true
         };
 
+
+        window.transText = {
+            err_ttl_msg: @json(transText('err_ttl_msg')),
+            err_msg: @json(transText('err_msg')),
+            conf_ttl_msg: @json(transText('conf_ttl_msg')),
+            conf_msg: @json(transText('conf_msg')),
+            conf_yd_btn: @json(transText('conf_yd_btn')),
+            cancel_btn: @json(transText('cancel_btn')),
+            err_val_ttl_msg: @json(transText('err_val_ttl_msg')),
+        };
         
 
         $(document).ready( function () {
@@ -217,15 +226,6 @@
 
     </script>
     
-    @if (session('success'))
-        <script>
-            const Toast = Swal.mixin(toastConfiguration);
-            Toast.fire({
-                icon: 'success',
-                title: "{{ session('success') }}"
-            });
-        </script>
-    @endif
     
     @yield('script')
 

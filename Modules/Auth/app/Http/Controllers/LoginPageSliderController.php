@@ -33,8 +33,10 @@ class LoginPageSliderController extends Controller
         // Validation
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:1000',
-            'id' => 'nullable|integer',
+            'description' => 'required|string|max:1000',
+        ], [
+            'title.required' => 'The title field is required!',
+            'description.required' => 'The description field is required!',
         ]);
 
         // Insert or update
@@ -71,6 +73,7 @@ class LoginPageSliderController extends Controller
             return response()->json(['error' => 'Data not found.']);
         }
         $data->delete();
-        return response()->json();
+        $message = transText('fd_del_msg');
+        return response()->json(['message' => $message]);
     }
 }
