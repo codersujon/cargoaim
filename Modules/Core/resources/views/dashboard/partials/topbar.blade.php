@@ -358,7 +358,7 @@
                                 <div class="col">
                                     <h6 class="m-0 fs-16 fw-semibold"> Notifications</h6>
                                 </div>
-                                <div class="col-auto">
+                                {{-- <div class="col-auto">
                                     <div class="dropdown">
                                         <a href="#" class="dropdown-toggle drop-arrow-none link-dark"
                                              data-bs-offset="0,15" aria-expanded="false">
@@ -379,7 +379,7 @@
                                                 Settings</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -578,11 +578,6 @@
                             <span class="align-middle">My Profile</span>
                         </a>
 
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <i class="ti ti-wallet me-1 fs-17 align-middle"></i>
-                            <span class="align-middle">Wallet : <span class="fw-semibold">$985.25</span></span>
-                        </a>
 
                         <!-- item-->
                         <a href="{{ url('color_settings')}}" class="dropdown-item">
@@ -597,12 +592,6 @@
                         </a>
 
                         <div class="dropdown-divider"></div>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <i class="ti ti-lock-square-rounded me-1 fs-17 align-middle"></i>
-                            <span class="align-middle">Lock Screen</span>
-                        </a>
 
                         <!-- item-->
                         <a href="#" class="dropdown-item fw-semibold text-danger"

@@ -196,10 +196,10 @@
         $(document).ready(function () {
 
             $('#myTable').on('draw.dt', function() {
-                // Language label যোগ করা
-                if ($('.language-manage-label').length === 0) {
-                    var languageLabel = @json(transText('language_ch'));
-                    $('.dt-length').before('<span class="language-manage-label" style="margin-right: 10px; font-weight: bold;">' + languageLabel + '</span>');
+                // Card Header যোগ করা
+                if ($('.table_details').length === 0) {
+                    var cardHeader = @json(transText('language_ch'));
+                    $('.dt-length').before('<span class="table_details" style="margin-right: 10px; font-weight: bold;">' + cardHeader + '</span>');
                 }
 
                 // Add button যোগ করা
@@ -217,40 +217,43 @@
             });
 
 
-            // Load Table Data Function
-            function loadTableData() {
-                $.get("{{ url('language_fetch') }}", function (data) {
-                    let html = '';
-                    let i = 1;
-                    data.forEach(function (item) {
-                        html += `<tr>
-                                    <td>${i++}</td>
-                                    <td>${item.apply_on_type}</td>
-                                    <td>${item.message_id_to_call}</td>
-                                    <td>${item.en ?? ''}</td>
-                                    <td>${item.bn ?? ''}</td>
-                                    <td>${item.cn ?? ''}</td>
-                                    <td>${item.th ?? ''}</td>
-                                    <td>${item.vn ?? ''}</td>
-                                    <td>${item.kh ?? ''}</td>
-                                    <td>${item.remarks ?? ''}</td>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <button type="button" id="edit" data-id="${item.row_id}" class="btn btn-sm btn-info me-2"><i class="ti ti-edit"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>`;
-                    });
-                    $('#myTable').DataTable().destroy(); // destroy old
-                    $('#dataBody').html(html); // insert new
-                    $('#myTable').DataTable(); // reinitialize
-                });
-            }
-            // Initial load
-            loadTableData();
+            //---- Fetch Data Load Start----////
+            const dataRowTemplate = (item, index) => `
+                <tr>
+                    <td>${index}</td>
+                    <td>${item.apply_on_type}</td>
+                    <td>${item.message_id_to_call}</td>
+                    <td>${item.en ?? ''}</td>
+                    <td>${item.bn ?? ''}</td>
+                    <td>${item.cn ?? ''}</td>
+                    <td>${item.th ?? ''}</td>
+                    <td>${item.vn ?? ''}</td>
+                    <td>${item.kh ?? ''}</td>
+                    <td>${item.remarks ?? ''}</td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" id="edit" data-id="${item.row_id}" class="btn btn-sm btn-info me-2"><i class="ti ti-edit"></i></button>
+                        </div>
+                    </td>
+                </tr>`;
 
-            // Form Submit
-            submitFormWithAjax('#form', "{{ url('language') }}", loadTableData);
+            const reloadTable = () => loadTableData({
+                url: "{{ url('language_fetch') }}",
+                tableId: 'myTable',
+                tableBodyId: 'dataBody',
+                rowTemplate: dataRowTemplate
+            });
+
+            // Initial table load
+            reloadTable();
+            //---- Fetch Data Load End----////
+
+            // Form submit call
+            submitFormWithAjax('#form', "{{ url('language') }}", reloadTable);
+
+
+
+
 
             // Edit Button Click
             loadEditDataToModal(
@@ -284,19 +287,6 @@
             //     }, 300); // delay দিয়ে wait করানো হচ্ছে যেন modal open হয়
             // });
 
-            // Delete Button Click
-            handleDeleteAction(
-                '#delete',
-                "{{ url('language') }}",
-                loadTableData,
-                {
-                    confirmTitle: 'Are you sure?',
-                    confirmText: 'You want to delete this item?',
-                    confirmBtnText: 'Yes, delete it!',
-                    successMessage: '{{ transText("fd_del_msg")}}',
-                    errorMessage: 'Something went wrong!'
-                }
-            );
 
 
 
