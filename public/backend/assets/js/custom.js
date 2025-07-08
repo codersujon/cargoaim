@@ -51,13 +51,12 @@
                 processData: false,
                 success: function (res) {
                     if (res.success) {
+
                         Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'success',
-                            title: res.message,
-                            showConfirmButton: false,
-                            timer: 3000
+                            text: res.message,
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: true
                         });
 
                         $('#bs-example-modal-lg').modal('hide');
@@ -78,11 +77,15 @@
 
                         Swal.fire({
                             icon: 'error',
-                            title: 'Validation Error',
+                            title: window.transText.err_val_ttl_msg,
                             html: errorMessages,
                         });
                     } else {
-                        Swal.fire('Error', 'Something went wrong!', 'error');
+                        Swal.fire({
+                            icon: 'error',
+                            title: window.transText.err_ttl_msg,
+                            text: window.transText.err_msg
+                        });
                     }
                 }
             });
@@ -105,12 +108,10 @@
                 success: function (res) {
                     if (res.success) {
                         Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'success',
-                            title: res.message,
-                            showConfirmButton: false,
-                            timer: 3000
+                            text: res.message,
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: true
                         });
 
                         $('#bs-example-modal-lg').modal('hide');
@@ -179,11 +180,25 @@
 
 
     // Delete Button Click
-    function handleDelete(buttonSelector, deleteUrl, reloadCallback) {
+    function handleDelete(buttonSelector, deleteUrl, reloadCallback, confirmationOptions = null) {
         $('body').on('click', buttonSelector, function () {
             const id = $(this).data("id");
 
-            Swal.fire(sweetAlertConfirmation).then((result) => {
+            // যদি custom confirmation options দেয়া না হয়, তাহলে default options
+            const defaultConfirmation = {
+                title: window.transText.conf_ttl_msg,
+                text: window.transText.conf_msg,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: window.transText.conf_yd_btn,
+                cancelButtonText: window.transText.cancel_btn,
+            };
+
+            const swalOptions = confirmationOptions ?? defaultConfirmation;
+
+            Swal.fire(swalOptions).then((result) => {
                 if (result.isConfirmed) {
                     let url = '';
                     if (typeof deleteUrl === 'function') {
@@ -196,10 +211,11 @@
                         type: "DELETE",
                         url: url,
                         success: function (data) {
-                            const Toast = Swal.mixin(toastConfiguration);
-                            Toast.fire({
+                            Swal.fire({
+                                text: data.message,
                                 icon: "success",
-                                title: '{{ transText("fd_del_msg") }}',
+                                timer: 1000,
+                                showConfirmButton: true
                             });
 
                             if (typeof reloadCallback === 'function') {
@@ -209,8 +225,8 @@
                         error: function () {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Oops...',
-                                text: 'Something went wrong while deleting.'
+                                title: window.transText.err_ttl_msg,
+                                text: window.transText.err_msg
                             });
                         }
                     });
@@ -220,6 +236,8 @@
             return false;
         });
     }
+// 
+
 
     
     //----- Data Active and Inactive Start------/////
@@ -634,14 +652,192 @@
             keyboard: true      // ESC চাপলে modal বন্ধ হবে
         });
 
-
-
-
-
-       
-
-
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $(document).ready(function(){
+
+//     // AJAX
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+    
+//     /**
+//      * SHOW SHIPPING CHARGE
+//      */
+//     function shippingCharge(){
+//     }
+//     shippingCharge();
+
+//     /**
+//      * ADD SHIPPING CHARGE
+//      */
+
+//     $(document).on("click", "#StoreSCharge", function(event){
+//         event.preventDefault();
+
+//         let title  = $("#title").val();
+//         let shippingCharge  = $("#shippingCharge").val();
+
+//         $.ajax({
+//             url: "/shipping/store",
+//             type: "POST",
+//             data:{
+//                 title: title,
+//                 shipping_charge: shippingCharge
+//             },
+//             success: function(response){
+//             },
+//             error: function(){
+//             }
+//         });
+//     });
+
+//     /**
+//      * EDIT SHPPING CHARGE
+//      */
+
+//     $(document).on("click", ".EditShipping", function(e){
+//         e.preventDefault();
+        
+//         const EditUrl = $(this).data('url');
+
+//         $.ajax({
+//             url: EditUrl,
+//             type: "GET",
+//             dataType: "json", // Expect a JSON response
+//             success: function(response){
+//             }
+//         });
+//     });
+
+//     /**
+//      * UPDATE SHIPPING
+//      */
+//     $(document).on("click", "#UpdateShipping", function(e){
+//         e.preventDefault();
+
+//         let sid = $("#sid").val();
+//         let title  = $("#Etitle").val();
+//         let shippingCharge  = $("#EshippingCharge").val();
+//         let status  = $("#status").val();
+
+//         $.ajax({
+//             url: `/shipping/update/${sid}`,
+//             type: "POST",
+//             data:{
+//                 title: title,
+//                 shipping_charge: shippingCharge,
+//                 status: status
+//             },
+//             success: function(response){
+//                 if(response.status == '200'){
+//                     $("#EditShippingChargeModal").modal('hide');
+//                     $("#Etitle").val("");
+//                     $("#EshippingCharge").val("");
+//                     $("#status").val("");
+
+//                     Swal.fire({
+//                         text: response.message,
+//                         icon: 'success',
+//                         timer: 500,
+//                         showConfirmButton: true
+//                     });
+//                     window.location.reload();
+//                 }
+//             }
+//         });
+
+//     });
+
+
+    
+
+
+//     /**
+//      * DESTROY SHIPPING CHARGE
+//      */
+//     $(document).on("click", ".deleteCharge", function(e){
+//         e.preventDefault();
+
+//         const deleteUrl = $(this).data('url');
+//         Swal.fire({
+//             title: "Are you sure?",
+//             text: "You want to delete the Shipping Charge!",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#0d6efd",
+//             cancelButtonColor: "#f41127",
+//             confirmButtonText: "Yes, delete it!",
+//           }).then((result) => {
+//             if (result.isConfirmed) {
+//                 $.ajax({
+//                     url: deleteUrl,
+//                     type: "GET",
+//                     success: function(response){
+//                         Swal.fire({
+//                             text: response.message,
+//                             icon: "success",
+//                             timer: 500,
+//                             showConfirmButton: true
+//                         });
+//                         shippingCharge();
+//                     },
+//                     error: function(){
+//                         Swal.fire({
+//                             title: "Error!",
+//                             text: "There was a problem deleting the shipping charge.",
+//                             icon: "error",
+//                             confirmButtonColor: "#0d6efd",
+//                             iconColor: '#f41127'
+//                         });
+//                     }
+//                 });
+              
+//             }
+//           });
+
+//     })
+
+
+// });
+
+
+// $(function(){
+//     // APPROVED PURCHASE
+//     $(document).on("click","#approveBtn", function(e){
+//         e.preventDefault();
+//         var link = $(this).attr("href");
+
+//     })
+// });
+
+
+
+
+
+
+
+
 
 
 

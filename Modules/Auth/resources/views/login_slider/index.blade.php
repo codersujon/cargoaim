@@ -19,33 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody id="dataBody">
-                                @foreach ($data as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->title }}</td>
-                                        <td>{{ $item->description }}</td>
-                                        <td>
-                                            <!-- Switch-->
-                                            <div>
-                                                <input type="checkbox" id="customSwitchStatus{{ $item->id }}" data-id="{{ $item->id }}"
-                                                    {{ $item->status == 'A' ? 'checked' : '' }} data-switch="success" class="toggle-status" />
-                                                <label for="customSwitchStatus{{ $item->id }}" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-center">
-                                                <button type="button" id="edit" data-id="{{ $item->id }}"
-                                                    class="btn btn-sm btn-info me-2">
-                                                    <i class="ti ti-edit"></i>
-                                                </button>
-                                                <button type="button" id="delete" data-id="{{ $item->id }}"
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="ti ti-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
@@ -195,6 +169,9 @@
                 '{{ transText("edit") }}',
                 '{{ transText("update_btn") }}',
             );
+
+
+            
 
             /*------------------Click to Delete Button------------------*/
             // Delete Button Click
