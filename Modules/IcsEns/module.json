@@ -1,0 +1,11 @@
+{
+    "name": "IcsEns",
+    "alias": "icsens",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\IcsEns\\Providers\\IcsEnsServiceProvider"
+    ],
+    "files": []
+}

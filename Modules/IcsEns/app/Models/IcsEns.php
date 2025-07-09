@@ -1,0 +1,143 @@
+<?php
+
+namespace Modules\IcsEns\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Modules\IcsEns\Database\Factories\IcsEnsFactory;
+
+class IcsEns extends Model
+{
+    use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     */
+    protected $table = 'customs_filing';
+    protected $primaryKey = 'row_id';
+    protected $fillable = [
+        'soft_cust_id',
+        'partition_id',
+        'billing_id',
+        'inv_no',
+        'inv_per_cycle_mbl',
+        'cargoaim_inv_amount',
+        'cargoaim_inv_currency',
+        'cargoaim_inv_roe',
+        'business_unit',
+        'bkg_no',
+        'hbl_no',
+        'ultimate_hbl_no',
+        'mbl_no',
+        'hbl_type',
+        'mbl_type',
+        'filing_type',
+        'import_export',
+        'original_hbl_no',
+        'original_mbl_no',
+        'carrier_scac',
+        'incoterm',
+        'nvocc_scac',
+        'from_location',
+        'actual_pol_etd_hbl',
+        'to_location',
+        'actual_pod_eta_hbl',
+        'ts_one',
+        'ts_two',
+        'ts_three',
+        'vsl_name',
+        'vsl_voyage',
+        'lloyed_no',
+        'vsl_call_sign',
+        'vsl_register_country',
+        'vsl_route_start_port',
+        'pol_for_us',
+        'pol_for_us_date',
+        'last_foreign_port',
+        'first_us_port',
+        'first_us_port_eta',
+        'shipper_code',
+        'shipper_name',
+        'shipper_address',
+        'shipper_location',
+        'shipper_zip_code',
+        'shipper_country',
+        'shipper_phone',
+        'shipper_email',
+        'shipper_registration',
+        'consignee_code',
+        'consignee_name',
+        'consignee_address',
+        'consignee_location',
+        'consignee_zip_code',
+        'consignee_country',
+        'consignee_phone',
+        'consignee_email',
+        'consignee_registration',
+        'notify_code',
+        'notify_name',
+        'notify_address',
+        'notify_location',
+        'notify_zip_code',
+        'notify_country',
+        'notify_phone',
+        'notify_email',
+        'notify_registration',
+        'seller_code',
+        'seller_name',
+        'seller_address',
+        'seller_location',
+        'seller_zip_code',
+        'seller_country',
+        'seller_phone',
+        'seller_email',
+        'seller_registration',
+        'buyer_code',
+        'buyer_name',
+        'buyer_address',
+        'buyer_location',
+        'buyer_zip_code',
+        'buyer_country',
+        'buyer_phone',
+        'buyer_email',
+        'buyer_registration',
+        'vsl_cutoms_office_code',
+        'hbl_cutoms_office_code',
+        'hbl_shipping_bill_reg_serial',
+        'hbl_shipping_bill_no',
+        'hbl_shipping_bill_date',
+        'mbl_ams_last_status',
+        'hbl_ams_last_status',
+        'isf_last_status',
+        'last_update_date',
+        'first_ams_submit_by',
+        'first_ams_submit_date',
+        'filing_channel',
+        'ams_reference_no',
+        'submission_status',
+        'version',
+        'status',
+        'ens_status_code',
+        'ens_disposition_code',
+        'ens_mrn_no',
+        'eu_lrn_no',
+        'notification_email',
+        'notification_mobile',
+        'entry_by',
+        'entry_date',
+        'update_by',
+        'update_date',
+        'delete_by',
+        'delete_date',
+        'case_close',
+        'case_close_by',
+        'case_close_date',
+    ];
+
+    public $timestamps = false;
+
+    // protected static function newFactory(): IcsEnsFactory
+    // {
+    //     // return IcsEnsFactory::new();
+    // }
+}
