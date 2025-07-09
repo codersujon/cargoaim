@@ -389,7 +389,7 @@
                             <div class="dropdown-item notification-item py-2 text-wrap active" id="notification-1">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('public/dashboard') }}/assets/images/users/avatar-2.jpg"
+                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-2.jpg"
                                             class="avatar-md rounded-circle" alt="" />
                                         <span class="position-absolute rounded-pill bg-danger notification-badge">
                                             <i class="ti ti-message-circle"></i>
@@ -416,7 +416,7 @@
                             <div class="dropdown-item notification-item py-2 text-wrap" id="notification-2">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('public/dashboard') }}/assets/images/users/avatar-4.jpg"
+                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-4.jpg"
                                             class="avatar-md rounded-circle" alt="" />
                                         <span class="position-absolute rounded-pill bg-info notification-badge">
                                             <i class="ti ti-currency-dollar"></i>
@@ -468,7 +468,7 @@
                             <div class="dropdown-item notification-item py-2 text-wrap" id="notification-4">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('public/dashboard') }}/assets/images/users/avatar-7.jpg"
+                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-7.jpg"
                                             class="avatar-md rounded-circle" alt="" />
                                         <span class="position-absolute rounded-pill bg-secondary notification-badge">
                                             <i class="ti ti-plus"></i>
@@ -495,7 +495,7 @@
                             <div class="dropdown-item notification-item py-2 text-wrap" id="notification-5">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('public/dashboard') }}/assets/images/users/avatar-10.jpg"
+                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-10.jpg"
                                             class="avatar-md rounded-circle" alt="" />
                                         <span class="position-absolute rounded-pill bg-danger notification-badge">
                                             <i class="ti ti-heart-filled"></i>

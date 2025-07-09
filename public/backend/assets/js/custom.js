@@ -128,11 +128,15 @@
 
                         Swal.fire({
                             icon: 'error',
-                            title: 'Validation Error',
+                            title: window.transText.err_val_ttl_msg,
                             html: errorMessages,
                         });
                     } else {
-                        Swal.fire('Error', 'Something went wrong!', 'error');
+                        Swal.fire({
+                            icon: 'error',
+                            title: window.transText.err_ttl_msg,
+                            text: window.transText.err_msg
+                        });
                     }
                 }
             });
@@ -164,7 +168,11 @@
                 $(modalSelector).modal('show');
             })
             .fail(function () {
-                alert('ডেটা লোড করতে সমস্যা হয়েছে।');
+                Swal.fire({
+                    icon: 'error',
+                    title: window.transText.err_ttl_msg,
+                    text: window.transText.err_msg
+                });
             })
             .always(function () {
                 $('#loader').fadeOut(200);
@@ -236,38 +244,29 @@
             return false;
         });
     }
-// 
 
-
-    
     //----- Data Active and Inactive Start------/////
     function toggleStatusUpdate(id, status, url) {
         $.post(url, { id, status })
             .done(() => {
                 Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: status === 'A' ? 'Activated!' : 'Deactivated!',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true
+                    text: status === 'A' ? window.transText.actv_msg : window.transText.dact_msg,
+                    icon: "success",
+                    timer: 1000,
+                    showConfirmButton: true
                 });
             })
             .fail(() => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!'
+                    title: window.transText.err_ttl_msg,
+                    text: window.transText.err_msg
                 });
             });
     }
     //----- Data Active and Inactive End------///// 
 
     
-
-
-
     ///----- select box select function Start-----/////
     function loadSelectOptions({
         url,
@@ -352,8 +351,6 @@
 
 
    
-
-
     ////---- Set up Customer Autocomplete autocomplete based on shipper, consignee, or notify-----/////
     function setupCustomerAutocomplete(type) {
         let dataMap = {};
@@ -644,7 +641,6 @@
         e.preventDefault();
     });
 
-
     ///---- The modal should not close when clicking outside of it. ----///
     $(document).ready(function () {
         $('#bs-example-modal-lg').modal({
@@ -653,183 +649,6 @@
         });
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $(document).ready(function(){
-
-//     // AJAX
-//     $.ajaxSetup({
-//         headers: {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         }
-//     });
-    
-//     /**
-//      * SHOW SHIPPING CHARGE
-//      */
-//     function shippingCharge(){
-//     }
-//     shippingCharge();
-
-//     /**
-//      * ADD SHIPPING CHARGE
-//      */
-
-//     $(document).on("click", "#StoreSCharge", function(event){
-//         event.preventDefault();
-
-//         let title  = $("#title").val();
-//         let shippingCharge  = $("#shippingCharge").val();
-
-//         $.ajax({
-//             url: "/shipping/store",
-//             type: "POST",
-//             data:{
-//                 title: title,
-//                 shipping_charge: shippingCharge
-//             },
-//             success: function(response){
-//             },
-//             error: function(){
-//             }
-//         });
-//     });
-
-//     /**
-//      * EDIT SHPPING CHARGE
-//      */
-
-//     $(document).on("click", ".EditShipping", function(e){
-//         e.preventDefault();
-        
-//         const EditUrl = $(this).data('url');
-
-//         $.ajax({
-//             url: EditUrl,
-//             type: "GET",
-//             dataType: "json", // Expect a JSON response
-//             success: function(response){
-//             }
-//         });
-//     });
-
-//     /**
-//      * UPDATE SHIPPING
-//      */
-//     $(document).on("click", "#UpdateShipping", function(e){
-//         e.preventDefault();
-
-//         let sid = $("#sid").val();
-//         let title  = $("#Etitle").val();
-//         let shippingCharge  = $("#EshippingCharge").val();
-//         let status  = $("#status").val();
-
-//         $.ajax({
-//             url: `/shipping/update/${sid}`,
-//             type: "POST",
-//             data:{
-//                 title: title,
-//                 shipping_charge: shippingCharge,
-//                 status: status
-//             },
-//             success: function(response){
-//                 if(response.status == '200'){
-//                     $("#EditShippingChargeModal").modal('hide');
-//                     $("#Etitle").val("");
-//                     $("#EshippingCharge").val("");
-//                     $("#status").val("");
-
-//                     Swal.fire({
-//                         text: response.message,
-//                         icon: 'success',
-//                         timer: 500,
-//                         showConfirmButton: true
-//                     });
-//                     window.location.reload();
-//                 }
-//             }
-//         });
-
-//     });
-
-
-    
-
-
-//     /**
-//      * DESTROY SHIPPING CHARGE
-//      */
-//     $(document).on("click", ".deleteCharge", function(e){
-//         e.preventDefault();
-
-//         const deleteUrl = $(this).data('url');
-//         Swal.fire({
-//             title: "Are you sure?",
-//             text: "You want to delete the Shipping Charge!",
-//             icon: "warning",
-//             showCancelButton: true,
-//             confirmButtonColor: "#0d6efd",
-//             cancelButtonColor: "#f41127",
-//             confirmButtonText: "Yes, delete it!",
-//           }).then((result) => {
-//             if (result.isConfirmed) {
-//                 $.ajax({
-//                     url: deleteUrl,
-//                     type: "GET",
-//                     success: function(response){
-//                         Swal.fire({
-//                             text: response.message,
-//                             icon: "success",
-//                             timer: 500,
-//                             showConfirmButton: true
-//                         });
-//                         shippingCharge();
-//                     },
-//                     error: function(){
-//                         Swal.fire({
-//                             title: "Error!",
-//                             text: "There was a problem deleting the shipping charge.",
-//                             icon: "error",
-//                             confirmButtonColor: "#0d6efd",
-//                             iconColor: '#f41127'
-//                         });
-//                     }
-//                 });
-              
-//             }
-//           });
-
-//     })
-
-
-// });
-
-
-// $(function(){
-//     // APPROVED PURCHASE
-//     $(document).on("click","#approveBtn", function(e){
-//         e.preventDefault();
-//         var link = $(this).attr("href");
-
-//     })
-// });
 
 
 
