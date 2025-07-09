@@ -40,8 +40,6 @@
     <link href="{{ asset('backend') }}/flatpickr.css" rel="stylesheet" type="text/css" />
     <!-- flatpickr -->
 
-    <link rel="preload" href="{{ asset('backend/assets/fonts/tabler-icons3026.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
-
     @vite([
         'Modules/Core/resources/assets/css/custom-icon.css',
         'resources/css/app.css',

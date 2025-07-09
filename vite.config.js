@@ -13,11 +13,5 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-    ],
-    resolve: {
-        alias: {
-            '@core': path.resolve(__dirname, 'Modules/Core/resources/assets'),
-            '@corefonts': path.resolve(__dirname, 'Modules/Core/resources/fonts'),
-        },
-    },
+    ]
 });

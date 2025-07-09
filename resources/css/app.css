@@ -10,123 +10,197 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-.topbar_menu a {
-    display: block;
-    font-size: 14px;
-    color: #465dff;
-    text-decoration: none;
-    text-transform: capitalize;
-    box-sizing: border-box;
-    background-color: #fff;
-    width: 100%;
-    padding: 4px 6px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    font-weight: 600;
-    text-transform: uppercase;
+
+/* ========================= */
+/* Keyframes                 */
+/* ========================= */
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.topbar_menu li{
+@keyframes gradientPulse {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* ========================= */
+/* Topbar Menu Styling       */
+/* ========================= */
+
+.topbar_menu li {
     position: relative;
     float: left;
     margin: 0 4px;
 }
 
-.submenu{
-   display: none;
+.topbar_menu li a {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    background: linear-gradient(270deg, #465dff, #6cd3f8, #465dff);
+    background-size: 600% 600%;
+    animation: gradientMove 6s ease infinite;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: 2px solid #ccc;
 }
 
+.topbar_menu a:hover {
+    filter: brightness(1.1);
+    transform: scale(1.03);
+}
+
+/* Submenu container */
+.submenu {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 105%;
+    left: 0;
+    min-width: 240px;
+    padding: 8px;
+    background-color: #f0eeee;
+    border-radius: 2px;
+    box-shadow: -6px 1px 29px -2px rgba(0,0,0,0.23);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+/* Show submenu on hover */
 .topbar_menu li:hover .submenu {
     display: block;
-    position: absolute;
-    top: 100%;
-    left: 0px;
-    z-index: 1000;
-    transition: all 0.2s ease-in;
-    min-width: 240px;
-    box-shadow: -6px 1px 29px -2px rgba(0,0,0,0.23);
-    -webkit-box-shadow: -6px 1px 29px -2px rgba(0,0,0,0.23);
-    -moz-box-shadow: -6px 1px 29px -2px rgba(0,0,0,0.23);
-    margin: 0;
-    z-index: 999999;
-    padding: 8px;
-    border-radius: 2px;
-    background-color: #f0eeee;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
-.topbar_menu li:hover .submenu li {
-    position: relative;
+/* Submenu items */
+.topbar_menu .submenu li {
     float: none;
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid #fafafa;
+    border-bottom: 1px solid #ccc;
 }
 
-.topbar_menu .submenu li a {
-    display: inline-block;
-    position: relative;
-    background-color: #465dff;
-    color: #fff;
-    font-size: 13px;
-    font-weight: normal;
-    text-transform: none;
-    opacity: 1;
-    text-transform: capitalize;
-    transition: all 0.2s ease;
-    border-radius: 0;
-    border: none;
-}
-
-.topbar_menu li:hover .submenu li:hover a {
-    color: #465dff;
-    font-weight: 600;
-    text-transform: uppercase;
-    transform: translateX(3px);   /* Animate to position */
-    opacity: 1;
-}
-
-.topbar_menu li:hover .submenu li:hover a{
-    color: #465dff;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.topbar_menu li:hover .submenu li a:hover {
-    background-color: transparent;
-    color: #465dff;
-}
-
-.topbar_menu li:hover .submenu li:last-child {
+.topbar_menu .submenu li:last-child {
     border-bottom: none;
 }
 
-
-.side-nav-link > .sf_menu{
-    text-transform: uppercase;
-    font-size: 16px;
-    font-weight: 800;
-    background-color: #fff;
-    padding: 8px 12px;
-    color: #465dff;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-html[data-sidenav-size="condensed"]:not([data-layout="topnav"]) .sidenav-menu .side-nav > .side-nav-item:hover > .side-nav-link {
-    background-color: transparent !important;
-    color: #465dff !important;
-    font-size: 18px;
-    min-width: 350px;
-    box-shadow: 0px 1px 6px 2px rgba(0,0,0,0.21);
-    -webkit-box-shadow: 0px 1px 6px 2px rgba(0,0,0,0.21);
-    -moz-box-shadow: 0px 1px 6px 2px rgba(0,0,0,0.21);
-    transition: all 0.2s ease-in-out;
-}
-
-.side-nav-link .sf_menu:hover{
+/* Submenu link */
+.topbar_menu .submenu li a {
+    display: block;
+    padding: 6px 12px;
+    font-size: 13px;
     background-color: #465dff;
     color: #fff;
-    transform: translateX(2px);   /* Animate to position */
-    opacity: 1;
-    transition: all 0.2s ease-in-out;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    border: none;
+    animation: none;
+}
+
+/* Hover submenu link */
+.topbar_menu .submenu li a:hover {
+    background-color: #fff;
+    font-weight: 600;
+    transform: translateX(4px);
+    text-transform: uppercase;
+}
+
+
+/* Active state */
+.topbar_menu li.active > a,
+.topbar_menu .submenu li.active > a {
+    background-color: #fff;
+    color: #465dff;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-left: 4px solid #465dff;
+    padding-left: 10px;
+    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
+}
+
+
+/* ========================= */
+/* Side Nav Styling          */
+/* ========================= */
+
+.side-nav .sf_nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #3347e4;
+
+    width: 110px;
+    height: 36px;
+    padding: 0 18px;
+    border-radius: 5px;
+
+    background: linear-gradient(270deg, #b3baf2, #fff, #b3baf2);
+    background-size: 300% 300%;
+    animation: gradientPulse 6s ease infinite;
+
+    border: none;
+    transition: all 0.25s ease-in-out;
+
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.side-nav .sf_nav a::before {
+    content: "";
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 160%;
+    height: 160%;
+    background: inherit;
+    border-radius: inherit;
+    filter: blur(12px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: gradientPulse 6s ease infinite;
+    transition: opacity 0.3s;
+}
+
+.side-nav .sf_nav a svg {
+    width: 24px;
+    height: 24px;
+    margin-left: 3px;
+    flex-shrink: 0;
+}
+
+/* ========================= */
+/* Other Layout Elements     */
+/* ========================= */
+
+.logo {
+    text-align: center;
+}
+
+.simplebar-content-wrapper {
+    display: flex;
+    justify-content: center;
 }
