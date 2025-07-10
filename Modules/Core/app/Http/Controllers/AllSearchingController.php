@@ -4,10 +4,11 @@ namespace Modules\Core\Http\Controllers;
 
 use Modules\Core\Services\GlobalSearchService;
 use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
 
 class AllSearchingController extends Controller 
 {
-    public function getHBLEoriRecords(GlobalSearchService $service)
+     public function getHBLEoriRecords(GlobalSearchService $service)
     {
         return response()->json($service->getHBLEori());
     }
@@ -17,9 +18,9 @@ class AllSearchingController extends Controller
         return response()->json($service->getMBLEori());
     }
 
-    public function getCtryCdeRecords(GlobalSearchService $service)
+    public function getCtryCdeRecords(Request $request, GlobalSearchService $service)
     {
-        return response()->json($service->getCountryCode());
+        return response()->json($service->getCountryCode($request));
     }
 
     public function getBillFileRecords(GlobalSearchService $service)
@@ -37,19 +38,19 @@ class AllSearchingController extends Controller
         return response()->json($service->getPKG());
     }
 
-    public function getCstDtlRecords(GlobalSearchService $service)
+    public function getCstDtlRecords(Request $request, GlobalSearchService $service)
     {
-        return response()->json($service->getCustomerDetails());
+        return response()->json($service->getCustomerDetails($request));
     }
 
-    public function getPolPodDtlRecords(GlobalSearchService $service)
+    public function getPolPodDtlRecords(Request $request, GlobalSearchService $service)
     {
-        return response()->json($service->getPolPodDetails());
+        return response()->json($service->getPolPodDetails($request));
     }
 
-    public function getCityRecords(GlobalSearchService $service)
+    public function getCityRecords(Request $request, GlobalSearchService $service)
     {
-        return response()->json($service->getCity());
+        return response()->json($service->getCity($request));
     }
 
 

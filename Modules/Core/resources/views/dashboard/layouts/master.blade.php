@@ -183,6 +183,10 @@
             err_val_ttl_msg: @json(transText('err_val_ttl_msg')),
             actv_msg: @json(transText('actv_msg')),
             dact_msg: @json(transText('dact_msg')),
+            data_empty_msg: @json(transText('data_empty_msg')),
+            try_msg: @json(transText('try_msg')),
+            save_btn: @json(transText('save_btn')),
+            ics2_hbl_ens_create_new: @json(transText('ics2_hbl_ens_create_new')),
         };        
 
         $(document).ready( function () {
