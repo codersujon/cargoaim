@@ -9,6 +9,7 @@ use Modules\Core\Models\LocationTable;
 use Modules\Core\Models\CustomerAddress;
 use Modules\Core\Models\CustomsFilingScacEoriCoded;
 use Modules\Core\Models\FilingContractRate;
+use Illuminate\Http\Request;
 
 class GlobalSearchService
 {
@@ -40,8 +41,10 @@ class GlobalSearchService
             $query->where('ts_country', $request->input('ts_country'));
         }
 
-       return $countryCode = $query->orderBy('countryName', 'asc')->get();
+        return $query->orderBy('countryName', 'asc')->get();
     }
+
+
 
     public function getBillFiling()
     {
@@ -85,7 +88,7 @@ class GlobalSearchService
             return response()->json(['status' => false, 'message' => 'Invalid seaAirLand value']);
         }
 
-        return $polPodData = LocationTable::where('locationSeaAirLand', $seaAirLand)
+        return LocationTable::where('locationSeaAirLand', $seaAirLand)
             ->where(function ($query) use ($polpod) {
                 $query->where('locationCode', 'like', '%' . $polpod . '%')
                     ->orWhere('locationName', 'like', '%' . $polpod . '%');

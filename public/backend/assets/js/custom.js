@@ -312,7 +312,6 @@
             dataType: "json",
             data: {
                 [postKey]: selectedValue,
-                _token: "{{ csrf_token() }}"
             },
             success: function(data) {
                 let output = '<option value="">Select One</option>';
@@ -352,7 +351,7 @@
 
    
     ////---- Set up Customer Autocomplete autocomplete based on shipper, consignee, or notify-----/////
-    function setupCustomerAutocomplete(type) {
+    function setupCustomerAutocomplete(type, fetchUrl) {
         let dataMap = {};
         let selectedIndex = -1;
 
@@ -396,7 +395,7 @@
         const fetchSuggestions = (name) => {
             $loader.show();
             $.ajax({
-                url: "{{ url('get-customer-details') }}",
+                url: fetchUrl,
                 type: 'GET',
                 data: { name },
                 success: (response) => {
@@ -404,9 +403,9 @@
                     $suggestionBox.empty();
                     dataMap = {};
 
-                    if (response.status && response.data.length > 0) {
+                    if (response.length > 0) {
                         let tableHTML = '<table class="table table-striped mb-0"><tbody>';
-                        response.data.forEach(customer => {
+                        response.forEach(customer => {
                             dataMap[customer.customer_full_name] = customer;
                             tableHTML += `
                                 <tr style="cursor: pointer;">
@@ -488,7 +487,7 @@
     }
 
     ////---- Set up POL/POD autocomplete based on Sea, Air, or Land-----/////
-    function setupPolPodAutocomplete(type, seaAirLand) {
+    function setupPolPodAutocomplete(type, seaAirLand, fetchUrl = null) {
         let dataMap = {};
         let selectedIndex = -1;
 
@@ -524,19 +523,19 @@
         const fetchSuggestions = (polpod) => {
             $loader.show();
             $.ajax({
-                url: "{{ url('get-pol-pod-details') }}",
+                url: fetchUrl,
                 type: 'POST',
                 data: {
                     polpod: polpod,
                     seaAirLand: seaAirLand,
-                    _token: '{{ csrf_token() }}'
                 },
                 success: (response) => {
+
                     $loader.hide();
                     $suggestionBox.empty();
                     dataMap = {};
 
-                    if (response.status && response.data.length > 0) {
+                    if (response.length > 0) {
                         let tableHtml = `
                             <table class="table table-striped" style="width: 100%; border-collapse: collapse; font-size: 13px;">
                                 <thead>
@@ -552,7 +551,7 @@
                                 <tbody>
                         `;
 
-                        response.data.forEach(item => {
+                        response.forEach(item => {
                             const displayName = `${item.locationCode}`;
                             dataMap[displayName] = item;
 
@@ -577,7 +576,14 @@
                         });
 
                         tableHtml += `</tbody></table>`;
-                        $suggestionBox.html(tableHtml).show();
+                        
+                        // Show suggestion box
+                        $suggestionBox.html(tableHtml).css({
+                            display: 'block',
+                            position: 'absolute',
+                            zIndex: 9999
+                        }).show();
+
                     } else {
                         $suggestionBox.hide();
                     }
@@ -635,6 +641,7 @@
             }
         });
     }
+
 
     // ✅ ফোকাস হারানো রোধের জন্য mousedown ও click দুইটাতেই preventDefault
     $(document).on('mousedown click', '.suggestions-box', function (e) {

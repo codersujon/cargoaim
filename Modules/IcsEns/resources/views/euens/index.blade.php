@@ -1,7 +1,7 @@
-@extends('euens.layouts.app')
-@section('titleHeader')
-    | {{ transText('ens_ch') }}
-@endsection
+@extends('core::dashboard.layouts.master')
+
+@section('title', "| {{ transText('ens_ch') }}")
+
 @section('content')
 
     <style>
@@ -579,57 +579,7 @@
                                 <div class="table-body-scroll">
                                     <table class="table table-bordered table-striped" id="containerTableBody">
                                         <tbody id="containerTbody">
-                                            {{-- <tr class="text-center">
-                                                <td style="width: 20px;">1</td>
-                                                <td style="width: 100px;">
-                                                    <input type="text" name="container_no[]" id="container_no" class="form-control container-no" autocomplete="off" maxlength="11" required>
-                                                </td>
-                                                <td style="width: 55px;">
-                                                    <select class="form-select" name="size_iso[]" id="size_iso" autocomplete="off" required>
-                                                        <option value="">Loading...</option>
-                                                    </select> 
-                                                </td>
-                                                <td style="width: 108px;">
-                                                    <input type="text" name="seal_no[]" id="seal_no" class="form-control seal_no" autocomplete="off" required>
-                                                </td>
-                                                <td style="width: 57px;">
-                                                    <input type="text" name="pkg_qty[]" id="pkg_qty" class="form-control pkg_qty" autocomplete="off" required>
-                                                    
-                                                </td>
-                                                <td style="width: 82px;">
-                                                    <select class="form-select" name="pkg_type[]" id="pkg_type" autocomplete="off" autocomplete="off" required>
-                                                        <option value="">Loading...</option>                                                    
-                                                    </select>
-                                                </td>
-                                                <td style="width: 60px;">
-                                                    <input type="text" name="weight_kg[]" id="weight_kg" class="form-control weight_kg" autocomplete="off" required>
-                                                </td>
-                                                <td style="width: 57px;">
-                                                    <input type="text" name="cbm[]" id="cbm" class="form-control cbm" autocomplete="off" required>
-                                                </td>
-                                                <td style="width: 65px;">
-                                                    <input type="text" name="hs_code[]" id="hs_code" class="form-control hs_code" autocomplete="off" required>
-                                                </td>
-                                                <td style="width: 50px;">
-                                                    <input type="text" name="un_code_dg[]" id="un_code_dg" class="form-control un_code_dg" autocomplete="off">
-                                                </td>
-                                                <td style="width: 130px;">
-                                                    <input type="text" name="cargo_marks[]" id="cargo_marks" class="form-control" autocomplete="off" required>
-                                                </td>
-                                                <td>
-                                                    <input type="text" name="cargo_description[]" id="cargo_description" class="form-control" autocomplete="off" required>
-                                                </td>
-                                                <td style="width: 25px;">
-                                                    <i class="fa-solid fa-floppy-disk m-1 saveIcon" title="{{ transText('save_title') }}" style="cursor: pointer;"></i>
-                                                </td>
-
-                                                <td style="width: 25px;">
-                                                    <i class="fa-solid fa-copy m-1 copyRow" title="{{ transText('copy_title') }}" style="cursor: pointer;"></i>
-                                                </td>
-                                                <td style="width: 30px;">
-                                                    <i class="fa-solid fa-trash" title="{{ transText('delete_title') }}" style="color: #CD1212; cursor: pointer;"></i>
-                                                </td>
-                                            </tr> --}}
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -796,10 +746,23 @@
     <!-- Customer Modal Start -->
 
 @endsection
-@section('script')
-    <script src="{{ Module::asset('IcsEns:js/custom.js') }}"></script>
 
+@section('script')
     <script>
+
+        const getBillFiling = "{{ url('get-bill-filing') }}";
+        const getHblEoriUrl = "{{ url('get-hbl-eori-records') }}";
+        const getMblEoriUrl = "{{ url('get-mbl-eori-records') }}";
+        const getCtryCde = "{{ url('get-country-code') }}";
+        const getCntrSize = "{{ url('get-container-size') }}";
+        const getPKG = "{{ url('get-pkg') }}";
+        const getCstDtl = "{{ url('get-customer-details') }}";
+        const getPolPodDtl = "{{ url('get-pol-pod-details') }}";
+        const getCity = "{{ url('get-city') }}";
+
+
+
+
         $(document).ready(function () {
             $('#customer_form').on('submit', function (e) {
                 e.preventDefault();

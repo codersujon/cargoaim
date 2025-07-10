@@ -77,7 +77,7 @@ $(document).ready(function () {
 
     //---- Billing id ---//
     loadSelectOptions({
-        url: "{{ url('get-bill-filing') }}",
+        url: getBillFiling,
         selectId: '#billing_id',
         valueField: 'billing_id',
         textField: 'billing_id',
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
     //---- HBL EORI ---//
     loadSelectOptions({
-        url: "{{ url('get-hbl-eori-records') }}",
+        url: getHblEoriUrl,
         selectId: '#nvocc_scac',
         valueField: 'eori_code',
         textField: 'scac_eori_full',
@@ -96,7 +96,7 @@ $(document).ready(function () {
 
     //---- MBL EORI ----///
     loadSelectOptions({
-        url: "{{ url('get-mbl-eori-records') }}",
+        url: getMblEoriUrl,
         selectId: '#carrier_scac',
         valueField: 'eori_code',
         textField: 'scac_eori_full',
@@ -113,7 +113,7 @@ $(document).ready(function () {
 
     transshipmentPorts.forEach(port => {
         loadSelectOptions({
-            url: "{{ url('get-country-code') }}",
+            url: getCtryCde,
             selectId: port.id,
             valueField: 'countryCode',
             textField: 'countryCode',
@@ -127,7 +127,7 @@ $(document).ready(function () {
 
     //---- Customer Country Code ----///
     loadSelectOptions({
-        url: "{{ url('get-country-code') }}",
+        url: getCtryCde,
         selectId: '#customerAddressCountry',
         valueField: 'countryCode',
         textField: 'countryCode',
@@ -137,25 +137,25 @@ $(document).ready(function () {
 
     //---- Customer City ----///
     $('#customerAddressCountry').change(function() {
-        loadDependentDropdown("{{ url('get-city') }}", '#customerAddressCountry', '#address_city', 'countryCode');
+        loadDependentDropdown(getCity, '#customerAddressCountry', '#address_city', 'countryCode');
     });
 
 
     // Call setup for 'shipper'
-    setupCustomerAutocomplete('shipper');
-    setupCustomerAutocomplete('consignee');
-    setupCustomerAutocomplete('notify');
+    setupCustomerAutocomplete('shipper', getCstDtl);
+    setupCustomerAutocomplete('consignee', getCstDtl);
+    setupCustomerAutocomplete('notify', getCstDtl);
 
     // ✅ Call setup for different fields with seaAirLand types
-    setupPolPodAutocomplete('from_location', 1); // 1 = Sea
-    setupPolPodAutocomplete('to_location', 1);   // 2 = Air (or 3 = Land)
+    setupPolPodAutocomplete('from_location', 1, getPolPodDtl); // 1 = Sea
+    setupPolPodAutocomplete('to_location', 1, getPolPodDtl);   // 2 = Air (or 3 = Land)
 
 
 
     // New Modal Open Event delegation দিয়ে click handler
     $(document).on('click', '#createNew1', function () {
-        var save = '{{ transText("save_btn") }}';
-        var createNew = '{{ transText("ics2_hbl_ens_create_new") }}';
+        var save =  window.transText.save_btn;
+        var createNew =  window.transText.ics2_hbl_ens_create_new;
 
         // tbody clear
         $('#containerTbody').html('');
@@ -168,7 +168,7 @@ $(document).ready(function () {
 
         // Container Size load
         loadSelectOptions({
-            url: "{{ url('get-container-size') }}",
+            url: getCntrSize,
             selectId: $lastRow.find('select[name="size_iso[]"]'),
             valueField: 'eq_code',
             textField: 'eq_size_display',
@@ -177,7 +177,7 @@ $(document).ready(function () {
 
         // Package Type load
         loadSelectOptions({
-            url: "{{ url('get-pkg') }}",
+            url: getPKG,
             selectId: $lastRow.find('select[name="pkg_type[]"]'),
             valueField: 'pkg_code',
             textField: 'pkg_code',
@@ -236,8 +236,8 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
 
-                let dataEmptyMsg = @json(transText('data_empty_msg'));
-                let tryMsg = @json(transText('try_msg'));
+                let dataEmptyMsg = window.transText.data_empty_msg;
+                let tryMsg = window.transText.try_msg;
 
                 if (response && response.length > 0) {
                     $('.listTable').show();
@@ -458,7 +458,7 @@ $(document).ready(function () {
             $('#containerTbody').html(tbodyHtml);
 
             loadSelectOptions({
-                url: "{{ url('get-container-size') }}",
+                url: getCntrSize,
                 selectId: '.size_iso',
                 valueField: 'eq_code',
                 textField: 'eq_size_display',
@@ -466,7 +466,7 @@ $(document).ready(function () {
             });
 
             loadSelectOptions({
-                url: "{{ url('get-pkg') }}",
+                url: getPKG,
                 selectId: '.pkg_type',
                 valueField: 'pkg_code',
                 textField: 'pkg_code',
@@ -497,23 +497,23 @@ $(document).ready(function () {
         let row = `
             <tr class="text-center addedRow">
                 <td></td>
-                <td style="width: 90px;"><input type="text" name="container_no[]" class="form-control" required autocomplete="off"></td>
+                <td style="width: 90px;"><input type="text" name="container_no[]" class="form-control container-no" required maxlength="11" autocomplete="off"></td>
                 <td style="width: 55px;">
                     <select class="form-select size_iso_select" name="size_iso[]" required autocomplete="off">
                         <option value="">Loading...</option>
                     </select>
                 </td>
-                <td style="width: 85px;"><input type="text" name="seal_no[]" class="form-control" required autocomplete="off"></td>
-                <td style="width: 57px;"><input type="text" name="pkg_qty[]" class="form-control" required autocomplete="off"></td>
+                <td style="width: 85px;"><input type="text" name="seal_no[]" class="form-control seal_no" required autocomplete="off"></td>
+                <td style="width: 57px;"><input type="text" name="pkg_qty[]" class="form-control pkg_qty" required autocomplete="off"></td>
                 <td style="width: 82px;">
                     <select class="form-select pkg_type_select" name="pkg_type[]" required autocomplete="off">
                         <option value="">Loading...</option>
                     </select>
                 </td>
-                <td style="width: 60px;"><input type="text" name="weight_kg[]" class="form-control" required autocomplete="off"></td>
-                <td style="width: 57px;"><input type="text" name="cbm[]" class="form-control" required autocomplete="off"></td>
-                <td style="width: 65px;"><input type="text" name="hs_code[]" class="form-control" required autocomplete="off"></td>
-                <td style="width: 50px;"><input type="text" name="un_code_dg[]" class="form-control" required autocomplete="off"></td>
+                <td style="width: 60px;"><input type="text" name="weight_kg[]" class="form-control weight_kg" required autocomplete="off"></td>
+                <td style="width: 57px;"><input type="text" name="cbm[]" class="form-control cbm" required autocomplete="off"></td>
+                <td style="width: 65px;"><input type="text" name="hs_code[]" class="form-control hs_code" required autocomplete="off"></td>
+                <td style="width: 50px;"><input type="text" name="un_code_dg[]" class="form-control un_code_dg" required autocomplete="off"></td>
                 <td style="width: 130px;"><input type="text" name="cargo_marks[]" class="form-control" required autocomplete="off"></td>
                 <td><input type="text" name="cargo_description[]" class="form-control" required autocomplete="off"></td>
                 <td><i class="fa-solid fa-floppy-disk m-1 saveIcon" title="Save"></i></td>
@@ -527,7 +527,7 @@ $(document).ready(function () {
         // 🟢 Apply loadSelectOptions to the newly added select
         let lastSelect = $('#containerTbody').find('select.size_iso_select').last();
         loadSelectOptions({
-            url: "{{ url('get-container-size') }}",
+            url: getCntrSize,
             selectId: lastSelect,
             valueField: 'eq_code',
             textField: 'eq_size_display',
@@ -536,7 +536,7 @@ $(document).ready(function () {
         // 🟢 Apply loadSelectOptions to the newly added select
         let lastSelect2 = $('#containerTbody').find('select.pkg_type_select').last();
         loadSelectOptions({
-            url: "{{ url('get-pkg') }}",
+            url: getPKG,
             selectId: lastSelect2,
             valueField: 'pkg_code',
             textField: 'pkg_code',
@@ -554,11 +554,11 @@ $(document).ready(function () {
     ///-----row copy ------///
     $('#containerTbody').on('click', '.copyRow', function () {
         let currentRow = $(this).closest('tr');
-        let newRow = $('<tr class="text-center addedRow"></tr>'); // ✅ এখানে class যুক্ত করা হয়েছে
+        let newRow = $('<tr class="text-center addedRow"></tr>');
 
         newRow.append(`<td></td>`); // SL column
 
-        let copiedSizeIsoValue = ''; // will store selected value of size_iso
+        let copiedSizeIsoValue = '';
 
         currentRow.find('td').each(function (index) {
             if (index === 0 || index >= currentRow.find('td').length - 3) return;
@@ -575,11 +575,16 @@ $(document).ready(function () {
             let tag = input.prop('tagName').toLowerCase();
             let name = input.attr('name');
             let value = input.val();
+            let inputClass = input.attr('class') || '';
+            let maxlength = input.attr('maxlength') ? `maxlength="${input.attr('maxlength')}"` : '';
 
             if (tag === 'input') {
+                if (!inputClass.includes('form-control')) {
+                    inputClass = `form-control ${inputClass}`.trim();
+                }
                 newRow.append(`
                     <td style="${width}">
-                        <input type="text" name="${name}" class="form-control" value="${value}" autocomplete="off" required>
+                        <input type="text" name="${name}" class="${inputClass}" value="${value}" ${maxlength} autocomplete="off" required>
                     </td>
                 `);
             } else if (tag === 'select') {
@@ -598,18 +603,26 @@ $(document).ready(function () {
                         let selected = ($(this).val() === value) ? 'selected' : '';
                         options += `<option value="${$(this).val()}" ${selected}>${$(this).text()}</option>`;
                     });
+
+                    if (!inputClass.includes('form-select')) {
+                        inputClass = `form-select ${inputClass}`.trim();
+                    }
+
                     newRow.append(`
                         <td style="${width}">
-                            <select name="${name}" class="form-select" autocomplete="off" required>
+                            <select name="${name}" class="${inputClass}" autocomplete="off" required>
                                 ${options}
                             </select>
                         </td>
                     `);
                 }
             } else if (tag === 'textarea') {
+                if (!inputClass.includes('form-control')) {
+                    inputClass = `form-control ${inputClass}`.trim();
+                }
                 newRow.append(`
                     <td style="${width}">
-                        <textarea name="${name}" cols="30" rows="1" class="form-control" autocomplete="off" required>${value}</textarea>
+                        <textarea name="${name}" cols="30" rows="1" class="${inputClass}" autocomplete="off" required>${value}</textarea>
                     </td>
                 `);
             }
@@ -634,7 +647,7 @@ $(document).ready(function () {
         // ✅ Load container size via AJAX and set copied value
         let lastSelect = $('#containerTbody').find('select.size_iso_select').last();
         loadSelectOptions2({
-            url: "{{ url('get-container-size') }}",
+            url: getCntrSize,
             selectId: lastSelect,
             valueField: 'eq_code',
             textField: 'eq_size_display',
@@ -645,17 +658,13 @@ $(document).ready(function () {
     });
 
 
+
     /// ---Reset Serial Numbers ----//
     function resetSerialNumbers() {
         $('#containerTbody tr').each(function (index) {
             $(this).find('td:first').text(index + 1);
         });
     }
-
-
-
-
-
 
 
     ///---- Close Modal ------///

@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'Modules/Core/resources/assets/css/custom-icon.css',
+                'Modules/IcsEns/resources/assets/js/custom.js',
             ],
             refresh: true,
         }),
