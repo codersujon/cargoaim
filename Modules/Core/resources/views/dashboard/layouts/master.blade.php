@@ -8,7 +8,6 @@
 <head>
     <meta charset="utf-8" />
 
-    
     @php
         $profile = \Modules\Auth\Models\Profile::first();
     @endphp
@@ -19,7 +18,6 @@
     <meta content="CargoAIM is an ERP (Enterprise Resource Planning) software specifically designed for freight forwarders" name="description" />
     <meta content="Cargoaim" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('upload/' . $profile->fav_icon) }}">
@@ -42,14 +40,11 @@
     <link href="{{ asset('backend') }}/flatpickr.css" rel="stylesheet" type="text/css" />
     <!-- flatpickr -->
 
-    <link rel="preload" href="{{ asset('backend/assets/fonts/tabler-icons3026.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
-
     @vite([
         'Modules/Core/resources/assets/css/custom-icon.css',
         'resources/css/app.css',
         'resources/js/app.js',
     ])
-
 
 </head>
 
@@ -112,11 +107,8 @@
         </style>
     @endif
 
-
-
     <!-- Begin page -->
     <div class="wrapper">
-
         
         <!-- Sidenav Menu Start -->
             @include('core::dashboard.partials.sidebar')
@@ -126,21 +118,6 @@
         <!-- Topbar Start -->
             @include('core::dashboard.partials.topbar')
         <!-- Topbar End -->
-
-        <!-- Search Modal -->
-        {{-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content bg-transparent">
-                    <div class="card mb-1">
-                        <div class="px-3 py-2 d-flex flex-row align-items-center" id="top-search">
-                            <i class="ti ti-search fs-22"></i>
-                            <input type="search" class="form-control border-0" id="search-modal-input" placeholder="Search for actions, people,">
-                            <button type="button" class="btn p-0" data-bs-dismiss="modal" aria-label="Close">[esc]</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
@@ -155,37 +132,26 @@
             <!-- Footer Start -->
                 @include('core::dashboard.partials.footer')
             <!-- end Footer -->
-
         </div>
 
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->
-
     </div>
     <!-- END wrapper -->
 
     <!-- Theme Settings -->
     @include('core::dashboard.partials.theme_settings')
 
-
-
-
-
     <!-- Vendor js -->
     <script src="{{ asset('backend') }}/assets/js/vendor.min.js"></script>
-
     <!-- App js -->
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
     <script src="{{ asset('backend') }}/assets/js/dataTables.js"></script>
 
-
     <script src="{{ asset('backend') }}/flatpickr.js"></script>
-    
-
-    
-    
+      
     <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
     
     <script>
@@ -207,7 +173,6 @@
             timerProgressBar: true
         };
 
-
         window.transText = {
             err_ttl_msg: @json(transText('err_ttl_msg')),
             err_msg: @json(transText('err_msg')),
@@ -216,23 +181,17 @@
             conf_yd_btn: @json(transText('conf_yd_btn')),
             cancel_btn: @json(transText('cancel_btn')),
             err_val_ttl_msg: @json(transText('err_val_ttl_msg')),
-        };
-        
+            actv_msg: @json(transText('actv_msg')),
+            dact_msg: @json(transText('dact_msg')),
+        };        
 
         $(document).ready( function () {
             $('#myTable').DataTable();
             
         } );
-
     </script>
-    
-    
+
     @yield('script')
-
-
-   
-
-
 
 </body>
 

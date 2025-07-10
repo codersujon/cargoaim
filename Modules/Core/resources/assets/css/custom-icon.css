@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'tabler-icons';
-  src: url('@corefonts/tabler-icons3026.woff2') format('woff2');
+  src: url('/public/backend/assets/fonts/tabler-icons3026.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

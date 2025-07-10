@@ -36,48 +36,85 @@
     <div data-simplebar>
 
         <!--- Sidenav Menu -->
-        <ul class="side-nav">
-            <li class="side-nav-title">Dash</li>
+        <ul class="side-nav mb-2">
 
-            <li class="side-nav-item">
-                <a href="{{ url('language') }}" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-language"></i></span>
-                   <span class="menu-text"> {{ transText('language_menu') }} </span> 
-                </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-file"></i></span>
-                    <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    DOC
                 </a>
             </li>
 
-            <li class="side-nav-item">
-                <a href="" class="side-nav-link">
-                    <span class="sf_menu">DOC</span>
-                    <span class="menu-text"> {{ transText('booking_documentation') }} </span> 
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    LOG
                 </a>
             </li>
 
-             <li class="side-nav-item">
-                <a href="" class="side-nav-link">
-                    <span class="sf_menu">LOG</span>
-                    <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
-                </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="" class="side-nav-link">
-                    <span class="sf_menu">ACC</span>
-                    <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
-                </a>
-            </li>
-             <li class="side-nav-item">
-                <a href="" class="side-nav-link">
-                    <span class="sf_menu">CHA</span>
-                    <span class="menu-text"> {{ transText('eu_ics_2_ens') }} </span> 
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    ACC
                 </a>
             </li>
 
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    CHA
+                </a>
+            </li>
+
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    HRM
+                </a>
+            </li>
+
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    PAX
+                </a>
+            </li>
+
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    GSA
+                </a>
+            </li>
+
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    WMS
+                </a>
+            </li>
+         
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    TRK
+                </a>
+            </li>
+
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    CMS
+                </a>
+            </li>
+
+            <li class="sf_nav">
+                <a href="#">
+                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
+                    POM
+                </a>
+            </li>
+            
         </ul>
 
         <div class="clearfix"></div>

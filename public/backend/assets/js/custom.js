@@ -128,11 +128,15 @@
 
                         Swal.fire({
                             icon: 'error',
-                            title: 'Validation Error',
+                            title: window.transText.err_val_ttl_msg,
                             html: errorMessages,
                         });
                     } else {
-                        Swal.fire('Error', 'Something went wrong!', 'error');
+                        Swal.fire({
+                            icon: 'error',
+                            title: window.transText.err_ttl_msg,
+                            text: window.transText.err_msg
+                        });
                     }
                 }
             });
@@ -164,7 +168,11 @@
                 $(modalSelector).modal('show');
             })
             .fail(function () {
-                alert('ডেটা লোড করতে সমস্যা হয়েছে।');
+                Swal.fire({
+                    icon: 'error',
+                    title: window.transText.err_ttl_msg,
+                    text: window.transText.err_msg
+                });
             })
             .always(function () {
                 $('#loader').fadeOut(200);
@@ -236,38 +244,29 @@
             return false;
         });
     }
-// 
 
-
-    
     //----- Data Active and Inactive Start------/////
     function toggleStatusUpdate(id, status, url) {
         $.post(url, { id, status })
             .done(() => {
                 Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: status === 'A' ? 'Activated!' : 'Deactivated!',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true
+                    text: status === 'A' ? window.transText.actv_msg : window.transText.dact_msg,
+                    icon: "success",
+                    timer: 1000,
+                    showConfirmButton: true
                 });
             })
             .fail(() => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!'
+                    title: window.transText.err_ttl_msg,
+                    text: window.transText.err_msg
                 });
             });
     }
     //----- Data Active and Inactive End------///// 
 
     
-
-
-
     ///----- select box select function Start-----/////
     function loadSelectOptions({
         url,
@@ -352,8 +351,6 @@
 
 
    
-
-
     ////---- Set up Customer Autocomplete autocomplete based on shipper, consignee, or notify-----/////
     function setupCustomerAutocomplete(type) {
         let dataMap = {};
@@ -644,7 +641,6 @@
         e.preventDefault();
     });
 
-
     ///---- The modal should not close when clicking outside of it. ----///
     $(document).ready(function () {
         $('#bs-example-modal-lg').modal({
@@ -653,5 +649,14 @@
         });
 
     });
+
+
+
+
+
+
+
+
+
 
 
