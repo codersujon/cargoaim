@@ -36,221 +36,50 @@
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg>
             </button>
 
-            
-
-            <!-- Mega Menu Dropdown -->
-            {{-- <div class="topbar-item d-none d-md-flex">
-                <div class="dropdown">
-                    <a href="#" class="topbar-link btn btn-link px-2 dropdown-toggle drop-arrow-none fw-medium"
-                         data-bs-trigger="hover" data-bs-offset="0,17" aria-haspopup="false"
-                        aria-expanded="false">
-                        Pages <i class="ti ti-chevron-down ms-1"></i>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-xxl p-0">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="p-3">
-                                    <h5 class="mb-2 fw-semibold">UI Components</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="#!">Widgets</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dragula</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dropdowns</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Ratings</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Sweet Alerts</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Scrollbar</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Range Slider</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="p-3">
-                                    <h5 class="mb-2 fw-semibold">Applications</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="#">eCommerce Pages</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Hospital</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Email</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Kanban Board</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Invoice Management</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Pricing</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 bg-light bg-opacity-50">
-                                <div class="p-3">
-                                    <h5 class="mb-2 fw-semibold">Extra Pages</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="javascript:void(0);">Left Sidebar with User</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Menu Collapsed</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">Small Left Sidebar</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">New Header Style</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);">My Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Maintenance & Coming Soon</a>
-                                        </li>
-                                    </ul>
-                                </div> <!-- end .bg-light-->
-                            </div> <!-- end col-->
-                        </div> <!-- end row-->
-                    </div> <!-- .dropdown-menu-->
-                </div> <!-- .dropdown-->
-            </div>  --}}
-            <!-- end topbar-item -->
-
-            <!-- Mega Menu Dropdown -->
-            {{-- <div class="topbar-item d-none d-md-flex">
-                <div class="dropdown">
-                    <a href="#" class="topbar-link btn btn-link px-2 dropdown-toggle drop-arrow-none fw-medium" data-bs-trigger="hover" data-bs-offset="0,17" aria-haspopup="false"
-                        aria-expanded="false">
-                        Test <i class="ti ti-chevron-down ms-1"></i>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-xxl p-0">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="p-3">
-                                    <h5 class="mb-2 fw-semibold">UI Components</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="#!">Widgets</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dragula</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Dropdowns</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Ratings</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Sweet Alerts</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Scrollbar</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Range Slider</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="p-3">
-                                    <h5 class="mb-2 fw-semibold">Applications</h5>
-                                    <ul class="list-unstyled megamenu-list">
-                                        <li>
-                                            <a href="#">eCommerce Pages</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Hospital</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Email</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Kanban Board</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Invoice Management</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Pricing</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- end col-->
-                        </div> <!-- end row-->
-                    </div> <!-- .dropdown-menu-->
-                </div> <!-- .dropdown-->
-            </div>  --}}
-            <!-- end topbar-item -->
 
             {{-- Mega Menu Dropdown --}}
             <div class="topbar_menu">
                 <ul>
-                    <li>
-                        <a href="#"><i class="fa-solid fa-briefcase"></i> NMS <i class="fa-solid fa-angles-down"></i></a>
-                        <ul class="submenu">
-                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management</a></li>
-                            <li><a href=""><i class="fas fa-pen-nib"></i> User Interface Design</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> Database Management</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa-solid fa-briefcase"></i> Schedule <i class="fa-solid fa-angles-down"></i></a>
-                        <ul class="submenu">
-                            <li><a href=""><i class="fas fa-briefcase"></i> Feeder Schedule</a></li>
-                            <li><a href=""><i class="fas fa-pen-nib"></i> Mother Schedule</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> PRE /ONC Entry</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> Career's Mother Lane</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> Port 2 Port Routing</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> VSL to VSL Link</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> Port to Port Check</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa-solid fa-tags"></i> Tariff</a></li>
-                    <li><a href="#"><i class="fa-solid fa-dollar-sign"></i> Sales</a></li>
-                    <li><a href="#"><i class="fa-solid fa-headset"></i> CS & DOC</a></li>
-                    <li><a href="#"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
-                    <li>
-                        <a href="#">
-                            <i class="fa-solid fa-cog"></i> Settings
-                            <i class="fa-solid fa-angles-down"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href=""><i class="fas fa-briefcase"></i> Business Management</a></li>
-                            <li><a href=""><i class="fas fa-pen-nib"></i> User Interface Design</a></li>
-                            <li><a href=""><i class="fas fa-database"></i> Database Management</a></li>
-                        </ul>
-                    </li>
+                    @foreach ($menus as $menu)
+                        <li>
+                            <a href="#">
+                                <i class="fa-solid fa-briefcase"></i> {{ $menu->title }}
+                                @if ($menu->children->isNotEmpty())
+                                    <i class="fa-solid fa-angles-down"></i>
+                                @endif
+                            </a>
+
+                            @if ($menu->children->isNotEmpty())
+                                <!-- Sub Menu -->
+                                <ul class="submenu">
+                                    @foreach ($menu->children as $child)
+                                        <li>
+                                            <a href="{{ $child->route }}">
+                                                <i class="{{ $child->icon }}"></i> {{ $child->title }}
+                                                {{-- Assuming $child->children exists --}}
+                                                @if ($child->children && $child->children->isNotEmpty())
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                @endif
+                                            </a>
+
+                                            @if ($child->children && $child->children->isNotEmpty())
+                                                <!-- Nested Menu -->
+                                                <ul class="nested-menu">
+                                                    @foreach ($child->children as $nested)
+                                                        <li>
+                                                            <a href="{{ $nested->route }}">
+                                                                <i class="{{ $nested->icon }}"></i> {{ $nested->title }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

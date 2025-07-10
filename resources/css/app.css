@@ -10,84 +10,78 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-
-/* ========================= */
-/* Keyframes                 */
-/* ========================= */
-
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes slideInLeftToRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
-
-@keyframes gradientPulse {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 
 /* ========================= */
 /* Topbar Menu Styling       */
 /* ========================= */
 
-.topbar_menu li {
-    position: relative;
-    float: left;
-    margin: 0 4px;
+.topbar_menu ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.topbar_menu li a {
+.topbar_menu li {
+    position: relative;
+    border-right: 1px solid #ddd;
+    opacity: 0;
+    animation: slideInLeftToRight 0.5s ease forwards;
+}
+
+.topbar_menu li:last-child {
+    border-right: none;
+}
+
+.topbar_menu a {
     display: block;
+    padding: 6px 12px;
+    width: 100%;
     font-size: 14px;
+    font-weight: 500;
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    background: linear-gradient(270deg, #465dff, #6cd3f8, #465dff);
     background-size: 600% 600%;
-    animation: gradientMove 6s ease infinite;
+    box-sizing: border-box;
     transition: all 0.3s ease-in-out;
     position: relative;
     z-index: 1;
     overflow: hidden;
-    border: 2px solid #ccc;
 }
 
 .topbar_menu a:hover {
-    filter: brightness(1.1);
-    transform: scale(1.03);
+    background-color: #3347e4;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
 }
 
-/* Submenu container */
-.submenu {
-    display: none;
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    top: 105%;
-    left: 0;
-    min-width: 240px;
-    padding: 8px;
-    background-color: #f0eeee;
-    border-radius: 2px;
-    box-shadow: -6px 1px 29px -2px rgba(0,0,0,0.23);
-    transition: all 0.3s ease;
-    z-index: 9999;
+.topbar_menu a:hover {
+    background-color: #fff;
+    color: #465dff;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
 }
 
+   
 /* Show submenu on hover */
 .topbar_menu li:hover .submenu {
     display: block;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
 /* Submenu items */
@@ -95,42 +89,88 @@
     float: none;
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #5d6eff;
+    border-right: none;
 }
 
 .topbar_menu .submenu li:last-child {
     border-bottom: none;
 }
 
-/* Submenu link */
-.topbar_menu .submenu li a {
-    display: block;
-    padding: 6px 12px;
-    font-size: 13px;
-    background-color: #465dff;
-    color: #fff;
-    text-transform: capitalize;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    border: none;
-    animation: none;
-}
-
-/* Hover submenu link */
 .topbar_menu .submenu li a:hover {
-    background-color: #fff;
-    font-weight: 600;
-    transform: translateX(4px);
-    text-transform: uppercase;
+    /* background-color: #111e2c; */
+    /* background-color: #3347e4; */
+    background-color: #eee;
+    color: #465dff;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding-left: 10px;
+    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
 }
 
+
+/* ========================= */
+/* Submenu container */
+/* ========================= */
+.submenu {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 240px;
+    z-index: 9999;
+    padding: 0;
+    margin: 0;
+    /* background-color: #111e2c; */
+    background-color: #465dff;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.submenu li{
+    padding: 3px;
+}
+
+.submenu li a {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    background-size: 600% 600%;
+    text-transform: capitalize;
+    transition: all 0.3s ease-in-out;
+}
+
+.submenu li a i.fa-angles-right {
+    margin-left: auto;
+    color: #fff;
+    font-size: 10px;
+    float: right;
+    margin-top: 5px;
+    transition: transform 0.3s ease;
+}
+
+.submenu li a:hover i.fa-angles-right {
+    color: #465dff
+}
+
+
+/* Show submenu on hover with animation */
+.topbar_menu li:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    animation: slideUp 0.3s ease forwards;
+}
 
 /* Active state */
 .topbar_menu li.active > a,
 .topbar_menu .submenu li.active > a {
     background-color: #fff;
     color: #465dff;
-    font-weight: 700;
     text-transform: uppercase;
     border-left: 4px solid #465dff;
     padding-left: 10px;
@@ -139,36 +179,136 @@
 
 
 /* ========================= */
-/* Side Nav Styling          */
+/* Nested Menu Styling       */
 /* ========================= */
+
+.submenu li .nested-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 240px;
+    flex-direction: column;
+    background-color: #465dff;
+    opacity: 0;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 9999;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: normal;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+
+    max-width: 240px;
+    white-space: nowrap;         
+    overflow: hidden;            
+    text-overflow: ellipsis;
+}
+
+/* Show nested menu on hover */
+.submenu li:hover > .nested-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(10);
+    animation: slideRight 0.3s ease forwards;
+}
+
+.nested-menu li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #5d6eff;
+}
+
+.nested-menu li:last-child {
+    border-bottom: none;
+}
+
+.nested-menu li a {
+    display: block;
+    padding: 6px 12px;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Hover effect on nested menu links */
+.nested-menu a:hover {
+    background-color: #3347e4;
+    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
+    color: #fff;
+}
+
+/* ========================= */
+/* Animation for Nested Menu */
+/* ========================= */
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+/* ========================= */
+/* Side Nav Compact Styling  */
+/* ========================= */
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
 
 .side-nav .sf_nav a {
     display: inline-flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     text-transform: uppercase;
-    color: #3347e4;
+    color: #a00426;
 
-    width: 110px;
-    height: 36px;
-    padding: 0 18px;
-    border-radius: 5px;
+    width: 50px;                /* Smaller width */
+    height: 30px;               /* Reduced height */
+    padding: 0 10px;
+    border-radius: 3px;
 
-    background: linear-gradient(270deg, #b3baf2, #fff, #b3baf2);
+    background: #fff;
     background-size: 300% 300%;
     animation: gradientPulse 6s ease infinite;
 
-    border: none;
-    transition: all 0.25s ease-in-out;
+    border: 1px solid #3347e4;
+    transition: none;           
 
     position: relative;
     overflow: hidden;
     z-index: 1;
+
+    white-space: nowrap;
 }
 
+.side-nav .sf_nav a:hover {
+    color: #465dff;
+    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+/* Glow effect background blur */
 .side-nav .sf_nav a::before {
     content: "";
     position: absolute;
@@ -178,19 +318,22 @@
     height: 160%;
     background: inherit;
     border-radius: inherit;
-    filter: blur(12px);
-    opacity: 0.4;
+    filter: blur(8px); /* slightly less for compact view */
+    opacity: 0.3;
     z-index: -1;
     animation: gradientPulse 6s ease infinite;
     transition: opacity 0.3s;
+    border-radius: 4px;
 }
 
+/* SVG icon support (if used) */
 .side-nav .sf_nav a svg {
-    width: 24px;
-    height: 24px;
-    margin-left: 3px;
+    width: 18px;
+    height: 18px;
+    margin-left: 4px;
     flex-shrink: 0;
 }
+
 
 /* ========================= */
 /* Other Layout Elements     */
@@ -204,3 +347,19 @@
     display: flex;
     justify-content: center;
 }
+
+
+
+
+
+
+
+
+.topbar_menu li:nth-child(1) { animation-delay: 0.1s; }
+.topbar_menu li:nth-child(2) { animation-delay: 0.2s; }
+.topbar_menu li:nth-child(3) { animation-delay: 0.3s; }
+.topbar_menu li:nth-child(4) { animation-delay: 0.4s; }
+.topbar_menu li:nth-child(5) { animation-delay: 0.5s; }
+.topbar_menu li:nth-child(6) { animation-delay: 0.6s; }
+.topbar_menu li:nth-child(7) { animation-delay: 0.7s; }
+

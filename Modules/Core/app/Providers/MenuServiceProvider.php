@@ -22,15 +22,17 @@ class MenuServiceProvider extends ServiceProvider
         View::composer([
             'core::dashboard.layouts.master',
         ], function ($view) {
-            $sidebars = Menu::where('is_active', 1)
-                ->where('is_hidden', 1)
+            $menus = Menu::whereNull('parent_route')
+                ->with('children')
+                ->where('is_active', 1)
                 ->get();
 
-            $menus = Menu::where('is_active', 1)
-                ->where('is_hidden', 0)
-                ->get();
 
-            $view->with(compact('sidebars', 'menus'));
+            // $menus = Menu::where('is_active', 1)
+            //     ->where('is_hidden', 0)
+            //     ->get();
+
+            $view->with(compact('menus'));
         });
     }
 

@@ -19,7 +19,7 @@ class Menu extends Model
         'url',
         'route',
         'params',
-        'parent_id',
+        'parent_route',
         'has_children',
         'order',
         'permission',
@@ -32,12 +32,12 @@ class Menu extends Model
 
     public function children()
     {
-        return $this->hasMany(Menu::class, 'parent_id')->orderBy('order');
+        return $this->hasMany(Menu::class, 'parent_route')->orderBy('order');
     }
 
     public function parent()
     {
-        return $this->belongsTo(Menu::class, 'parent_id');
+        return $this->belongsTo(Menu::class, 'parent_route');
     }
 
     // protected static function newFactory(): MenuFactory
