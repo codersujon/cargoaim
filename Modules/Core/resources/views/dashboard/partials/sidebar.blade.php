@@ -35,86 +35,19 @@
 
     <div data-simplebar>
 
-        <!--- Sidenav Menu -->
-        <ul class="side-nav mb-2">
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    DOC
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    LOG
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    ACC
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    CHA
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    HRM
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    PAX
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    GSA
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    WMS
-                </a>
-            </li>
-         
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    TRK
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    CMS
-                </a>
-            </li>
-
-            <li class="sf_nav">
-                <a href="#">
-                    <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-corner-up-right-double"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-6a3 3 0 0 1 3 -3h7" /><path d="M10 13l4 -4l-4 -4m5 8l4 -4l-4 -4" /></svg>
-                    POM
-                </a>
-            </li>
-            
+      <!-- Side Navigation Menu -->
+        <ul class="side-nav mt-2">
+            <li class="sf_nav"><a href="#">DOC</a></li>
+            <li class="sf_nav"><a href="#">LOG</a></li>
+            <li class="sf_nav"><a href="#">ACC</a></li>
+            <li class="sf_nav"><a href="#">CHA</a></li>
+            <li class="sf_nav"><a href="#">HRM</a></li>
+            <li class="sf_nav"><a href="#">PAX</a></li>
+            <li class="sf_nav"><a href="#">GSA</a></li>
+            <li class="sf_nav"><a href="#">WMS</a></li>
+            <li class="sf_nav"><a href="#">TRK</a></li>
+            <li class="sf_nav"><a href="#">CMS</a></li>
+            <li class="sf_nav"><a href="#">POM</a></li>
         </ul>
 
         <div class="clearfix"></div>
