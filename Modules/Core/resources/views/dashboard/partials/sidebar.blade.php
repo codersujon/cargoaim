@@ -37,19 +37,18 @@
 
       <!-- Side Navigation Menu -->
         <ul class="side-nav">
-            <li class="sf_nav"><a href="#">DOC</a></li>
-            <li class="sf_nav"><a href="#">LOG</a></li>
-            <li class="sf_nav"><a href="#">ACC</a></li>
-            <li class="sf_nav"><a href="#">CHA</a></li>
-            <li class="sf_nav"><a href="#">HRM</a></li>
-            <li class="sf_nav"><a href="#">PAX</a></li>
-            <li class="sf_nav"><a href="#">GSA</a></li>
-            <li class="sf_nav"><a href="#">WMS</a></li>
-            <li class="sf_nav"><a href="#">TRK</a></li>
-            <li class="sf_nav"><a href="#">CMS</a></li>
-            <li class="sf_nav"><a href="#">POM</a></li>
+            <li class="sf_nav"><a href="#" title="Booking & Documentation">DOC</a></li>
+            <li class="sf_nav"><a href="#" title="Depot & Cargo Status">LOG</a></li>
+            <li class="sf_nav"><a href="#" title="Accounting">ACC</a></li>
+            <li class="sf_nav"><a href="#" title="Customs House/Brokerage">CHA</a></li>
+            <li class="sf_nav"><a href="#" title="HR & User ID">HRM</a></li>
+            <li class="sf_nav"><a href="#" title="Passenger Billing">PAX</a></li>
+            <li class="sf_nav"><a href="#" title="Airlines & GSA Billing">GSA</a></li>
+            <li class="sf_nav"><a href="#" title="Warehouse">WMS</a></li>
+            <li class="sf_nav"><a href="#" title="Trucking (Fleet Owner)">TRK</a></li>
+            <li class="sf_nav"><a href="#" title="Courier">CMS</a></li>
+            <li class="sf_nav"><a href="#" title="Purchase Order Management">POM</a></li>
         </ul>
-
         <div class="clearfix"></div>
     </div>
 </div>

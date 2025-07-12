@@ -41,8 +41,13 @@
             <div class="topbar_menu">
                 <ul>
                     @foreach ($menus as $menu)
-                        <li>
-                            <a href="#">
+                        @php
+                            $menuUrl = $menu->url ?? ($menu->route ? route($menu->route) : '#');
+                            $isMenuActive = request()->is(ltrim(parse_url($menuUrl, PHP_URL_PATH), '/'));
+                        @endphp
+                        <li class="{{ $isMenuActive ? 'active' : '' }}">
+
+                            <a href="{{ $menuUrl }}">
                                 <i class="fa-solid fa-briefcase"></i> {{ $menu->title }}
                                 @if ($menu->children->isNotEmpty())
                                     <i class="fa-solid fa-angles-down"></i>
@@ -53,8 +58,12 @@
                                 <!-- Sub Menu -->
                                 <ul class="submenu">
                                     @foreach ($menu->children as $child)
-                                        <li>
-                                            <a href="{{ $child->url ? $child->url : route($child->route) }}">
+                                        @php
+                                            $childUrl = $child->url ?? ($child->route ? route($child->route) : '#');
+                                            $isChildActive = request()->is(ltrim(parse_url($childUrl, PHP_URL_PATH), '/'));
+                                        @endphp
+                                        <li class="{{ $isChildActive ? 'active' : '' }}">
+                                            <a href="{{ $childUrl }}">
                                                 {{-- Assuming $child->icon exists --}}
                                                 <i class="{{ $child->icon }}"></i> {{ $child->title }}
                                                 {{-- Assuming $child->children exists --}}
@@ -67,8 +76,12 @@
                                                 <!-- Nested Menu -->
                                                 <ul class="nested-menu">
                                                     @foreach ($child->children as $nested)
-                                                        <li>
-                                                            <a href="{{ $nested->url ? $nested->url : route($nested->route) }}">
+                                                        @php
+                                                            $nestedUrl = $nested->url ?? ($nested->route ? route($nested->route) : '#');
+                                                            $isNestedActive = request()->is(ltrim(parse_url($nestedUrl, PHP_URL_PATH), '/'));
+                                                        @endphp
+                                                        <li class="{{ $isNestedActive ? 'active' : '' }}">
+                                                            <a href="{{ $nestedUrl }}">
                                                                 <i class="{{ $nested->icon }}"></i> {{ $nested->title }}
                                                             </a>
                                                         </li>

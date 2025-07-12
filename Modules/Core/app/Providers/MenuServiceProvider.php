@@ -22,7 +22,7 @@ class MenuServiceProvider extends ServiceProvider
         View::composer([
             'core::dashboard.layouts.master',
         ], function ($view) {
-           $menus = Menu::whereNull('parent_route')
+            $menus = Menu::whereNull('parent_route')
                     ->with(['children' => function ($query) {
                         $query->orderBy('order', 'asc'); // child sort
                     }])
@@ -30,11 +30,15 @@ class MenuServiceProvider extends ServiceProvider
                     ->orderBy('order', 'asc') // parent sort
                     ->get();
 
-            // $menus = Menu::where('is_active', 1)
-            //     ->where('is_hidden', 0)
-            //     ->get();
+            $sidemenus = Menu::whereNull('parent_route')
+                    ->whereNull('icon')
+                    ->where('is_active', 1)
+                    ->where('is_hidden', 0)
+                    ->where('has_children', 0)
+                    ->orderBy('order', 'asc')
+                    ->get();
 
-            $view->with(compact('menus'));
+            $view->with(compact('menus', 'sidemenus'));
         });
     }
 

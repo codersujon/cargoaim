@@ -1292,4 +1292,23 @@ return [
         'target' => '_self',
     ],
 
+    [
+        'title'         => 'DOC',                     
+        'icon'          => '',  
+        'url'           => '/dashboard',                      
+        'route'         => 'dashboard.index',               
+        'params'        => null,                      
+        'parent_route'  => null,                      
+        'order'         => 1000,                        
+        'permission'    => 'access_nms',              
+        'roles'         => json_encode(['admin', 'user']), 
+        'is_active'     => 1,                         
+        'is_hidden'     => 0,                         
+        'has_children'  => 0,                        
+        'module'        => 'core',                    
+        'target'        => '_blank',                   
+    ],
+
 ];
+
+    
