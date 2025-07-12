@@ -46,7 +46,7 @@
 
 .topbar_menu a {
     display: block;
-    padding: 6px 12px;
+    padding: 6px 8px;
     width: 100%;
     font-size: 14px;
     font-weight: 500;
@@ -266,10 +266,12 @@
 .side-nav {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 5px;
     padding: 0;
     margin: 0;
     list-style: none;
+    margin-top: 40px;
 }
 
 .side-nav .sf_nav a {
@@ -297,6 +299,7 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
+    margin-left: 5px;
 
     white-space: nowrap;
 }
@@ -305,33 +308,7 @@
     color: #465dff;
     box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
     font-weight: 700;
-    border-radius: 5px;
-}
-
-/* Glow effect background blur */
-.side-nav .sf_nav a::before {
-    content: "";
-    position: absolute;
-    top: -30%;
-    left: -30%;
-    width: 160%;
-    height: 160%;
-    background: inherit;
-    border-radius: inherit;
-    filter: blur(8px); /* slightly less for compact view */
-    opacity: 0.3;
-    z-index: -1;
-    animation: gradientPulse 6s ease infinite;
-    transition: opacity 0.3s;
     border-radius: 4px;
-}
-
-/* SVG icon support (if used) */
-.side-nav .sf_nav a svg {
-    width: 18px;
-    height: 18px;
-    margin-left: 4px;
-    flex-shrink: 0;
 }
 
 
@@ -343,18 +320,6 @@
     text-align: center;
 }
 
-.simplebar-content-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-
-
-
-
-
-
-
 .topbar_menu li:nth-child(1) { animation-delay: 0.1s; }
 .topbar_menu li:nth-child(2) { animation-delay: 0.2s; }
 .topbar_menu li:nth-child(3) { animation-delay: 0.3s; }
@@ -362,4 +327,10 @@
 .topbar_menu li:nth-child(5) { animation-delay: 0.5s; }
 .topbar_menu li:nth-child(6) { animation-delay: 0.6s; }
 .topbar_menu li:nth-child(7) { animation-delay: 0.7s; }
+.topbar_menu li:nth-child(8) { animation-delay: 0.8s; }
+.topbar_menu li:nth-child(9) { animation-delay: 0.9s; }
+.topbar_menu li:nth-child(10) { animation-delay: 1.0s;}
+
+
+
 

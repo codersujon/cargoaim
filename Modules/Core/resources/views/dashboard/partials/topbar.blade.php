@@ -54,7 +54,8 @@
                                 <ul class="submenu">
                                     @foreach ($menu->children as $child)
                                         <li>
-                                            <a href="{{ $child->route }}">
+                                            <a href="{{ $child->url ? $child->url : route($child->route) }}">
+                                                {{-- Assuming $child->icon exists --}}
                                                 <i class="{{ $child->icon }}"></i> {{ $child->title }}
                                                 {{-- Assuming $child->children exists --}}
                                                 @if ($child->children && $child->children->isNotEmpty())
@@ -67,7 +68,7 @@
                                                 <ul class="nested-menu">
                                                     @foreach ($child->children as $nested)
                                                         <li>
-                                                            <a href="{{ $nested->route }}">
+                                                            <a href="{{ $nested->url ? $nested->url : route($nested->route) }}">
                                                                 <i class="{{ $nested->icon }}"></i> {{ $nested->title }}
                                                             </a>
                                                         </li>

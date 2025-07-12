@@ -22,11 +22,13 @@ class MenuServiceProvider extends ServiceProvider
         View::composer([
             'core::dashboard.layouts.master',
         ], function ($view) {
-            $menus = Menu::whereNull('parent_route')
-                ->with('children')
-                ->where('is_active', 1)
-                ->get();
-
+           $menus = Menu::whereNull('parent_route')
+                    ->with(['children' => function ($query) {
+                        $query->orderBy('order', 'asc'); // child sort
+                    }])
+                    ->where('is_active', 1)
+                    ->orderBy('order', 'asc') // parent sort
+                    ->get();
 
             // $menus = Menu::where('is_active', 1)
             //     ->where('is_hidden', 0)

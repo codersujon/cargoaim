@@ -9,7 +9,7 @@ return [
         'route' => 'nms.index',
         'params' => null,
         'parent_route' => null,
-        'order' => 70,
+        'order' => 10,
         'permission' => 'access_nms',
         'roles' => json_encode(["admin", "user"]),
         'is_active' => 1,

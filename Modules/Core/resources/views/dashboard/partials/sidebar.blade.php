@@ -36,7 +36,7 @@
     <div data-simplebar>
 
       <!-- Side Navigation Menu -->
-        <ul class="side-nav mt-2">
+        <ul class="side-nav">
             <li class="sf_nav"><a href="#">DOC</a></li>
             <li class="sf_nav"><a href="#">LOG</a></li>
             <li class="sf_nav"><a href="#">ACC</a></li>
