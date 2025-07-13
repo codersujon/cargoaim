@@ -13,8 +13,15 @@ class MenuTableSeeder extends Seeder
      */
     public function run(): void
     {
+        // If already have rows
+        if(Menu::count() > 0){
+            $this->command->info('Menu table already seeded. Skipping...');
+            return;
+        }
+
         $menus = include(__DIR__ . '/data/menus_data.php');
         $routeToId = [];
+
 
         // First pass: Insert all menus with parent_id = null
         foreach ($menus as $menu) {
@@ -50,5 +57,6 @@ class MenuTableSeeder extends Seeder
             }
         }
 
+        $this->command->info('Menu table seeded successfully!');
     }
 }

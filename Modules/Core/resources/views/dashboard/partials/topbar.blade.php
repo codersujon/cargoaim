@@ -41,8 +41,13 @@
             <div class="topbar_menu">
                 <ul>
                     @foreach ($menus as $menu)
-                        <li>
-                            <a href="#">
+                        @php
+                            $menuUrl = $menu->url ?? ($menu->route ? route($menu->route) : '#');
+                            $isMenuActive = request()->is(ltrim(parse_url($menuUrl, PHP_URL_PATH), '/'));
+                        @endphp
+                        <li class="{{ $isMenuActive ? 'active' : '' }}">
+
+                            <a href="{{ $menuUrl }}">
                                 <i class="fa-solid fa-briefcase"></i> {{ $menu->title }}
                                 @if ($menu->children->isNotEmpty())
                                     <i class="fa-solid fa-angles-down"></i>
@@ -53,8 +58,13 @@
                                 <!-- Sub Menu -->
                                 <ul class="submenu">
                                     @foreach ($menu->children as $child)
-                                        <li>
-                                            <a href="{{ $child->route }}">
+                                        @php
+                                            $childUrl = $child->url ?? ($child->route ? route($child->route) : '#');
+                                            $isChildActive = request()->is(ltrim(parse_url($childUrl, PHP_URL_PATH), '/'));
+                                        @endphp
+                                        <li class="{{ $isChildActive ? 'active' : '' }}">
+                                            <a href="{{ $childUrl }}">
+                                                {{-- Assuming $child->icon exists --}}
                                                 <i class="{{ $child->icon }}"></i> {{ $child->title }}
                                                 {{-- Assuming $child->children exists --}}
                                                 @if ($child->children && $child->children->isNotEmpty())
@@ -66,8 +76,12 @@
                                                 <!-- Nested Menu -->
                                                 <ul class="nested-menu">
                                                     @foreach ($child->children as $nested)
-                                                        <li>
-                                                            <a href="{{ $nested->route }}">
+                                                        @php
+                                                            $nestedUrl = $nested->url ?? ($nested->route ? route($nested->route) : '#');
+                                                            $isNestedActive = request()->is(ltrim(parse_url($nestedUrl, PHP_URL_PATH), '/'));
+                                                        @endphp
+                                                        <li class="{{ $isNestedActive ? 'active' : '' }}">
+                                                            <a href="{{ $nestedUrl }}">
                                                                 <i class="{{ $nested->icon }}"></i> {{ $nested->title }}
                                                             </a>
                                                         </li>
@@ -375,12 +389,6 @@
                 </button>
             </div>
 
-            <!-- Light/Dark Mode Button -->
-            <div class="topbar-item d-none d-sm-flex">
-                <button class="topbar-link" id="light-dark-mode" type="button">
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-moon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
-                </button>
-            </div>
 
             <!-- User Dropdown -->
             <div class="topbar-item nav-user">

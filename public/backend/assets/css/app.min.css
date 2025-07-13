@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap);
 :root {
-  --osen-logo-lg-height: 33px;
-  --osen-logo-sm-height: 33px;
+  --osen-logo-lg-height: 30px;
+  --osen-logo-sm-height: 28px;
   --osen-sidenav-width: 260px;
   --osen-sidenav-width-md: 160px;
-  --osen-sidenav-width-sm: 60px;
+  --osen-sidenav-width-sm: 50px;
   --osen-topbar-height: 50px;
   --osen-menu-item-icon-size: 1.10rem;
   --osen-menu-item-font-size: 0.875rem;

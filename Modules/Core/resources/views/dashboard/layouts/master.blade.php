@@ -3,8 +3,6 @@
 {{-- <html lang="en"> --}}
 <html lang="en" data-sidenav-size="condensed" data-bs-theme="light" data-menu-color="dark" data-topbar-color="light" data-layout-mode="fluid">
 
-<!-- Mirrored from coderthemes.com/osen/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Apr 2025 04:49:51 GMT -->
-
 <head>
     <meta charset="utf-8" />
 
