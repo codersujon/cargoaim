@@ -5,10 +5,14 @@
 
 <header class="app-topbar">
     <div class="page-container topbar-menu">
-        <div class="d-flex align-items-center gap-2">
+        <div class="d-flex align-items-center gap-1">
+            {{-- Brand Name --}}
+            <div class="brand_name">
+                <a href="{{ route('user.dashboard') }}">Cargoaim</a>
+            </div>
 
             <!-- Brand Logo -->
-            <a href="{{ route('user.dashboard') }}" class="logo">
+            {{-- <a href="{{ route('user.dashboard') }}" class="logo">
                 <span class="logo-light">
                     <span class="logo-lg">
                         <img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}" alt="logo">
@@ -24,20 +28,20 @@
                     <span class="logo-sm"><img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
                             alt="small logo"></span>
                 </span>
-            </a>
+            </a> --}}
 
             <!-- Sidebar Menu Toggle Button -->
-            <button class="sidenav-toggle-button px-2">
+            {{-- <button class="sidenav-toggle-button px-2">
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg>
-            </button>
+            </button> --}}
 
             <!-- Horizontal Menu Toggle Button -->
-            <button class="topnav-toggle-button px-2" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+            {{-- <button class="topnav-toggle-button px-2" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg>
-            </button>
+            </button> --}}
 
 
-            {{-- Mega Menu Dropdown --}}
+            {{-- Mega Menu Dropdown Start --}}
             <div class="topbar_menu">
                 <ul>
                     @foreach ($menus as $menu)
@@ -96,6 +100,7 @@
                     @endforeach
                 </ul>
             </div>
+            {{-- Mega Menu Dropdown End --}}
         </div>
 
         <div class="d-flex align-items-center gap-2">
@@ -380,15 +385,6 @@
                     </div>
                 </div>
             </div>
-  
-            <!-- Button Trigger Customizer Offcanvas -->
-            <div class="topbar-item d-none d-sm-flex">
-                <button class="topbar-link" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas"
-                    type="button">
-                   <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-settings"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>
-                </button>
-            </div>
-
 
             <!-- User Dropdown -->
             <div class="topbar-item nav-user">
@@ -417,11 +413,10 @@
 
 
                         <!-- item-->
-                        <a href="{{ url('color_settings')}}" class="dropdown-item">
+                        <button class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas">
                             <i class="ti ti-settings me-1 fs-17 align-middle"></i>
                             <span class="align-middle">Settings</span>
-                        </a>
-
+                        </button>
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
                             <i class="ti ti-lifebuoy me-1 fs-17 align-middle"></i>

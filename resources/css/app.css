@@ -25,6 +25,10 @@
 /* Topbar Menu Styling       */
 /* ========================= */
 
+.topbar_menu{
+    margin-left: 30px;
+}
+
 .topbar_menu ul {
     display: flex;
     flex-wrap: wrap;
@@ -35,7 +39,7 @@
 
 .topbar_menu li {
     position: relative;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid #c0c0c0;
     opacity: 0;
     animation: slideInLeftToRight 0.5s ease forwards;
 }
@@ -183,7 +187,9 @@
 /* ========================= */
 /* Nested Menu Styling       */
 /* ========================= */
-
+.submenu{
+    display: inline-block;
+}
 .submenu li .nested-menu {
     position: absolute;
     top: 0;
@@ -275,7 +281,7 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .side-nav .sf_nav a {
@@ -303,7 +309,7 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
-    margin-left: 5px;
+    margin-left: 6px;
 
     white-space: nowrap;
 }
@@ -348,4 +354,60 @@
 
 
 
+/* ========================= */
+/* Brand Name Elements     */
+/* ========================= */
+.brand_name a {
+    color: #ffffff;              
+    font-size: 1.25rem;         
+    margin-left: -0.9375rem;    
+    text-decoration: none;      
+    font-weight: 600;           
+    text-transform: uppercase;
+    display: inline-block;      
+    transition: color 0.3s ease; 
+    margin-top: 3px;
+}
 
+
+.brand_name a {
+    font-size: 1.25rem;
+    margin-left: -1.2rem;
+    margin-top: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+
+    /* Gradient Text */
+    background: linear-gradient(135deg, #c680f1, #f5f3f5, #c680f1);
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animation */
+    animation: gradientMove 3s linear infinite;
+    transition: all 0.3s ease;
+}
+
+/* Gradient Animation Keyframes */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: 0% center;
+    }
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
