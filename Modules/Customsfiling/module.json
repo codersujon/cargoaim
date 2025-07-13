@@ -1,0 +1,11 @@
+{
+    "name": "Customsfiling",
+    "alias": "customsfiling",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Customsfiling\\Providers\\CustomsfilingServiceProvider"
+    ],
+    "files": []
+}
