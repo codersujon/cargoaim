@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->boolean('is_hidden')->default(false);
             $table->boolean('has_children')->default(false);
+            $table->string('tooltip_title')->nullable();
             $table->string('module')->nullable();
             $table->string('target')->nullable();     // _blank, modal, etc.
             $table->timestamps();
