@@ -213,7 +213,7 @@
                                                 </div>
                                             </th>
                                             <td style="width: 130px;">
-                                                <select class="form-select" name="billing_id" id="billing_id" autocomplete="off" required style="margin-top: 2px; margin-bottom: 1px;">
+                                                <select class="form-select" name="billing_id" id="billing_id" autocomplete="off"  style="margin-top: 2px; margin-bottom: 1px;" required>
                                                     <option value="">Loading...</option>
                                                 </select>
                                             </td>
@@ -243,7 +243,7 @@
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
                                                     <div style="flex: 1; position: relative;">
-                                                        <input type="text" name="shipper_name" id="shipper_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" autocomplete="off">
+                                                        <input type="text" name="shipper_name" id="shipper_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
                                                         
                                                         <div id="shipper_loader" class="circle-dot-loader" style="display: none;">
                                                             <div></div><div></div><div></div><div></div>
@@ -266,7 +266,7 @@
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
                                                     <div style="flex: 1; position: relative;">
-                                                        <input type="text" name="consignee_name" id="consignee_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" autocomplete="off">
+                                                        <input type="text" name="consignee_name" id="consignee_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
                                                         
                                                         <div id="consignee_loader" class="circle-dot-loader" style="display: none;">
                                                             <div></div><div></div><div></div><div></div>
@@ -288,7 +288,7 @@
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
                                                     <div style="flex: 1; position: relative;">
-                                                        <input type="text" name="notify_name" id="notify_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" autocomplete="off">
+                                                        <input type="text" name="notify_name" id="notify_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
                                                         
                                                         <div id="notify_loader" class="circle-dot-loader" style="display: none;">
                                                             <div></div><div></div><div></div><div></div>
@@ -314,7 +314,7 @@
                                                 </div>                                                
                                             </th>
                                             <td>
-                                                <input type="text" name="hbl_no" id="hbl_no" class="form-control" autocomplete="off" required style="margin-top: 1px; margin-bottom: 1px;">
+                                                <input type="text" name="hbl_no" id="hbl_no" class="form-control" required autocomplete="off"  style="margin-top: 1px; margin-bottom: 1px;">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <th>
@@ -341,15 +341,15 @@
                                                 <span style="margin-right: 2px;">{{ transText('address_lable') }} :</span> 
                                             </th>
                                             <td>
-                                                <input type="text" name="shipper_address" id="shipper_address" class="form-control" required autocomplete="off" readonly>
+                                                <input type="text" name="shipper_address" id="shipper_address" class="form-control"  autocomplete="off" required readonly>
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
-                                                <input type="text" name="consignee_address" id="consignee_address" class="form-control" required autocomplete="off"readonly>
+                                                <input type="text" name="consignee_address" id="consignee_address" class="form-control"  autocomplete="off" required readonly>
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
-                                                <input type="text" name="notify_address" id="notify_address" class="form-control" required autocomplete="off" readonly>
+                                                <input type="text" name="notify_address" id="notify_address" class="form-control"  autocomplete="off" required readonly>
                                             </td>
                                         </tr>
                                         <tr class="text-center border-bottom border-dashed">
@@ -409,7 +409,7 @@
                                                 </div>
                                             </th>
                                             <td>
-                                                <input type="text" name="mbl_no" id="mbl_no" class="form-control" autocomplete="off" required style="margin-top: 1px; margin-bottom: 1px;">
+                                                <input type="text" name="mbl_no" id="mbl_no" class="form-control" autocomplete="off" required  style="margin-top: 1px; margin-bottom: 1px;">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <th>
@@ -470,7 +470,7 @@
                                                 </div>                                                
                                             </th>
                                             <td>
-                                                <select class="form-select" name="ts_three" id="ts_three" autocomplete="off">
+                                                <select class="form-select" name="ts_three" id="ts_three" autocomplete="off" required>
                                                     <option value="">Loading...</option>
                                                 </select>
                                             </td>
@@ -479,15 +479,15 @@
                                                 <span style="margin-right: 2px;">{{ transText('email_lable') }} :</span> 
                                             </th>
                                             <td>
-                                                 <input type="text" name="shipper_email" id="shipper_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off" readonly>
+                                                 <input type="text" name="shipper_email" id="shipper_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
-                                                <input type="text" name="consignee_email" id="consignee_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off" readonly>
+                                                <input type="text" name="consignee_email" id="consignee_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
-                                                <input type="text" name="notify_email" id="notify_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off" readonly>
+                                                <input type="text" name="notify_email" id="notify_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off">
                                             </td>
                                         </tr>
                                         <tr class="text-center border-bottom border-dashed">
@@ -525,21 +525,21 @@
                                                 <span style="margin-right: 2px;">{{ transText('lic_bin_eori_lable') }} :</span> 
                                             </th>
                                             <td>
-                                                 <input type="text" name="shipper_registration" id="shipper_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" readonly style="margin-top: 1px; margin-bottom: 2px;">
+                                                 <input type="text" name="shipper_registration" id="shipper_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" style="margin-top: 1px; margin-bottom: 2px;">
                                                         
-                                                <input type="hidden" name="shipper_code" id="shipper_code" required autocomplete="off">
+                                                <input type="hidden" name="shipper_code" id="shipper_code"  autocomplete="off">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
-                                                 <input type="text" name="consignee_registration" id="consignee_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" readonly style="margin-top: 1px; margin-bottom: 2px;">
+                                                 <input type="text" name="consignee_registration" id="consignee_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" style="margin-top: 1px; margin-bottom: 2px;">
                                                         
-                                                <input type="hidden" name="consignee_code" id="consignee_code" required autocomplete="off">
+                                                <input type="hidden" name="consignee_code" id="consignee_code"  autocomplete="off">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
-                                                <input type="text" name="notify_registration" id="notify_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" readonly style="margin-top: 1px; margin-bottom: 2px;">
+                                                <input type="text" name="notify_registration" id="notify_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" style="margin-top: 1px; margin-bottom: 2px;">
                                                 
-                                                <input type="hidden" name="notify_code" id="notify_code" required autocomplete="off">
+                                                <input type="hidden" name="notify_code" id="notify_code"  autocomplete="off">
                                             </td>
                                         </tr>
 
@@ -641,7 +641,7 @@
                                                 </div>
                                             </th>
                                             <td>
-                                                <select class="form-select" name="customerAddressCountry" id="customerAddressCountry" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                                <select class="form-select" name="customerAddressCountry" id="customerAddressCountry" required autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
                                                     <option value="">Loading...</option>
                                                 </select>
                                             </td>
@@ -656,7 +656,7 @@
                                                 </div>
                                             </th>
                                             <td>
-                                                <select class="form-select" name="address_city" id="address_city" autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
+                                                <select class="form-select" name="address_city" id="address_city" required autocomplete="off" style="margin-top: 4px; margin-bottom: 4px;">
                                                     <option value=""></option>
                                                 </select>
                                             </td>
@@ -744,7 +744,6 @@
         </div>
     </div>
     <!-- Customer Modal Start -->
-
 @endsection
 
 @section('script')
@@ -769,7 +768,12 @@
                         console.log(response);
                         
                         if (response.status === 'success') {
-                            alert(response.message); // success message দেখাও
+                            Swal.fire({
+                                text: response.message,
+                                icon: "success",
+                                timer: 1000,
+                                showConfirmButton: true
+                            });
 
                             $('#customerModal').modal('hide'); // মডাল বন্ধ
                             $('#customer_form')[0].reset(); // ফর্ম রিসেট
