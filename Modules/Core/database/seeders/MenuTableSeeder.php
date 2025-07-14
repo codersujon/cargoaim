@@ -40,6 +40,7 @@ class MenuTableSeeder extends Seeder
             $menuModel->has_children = $menu['has_children'];
             $menuModel->module       = $menu['module'];
             $menuModel->target       = $menu['target'];
+            $menuModel->tooltip_title = $menu['tooltip_title'] ?? null;
             $menuModel->parent_route = null; // temporary
             $menuModel->created_at   = Carbon::now();
             $menuModel->updated_at   = Carbon::now();

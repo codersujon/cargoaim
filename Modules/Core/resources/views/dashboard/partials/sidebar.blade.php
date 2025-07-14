@@ -37,20 +37,17 @@
 
       <!-- Side Navigation Menu -->
         <ul class="side-nav">
-            <li class="sf_nav"><a href="#" data-title="Booking & Documentation">DOC</a></li>
-            <li class="sf_nav"><a href="#" data-title="Depot & Cargo Status">LOG</a></li>
-            <li class="sf_nav"><a href="#" data-title="Accounting">ACC</a></li>
-            <li class="sf_nav"><a href="#" data-title="Customs House/Brokerage">CHA</a></li>
-            <li class="sf_nav"><a href="#" data-title="HR & User ID">HRM</a></li>
-            <li class="sf_nav"><a href="#" data-title="Passenger Billing">PAX</a></li>
-            <li class="sf_nav"><a href="#" data-title="Airlines & GSA Billing">GSA</a></li>
-            <li class="sf_nav"><a href="#" data-title="Warehouse">WMS</a></li>
-            <li class="sf_nav"><a href="#" data-title="Trucking (Fleet Owner)">TRK</a></li>
-            <li class="sf_nav"><a href="#" data-title="Courier">CMS</a></li>
-            <li class="sf_nav"><a href="#" data-title="Purchase Order Management">POM</a></li>
-            <li class="sf_nav"><a href="#" data-title="Non Vessel Operating">NVO</a></li>
+            @foreach($sidemenus as $item)
+                @php
+                    $itemUrl = $item->url ?? ($item->route ? route($item->route) : '#');
+                    $isActive = request()->is(ltrim(parse_url($itemUrl, PHP_URL_PATH), '/'));
+                @endphp
+                <li class="sf_nav">
+                    <a href="{{ $itemUrl }}" data-title="{{ $item->tooltip_title }}" class="{{ $isActive ? 'active' : '' }}">{{ $item->title }}</a>
+                </li>
+            @endforeach
         </ul>
-
+        <!-- Side Navigation Menu -->
         <div class="clearfix"></div>
     </div>
 </div>

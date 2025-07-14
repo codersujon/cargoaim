@@ -27,6 +27,7 @@ class Menu extends Model
         'is_active',
         'is_hidden',
         'target',
+        'tooltip_title',
         'module',
     ];
 
