@@ -25,6 +25,10 @@
 /* Topbar Menu Styling       */
 /* ========================= */
 
+.topbar_menu{
+    margin-left: 30px;
+}
+
 .topbar_menu ul {
     display: flex;
     flex-wrap: wrap;
@@ -35,7 +39,7 @@
 
 .topbar_menu li {
     position: relative;
-    border-right: 1px solid #ddd;
+    border-right: 1px solid #c0c0c0;
     opacity: 0;
     animation: slideInLeftToRight 0.5s ease forwards;
 }
@@ -183,7 +187,9 @@
 /* ========================= */
 /* Nested Menu Styling       */
 /* ========================= */
-
+.submenu{
+    display: inline-block;
+}
 .submenu li .nested-menu {
     position: absolute;
     top: 0;
@@ -261,80 +267,6 @@
     }
 }
 
-
-
-/* ========================= */
-/* Side Nav Compact Styling  */
-/* ========================= */
-
-.side-nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    margin-top: 40px;
-}
-
-.side-nav .sf_nav a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #9f3fda;
-
-    width: 40px;                /* Smaller width */
-    height: 30px;               /* Reduced height */
-    padding: 0 10px;
-    border-radius: 3px;
-
-    background: #fff;
-    background-size: 300% 300%;
-    animation: gradientPulse 6s ease infinite;
-
-    border: 1px solid #e0a0dc;
-    transition: none;           
-
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    margin-left: 5px;
-
-    white-space: nowrap;
-}
-
-.side-nav .sf_nav a:hover {
-    color: #9f3fda;
-    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
-    font-weight: 700;
-    border-radius: 4px;
-}
-
-.side-nav a.active {
-    color: #fff;
-    background: linear-gradient(135deg, #9f3fda, #e0a0dc);
-    border-color: #9f3fda;
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(159, 63, 218, 0.3);
-    transform: scale(1.05);
-    border-radius: 6px;
-    z-index: 2;
-}
-
-
-/* ========================= */
-/* Other Layout Elements     */
-/* ========================= */
-
-.logo {
-    text-align: center;
-}
-
 .topbar_menu li:nth-child(1) { animation-delay: 0.1s; }
 .topbar_menu li:nth-child(2) { animation-delay: 0.2s; }
 .topbar_menu li:nth-child(3) { animation-delay: 0.3s; }
@@ -348,4 +280,132 @@
 
 
 
+/* ========================= */
+/* Brand Name Elements       */
+/* ========================= */
+.brand_name {
+    min-height: 40px;             /* Prevent jump */
+    display: flex;
+    align-items: center;
+}
 
+.brand_name a {
+    font-size: 1.25rem;
+    line-height: 1.25;            /* Avoid height shifts */
+    margin-left: -1.2rem;
+    margin-top: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+
+    /* Gradient Text */
+    background: linear-gradient(135deg, #c680f1, #f5f3f5, #c680f1);
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animation */
+    animation: gradientMove 3s linear infinite;
+    transition: all 0.3s ease;
+}
+
+/* Gradient Animation Keyframes */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: 0% center;
+    }
+}
+
+
+
+/* ========================= */
+/* Side Navigation Container */
+/* ========================= */
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+    margin: 10px 0 0 0;
+    list-style: none;
+}
+
+/* ========================= */
+/* Side Navigation Links     */
+/* ========================= */
+.side-nav .sf_nav {
+    position: relative;
+}
+
+.side-nav .sf_nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 30px;
+    padding: 0 10px;
+    margin-left: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #9f3fda;
+
+    background: #fff;
+    background-size: 300% 300%;
+    animation: gradientPulse 6s ease infinite;
+
+    border: 1px solid #e0a0dc;
+    z-index: 1;
+
+    white-space: nowrap;
+    transition: none;
+}
+
+
+.side-nav .sf_nav a::after {
+    content: attr(data-title);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px); /* Start slightly left */
+    
+    background-color: rgba(70, 93, 255, 0.95);
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 9999;
+
+    transition: all 0.25s ease;
+}
+
+/* Better hover selector */
+.side-nav .sf_nav a:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0); /* Animate to original position */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -37,18 +37,20 @@
 
       <!-- Side Navigation Menu -->
         <ul class="side-nav">
-            <li class="sf_nav"><a href="#" title="Booking & Documentation">DOC</a></li>
-            <li class="sf_nav"><a href="#" title="Depot & Cargo Status">LOG</a></li>
-            <li class="sf_nav"><a href="#" title="Accounting">ACC</a></li>
-            <li class="sf_nav"><a href="#" title="Customs House/Brokerage">CHA</a></li>
-            <li class="sf_nav"><a href="#" title="HR & User ID">HRM</a></li>
-            <li class="sf_nav"><a href="#" title="Passenger Billing">PAX</a></li>
-            <li class="sf_nav"><a href="#" title="Airlines & GSA Billing">GSA</a></li>
-            <li class="sf_nav"><a href="#" title="Warehouse">WMS</a></li>
-            <li class="sf_nav"><a href="#" title="Trucking (Fleet Owner)">TRK</a></li>
-            <li class="sf_nav"><a href="#" title="Courier">CMS</a></li>
-            <li class="sf_nav"><a href="#" title="Purchase Order Management">POM</a></li>
+            <li class="sf_nav"><a href="#" data-title="Booking & Documentation">DOC</a></li>
+            <li class="sf_nav"><a href="#" data-title="Depot & Cargo Status">LOG</a></li>
+            <li class="sf_nav"><a href="#" data-title="Accounting">ACC</a></li>
+            <li class="sf_nav"><a href="#" data-title="Customs House/Brokerage">CHA</a></li>
+            <li class="sf_nav"><a href="#" data-title="HR & User ID">HRM</a></li>
+            <li class="sf_nav"><a href="#" data-title="Passenger Billing">PAX</a></li>
+            <li class="sf_nav"><a href="#" data-title="Airlines & GSA Billing">GSA</a></li>
+            <li class="sf_nav"><a href="#" data-title="Warehouse">WMS</a></li>
+            <li class="sf_nav"><a href="#" data-title="Trucking (Fleet Owner)">TRK</a></li>
+            <li class="sf_nav"><a href="#" data-title="Courier">CMS</a></li>
+            <li class="sf_nav"><a href="#" data-title="Purchase Order Management">POM</a></li>
+            <li class="sf_nav"><a href="#" data-title="Non Vessel Operating">NVO</a></li>
         </ul>
+
         <div class="clearfix"></div>
     </div>
 </div>
