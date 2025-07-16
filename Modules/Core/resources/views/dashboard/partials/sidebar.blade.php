@@ -43,7 +43,7 @@
                     $isActive = request()->is(ltrim(parse_url($itemUrl, PHP_URL_PATH), '/'));
                 @endphp
                 <li class="sf_nav">
-                    <a href="{{ $itemUrl }}" data-title="{{ $item->tooltip_title }}" class="{{ $isActive ? 'active' : '' }}">{{ $item->title }}</a>
+                    <a href="{{ $itemUrl }}" data-title="{{ transText($item->tooltip_title) }}" class="{{ $isActive ? 'active' : '' }}">{{ transText($item->title) }}</a>
                 </li>
             @endforeach
         </ul>
