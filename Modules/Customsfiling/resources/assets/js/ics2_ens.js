@@ -75,6 +75,23 @@ $(document).ready(function () {
         `;
     }
 
+    //---- Liner Select ----///
+    loadSelectOptions({
+        url: urls.liner,
+        selectId: '#stock_filter_carrier_name',
+        valueField: 'carrierCode',
+        textField: 'full_name', // ✅ Laravel থেকে আসা 'full_name' key
+        placeholder: 'Please Select'
+    });
+    //---- Company Select ----///
+    loadSelectOptions({
+        url: urls.getBillFiling,
+        selectId: '#stock_filter_b_unit',
+        valueField: 'billing_id',
+        textField: 'billing_id', // ✅ Laravel থেকে আসা 'full_name' key
+        placeholder: 'Please Select'
+    });
+
     //---- Billing id ---//
     loadSelectOptions({
         url: urls.getBillFiling,
@@ -124,7 +141,6 @@ $(document).ready(function () {
         });
     });
 
-
     //---- Customer Country Code ----///
     loadSelectOptions({
         url: urls.getCtryCde,
@@ -139,6 +155,8 @@ $(document).ready(function () {
     $('#customerAddressCountry').change(function() {
         loadDependentDropdown(urls.getCity, '#customerAddressCountry', '#address_city', 'countryCode');
     });
+
+    
 
 
     // Call setup for 'shipper'
@@ -192,7 +210,7 @@ $(document).ready(function () {
 
 
     // Submit Button Click
-    submitFormWithAjax1('#form', urls.icsEns);
+    submitFormWithAjax('#form', urls.icsEns, submitLoadForm);
 
     // Function to disable all .saveIcon elements
     function disableAllSaveIcons() {
@@ -218,12 +236,9 @@ $(document).ready(function () {
 
 
     ////----- Filing Fetch data Load Start------////
-    $('#loadform').on('submit', function (e) {
-        e.preventDefault();
-
-        let formData = new FormData(this);
-        // Show loader before sending AJAX
-        $('#loader').fadeIn();
+    function submitLoadForm() {
+        let formData = new FormData($('#loadform')[0]);
+        $('#loader').fadeIn(); // Show loader
 
         $.ajax({
             type: "POST",
@@ -232,15 +247,17 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
-                console.log(response);
+                console.log("Response:", response);
 
-                let dataEmptyMsg = window.transText.data_empty_msg;
-                let tryMsg = window.transText.try_msg;
+                let dataEmptyMsg = window.transText?.data_empty_msg ?? 'No data found';
+                let tryMsg = window.transText?.try_msg ?? 'Please try again later';
 
-                if (response && response.length > 0) {
+                $('#dataBody').empty();
+
+                if (Array.isArray(response) && response.length > 0) {
                     $('.listTable').show();
+                    $('.listTable table').show();
                     $('#hbl_content_div').hide();
-                    $('#dataBody').empty(); // clear old data if any
 
                     let html = '';
                     let i = 1;
@@ -248,60 +265,53 @@ $(document).ready(function () {
                     response.forEach(function (item) {
                         html += `
                             <tr>
-                                <td style="width: 10px;"><input type="checkbox" name="check_name" id="check_id" /></td>
-                                <td class="text-center" style="width: 10px;">${i++}</td>
-                                <td class="text-center bg-info" style="width: 100px;">${item.mbl_no ?? ''}</td>
-                                <td class="text-center bg-warning" style="width: 100px;">${item.filing_t_ultimate_hbl_no ?? ''}</td>
-                                <td class="text-center" style="width: 40px;">
-                                    <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn" style="margin: 2px 0px;">
+                                <td class="text-center"><input type="checkbox" name="check_name[]" value="${item.row_id}" /></td>
+                                <td class="text-center">${i++}</td>
+                                <td class="text-center bg-info">${item.mbl_no ?? ''}</td>
+                                <td class="text-center bg-warning">${item.ultimate_hbl_no ?? ''}</td>
+                                <td class="text-center">
+                                    <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn">
                                         <i class="ti ti-edit"></i>
                                     </button>
                                 </td>
-                                <td class="text-center" style="width: 40px;">
-                                    <button type="button" class="btn btn-sm btn-dark copyBtn" data-copy="${item.filing_t_ultimate_hbl_no ?? ''}" style="margin: 2px 0px;">
-                                        <i class="fa-solid fa-copy" title="Copy" style="cursor: pointer;"></i>
-                                    </button>                                    
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-dark copyBtn" data-copy="${item.filing_t_ultimate_hbl_no ?? ''}">
+                                        <i class="fa-solid fa-copy" title="Copy"></i>
+                                    </button>
                                 </td>
-                                <td class="text-center bg-light" style="width: 120px;">${item.ens_mrn_no ?? ''}</td>
-                                <td class="text-center bg-light" style="width: 50px;">${item.status ?? ''}</td>
-                                <td class="text-center bg-light" style="width: 50px;">${item.ens_disposition_code ?? ''}</td>
-                                <td class="text-center" style="width: 20px;">${item.eq_qty ?? ''}</td>
-                                <td class="text-center" style="width: 30px;">${item.pky_qty ?? ''}</td>
-                                <td class="text-center" style="width: 40px;">${item.weight_kg ?? ''}</td>
-                                <td class="text-center" style="width: 50px;">${item.cbm ?? ''}</td>
-                                <td class="text-center" style="width: 30px;">${item.to_location ?? ''}</td>
-                                <td style="width: 150px;">${item.shipper_name ?? ''}</td>
-                                <td style="width: 150px;">${item.consignee_name ?? ''}</td>
-                                <td style="width: 20px;">
-                                    <div class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-sm btn-info me-2">
-                                            <i class="fa-solid fa-bolt"></i>
-                                        </button>
-                                    </div>
+                                <td class="text-center bg-light">${item.ens_mrn_no ?? ''}</td>
+                                <td class="text-center bg-light">${item.ens_status_code ?? ''}</td>
+                                <td class="text-center bg-light">${item.ens_disposition_code ?? ''}</td>
+                                <td class="text-center">${item.eq_qty ?? '0'}</td>
+                                <td class="text-center">${item.pky_qty ?? '0'}</td>
+                                <td class="text-center">${item.weight_kg ?? '0'}</td>
+                                <td class="text-center">${item.cbm ?? '0'}</td>
+                                <td class="text-center">${item.to_location ?? ''}</td>
+                                <td>${item.shipper_name ?? ''}</td>
+                                <td>${item.consignee_name ?? ''}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-info actionBtn" data-id="${item.row_id}">
+                                        <i class="fa-solid fa-bolt"></i>
+                                    </button>
                                 </td>
-                                <td style="width: 20px;">
-                                    <div class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-sm btn-danger me-2 deleteBtn" data-id="${item.row_id}">
-                                            <i class="fa-solid fa-trash" title="Delete" style="cursor: pointer;"></i>
-                                        </button>
-                                    </div>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-danger deleteBtn" data-id="${item.row_id}">
+                                        <i class="fa-solid fa-trash" title="Delete"></i>
+                                    </button>
                                 </td>
                             </tr>`;
                     });
 
                     $('#dataBody').html(html);
-                    $('table.table-striped').show();
-
                 } else {
                     $('.listTable').hide();
-                    $('#dataBody').empty();
 
                     $('#hbl_content_div').html(`
                         <div style="
                             padding: 2.25rem;
                             border-radius: 12px;
                             background-color: #f9fafb;
-                            border: 1.5px solid var(--osen-topbar-bg, #ddd);
+                            border: 1.5px solid #ddd;
                             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
                             text-align: left;
                             color: #6b7280;
@@ -309,19 +319,133 @@ $(document).ready(function () {
                         ">
                             <h5 style="font-size: 16px; margin-bottom: 8px;">📄 ${dataEmptyMsg}</h5>
                             <p style="margin: 5px 5px 0; font-size: 14px; color: #9ca3af;">
-                                ${tryMsg}.
+                                ${tryMsg}
                             </p>
                         </div>
                     `).show();
                 }
-                // Hide loader after completion
+
                 $('#loader').fadeOut();
             },
             error: function (xhr, status, error) {
-                console.error('AJAX Error:', error);
+                console.error('AJAX Error:', status, error);
+                $('#loader').fadeOut();
+                alert('An error occurred while fetching data.');
             }
         });
+    }
+
+    $('#loadform').on('submit', function (e) {
+        e.preventDefault();
+        submitLoadForm(); // Call reusable function
     });
+
+
+
+    // $('#loadform').on('submit', function (e) {
+    //     e.preventDefault();
+
+    //     let formData = new FormData(this);
+    //     // Show loader before sending AJAX
+    //     $('#loader').fadeIn();
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: urls.filingFetch,
+    //         data: formData,
+    //         contentType: false,
+    //         processData: false,
+    //         success: function (response) {
+    //             console.log(response);
+
+    //             let dataEmptyMsg = window.transText.data_empty_msg;
+    //             let tryMsg = window.transText.try_msg;
+
+    //             if (response && response.length > 0) {
+    //                 $('.listTable').show();
+    //                 $('#hbl_content_div').hide();
+    //                 $('#dataBody').empty(); // clear old data if any
+
+    //                 let html = '';
+    //                 let i = 1;
+
+    //                 response.forEach(function (item) {
+    //                     html += `
+    //                         <tr>
+    //                             <td style="width: 10px;"><input type="checkbox" name="check_name" id="check_id" /></td>
+    //                             <td class="text-center" style="width: 10px;">${i++}</td>
+    //                             <td class="text-center bg-info" style="width: 100px;">${item.mbl_no ?? ''}</td>
+    //                             <td class="text-center bg-warning" style="width: 100px;">${item.filing_t_ultimate_hbl_no ?? ''}</td>
+    //                             <td class="text-center" style="width: 40px;">
+    //                                 <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn" style="margin: 2px 0px;">
+    //                                     <i class="ti ti-edit"></i>
+    //                                 </button>
+    //                             </td>
+    //                             <td class="text-center" style="width: 40px;">
+    //                                 <button type="button" class="btn btn-sm btn-dark copyBtn" data-copy="${item.filing_t_ultimate_hbl_no ?? ''}" style="margin: 2px 0px;">
+    //                                     <i class="fa-solid fa-copy" title="Copy" style="cursor: pointer;"></i>
+    //                                 </button>                                    
+    //                             </td>
+    //                             <td class="text-center bg-light" style="width: 120px;">${item.ens_mrn_no ?? ''}</td>
+    //                             <td class="text-center bg-light" style="width: 50px;">${item.ens_status_code ?? ''}</td>
+    //                             <td class="text-center bg-light" style="width: 50px;">${item.ens_disposition_code ?? ''}</td>
+    //                             <td class="text-center" style="width: 20px;">${item.eq_qty ?? ''}</td>
+    //                             <td class="text-center" style="width: 30px;">${item.pky_qty ?? ''}</td>
+    //                             <td class="text-center" style="width: 40px;">${item.weight_kg ?? ''}</td>
+    //                             <td class="text-center" style="width: 50px;">${item.cbm ?? ''}</td>
+    //                             <td class="text-center" style="width: 30px;">${item.to_location ?? ''}</td>
+    //                             <td style="width: 150px;">${item.shipper_name ?? ''}</td>
+    //                             <td style="width: 150px;">${item.consignee_name ?? ''}</td>
+    //                             <td style="width: 20px;">
+    //                                 <div class="d-flex justify-content-center">
+    //                                     <button type="button" class="btn btn-sm btn-info me-2">
+    //                                         <i class="fa-solid fa-bolt"></i>
+    //                                     </button>
+    //                                 </div>
+    //                             </td>
+    //                             <td style="width: 20px;">
+    //                                 <div class="d-flex justify-content-center">
+    //                                     <button type="button" class="btn btn-sm btn-danger me-2 deleteBtn" data-id="${item.row_id}">
+    //                                         <i class="fa-solid fa-trash" title="Delete" style="cursor: pointer;"></i>
+    //                                     </button>
+    //                                 </div>
+    //                             </td>
+    //                         </tr>`;
+    //                 });
+
+    //                 $('#dataBody').html(html);
+    //                 $('table.table-striped').show();
+
+    //             } else {
+    //                 $('.listTable').hide();
+    //                 $('#dataBody').empty();
+
+    //                 $('#hbl_content_div').html(`
+    //                     <div style="
+    //                         padding: 2.25rem;
+    //                         border-radius: 12px;
+    //                         background-color: #f9fafb;
+    //                         border: 1.5px solid var(--osen-topbar-bg, #ddd);
+    //                         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    //                         text-align: left;
+    //                         color: #6b7280;
+    //                         font-family: 'Segoe UI', sans-serif;
+    //                     ">
+    //                         <h5 style="font-size: 16px; margin-bottom: 8px;">📄 ${dataEmptyMsg}</h5>
+    //                         <p style="margin: 5px 5px 0; font-size: 14px; color: #9ca3af;">
+    //                             ${tryMsg}.
+    //                         </p>
+    //                     </div>
+    //                 `).show();
+    //             }
+    //             // Hide loader after completion
+    //             $('#loader').fadeOut();
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error('AJAX Error:', error);
+    //         }
+    //     });
+    // });
     ////----- Filing Fetch data Load End------////
     
     // Edit Button Click
@@ -651,16 +775,12 @@ $(document).ready(function () {
         });
     });
 
-
-
     /// ---Reset Serial Numbers ----//
     function resetSerialNumbers() {
         $('#containerTbody tr').each(function (index) {
             $(this).find('td:first').text(index + 1);
         });
     }
-
-
     ///---- Close Modal ------///
 
     $(document).on('click', '.ins_modal_close', function () {
@@ -669,7 +789,6 @@ $(document).ready(function () {
 
         // modal fields clear
         $('#bs-example-modal-lg').find('input, select, textarea').val('');
-        
     });
 
     /// Uppercase Only  ////

@@ -30,6 +30,7 @@ class Ics2EnsServiceProvider extends ServiceProvider
                 'getCity' => url('get-city'),
                 'filingFetch' => url('filing_fetch'),
                 'icsEns' => url('ics_ens'),
+                'liner' => url('liner'),
             ];
 
             $view->with('urlData', $urlData);

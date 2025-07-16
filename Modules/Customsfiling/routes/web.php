@@ -21,10 +21,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/get-customer-details', [AllSearchingController::class, 'getCstDtlRecords']);
     Route::post('/get-pol-pod-details', [AllSearchingController::class, 'getPolPodDtlRecords']);
     Route::post('get-city', [AllSearchingController::class, 'getCityRecords']);
-
-
+    
     Route::resource('ics_ens', IcsEnsController::class);
     Route::post('/filing_fetch', [IcsEnsController::class, 'filingFetch']);
+    Route::get('/liner', [IcsEnsController::class, 'liner']);
 
     Route::resource('customer_address', CustomerAddressController::class);
 });

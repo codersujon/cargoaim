@@ -82,9 +82,11 @@ class CustomerAddressController extends Controller
             $data
         );
 
+        $message = $request->rowId != 0 ? transText('f_upd_msg') :  transText('f_ins_msg');
+
         return response()->json([
             'status' => 'success',
-            'message' => $isUpdate ? 'Customer updated successfully' : 'Customer created successfully',
+            'message' => $message,
             'data' => $customer
         ]);
     }

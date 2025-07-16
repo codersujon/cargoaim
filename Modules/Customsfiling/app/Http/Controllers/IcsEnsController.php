@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Customsfiling\Models\CustomsFiling;
 use Modules\Customsfiling\Models\CustomsFilingEqDetails;
+use Modules\Core\Models\CarrierBasic;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use Carbon\Carbon;
@@ -18,36 +19,276 @@ class IcsEnsController extends Controller
         return view('customsfiling::euens.ics2_ens');
     }
 
-    
     public function create(){}
+
+    public function liner()
+    {
+        $user = Auth::guard('web')->user();
+        $userID = $user->userId;
+        $softCustID = $user->soft_cust_id;
+
+        $carriers = CarrierBasic::where('soft_cust_id', $softCustID)
+            ->where('carrierCode', '!=', 'DUM')
+            ->where('carrierType', '2')
+            ->orderByRaw("
+                CASE
+                    WHEN carrierCodeNick IS NULL OR carrierCodeNick = ''
+                    THEN carrierName
+                    ELSE CONCAT(carrierCodeNick, '-', carrierName)
+                END ASC
+            ")
+            ->select(
+                'carrierCode',
+                'carrierCodeNick',
+                'carrierName',
+                DB::raw("
+                    CASE
+                        WHEN carrierCodeNick IS NULL OR carrierCodeNick = ''
+                        THEN carrierName
+                        ELSE CONCAT(carrierCodeNick, '-', carrierName)
+                    END as full_name
+                ")
+            )
+            ->get();
+
+        return response()->json($carriers);
+    }
+
+
+    // public function liner()
+    // {
+    //     $user = Auth::guard('web')->user();
+    //     $userID = $user->userId;
+    //     $softCustID = $user->soft_cust_id;
+
+    //     $carriers = CarrierBasic::when($userID != 'admin.filing', function ($query) use ($softCustID) {
+    //             $query->where('soft_cust_id', $softCustID);
+    //         })
+    //         ->where('carrierCode', '!=', 'DUM')
+    //         ->where('carrierType', '2')
+    //         ->orderByRaw("
+    //             CASE
+    //                 WHEN carrierCodeNick IS NULL OR carrierCodeNick = ''
+    //                 THEN carrierName
+    //                 ELSE CONCAT(carrierCodeNick, '-', carrierName)
+    //             END
+    //         ")
+    //         ->select(
+    //             'carrierCode',
+    //             'carrierCodeNick',
+    //             'carrierName',
+    //             DB::raw("
+    //                 CASE
+    //                     WHEN carrierCodeNick IS NULL OR carrierCodeNick = ''
+    //                     THEN carrierName
+    //                     ELSE CONCAT(carrierCodeNick, '-', carrierName)
+    //                 END as full_name
+    //             ")
+    //         )
+    //         ->get();
+
+    //     return response()->json($carriers);
+    // }
+
+
 
     public function filingFetch(Request $request)
     {
+        $user = Auth::guard('web')->user();
+        $userID = $user->userId;
+        $softCustID = $user->soft_cust_id;
+        $billing_id = $user->billing_id;
+
         $data = $request->all();
+        $hbl_mbl = $data['hbl_mbl'] ?? '';
+        $bkg_no = $data['bkg_no'] ?? '';
+        $date_type = $data['date_type'] ?? 'entry_date';
+        $liner = $data['stock_filter_carrier_name'] ?? '';
+        $requested_b_unit = $data['stock_filter_b_unit'] ?? '';
+        $open_close = $data['open_close'] ?? '';
+        $stock_status = $data['stock_status'] ?? '';
+
         $date_from = Carbon::createFromFormat('d-m-Y', $data['date_range_from'])->format('Y-m-d');
         $date_to = Carbon::createFromFormat('d-m-Y', $data['date_range_to'])->format('Y-m-d');
 
-        $filingFetchData = DB::table('customs_filing')
+        $query = DB::table('customs_filing')
             ->select(
                 'row_id',
-                'hbl_no',
+                'soft_cust_id',
+                'business_unit',
+                'bkg_no as bkg_no_got',
+                'bkg_no as bkg_no_got',
+                'hbl_no as hbl_no_got',
+                'ultimate_hbl_no',
                 'mbl_no',
-                'ultimate_hbl_no as filing_t_ultimate_hbl_no',
-                'ens_disposition_code',
-                'status',
+                'version',
+                'hbl_type',
+                'mbl_type',
+                'carrier_scac',
+                'nvocc_scac',
+                'from_location',
+                'to_location',
                 'shipper_name',
                 'consignee_name',
-                'entry_date'
+                'case_close',
+                'ams_reference_no',
+                'hbl_ams_last_status',
+                'import_export',
+                'status',
+                'pol_for_us_date',
+                DB::raw("DATE_FORMAT(first_us_port_eta, '%Y-%m-%d') as first_us_port_eta"),
+                'ts_one',
+                'ts_two',
+                'ts_three',
+                'ens_status_code',
+                'ens_disposition_code',
+                'ens_mrn_no',
+                'cargoaim_inv_amount',
+                'eu_lrn_no',
+
+                // ✅ Subqueries
+                DB::raw("(SELECT COUNT(DISTINCT bkg_bl_cont_no)
+                        FROM bkg_bl_container_details_t
+                        WHERE soft_cust_id = customs_filing.soft_cust_id
+                            AND bkg_bl_hbl_no = customs_filing.hbl_no
+                            AND bkg_bl_bkg_no = customs_filing.bkg_no
+                        LIMIT 1) as cont_count"),
+
+                DB::raw("(SELECT 
+                            CASE 
+                                WHEN status_code = 'ACK_FAILURE' THEN UPPER(status_details_text)
+                                WHEN status_code IN ('AWAITING', 'ACK_WAITING') THEN 'WAITING'
+                                ELSE 'OK'
+                            END
+                        FROM customs_filing_status_history
+                        WHERE soft_cust_id = customs_filing.soft_cust_id
+                            AND hbl_no = customs_filing.hbl_no
+                            AND ultimate_hbl_no = customs_filing.ultimate_hbl_no
+                            AND status_type IN ('ACK_STATUS', 'UPDATE_SENT', 'SUMBITTED')
+                        ORDER BY update_date_time DESC LIMIT 1) as fmc_status"),
+
+                DB::raw("(SELECT response_details
+                        FROM customs_filing_status_history
+                        WHERE soft_cust_id = customs_filing.soft_cust_id
+                            AND hbl_no = customs_filing.hbl_no
+                            AND ultimate_hbl_no = customs_filing.ultimate_hbl_no
+                            AND response_details != ''
+                        ORDER BY row_id DESC LIMIT 1) as response_details"),
+
+                DB::raw("IFNULL((
+                        SELECT SUM(pkg_qty)
+                        FROM customs_filing_eq_details
+                        WHERE soft_cust_id = customs_filing.soft_cust_id
+                            AND status = customs_filing.status
+                            AND bkg_no = customs_filing.bkg_no
+                            AND hbl_no = customs_filing.hbl_no
+                            AND ultimate_hbl_no = customs_filing.ultimate_hbl_no
+                            AND version = customs_filing.version
+                        ), 0) as pky_qty"),
+
+                DB::raw("IFNULL((
+                        SELECT SUM(weight_kg)
+                        FROM customs_filing_eq_details
+                        WHERE soft_cust_id = customs_filing.soft_cust_id
+                            AND status = customs_filing.status
+                            AND bkg_no = customs_filing.bkg_no
+                            AND hbl_no = customs_filing.hbl_no
+                            AND ultimate_hbl_no = customs_filing.ultimate_hbl_no
+                            AND version = customs_filing.version
+                        ), 0) as weight_kg"),
+
+                DB::raw("IFNULL((
+                        SELECT SUM(cbm)
+                        FROM customs_filing_eq_details
+                        WHERE soft_cust_id = customs_filing.soft_cust_id
+                            AND status = customs_filing.status
+                            AND bkg_no = customs_filing.bkg_no
+                            AND hbl_no = customs_filing.hbl_no
+                            AND ultimate_hbl_no = customs_filing.ultimate_hbl_no
+                            AND version = customs_filing.version
+                        ), 0) as cbm"),
+
+                DB::raw("IFNULL((
+                        SELECT COUNT(DISTINCT container_no)
+                        FROM customs_filing_eq_details
+                        WHERE soft_cust_id = customs_filing.soft_cust_id
+                            AND status = customs_filing.status
+                            AND bkg_no = customs_filing.bkg_no
+                            AND hbl_no = customs_filing.hbl_no
+                            AND ultimate_hbl_no = customs_filing.ultimate_hbl_no
+                            AND version = customs_filing.version
+                        ), 0) as eq_qty")
             )
-            ->where(function($query) use ($date_from, $date_to) {
-                $query->whereBetween(DB::raw("STR_TO_DATE(entry_date, '%Y-%m-%d')"), [$date_from, $date_to])
-                    ->orWhereBetween(DB::raw("STR_TO_DATE(entry_date, '%d-%m-%Y')"), [$date_from, $date_to]);
+            ->when($userID !== 'admin.filing', function ($query) use ($softCustID) {
+                $query->where('customs_filing.soft_cust_id', $softCustID);
             })
-            ->orderBy('customs_filing.row_id','desc')
+            ->where(function ($query) use ($requested_b_unit) {
+                $query->where('business_unit', 'like', "%$requested_b_unit%");
+            })
+            ->where(function ($query) use ($bkg_no) {
+                $query->where('bkg_no', 'like', "%$bkg_no%");
+            })
+            ->where(function ($query) use ($open_close) {
+                $query->where('case_close', 'like', "%$open_close%");
+            })
+            ->when(!empty($liner), function ($query) use ($liner) {
+                $query->where('carrier_scac', 'like', "%$liner%");
+            })
+            ->when(!empty($hbl_mbl), function ($query) use ($hbl_mbl) {
+                $query->where(function ($q) use ($hbl_mbl) {
+                    $q->where('hbl_no', 'like', "%$hbl_mbl%")
+                    ->orWhere('mbl_no', 'like', "%$hbl_mbl%");
+                });
+            })
+            ->where(function ($query) use ($date_type, $date_from, $date_to) {
+                $query->whereBetween(DB::raw("DATE($date_type)"), [$date_from, $date_to]);
+            })
+            ->whereIn('status', ['A', 'N'])
+            ->where('filing_type', 'EUENS')
+            ->orderByDesc('entry_date')
             ->get();
 
-        return response()->json($filingFetchData);
+        return response()->json($query);
     }
+
+
+
+
+    // public function filingFetch(Request $request)
+    // {
+    //     $user = Auth::guard('web')->user();
+    //     $userID = $user->userId;
+    //     $softCustID = $user->soft_cust_id;
+        
+    //     $data = $request->all();
+    //     $date_from = Carbon::createFromFormat('d-m-Y', $data['date_range_from'])->format('Y-m-d');
+    //     $date_to = Carbon::createFromFormat('d-m-Y', $data['date_range_to'])->format('Y-m-d');
+
+    //     $filingFetchData = DB::table('customs_filing')
+    //         ->select(
+    //             'row_id',
+    //             'hbl_no',
+    //             'mbl_no',
+    //             'ultimate_hbl_no as filing_t_ultimate_hbl_no',
+    //             'ens_disposition_code',
+    //             'status',
+    //             'shipper_name',
+    //             'consignee_name',
+    //             'entry_date'
+    //         )
+    //         ->when($userID !== 'admin.filing', function ($query) use ($userID, $softCustID) {
+    //             $query->where('soft_cust_id', $softCustID);
+    //         })
+    //         ->where(function($query) use ($date_from, $date_to) {
+    //             $query->whereBetween(DB::raw("STR_TO_DATE(entry_date, '%Y-%m-%d')"), [$date_from, $date_to])
+    //                 ->orWhereBetween(DB::raw("STR_TO_DATE(entry_date, '%d-%m-%Y')"), [$date_from, $date_to]);
+    //         })
+    //         ->orderBy('customs_filing.row_id', 'desc')
+    //         ->get();
+
+    //     return response()->json($filingFetchData);
+    // }
+
 
 
     public function store(Request $request)
@@ -161,6 +402,7 @@ class IcsEnsController extends Controller
             $validated += [
                 'billing_id' => $user->billing_id,
                 'ultimate_hbl_no' => $validated['hbl_no'],
+                // 'business_unit' => $validated['hbl_no'],
                 'hbl_type' => 'OBL',
                 'mbl_type' => 'OBL',
                 'filing_type' => 'EUENS',
@@ -194,7 +436,7 @@ class IcsEnsController extends Controller
             );
 
             // ✅ Sanitize & validate container inputs (merge part)
-             $request->merge([
+            $request->merge([
                 'container_no' => collect($request->input('container_no', []))->map(fn($item) => preg_replace('/[^0-9.a-zA-Z_\/-]/', '', $item))->toArray(),
                 'seal_no' => collect($request->input('seal_no', []))->map(fn($item) => preg_replace('/[^0-9.a-zA-Z_\/-]/', '', $item))->toArray(),
                 'pkg_qty' => collect($request->input('pkg_qty', []))->map(fn($item) => preg_replace('/[^0-9]/', '', $item))->toArray(),
@@ -263,10 +505,12 @@ class IcsEnsController extends Controller
                 ]);
             }
 
+            $message = $request->row_id != 0 ? transText('f_upd_msg') :  transText('f_ins_msg');
+
             // ✅ All done, transaction will be committed
             return response()->json([
                 'success' => true,
-                'message' => $request->row_id ? 'Updated successfully!' : 'Inserted successfully!',
+                'message' => $message,
                 'data' => $data
             ]);
         });
