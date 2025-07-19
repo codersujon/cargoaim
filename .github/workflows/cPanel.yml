@@ -49,12 +49,3 @@ jobs:
             --exclude=".env" \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/cargoaim/public_html/cargoaim/test/
 
-      - name: Run Artisan Commands Over SSH
-        run: |
-          ssh -tt -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /home/cargoaim/public_html/cargoaim/test/
-            composer install --no-interaction --prefer-dist --optimize-autoloader
-            php artisan config:cache
-            php artisan migrate --force
-            php artisan db:seed --class=Modules\\Core\\Database\\Seeders\\MenuTableSeeder
-          EOF
