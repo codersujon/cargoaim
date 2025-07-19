@@ -1,4 +1,4 @@
-name: 🚀 Cargoaim Deploy to cPanel via SSH
+name: 🚀 Deploy to https://test.cargoaim.net/
 
 on:
   push:
@@ -10,16 +10,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup SSH
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, intl, pdo, mysql
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Install & Build Frontend Assets
+        run: |
+          npm install
+          npm run build --if-present
+
+      - name: Set Up SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy files with rsync
+      - name: Deploy Files with Rsync
         run: |
-          rsync -avz --delete ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/cargoaim/public_html/cargoaim/test/
+          rsync -az --delete \
+            --exclude=".git*" \
+            --exclude="node_modules" \
+            --exclude="vendor" \
+            --exclude=".env" \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/cargoaim/public_html/cargoaim/test/
+
+      - name: Run Artisan Commands Over SSH
+        run: |
+          ssh -tt -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /home/cargoaim/public_html/cargoaim/test/
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan config:cache
+            php artisan migrate --force
+            php artisan db:seed --class=Modules\\Core\\Database\\Seeders\\MenuTableSeeder
+          EOF
