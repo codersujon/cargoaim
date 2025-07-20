@@ -21,11 +21,12 @@
             z-index: 1055 !important;
         }
         
-        input[required],
+        /* input[required],
         select[required],
         textarea[required] {
             border: 1px solid rgb(255, 101, 101) !important;
-        }
+        } */
+
     </style>
 
     <div class="row pt-3">
@@ -37,11 +38,6 @@
                     <button type="button" class="btn btn-primary ms-1" id="createNew1">
                         {{ transText('new_hbl_file_btn') }}
                     </button>
-
-                   
-
-                   
-
                 </div>
 
                 <div class="card-body">
@@ -119,10 +115,8 @@
                                             {{ transText('load_btn') }}
                                         </button>
                                     </div>
-
                                 </div>
-                            </div>
-                                               
+                            </div>              
                         </div>
                     </form>
 

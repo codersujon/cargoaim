@@ -156,7 +156,6 @@ $(document).ready(function () {
         loadDependentDropdown(urls.getCity, '#customerAddressCountry', '#address_city', 'countryCode');
     });
 
-    
     // Call setup for 'shipper'
     setupCustomerAutocomplete('shipper', urls.getCstDtl);
     setupCustomerAutocomplete('consignee', urls.getCstDtl);
@@ -165,7 +164,6 @@ $(document).ready(function () {
     // ✅ Call setup for different fields with seaAirLand types
     setupPolPodAutocomplete('from_location', 1, urls.getPolPodDtl); // 1 = Sea
     setupPolPodAutocomplete('to_location', 1, urls.getPolPodDtl);   // 2 = Air (or 3 = Land)
-
 
     // New Modal Open Event delegation দিয়ে click handler
     $(document).on('click', '#createNew1', function () {
@@ -205,7 +203,6 @@ $(document).ready(function () {
         disableAllSaveIcons();
     });
 
-
     // Submit Button Click
     submitFormWithAjax('#form', urls.icsEns, submitLoadForm);
 
@@ -230,7 +227,6 @@ $(document).ready(function () {
             }).prop('disabled', false);
         });
     }
-
 
     ////----- Filing Fetch data Load Start------////
     function submitLoadForm() {
@@ -336,8 +332,6 @@ $(document).ready(function () {
         e.preventDefault();
         submitLoadForm(); // Call reusable function
     });
-
-
 
     // $('#loadform').on('submit', function (e) {
     //     e.preventDefault();
@@ -597,7 +591,6 @@ $(document).ready(function () {
             enableAllSaveIcons(); // Optional
         }
     );
-
 
     /// -----row add---//
     $('#addRowBtn').click(function () {

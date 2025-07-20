@@ -280,19 +280,27 @@
     }) {
         $.ajax({
             url: url,
-            type: 'GET',
+            type: 'POST',
             data: params,
             dataType: 'json',
             success: function(data) {
                 let options = `<option value="">${placeholder}</option>`;
+
+                // যদি শুধুমাত্র ১টি রেকর্ড থাকে, তাহলে সেটাকে selectedValue বানিয়ে দিন
+                if (data.length === 1 && !selectedValue) {
+                    selectedValue = data[0][valueField];
+                }
+
                 $.each(data, function(index, item) {
                     let text = item[textField];
                     if (extraTextField && item[extraTextField]) {
                         text += ' - ' + item[extraTextField];
                     }
+
                     const isSelected = (selectedValue && item[valueField] == selectedValue) ? 'selected' : '';
                     options += `<option value="${item[valueField]}" ${isSelected}>${text}</option>`;
                 });
+
                 $(selectId).html(options);
             },
             error: function(xhr, status, error) {
@@ -301,6 +309,29 @@
             }
         });
     }
+    
+    function loadSelectOptions2({ url, selectId, valueField, textField, placeholder }, callback = null) {
+        $.get(url, function (data) {
+            let options = placeholder ? `<option value="">${placeholder}</option>` : '';
+            data.forEach(item => {
+                options += `<option value="${item[valueField]}">${item[textField]}</option>`;
+            });
+
+            if (selectId instanceof jQuery) {
+                selectId.html(options);
+            } else {
+                selectId = $(selectId);
+                selectId.html(options);
+            }
+
+            // ✅ Call the callback after options are loaded
+            if (typeof callback === 'function') {
+                callback(selectId);
+            }
+        });
+    }
+    ///----- select box select function End -----/////
+    
 
     ///----- City Name ------///
     function loadDependentDropdown(url, sourceSelector, targetSelector, postKey = 'id') {
@@ -326,27 +357,7 @@
         });
     }
 
-    function loadSelectOptions2({ url, selectId, valueField, textField, placeholder }, callback = null) {
-        $.get(url, function (data) {
-            let options = placeholder ? `<option value="">${placeholder}</option>` : '';
-            data.forEach(item => {
-                options += `<option value="${item[valueField]}">${item[textField]}</option>`;
-            });
-
-            if (selectId instanceof jQuery) {
-                selectId.html(options);
-            } else {
-                selectId = $(selectId);
-                selectId.html(options);
-            }
-
-            // ✅ Call the callback after options are loaded
-            if (typeof callback === 'function') {
-                callback(selectId);
-            }
-        });
-    }
-    ///----- select box select function End -----/////
+    
 
 
    
@@ -396,7 +407,7 @@
             $loader.show();
             $.ajax({
                 url: fetchUrl,
-                type: 'GET',
+                type: 'POST',
                 data: { name },
                 success: (response) => {
                     $loader.hide();

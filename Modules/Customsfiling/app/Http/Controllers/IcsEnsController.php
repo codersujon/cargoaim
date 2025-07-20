@@ -16,12 +16,10 @@ class IcsEnsController extends Controller
 {
     public function index()
     {
-        
         return view('customsfiling::euens.ics2_ens');
     }
 
     public function create(){}
-
 
     //------------------------------------------
     public function liner()
@@ -59,7 +57,6 @@ class IcsEnsController extends Controller
         return response()->json($carriers);
     }
 
-
     // public function liner()
     // {
     //     $user = Auth::guard('web')->user();
@@ -96,13 +93,13 @@ class IcsEnsController extends Controller
     // }
 
 
-
     public function filingFetch(Request $request)
     {
         $user = Auth::guard('web')->user();
         $userID = $user->userId;
         $softCustID = $user->soft_cust_id;
         $billing_id = $user->billing_id;
+        $super_admin_type = $user->super_admin_type;
 
         $data = $request->all();
         $hbl_mbl = $data['hbl_mbl'] ?? '';
@@ -116,8 +113,7 @@ class IcsEnsController extends Controller
         $date_from = Carbon::createFromFormat('d-m-Y', $data['date_range_from'])->format('Y-m-d');
         $date_to = Carbon::createFromFormat('d-m-Y', $data['date_range_to'])->format('Y-m-d');
 
-        $query = DB::table('customs_filing')
-            ->select(
+        $query = CustomsFiling::select(
                 'row_id',
                 'soft_cust_id',
                 'business_unit',
@@ -224,8 +220,9 @@ class IcsEnsController extends Controller
                             AND version = customs_filing.version
                         ), 0) as eq_qty")
             )
-            ->when($userID !== 'admin.filing', function ($query) use ($softCustID) {
-                $query->where('customs_filing.soft_cust_id', $softCustID);
+            ->when($userID !== 'admin.filing', function ($query) use ($softCustID, $billing_id) {
+                $query->where('customs_filing.soft_cust_id', $softCustID)
+                    ->where('customs_filing.billing_id', $billing_id);
             })
             ->where(function ($query) use ($requested_b_unit) {
                 $query->where('business_unit', 'like', "%$requested_b_unit%");
@@ -255,9 +252,6 @@ class IcsEnsController extends Controller
 
         return response()->json($query);
     }
-
-
-
 
     // public function filingFetch(Request $request)
     // {
@@ -295,14 +289,11 @@ class IcsEnsController extends Controller
     // }
 
 
-
     public function store(Request $request)
     {
         $user = Auth::guard('web')->user();
         
         // $user->user_time_zone
-
-        
 
         return DB::transaction(function () use ($request, $user) {
             // ✅ Validation error messages
