@@ -1,25 +1,61 @@
-name: 🚀 Cargoaim Deploy to cPanel via SSH
+name: 🚀 Deploy to https://test.cargoaim.net/
 
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: ⬇️ Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup SSH
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, curl, intl, mysql, zip
+          tools: composer
+
+      - name: 🧰 Setup Node.js (Latest LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: 🧪 Install PHP Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: 🔐 Setup App Key
+        run: php artisan key:generate --force
+
+      - name: 🗂 Set Directory Permissions
+        run: chmod -R ug+rwx storage bootstrap/cache
+
+      - name: 💻 Install and Build Frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: 🔐 Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy files with rsync
+      - name: 🚀 Deploy via rsync
         run: |
-          rsync -avz --delete ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/cargoaim/public_html/cargoaim/test/
+          rsync -avz --delete \
+            --exclude=".git/" \
+            --exclude=".github/" \
+            --exclude="node_modules/" \
+            --exclude="tests/" \
+            --exclude=".env" \
+            --exclude="storage/*.key" \
+            --exclude="storage/*.log" \
+            --exclude="storage/framework/cache/data/*" \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/cargoaim/public_html/cargoaim/test/
