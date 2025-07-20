@@ -1,0 +1,11 @@
+{
+    "name": "NVOCC",
+    "alias": "nvocc",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\NVOCC\\Providers\\NVOCCServiceProvider"
+    ],
+    "files": []
+}

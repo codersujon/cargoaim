@@ -404,6 +404,25 @@
     transform: translateY(-50%) translateX(0); /* Animate to original position */
 }
 
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.side-nav .sf_nav a.active {
+    background: linear-gradient(270deg, #7f00ff, #e100ff, #3347e4);
+    background-size: 400% 400%;
+    animation: gradientMove 6s ease infinite;
+
+    color: white !important;
+    border: 1px solid transparent;
+    box-shadow: 0 0 10px rgba(127, 0, 255, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+
 .logo {
   display: flex;
   align-items: center;
