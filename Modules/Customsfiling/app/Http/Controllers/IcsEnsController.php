@@ -16,20 +16,25 @@ class IcsEnsController extends Controller
 {
     public function index()
     {
+        
         return view('customsfiling::euens.ics2_ens');
     }
 
     public function create(){}
 
+
+    //------------------------------------------
     public function liner()
     {
         $user = Auth::guard('web')->user();
         $userID = $user->userId;
         $softCustID = $user->soft_cust_id;
 
+        // customs_filing_scac_eori_coded - eori_code, scac_eori_full, code_owner_type='L' (no soft_cust_id filter)
+
         $carriers = CarrierBasic::where('soft_cust_id', $softCustID)
             ->where('carrierCode', '!=', 'DUM')
-            ->where('carrierType', '2')
+            ->where('carrierType', '1')
             ->orderByRaw("
                 CASE
                     WHEN carrierCodeNick IS NULL OR carrierCodeNick = ''
@@ -294,6 +299,10 @@ class IcsEnsController extends Controller
     public function store(Request $request)
     {
         $user = Auth::guard('web')->user();
+        
+        // $user->user_time_zone
+
+        
 
         return DB::transaction(function () use ($request, $user) {
             // ✅ Validation error messages
@@ -418,13 +427,26 @@ class IcsEnsController extends Controller
             ];
 
             // ✅ Optional nullable fields
-            $nullableFields = [ /* your previous list of nullable fields */ ];
+            $nullableFields = [
+                'inv_no', 'inv_per_cycle_mbl', 'cargoaim_inv_currency', 'hbl_shipping_bill_no', 'vsl_name', 'vsl_voyage', 'lloyed_no', 
+                'vsl_call_sign', 'vsl_register_country', 'vsl_route_start_port', 'pol_for_us', 'last_foreign_port', 'first_us_port',
+                'seller_code', 'seller_name', 'seller_address', 'seller_location', 'seller_zip_code', 'seller_country', 'seller_phone',
+                'seller_email', 'seller_registration', 'buyer_code', 'buyer_name', 'buyer_address', 'buyer_location', 'buyer_zip_code',
+                'buyer_country', 'buyer_phone', 'buyer_email', 'buyer_registration', 'hbl_cutoms_office_code', 'hbl_shipping_bill_reg_serial',
+                'mbl_ams_last_status', 'hbl_ams_last_status', 'isf_last_status', 'first_ams_submit_by', 'filing_channel', 'ams_reference_no', 
+                'submission_status', 'ens_status_code', 'ens_disposition_code', 'ens_mrn_no', 'eu_lrn_no', 'notification_email', 
+                'notification_mobile', 'delete_by', 'case_close', 'case_close_by', 'update_by'
+            ];
             foreach ($nullableFields as $field) {
                 $validated[$field] = $request->input($field, '');
             }
 
             // ✅ Optional date fields
-            $dateFields = [ /* your date fields list */ ];
+            $dateFields = [
+                'actual_pol_etd_hbl', 'actual_pod_eta_hbl', 'pol_for_us_date', 'first_us_port_eta', 'hbl_shipping_bill_date', 
+                'last_update_date', 'first_ams_submit_date', 'update_date', 'delete_date', 'case_close_date',
+            ];
+            
             foreach ($dateFields as $field) {
                 $validated[$field] = $request->input($field, '0000-00-00 00:00:00');
             }

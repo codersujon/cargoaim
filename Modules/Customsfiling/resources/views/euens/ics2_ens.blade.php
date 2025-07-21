@@ -3,7 +3,6 @@
 @section('title', "| {{ transText('ens_ch') }}")
 
 @section('content')
-
     <style>
         .table > :not(caption) > * > * {
             padding: 0!important;
@@ -21,6 +20,12 @@
         .modal-backdrop.show:nth-of-type(2) {
             z-index: 1055 !important;
         }
+        
+        input[required],
+        select[required],
+        textarea[required] {
+            border: 1px solid rgb(255, 101, 101) !important;
+        }
     </style>
 
     <div class="row pt-3">
@@ -32,6 +37,11 @@
                     <button type="button" class="btn btn-primary ms-1" id="createNew1">
                         {{ transText('new_hbl_file_btn') }}
                     </button>
+
+                   
+
+                   
+
                 </div>
 
                 <div class="card-body">
@@ -372,7 +382,7 @@
                                                 </div>                                                
                                             </th>
                                             <td>
-                                                <select class="form-select" name="ts_one" id="ts_one" autocomplete="off" style="margin-top: 1px; margin-bottom: 1px;">
+                                                <select class="form-select ts_one" name="ts_one" id="ts_one" autocomplete="off" style="margin-top: 1px; margin-bottom: 1px;">
                                                     <option value="">Loading...</option>
                                                 </select>
                                             </td>
@@ -420,7 +430,7 @@
                                             </th>
                                             
                                             <td>
-                                                <select class="form-select" name="ts_two" id="ts_two" autocomplete="off">
+                                                <select class="form-select ts_two" name="ts_two" id="ts_two" autocomplete="off">
                                                     <option value="">Loading...</option>
                                                 </select>
                                             </td>
@@ -470,7 +480,7 @@
                                                 </div>                                                
                                             </th>
                                             <td>
-                                                <select class="form-select" name="ts_three" id="ts_three" autocomplete="off" required>
+                                                <select class="form-select ts_three" name="ts_three" id="ts_three" autocomplete="off">
                                                     <option value="">Loading...</option>
                                                 </select>
                                             </td>

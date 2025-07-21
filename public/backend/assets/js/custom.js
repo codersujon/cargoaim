@@ -654,5 +654,4 @@
             backdrop: 'static', // Modal বাইরে ক্লিক করলে বন্ধ হবে না
             keyboard: true      // ESC চাপলে modal বন্ধ হবে
         });
-
     });

@@ -10,11 +10,18 @@ use Modules\Core\Models\CustomerAddress;
 use Modules\Core\Models\CustomsFilingScacEoriCoded;
 use Modules\Core\Models\FilingContractRate;
 use Illuminate\Http\Request;
+use Auth;
 
 class GlobalSearchService
 {
     public function getHBLEori()
     {
+        $user = Auth::guard('web')->user();
+        $soft_cust_id = $user->soft_cust_id;
+        $billing_id = $user->billing_id;
+        $super_admin_type = $user->super_admin_type;
+        
+        // customer base admin full acsses*(filing_contract_rate)
         return CustomsFilingScacEoriCoded::select('eori_code', 'scac_eori_full')
             ->where('code_owner_type', 'N')
             ->where('eori_code', '!=', '')
@@ -45,19 +52,29 @@ class GlobalSearchService
     }
 
 
-
     public function getBillFiling()
     {
-        return FilingContractRate::select('billing_id')
-            ->orderBy('billing_id', 'asc')
-            ->distinct()
-            ->get();
+        $user = Auth::guard('web')->user();
+        $soft_cust_id = $user->soft_cust_id;
+        $billing_id = $user->billing_id;
+        $super_admin_type = $user->super_admin_type;
+
+        $query = FilingContractRate::select('billing_id')->distinct('billing_id');
+
+        if ($super_admin_type === 'N') {
+            $query->where('soft_cust_id', $soft_cust_id)
+                ->where('billing_id', $billing_id);
+        }
+
+        return $query->orderBy('billing_id', 'asc')->get();
     }
+
 
     public function getContainerSize()
     {
         return EqCodeTable::select('eq_code', 'eq_size_display')
             ->where('eq_code', '!=', 'CBM')
+            ->orderBy('eq_size_display', 'asc')
             ->distinct()
             ->get();
     }

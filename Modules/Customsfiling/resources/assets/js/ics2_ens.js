@@ -157,8 +157,6 @@ $(document).ready(function () {
     });
 
     
-
-
     // Call setup for 'shipper'
     setupCustomerAutocomplete('shipper', urls.getCstDtl);
     setupCustomerAutocomplete('consignee', urls.getCstDtl);
@@ -167,7 +165,6 @@ $(document).ready(function () {
     // ✅ Call setup for different fields with seaAirLand types
     setupPolPodAutocomplete('from_location', 1, urls.getPolPodDtl); // 1 = Sea
     setupPolPodAutocomplete('to_location', 1, urls.getPolPodDtl);   // 2 = Air (or 3 = Land)
-
 
 
     // New Modal Open Event delegation দিয়ে click handler
@@ -495,24 +492,26 @@ $(document).ready(function () {
             { selector: '#notify_registration', key: 'main.notify_registration' },
             { selector: '#notify_code', key: 'main.notify_code' },
         ],
-        'Edit Customer Filing',
-        'Update',
+
+        window.transText.ics2_hbl_ens_create_new,
+        window.transText?.f_upd_msg ?? 'No data found',
+
         function (response) {
             const details = response.details || [];
 
             const columns = [
                 { name: 'row_id_eqd', type: 'hidden' },
-                { name: 'container_no', type: 'input', class: 'form-control container-no', width: '100px' },
+                { name: 'container_no', type: 'input', class: 'form-control container-no', width: '100px', required:true },
                 { name: 'size_iso', type: 'select', class: 'form-select size_iso', width: '55px', required: true, options: ['20GP', '40GP', '40HQ'] },
-                { name: 'seal_no', type: 'input', class: 'form-control seal_no', width: '108px' },
-                { name: 'pkg_qty', type: 'input', class: 'form-control pkg_qty', width: '57px' },
-                { name: 'pkg_type', type: 'select', class: 'form-select pkg_type', width: '82px', options: ['BOX', 'CRT', 'PALLET'] },
-                { name: 'weight_kg', type: 'input', class: 'form-control weight_kg', width: '60px' },
-                { name: 'cbm', type: 'input', class: 'form-control cbm', width: '57px' },
-                { name: 'hs_code', type: 'input', class: 'form-control hs_code', width: '65px' },
+                { name: 'seal_no', type: 'input', class: 'form-control seal_no', width: '108px', required:true },
+                { name: 'pkg_qty', type: 'input', class: 'form-control pkg_qty', width: '57px', required:true },
+                { name: 'pkg_type', type: 'select', class: 'form-select pkg_type', width: '82px', required:true, options: ['BOX', 'CRT', 'PALLET'] },
+                { name: 'weight_kg', type: 'input', class: 'form-control weight_kg', width: '60px', required:true },
+                { name: 'cbm', type: 'input', class: 'form-control cbm', width: '57px', required:true },
+                { name: 'hs_code', type: 'input', class: 'form-control hs_code', width: '65px', required:true },
                 { name: 'un_code_dg', type: 'input', class: 'form-control un_code_dg', width: '50px' },
-                { name: 'cargo_marks', type: 'input', class: 'form-control cargo_marks', width: '130px' },
-                { name: 'cargo_description', type: 'input', class: 'form-control cargo_description' }
+                { name: 'cargo_marks', type: 'input', class: 'form-control cargo_marks', width: '130px', required:true },
+                { name: 'cargo_description', type: 'input', class: 'form-control cargo_description', required:true }
             ];
 
             const actionIcons = [
@@ -549,7 +548,7 @@ $(document).ready(function () {
                         const widthStyle = col.width ? ` style="width: ${col.width};"` : '';
 
                         if (col.type === 'hidden') {
-                            tbodyHtml += `<input type="hidden" name="${col.name}[]" value="${value}">`;
+                            tbodyHtml += `<input type="hidden" name="${col.name}[]" value="${value}" ${col.required ? 'required' : ''}>`;
                         } else if (col.type === 'input') {
                             tbodyHtml += `<td${widthStyle}><input type="text" name="${col.name}[]" class="${col.class}" value="${value}" autocomplete="off"></td>`;
                         } else if (col.type === 'select') {
@@ -781,8 +780,9 @@ $(document).ready(function () {
             $(this).find('td:first').text(index + 1);
         });
     }
-    ///---- Close Modal ------///
 
+    
+    ///---- Close Modal ------///
     $(document).on('click', '.ins_modal_close', function () {
         allowLoadEditData = false;
         $(this).blur();
@@ -800,11 +800,11 @@ $(document).ready(function () {
         }
     });
 
-    /// ALPHA, NUMBER, /, ., -  ////
+    /// ALPHA, NUMBER, /, -, _, # ///
     $('#hbl_no, #mbl_no').on('input', function () {
         var value = $(this).val();
-        // অনুমোদিত: A-Z, a-z, 0-9, /, ., -
-        var cleaned = value.replace(/[^a-zA-Z0-9\/.\-]/g, '');
+        // অনুমোদিত: A-Z, a-z, 0-9, /, -, _, #
+        var cleaned = value.replace(/[^a-zA-Z0-9\/\-_#]/g, '');
         cleaned = cleaned.toUpperCase(); // বড় হাতের অক্ষর
         if (value !== cleaned) {
             $(this).val(cleaned);
