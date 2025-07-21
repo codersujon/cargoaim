@@ -283,17 +283,32 @@
 /* ========================= */
 /* Brand Name Elements       */
 /* ========================= */
+.brand_name {
+    min-height: 40px;             /* Prevent jump */
+    display: flex;
+    align-items: center;
+}
+
 .brand_name a {
     font-size: 1.25rem;
     line-height: 1.25;            /* Avoid height shifts */
     margin-left: 1rem;
-    font-weight: 500;
     margin-top: 3px;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
     display: inline-block;
-    color: white; /* Added for white text */
+
+    /* Set static white text */
+    color: white;
+
+    /* Stability Enhancements */
+    white-space: nowrap;
+    text-rendering: optimizeLegibility;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: all 0.3s ease;
 }
 
 
