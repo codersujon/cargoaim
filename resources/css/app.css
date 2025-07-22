@@ -284,7 +284,7 @@
 /* Brand Name Elements       */
 /* ========================= */
 .brand_name {
-    min-height: 40px;             /* Prevent jump */
+    height: 40px;             /* Prevent jump */
     display: flex;
     align-items: center;
 }
@@ -292,11 +292,10 @@
 .brand_name a {
     font-size: 1.25rem;
     line-height: 1.25;            /* Avoid height shifts */
-    margin-left: -4.2rem;
+    margin-left: -3.7rem;
     margin-right: 1.5rem;
-    font-weight: 500;
-    margin-top: 3px;
     font-weight: 600;
+    margin-top: 3px;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
@@ -326,6 +325,7 @@
     padding: 0;
     margin: 90px 0 0 0;
     list-style: none;
+    position: fixed;
 }
 
 /* ========================= */

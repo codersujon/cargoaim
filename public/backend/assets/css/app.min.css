@@ -765,7 +765,7 @@ progress {
 .container-xl,
 .container-xxl,
 .page-container {
-  --osen-gutter-x: 1.5rem;
+  --osen-gutter-x: 0.3rem;
   --osen-gutter-y: 0;
   width: 100%;
   padding-right: calc(var(--osen-gutter-x) * 0.5);

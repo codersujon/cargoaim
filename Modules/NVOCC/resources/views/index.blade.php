@@ -2,65 +2,52 @@
 @section('title', "| {{ transText('nvocc_ch') }}")
 
 @section('content')
-<div class="row pt-2">
-    <div class="col-xl-12">
-        <div class="card">
-            {{-- card header --}}
-            <div class="card-header border-bottom border-dashed d-flex align-items-center">
-                <h4 class="header-title">{{ transText('nvocc_ch') }}</h4>
-            </div>
+    <div class="row pt-1">
+        {{-- tabs  start --}}
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab-links">
+                    <button class="tab-link active" data-tab="tab-1">Find</button>
+                    <button class="tab-link" data-tab="tab-2">Booking</button>
+                    <button class="tab-link" data-tab="tab-3">BL Parties</button>
+                    <button class="tab-link" data-tab="tab-4">CGO/CONT</button>
+                    <button class="tab-link" data-tab="tab-5">Charges</button>
+                    <button class="tab-link" data-tab="tab-6">PSA/AN</button>
+                    <button class="tab-link" data-tab="tab-7">HBL View</button>
+                    <button class="tab-link" data-tab="tab-8">Notify</button>
 
-            {{-- tabs  start --}}
+                    <div class="tab-indicator"></div>
+                </div>
 
-            <div class="tabs-container">
-                <div class="tabs">
-                    <div class="tab-links">
-                        <button class="tab-link active" data-tab="tab-1">Find</button>
-                        <button class="tab-link" data-tab="tab-2">Booking</button>
-                        <button class="tab-link" data-tab="tab-3">BL Parties</button>
-                        <button class="tab-link" data-tab="tab-4">CGO/CONT</button>
-                        <button class="tab-link" data-tab="tab-5">Charges</button>
-                        <button class="tab-link" data-tab="tab-6">PSA/AN</button>
-                        <button class="tab-link" data-tab="tab-7">HBL View</button>
-                        <button class="tab-link" data-tab="tab-8">Notify</button>
-
-                        <div class="tab-indicator"></div>
-                    </div>
-
-                    <!-- Tab Contents -->
-                    <div class="tab-content active" id="tab-1">
-                        <h2>Find Content</h2>
-                    </div>
-                    <div class="tab-content" id="tab-2">
-                        <h2>Booking Content</h2>
-                    </div>
-                    <div class="tab-content" id="tab-3">
-                        <h2>BL Parties Content</h2>
-                    </div>
-                    <div class="tab-content" id="tab-4">
-                        <h2>CGO/CONT Content</h2>
-                    </div>
-                    <div class="tab-content" id="tab-5">
-                        <h2>Charges Content</h2>
-                    </div>
-                    <div class="tab-content" id="tab-6">
-                        <h2>PSA/AN Content</h2>
-                    </div>
-                    <div class="tab-content" id="tab-7">
-                        <h2>HBL View Content</h2>
-                    </div>
-                    <div class="tab-content" id="tab-8">
-                        <h2>Notify Content</h2>
-                    </div>
+                <!-- Tab Contents -->
+                <div class="tab-content active" id="tab-1">
+                    <h2>Find Content</h2>
+                </div>
+                <div class="tab-content" id="tab-2">
+                    <h2>Booking Content</h2>
+                </div>
+                <div class="tab-content" id="tab-3">
+                    <h2>BL Parties Content</h2>
+                </div>
+                <div class="tab-content" id="tab-4">
+                    <h2>CGO/CONT Content</h2>
+                </div>
+                <div class="tab-content" id="tab-5">
+                    <h2>Charges Content</h2>
+                </div>
+                <div class="tab-content" id="tab-6">
+                    <h2>PSA/AN Content</h2>
+                </div>
+                <div class="tab-content" id="tab-7">
+                    <h2>HBL View Content</h2>
+                </div>
+                <div class="tab-content" id="tab-8">
+                    <h2>Notify Content</h2>
                 </div>
             </div>
-
-            {{-- tabs  end --}}
-
         </div>
-    </div> <!-- end col -->
-</div>
-
+        {{-- tabs  end --}}
+    </div>
 <style>
     .tabs-container {
         width: 100%;
@@ -90,6 +77,7 @@
         font-weight: 500;
         background: none;
         border: 1px solid #ddd;
+        border-bottom: none;
 
         cursor: pointer;
         text-transform: uppercase;
@@ -100,9 +88,9 @@
     }
 
     .tab-link.active {
-        font-weight: 700;
         color: #3347e4;
         border: 1px solid #3347e4; /* Solid border */
+        border-bottom: none;
         background: none; /* Remove gradient */
         background-clip: border-box;
     }
@@ -121,28 +109,16 @@
 
     .tab-content {
         display: none;
-        padding: 20px;
+        padding: 10px;
         background: #f5f5f5;
-        border-radius: 0 0 8px 8px;
+        border-radius: 0 5px 5px 5px;
+        border: 1px solid #d9d9d9;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .tab-content.active {
         display: block;
-        animation: fadeIn 0.3s ease-in-out;
     }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateX(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
 </style>
 
 <script>
