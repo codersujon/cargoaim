@@ -54,6 +54,7 @@
         display: flex;
         justify-content: center;
         padding: 8px 0;
+        margin-left: -40px;
     }
 
     .tabs {
