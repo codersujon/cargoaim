@@ -1,60 +1,59 @@
-name: 🚀 https://test.cargoaim.net/
+name: 🚀 Deploy to https://test.cargoaim.net/
 
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: ⬇️ Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      - name: 🐘 Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-            php-version: "8.2"
+          php-version: '8.2'
+          extensions: mbstring, bcmath, curl, intl, mysql, zip
+          tools: composer
 
-      - name: Set up Node.js
+      - name: 🧰 Setup Node.js (Latest LTS)
         uses: actions/setup-node@v4
         with:
-            node-version: "22.x"
-            cache: "npm"
+          node-version: 'lts/*'
+          cache: 'npm'
 
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: 🧪 Install PHP Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Install PHP Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Generate key
-        run: php artisan key:generate
+      - name: 🗂 Set Directory Permissions
+        run: chmod -R ug+rwx storage bootstrap/cache
 
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-      
-      - name: Install and Build Frontend Dependencies
+      - name: 💻 Install and Build Frontend
         run: |
-          npm install
-          npm run build --if-present
+          npm ci
+          npm run build
 
-      - name: Setup SSH
+      - name: 🔐 Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy files with rsync
+      - name: 🚀 Deploy via rsync
         run: |
-          rsync -avz --delete ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/cargoaim/public_html/cargoaim/test/
-
-      - name: Run Laravel Migrations on Server
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /home/cargoaim/public_html/cargoaim/test/
-            php artisan migrate --force
-          EOF
+          rsync -avz --delete \
+            --exclude=".git/" \
+            --exclude=".github/" \
+            --exclude="node_modules/" \
+            --exclude="tests/" \
+            --exclude=".env" \
+            --exclude="storage/*.key" \
+            --exclude="storage/*.log" \
+            --exclude="storage/framework/cache/data/*" \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/cargoaim/public_html/cargoaim/test/

@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/nvocc",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\NVOCC\\": "app/",
+            "Modules\\NVOCC\\Database\\Factories\\": "database/factories/",
+            "Modules\\NVOCC\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\NVOCC\\Tests\\": "tests/"
+        }
+    }
+}

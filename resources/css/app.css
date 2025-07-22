@@ -10,6 +10,8 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+
+
 @keyframes slideInLeftToRight {
     0% {
         opacity: 0;
@@ -52,8 +54,8 @@
     display: block;
     padding: 6px 8px;
     width: 100%;
-    font-size: 14px;
-    font-weight: normal;
+    font-size: 13px;
+    font-weight: 400;
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
@@ -63,13 +65,6 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
-}
-
-.topbar_menu a:hover {
-    background-color: #3347e4;
-    color: #fff;
-    text-decoration: none;
-    box-shadow: inset 0 0 10px rgba(70, 93, 255, 0.1);
 }
 
 .topbar_menu a:hover {
@@ -102,8 +97,6 @@
 }
 
 .topbar_menu .submenu li a:hover {
-    /* background-color: #111e2c; */
-    /* background-color: #3347e4; */
     background-color: #eee;
     color: #465dff;
     text-decoration: none;
@@ -126,7 +119,6 @@
     z-index: 9999;
     padding: 0;
     margin: 0;
-    /* background-color: #111e2c; */
     background-color: #465dff;
     transform: translateY(20px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
@@ -139,7 +131,7 @@
 
 .submenu li a {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     color: #fff;
     text-decoration: none;
     padding: 6px 12px;
@@ -284,7 +276,7 @@
 /* Brand Name Elements       */
 /* ========================= */
 .brand_name {
-    min-height: 40px;             /* Prevent jump */
+    height: 40px;             /* Prevent jump */
     display: flex;
     align-items: center;
 }
@@ -292,37 +284,23 @@
 .brand_name a {
     font-size: 1.25rem;
     line-height: 1.25;            /* Avoid height shifts */
-    margin-left: -1.2rem;
-    margin-top: 3px;
+    margin-left: -2.7rem;
+    margin-right: 1.5rem;
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
     text-decoration: none;
     display: inline-block;
 
     /* Gradient Text */
-    background: linear-gradient(135deg, #c680f1, #f5f3f5, #c680f1);
+    background: linear-gradient(135deg, #fff, #fff, #fff);
     background-size: 200% auto;
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    /* Animation */
-    animation: gradientMove 3s linear infinite;
     transition: all 0.3s ease;
-}
-
-/* Gradient Animation Keyframes */
-@keyframes gradientMove {
-    0% {
-        background-position: 0% center;
-    }
-    50% {
-        background-position: 100% center;
-    }
-    100% {
-        background-position: 0% center;
-    }
 }
 
 
@@ -336,8 +314,9 @@
     justify-content: center;
     gap: 5px;
     padding: 0;
-    margin: 10px 0 0 0;
+    margin: 30px 0 0 0;
     list-style: none;
+    position: fixed;
 }
 
 /* ========================= */
@@ -360,7 +339,7 @@
     overflow: hidden;
 
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
     color: #9f3fda;
 
@@ -404,8 +383,44 @@
     transform: translateY(-50%) translateX(0); /* Animate to original position */
 }
 
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.side-nav .sf_nav a.active {
+    background: linear-gradient(270deg, #7f00ff, #e100ff, #3347e4);
+    background-size: 400% 400%;
+    animation: gradientMove 6s ease infinite;
+
+    color: white !important;
+    border: 1px solid transparent;
+    box-shadow: 0 0 10px rgba(127, 0, 255, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+
+
+
+
+
+/* ========================= */
+/* For Tabs     */
+/* ========================= */
+.tabs-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+

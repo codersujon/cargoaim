@@ -1,6 +1,5 @@
 {
     "Core": true,
     "Auth": true,
-    "IcsEns": true,
-    "Customsfiling": true
+    "NVOCC": true
 }
