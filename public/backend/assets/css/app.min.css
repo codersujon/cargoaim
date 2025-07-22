@@ -15024,10 +15024,12 @@ html[data-layout-mode="detached"]:not([data-layout="topnav"])
   .sidenav-menu {
   padding: 12px 0;
   bottom: 0.75rem;
-  top: calc(var(--osen-topbar-height) + 1.5rem * 0.5);
-  border-radius: 0.4rem;
+  top: calc(var(--osen-topbar-height) + 1.0rem * 0.5);
+  border-radius: 0rem;
   border: 0 solid var(--osen-border-color);
   padding-bottom: 0;
+  left: 0px;
+  top: 52px !important;
 }
 html[data-layout-mode="detached"]:not([data-layout="topnav"])
   .wrapper

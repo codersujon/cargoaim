@@ -3,25 +3,6 @@
 @endphp
 
 <div class="sidenav-menu">
-    <!-- Brand Logo -->
-    <a href="{{ route('user.dashboard') }}" class="logo">
-        {{-- <span class="logo-light">
-            <span class="logo-lg">
-                <img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}" alt="logo">
-            </span>
-            <span class="logo-sm">
-                <img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
-                    alt="small logo">
-            </span>
-        </span>
-
-        <span class="logo-dark">
-           <span class="logo-lg"><img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
-                    alt="dark logo"></span>
-            <span class="logo-sm"><img src="{{ asset('upload/' . ($profile->logo ?? 'default.png')) }}"
-                    alt="small logo"></span>
-        </span> --}}
-    </a>
 
     <!-- Sidebar Hover Menu Toggle Button -->
     <button class="button-sm-hover">
