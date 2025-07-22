@@ -42,7 +42,7 @@
         'Modules/Core/resources/assets/css/custom-icon.css',
         'resources/css/app.css',
         'resources/js/app.js',
-        'Modules/Customsfiling/Resources/assets/js/ics2_ens.js',
+        'Modules/Customsfiling/resources/assets/js/ics2_ens.js',
     ])
 
 </head>
