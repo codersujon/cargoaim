@@ -128,7 +128,7 @@
             </div> <!-- container -->
 
             <!-- Footer Start -->
-                @include('core::dashboard.partials.footer')
+                {{-- @include('core::dashboard.partials.footer') --}}
             <!-- end Footer -->
         </div>
 

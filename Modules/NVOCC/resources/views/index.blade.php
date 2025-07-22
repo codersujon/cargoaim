@@ -2,7 +2,8 @@
 @section('title', "| {{ transText('nvocc_ch') }}")
 
 @section('content')
-    <div class="row pt-1">
+
+    <div class="row modules-tabs pt-1">
         {{-- tabs  start --}}
         <div class="tabs-container">
             <div class="tabs">
@@ -48,13 +49,17 @@
         </div>
         {{-- tabs  end --}}
     </div>
+
 <style>
+
     .tabs-container {
-        width: 100%;
+        width: 97%;
+        position: fixed;
         display: flex;
         justify-content: center;
         padding: 8px 0;
-        margin-left: -40px;
+        margin-left: -42px;
+        
     }
 
     .tabs {
@@ -90,7 +95,7 @@
 
     .tab-link.active {
         color: #3347e4;
-        border: 1px solid #3347e4; /* Solid border */
+        border: 1px solid #7988f9; /* Solid border */
         border-bottom: none;
         background: none; /* Remove gradient */
         background-clip: border-box;
@@ -115,6 +120,7 @@
         border-radius: 0 5px 5px 5px;
         border: 1px solid #d9d9d9;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        min-height: 590px
     }
 
     .tab-content.active {

@@ -14282,6 +14282,7 @@ html[data-bs-theme="dark"] #light-dark-mode .ti-moon::before {
   border-right: 0 solid var(--osen-border-color);
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
+  height: 100%;
 }
 .sidenav-menu [data-simplebar] {
   height: calc(100% - var(--osen-topbar-height));
@@ -20926,4 +20927,10 @@ thead th {
 .toastr, 
 .toast {
     z-index: 100005 !important;
+}
+
+
+.row.modules-tabs{
+    /* --osen-gutter-x: 13rem;
+    margin-left: -15px; */
 }
