@@ -58,7 +58,7 @@
         display: flex;
         justify-content: center;
         padding: 8px 0;
-        margin-left: -42px;
+        margin-left: -44px;
         
     }
 
@@ -82,12 +82,12 @@
         font-size: 12px;
         font-weight: 500;
         background: none;
-        border: 1px solid #ddd;
+        border: 1px solid #c2acf1;
         border-bottom: none;
-
+        background: #e7dcff;
         cursor: pointer;
         text-transform: uppercase;
-        color: #555;
+        color: #6830e2;
         position: relative;
         transition: color 0.3s ease, 0.4s ease;
         border-radius: 6px 6px 0 0;
@@ -120,7 +120,13 @@
         border-radius: 0 5px 5px 5px;
         border: 1px solid #d9d9d9;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        min-height: 590px
+        min-height: 86vh
+    }
+
+    @media (max-width: 1366px) and (max-height: 768px) {
+        .tab-content {
+            min-height: 500px;
+        }
     }
 
     .tab-content.active {
