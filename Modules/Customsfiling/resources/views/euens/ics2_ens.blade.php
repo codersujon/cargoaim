@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7 mb-2 pe-0">
                                         <label for="example-fileinput" class="form-label"> {{ transText('keyword_lable') }}:</label>
-                                        <input type="text" name="hbl_mbl" id="hbl_mbl" class="form-control" placeholder="HBL/MBL/PORT/VSL/VOY" autocomplete="off">
+                                        <input type="text" name="hbl_mbl" id="hbl_mbl" class="form-control uppercase-only" placeholder="HBL/MBL/PORT/VSL/VOY" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -96,11 +96,10 @@
                                     <div class="col-sm-6 col-md-4 col-lg-4 mb-2 pe-0">
                                         <label for="example-select" class="form-label">{{ transText('status_lable') }}:</label>
                                         <select class="form-select" name="stock_status" id="stock_status">
-                                            <option value="A">Available</option>
-                                            <option value="C">Close</option>
-                                            <option value="H">Hold</option>
+                                            <option value="A">Active</option>
                                             <option value="D">Deleted</option>
-                                            <option value="" selected="selected">All</option>
+                                            <option value="N">Canceled</option>
+                                            <option value="All" selected="selected">All</option>
                                         </select>
                                     </div>
                                     

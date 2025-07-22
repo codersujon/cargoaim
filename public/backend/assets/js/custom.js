@@ -267,7 +267,7 @@
     //----- Data Active and Inactive End------///// 
 
     
-    ///----- select box select function Start-----/////
+    ///----- select box select function Start-----////
     function loadSelectOptions({
         url,
         selectId,
@@ -276,22 +276,22 @@
         placeholder = 'Select an option',
         extraTextField = null,
         params = {},
-        selectedValue = null  // নতুন প্যারামিটার
+        selectedValue = null,
+        callback = null
     }) {
         $.ajax({
             url: url,
             type: 'POST',
             data: params,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 let options = `<option value="">${placeholder}</option>`;
 
-                // যদি শুধুমাত্র ১টি রেকর্ড থাকে, তাহলে সেটাকে selectedValue বানিয়ে দিন
                 if (data.length === 1 && !selectedValue) {
                     selectedValue = data[0][valueField];
                 }
 
-                $.each(data, function(index, item) {
+                $.each(data, function (index, item) {
                     let text = item[textField];
                     if (extraTextField && item[extraTextField]) {
                         text += ' - ' + item[extraTextField];
@@ -302,14 +302,19 @@
                 });
 
                 $(selectId).html(options);
+
+                if (typeof callback === 'function') {
+                    callback();
+                }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('Error loading select options:', error);
                 $(selectId).html('<option value="">Error loading data</option>');
             }
         });
     }
-    
+
+
     function loadSelectOptions2({ url, selectId, valueField, textField, placeholder }, callback = null) {
         $.get(url, function (data) {
             let options = placeholder ? `<option value="">${placeholder}</option>` : '';

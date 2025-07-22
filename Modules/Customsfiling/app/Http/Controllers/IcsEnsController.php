@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Modules\Customsfiling\Models\CustomsFiling;
 use Modules\Customsfiling\Models\CustomsFilingEqDetails;
 use Modules\Core\Models\CarrierBasic;
+use Modules\Core\Models\CustomsFilingScacEoriCoded;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use Carbon\Carbon;
@@ -21,40 +22,41 @@ class IcsEnsController extends Controller
 
     public function create(){}
 
-    //------------------------------------------
+    /**
+     * Fetch liner data from CustomsFilingScacEoriCoded (not user-based).
+     *
+     * Retrieves all records where code_owner_type is 'L' (Liner),
+     * without applying any user-specific or soft_cust_id-based filtering.
+     * Returns eori_code and scac_eori_full, along with a formatted 'full_name'
+     * (either "eori_code - scac_eori_full" or just "scac_eori_full" if eori_code is missing).
+     * Data is sorted alphabetically based on the displayed full name.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function liner()
     {
-        $user = Auth::guard('web')->user();
-        $userID = $user->userId;
-        $softCustID = $user->soft_cust_id;
-
-        // customs_filing_scac_eori_coded - eori_code, scac_eori_full, code_owner_type='L' (no soft_cust_id filter)
-
-        $carriers = CarrierBasic::where('soft_cust_id', $softCustID)
-            ->where('carrierCode', '!=', 'DUM')
-            ->where('carrierType', '1')
+        $liner = CustomsFilingScacEoriCoded::where('code_owner_type', 'L')
             ->orderByRaw("
                 CASE
-                    WHEN carrierCodeNick IS NULL OR carrierCodeNick = ''
-                    THEN carrierName
-                    ELSE CONCAT(carrierCodeNick, '-', carrierName)
+                    WHEN eori_code IS NULL OR eori_code = ''
+                    THEN scac_eori_full
+                    ELSE CONCAT(eori_code, '-', scac_eori_full)
                 END ASC
             ")
             ->select(
-                'carrierCode',
-                'carrierCodeNick',
-                'carrierName',
+                'eori_code',
+                'scac_eori_full',
                 DB::raw("
                     CASE
-                        WHEN carrierCodeNick IS NULL OR carrierCodeNick = ''
-                        THEN carrierName
-                        ELSE CONCAT(carrierCodeNick, '-', carrierName)
+                        WHEN eori_code IS NULL OR eori_code = ''
+                        THEN scac_eori_full
+                        ELSE CONCAT(eori_code, '-', scac_eori_full)
                     END as full_name
                 ")
             )
             ->get();
 
-        return response()->json($carriers);
+        return response()->json($liner);
     }
 
     // public function liner()
@@ -92,6 +94,17 @@ class IcsEnsController extends Controller
     //     return response()->json($carriers);
     // }
 
+
+
+    /**
+     * Load filtered data based on search criteria.
+     *
+     * This method fetches filing records according to:
+     * - User type: 'admin.filing' gets all records; others get data based on user’s soft customer ID and billing ID.
+     * - Optional filters: liner (carrier), business unit, case close status, HBL/MBL number, and booking number.
+     * - Status filter: Active, Deleted, Canceled, or All.
+     * - Date range: Filters based on a selected date type (e.g., entry_date) between 'from' and 'to' dates.
+     */
 
     public function filingFetch(Request $request)
     {
@@ -225,7 +238,10 @@ class IcsEnsController extends Controller
                     ->where('customs_filing.billing_id', $billing_id);
             })
             ->where(function ($query) use ($requested_b_unit) {
-                $query->where('business_unit', 'like', "%$requested_b_unit%");
+                $query->where('billing_id', 'like', "%$requested_b_unit%");
+            })
+            ->when($stock_status !== 'All', function ($query) use ($stock_status) {
+                $query->where('status', $stock_status);
             })
             ->where(function ($query) use ($bkg_no) {
                 $query->where('bkg_no', 'like', "%$bkg_no%");
@@ -253,40 +269,6 @@ class IcsEnsController extends Controller
         return response()->json($query);
     }
 
-    // public function filingFetch(Request $request)
-    // {
-    //     $user = Auth::guard('web')->user();
-    //     $userID = $user->userId;
-    //     $softCustID = $user->soft_cust_id;
-        
-    //     $data = $request->all();
-    //     $date_from = Carbon::createFromFormat('d-m-Y', $data['date_range_from'])->format('Y-m-d');
-    //     $date_to = Carbon::createFromFormat('d-m-Y', $data['date_range_to'])->format('Y-m-d');
-
-    //     $filingFetchData = DB::table('customs_filing')
-    //         ->select(
-    //             'row_id',
-    //             'hbl_no',
-    //             'mbl_no',
-    //             'ultimate_hbl_no as filing_t_ultimate_hbl_no',
-    //             'ens_disposition_code',
-    //             'status',
-    //             'shipper_name',
-    //             'consignee_name',
-    //             'entry_date'
-    //         )
-    //         ->when($userID !== 'admin.filing', function ($query) use ($userID, $softCustID) {
-    //             $query->where('soft_cust_id', $softCustID);
-    //         })
-    //         ->where(function($query) use ($date_from, $date_to) {
-    //             $query->whereBetween(DB::raw("STR_TO_DATE(entry_date, '%Y-%m-%d')"), [$date_from, $date_to])
-    //                 ->orWhereBetween(DB::raw("STR_TO_DATE(entry_date, '%d-%m-%Y')"), [$date_from, $date_to]);
-    //         })
-    //         ->orderBy('customs_filing.row_id', 'desc')
-    //         ->get();
-
-    //     return response()->json($filingFetchData);
-    // }
 
 
     public function store(Request $request)
@@ -403,6 +385,10 @@ class IcsEnsController extends Controller
                 'billing_id' => $user->billing_id,
                 'ultimate_hbl_no' => $validated['hbl_no'],
                 // 'business_unit' => $validated['hbl_no'],
+                'ts_one' => $request->ts_one,
+                'ts_two' => $request->ts_two,
+                'ts_three' => $request->ts_three,
+
                 'hbl_type' => 'OBL',
                 'mbl_type' => 'OBL',
                 'filing_type' => 'EUENS',
@@ -491,8 +477,8 @@ class IcsEnsController extends Controller
                 if (!$no) continue;
 
                 CustomsFilingEqDetails::create([
-                    'soft_cust_id' => $validated['soft_cust_id'],
-                    'partition_id' => $validated['partition_id'],
+                    'soft_cust_id' => $user->soft_cust_id,
+                    'partition_id' => $user->partition_id,
                     'bkg_no' => '',
                     'hbl_no' => $validated['hbl_no'],
                     'ultimate_hbl_no' => $validated['ultimate_hbl_no'],
@@ -826,9 +812,15 @@ class IcsEnsController extends Controller
 
     public function edit($id)
     {
+        $user = Auth::guard('web')->user();
+        $userID = $user->userId;
+        $softCustID = $user->soft_cust_id;
+        $billing_id = $user->billing_id;
+
         $data = CustomsFiling::where('row_id', $id)->first();
 
-        $detailsData = CustomsFilingEqDetails::where('soft_cust_id', $data->soft_cust_id)
+        $detailsData = CustomsFilingEqDetails::where('soft_cust_id', $softCustID)
+            // ->where('billing_id', $billing_id)
             ->select(
                 'row_id as row_id_eqd',
                 'container_no',

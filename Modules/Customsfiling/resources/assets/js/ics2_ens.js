@@ -57,10 +57,10 @@ $(document).ready(function () {
                 <input type="text" name="un_code_dg[]" class="form-control un_code_dg" autocomplete="off">
             </td>
             <td style="width: 130px;">
-                <input type="text" name="cargo_marks[]" class="form-control" autocomplete="off" required>
+                <input type="text" name="cargo_marks[]" class="form-control uppercase-only" autocomplete="off" required>
             </td>
             <td>
-                <input type="text" name="cargo_description[]" class="form-control" autocomplete="off" required>
+                <input type="text" name="cargo_description[]" class="form-control uppercase-only" autocomplete="off" required>
             </td>
             <td style="width: 25px;">
                 <i class="fa-solid fa-floppy-disk m-1 saveIcon" title="Save" style="cursor: pointer;"></i>
@@ -79,9 +79,9 @@ $(document).ready(function () {
     loadSelectOptions({
         url: urls.liner,
         selectId: '#stock_filter_carrier_name',
-        valueField: 'carrierCode',
+        valueField: 'eori_code',
         textField: 'full_name', // ✅ Laravel থেকে আসা 'full_name' key
-        placeholder: 'Please Select'
+        placeholder: ''
     });
     //---- Company Select ----///
     loadSelectOptions({
@@ -89,7 +89,7 @@ $(document).ready(function () {
         selectId: '#stock_filter_b_unit',
         valueField: 'billing_id',
         textField: 'billing_id', // ✅ Laravel থেকে আসা 'full_name' key
-        placeholder: 'Please Select'
+        placeholder: ''
     });
 
     //---- Billing id ---//
@@ -121,13 +121,12 @@ $(document).ready(function () {
         placeholder: ''
     });
 
-    ///----- TS Country ----//
+    ///----- TS Country Start----//
     const transshipmentPorts = [
         { id: '#ts_one', placeholder: '' },
         { id: '#ts_two', placeholder: '' },
         { id: '#ts_three', placeholder: '' }
     ];
-
     transshipmentPorts.forEach(port => {
         loadSelectOptions({
             url: urls.getCtryCde,
@@ -140,6 +139,7 @@ $(document).ready(function () {
 
         });
     });
+    ///----- TS Country End----//
 
     //---- Customer Country Code ----///
     loadSelectOptions({
@@ -227,6 +227,8 @@ $(document).ready(function () {
             }).prop('disabled', false);
         });
     }
+
+
 
     ////----- Filing Fetch data Load Start------////
     function submitLoadForm() {
@@ -327,119 +329,16 @@ $(document).ready(function () {
             }
         });
     }
-
     $('#loadform').on('submit', function (e) {
         e.preventDefault();
         submitLoadForm(); // Call reusable function
     });
-
-    // $('#loadform').on('submit', function (e) {
-    //     e.preventDefault();
-
-    //     let formData = new FormData(this);
-    //     // Show loader before sending AJAX
-    //     $('#loader').fadeIn();
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: urls.filingFetch,
-    //         data: formData,
-    //         contentType: false,
-    //         processData: false,
-    //         success: function (response) {
-    //             console.log(response);
-
-    //             let dataEmptyMsg = window.transText.data_empty_msg;
-    //             let tryMsg = window.transText.try_msg;
-
-    //             if (response && response.length > 0) {
-    //                 $('.listTable').show();
-    //                 $('#hbl_content_div').hide();
-    //                 $('#dataBody').empty(); // clear old data if any
-
-    //                 let html = '';
-    //                 let i = 1;
-
-    //                 response.forEach(function (item) {
-    //                     html += `
-    //                         <tr>
-    //                             <td style="width: 10px;"><input type="checkbox" name="check_name" id="check_id" /></td>
-    //                             <td class="text-center" style="width: 10px;">${i++}</td>
-    //                             <td class="text-center bg-info" style="width: 100px;">${item.mbl_no ?? ''}</td>
-    //                             <td class="text-center bg-warning" style="width: 100px;">${item.filing_t_ultimate_hbl_no ?? ''}</td>
-    //                             <td class="text-center" style="width: 40px;">
-    //                                 <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn" style="margin: 2px 0px;">
-    //                                     <i class="ti ti-edit"></i>
-    //                                 </button>
-    //                             </td>
-    //                             <td class="text-center" style="width: 40px;">
-    //                                 <button type="button" class="btn btn-sm btn-dark copyBtn" data-copy="${item.filing_t_ultimate_hbl_no ?? ''}" style="margin: 2px 0px;">
-    //                                     <i class="fa-solid fa-copy" title="Copy" style="cursor: pointer;"></i>
-    //                                 </button>                                    
-    //                             </td>
-    //                             <td class="text-center bg-light" style="width: 120px;">${item.ens_mrn_no ?? ''}</td>
-    //                             <td class="text-center bg-light" style="width: 50px;">${item.ens_status_code ?? ''}</td>
-    //                             <td class="text-center bg-light" style="width: 50px;">${item.ens_disposition_code ?? ''}</td>
-    //                             <td class="text-center" style="width: 20px;">${item.eq_qty ?? ''}</td>
-    //                             <td class="text-center" style="width: 30px;">${item.pky_qty ?? ''}</td>
-    //                             <td class="text-center" style="width: 40px;">${item.weight_kg ?? ''}</td>
-    //                             <td class="text-center" style="width: 50px;">${item.cbm ?? ''}</td>
-    //                             <td class="text-center" style="width: 30px;">${item.to_location ?? ''}</td>
-    //                             <td style="width: 150px;">${item.shipper_name ?? ''}</td>
-    //                             <td style="width: 150px;">${item.consignee_name ?? ''}</td>
-    //                             <td style="width: 20px;">
-    //                                 <div class="d-flex justify-content-center">
-    //                                     <button type="button" class="btn btn-sm btn-info me-2">
-    //                                         <i class="fa-solid fa-bolt"></i>
-    //                                     </button>
-    //                                 </div>
-    //                             </td>
-    //                             <td style="width: 20px;">
-    //                                 <div class="d-flex justify-content-center">
-    //                                     <button type="button" class="btn btn-sm btn-danger me-2 deleteBtn" data-id="${item.row_id}">
-    //                                         <i class="fa-solid fa-trash" title="Delete" style="cursor: pointer;"></i>
-    //                                     </button>
-    //                                 </div>
-    //                             </td>
-    //                         </tr>`;
-    //                 });
-
-    //                 $('#dataBody').html(html);
-    //                 $('table.table-striped').show();
-
-    //             } else {
-    //                 $('.listTable').hide();
-    //                 $('#dataBody').empty();
-
-    //                 $('#hbl_content_div').html(`
-    //                     <div style="
-    //                         padding: 2.25rem;
-    //                         border-radius: 12px;
-    //                         background-color: #f9fafb;
-    //                         border: 1.5px solid var(--osen-topbar-bg, #ddd);
-    //                         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-    //                         text-align: left;
-    //                         color: #6b7280;
-    //                         font-family: 'Segoe UI', sans-serif;
-    //                     ">
-    //                         <h5 style="font-size: 16px; margin-bottom: 8px;">📄 ${dataEmptyMsg}</h5>
-    //                         <p style="margin: 5px 5px 0; font-size: 14px; color: #9ca3af;">
-    //                             ${tryMsg}.
-    //                         </p>
-    //                     </div>
-    //                 `).show();
-    //             }
-    //             // Hide loader after completion
-    //             $('#loader').fadeOut();
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.error('AJAX Error:', error);
-    //         }
-    //     });
-    // });
     ////----- Filing Fetch data Load End------////
     
-    // Edit Button Click
+
+
+    //-------- Edit Button Click start-------------///
+
     loadEditDataToModal(
         '.editBtn',
         urls.icsEns,
@@ -496,16 +395,16 @@ $(document).ready(function () {
             const columns = [
                 { name: 'row_id_eqd', type: 'hidden' },
                 { name: 'container_no', type: 'input', class: 'form-control container-no', width: '100px', required:true },
-                { name: 'size_iso', type: 'select', class: 'form-select size_iso', width: '55px', required: true, options: ['20GP', '40GP', '40HQ'] },
+                { name: 'size_iso', type: 'select', class: 'form-select size_iso', width: '55px', required: true },
                 { name: 'seal_no', type: 'input', class: 'form-control seal_no', width: '108px', required:true },
                 { name: 'pkg_qty', type: 'input', class: 'form-control pkg_qty', width: '57px', required:true },
-                { name: 'pkg_type', type: 'select', class: 'form-select pkg_type', width: '82px', required:true, options: ['BOX', 'CRT', 'PALLET'] },
+                { name: 'pkg_type', type: 'select', class: 'form-select pkg_type', width: '82px', required:true },
                 { name: 'weight_kg', type: 'input', class: 'form-control weight_kg', width: '60px', required:true },
                 { name: 'cbm', type: 'input', class: 'form-control cbm', width: '57px', required:true },
                 { name: 'hs_code', type: 'input', class: 'form-control hs_code', width: '65px', required:true },
                 { name: 'un_code_dg', type: 'input', class: 'form-control un_code_dg', width: '50px' },
-                { name: 'cargo_marks', type: 'input', class: 'form-control cargo_marks', width: '130px', required:true },
-                { name: 'cargo_description', type: 'input', class: 'form-control cargo_description', required:true }
+                { name: 'cargo_marks', type: 'input', class: 'form-control cargo_marks uppercase-only', width: '130px', required:true },
+                { name: 'cargo_description', type: 'input', class: 'form-control cargo_description uppercase-only', required:true }
             ];
 
             const actionIcons = [
@@ -533,9 +432,7 @@ $(document).ready(function () {
 
             if (details.length > 0) {
                 details.forEach(function (item, index) {
-                    // row start
-                    tbodyHtml += `<tr class="text-center addedRow2" data-row-id-eqd="${item['row_id_eqd'] || ''}" style="width: 20px;"><td>${index + 1}</td>`;
-
+                    tbodyHtml += `<tr class="text-center addedRow2" data-row-id-eqd="${item['row_id_eqd'] || ''}"><td>${index + 1}</td>`;
 
                     columns.forEach(function (col) {
                         const value = item[col.name] || '';
@@ -546,16 +443,11 @@ $(document).ready(function () {
                         } else if (col.type === 'input') {
                             tbodyHtml += `<td${widthStyle}><input type="text" name="${col.name}[]" class="${col.class}" value="${value}" autocomplete="off"></td>`;
                         } else if (col.type === 'select') {
-                            let optionsHtml = '';
-                            (col.options || []).forEach(opt => {
-                                const selected = (opt.toLowerCase() === (value || '').toLowerCase()) ? 'selected' : '';
-                                optionsHtml += `<option value="${opt}" ${selected}>${opt}</option>`;
-                            });
-                            tbodyHtml += `<td${widthStyle}><select name="${col.name}[]" class="${col.class}" ${col.required ? 'required' : ''}>${optionsHtml}</select></td>`;
+                            tbodyHtml += `<td${widthStyle}>
+                                <select name="${col.name}[]" class="${col.class}" data-selected="${value}" ${col.required ? 'required' : ''}></select>
+                            </td>`;
                         }
-
                     });
-
 
                     actionIcons.forEach(icon => {
                         tbodyHtml += `<td style="width: 25px;">
@@ -571,28 +463,193 @@ $(document).ready(function () {
 
             $('#containerTbody').html(tbodyHtml);
 
-            loadSelectOptions({
-                url: urls.getCntrSize,
-                selectId: '.size_iso',
-                valueField: 'eq_code',
-                textField: 'eq_size_display',
-                placeholder: ''
+            // ✅ After rendering all rows, load dropdown options dynamically
+            $('#containerTbody tr').each(function () {
+                const $row = $(this);
+
+                loadSelectOptions({
+                    url: urls.getCntrSize,
+                    selectId: $row.find('.size_iso'),
+                    valueField: 'eq_code',
+                    textField: 'eq_size_display',
+                    selectedValue: $row.find('.size_iso').data('selected') || '',
+                    placeholder: ''
+                });
+
+                loadSelectOptions({
+                    url: urls.getPKG,
+                    selectId: $row.find('.pkg_type'),
+                    valueField: 'pkg_code',
+                    textField: 'pkg_code',
+                    extraTextField: 'pkg_description',
+                    selectedValue: $row.find('.pkg_type').data('selected') || '',
+                    placeholder: ''
+                });
             });
 
-            loadSelectOptions({
-                url: urls.getPKG,
-                selectId: '.pkg_type',
-                valueField: 'pkg_code',
-                textField: 'pkg_code',
-                extraTextField: 'pkg_description',
-                placeholder: ''
-            });
-
-            enableAllSaveIcons(); // Optional
+            enableAllSaveIcons();
         }
     );
 
-    /// -----row add---//
+
+
+
+    // loadEditDataToModal(
+    //     '.editBtn',
+    //     urls.icsEns,
+    //     '#bs-example-modal-lg',
+    //     [
+    //         { selector: '#row_id', key: 'main.row_id' },
+    //         { selector: '#billing_id', key: 'main.billing_id' },
+    //         { selector: '#nvocc_scac', key: 'main.nvocc_scac' },
+    //         { selector: '#hbl_no', key: 'main.hbl_no' },
+    //         { selector: '#mbl_no', key: 'main.mbl_no' },
+    //         { selector: '#carrier_scac', key: 'main.carrier_scac' },
+    //         { selector: '#import_export', key: 'main.import_export' },
+    //         { selector: '#from_location', key: 'main.from_location' },
+    //         { selector: '#to_location', key: 'main.to_location' },
+    //         { selector: '#ts_one', key: 'main.ts_one' },
+    //         { selector: '#ts_two', key: 'main.ts_two' },
+    //         { selector: '#ts_three', key: 'main.ts_three' },
+    //         { selector: '#incoterm', key: 'main.incoterm' },
+    //         { selector: '#shipper_name', key: 'main.shipper_name' },
+    //         { selector: '#shipper_address', key: 'main.shipper_address' },
+    //         { selector: '#shipper_country', key: 'main.shipper_country' },
+    //         { selector: '#shipper_location', key: 'main.shipper_location' },
+    //         { selector: '#shipper_phone', key: 'main.shipper_phone' },
+    //         { selector: '#shipper_zip_code', key: 'main.shipper_zip_code' },
+    //         { selector: '#shipper_email', key: 'main.shipper_email' },
+    //         { selector: '#shipper_registration', key: 'main.shipper_registration' },
+    //         { selector: '#shipper_code', key: 'main.shipper_code' },
+    //         { selector: '#consignee_name', key: 'main.consignee_name' },
+    //         { selector: '#consignee_address', key: 'main.consignee_address' },
+    //         { selector: '#consignee_country', key: 'main.consignee_country' },
+    //         { selector: '#consignee_location', key: 'main.consignee_location' },
+    //         { selector: '#consignee_phone', key: 'main.consignee_phone' },
+    //         { selector: '#consignee_zip_code', key: 'main.consignee_zip_code' },
+    //         { selector: '#consignee_email', key: 'main.consignee_email' },
+    //         { selector: '#consignee_registration', key: 'main.consignee_registration' },
+    //         { selector: '#consignee_code', key: 'main.consignee_code' },
+    //         { selector: '#notify_name', key: 'main.notify_name' },
+    //         { selector: '#notify_address', key: 'main.notify_address' },
+    //         { selector: '#notify_country', key: 'main.notify_country' },
+    //         { selector: '#notify_location', key: 'main.notify_location' },
+    //         { selector: '#notify_phone', key: 'main.notify_phone' },
+    //         { selector: '#notify_zip_code', key: 'main.notify_zip_code' },
+    //         { selector: '#notify_email', key: 'main.notify_email' },
+    //         { selector: '#notify_registration', key: 'main.notify_registration' },
+    //         { selector: '#notify_code', key: 'main.notify_code' },
+    //     ],
+
+    //     window.transText.ics2_hbl_ens_create_new,
+    //     window.transText?.f_upd_msg ?? 'No data found',
+
+    //     function (response) {
+    //         const details = response.details || [];
+
+    //         const columns = [
+    //             { name: 'row_id_eqd', type: 'hidden' },
+    //             { name: 'container_no', type: 'input', class: 'form-control container-no', width: '100px', required:true },
+    //             { name: 'size_iso', type: 'select', class: 'form-select size_iso', width: '55px', required: true, options: ['20GP', '40GP', '40HQ'] },
+    //             { name: 'seal_no', type: 'input', class: 'form-control seal_no', width: '108px', required:true },
+    //             { name: 'pkg_qty', type: 'input', class: 'form-control pkg_qty', width: '57px', required:true },
+    //             { name: 'pkg_type', type: 'select', class: 'form-select pkg_type', width: '82px', required:true, options: ['BOX', 'CRT', 'PALLET'] },
+    //             { name: 'weight_kg', type: 'input', class: 'form-control weight_kg', width: '60px', required:true },
+    //             { name: 'cbm', type: 'input', class: 'form-control cbm', width: '57px', required:true },
+    //             { name: 'hs_code', type: 'input', class: 'form-control hs_code', width: '65px', required:true },
+    //             { name: 'un_code_dg', type: 'input', class: 'form-control un_code_dg', width: '50px' },
+    //             { name: 'cargo_marks', type: 'input', class: 'form-control cargo_marks uppercase-only', width: '130px', required:true },
+    //             { name: 'cargo_description', type: 'input', class: 'form-control cargo_description uppercase-only', required:true }
+    //         ];
+
+    //         const actionIcons = [
+    //             {
+    //                 icon: 'fa-floppy-disk',
+    //                 class: 'saveIcon',
+    //                 title: 'Save',
+    //                 style: 'cursor: pointer;'
+    //             },
+    //             {
+    //                 icon: 'fa-copy',
+    //                 class: 'copyRow',
+    //                 title: 'Copy',
+    //                 style: 'cursor: pointer;'
+    //             },
+    //             {
+    //                 icon: 'fa-trash',
+    //                 class: '',
+    //                 title: 'Delete',
+    //                 style: 'color: #CD1212; cursor: pointer;'
+    //             }
+    //         ];
+
+    //         let tbodyHtml = '';
+
+    //         if (details.length > 0) {
+    //             details.forEach(function (item, index) {
+    //                 // row start
+    //                 tbodyHtml += `<tr class="text-center addedRow2" data-row-id-eqd="${item['row_id_eqd'] || ''}" style="width: 20px;"><td>${index + 1}</td>`;
+
+
+    //                 columns.forEach(function (col) {
+    //                     const value = item[col.name] || '';
+    //                     const widthStyle = col.width ? ` style="width: ${col.width};"` : '';
+
+    //                     if (col.type === 'hidden') {
+    //                         tbodyHtml += `<input type="hidden" name="${col.name}[]" value="${value}" ${col.required ? 'required' : ''}>`;
+    //                     } else if (col.type === 'input') {
+    //                         tbodyHtml += `<td${widthStyle}><input type="text" name="${col.name}[]" class="${col.class}" value="${value}" autocomplete="off"></td>`;
+    //                     } else if (col.type === 'select') {
+    //                         let optionsHtml = '';
+    //                         (col.options || []).forEach(opt => {
+    //                             const selected = (opt.toLowerCase() === (value || '').toLowerCase()) ? 'selected' : '';
+    //                             optionsHtml += `<option value="${opt}" ${selected}>${opt}</option>`;
+    //                         });
+    //                         tbodyHtml += `<td${widthStyle}><select name="${col.name}[]" class="${col.class}" ${col.required ? 'required' : ''}>${optionsHtml}</select></td>`;
+    //                     }
+
+    //                 });
+
+
+    //                 actionIcons.forEach(icon => {
+    //                     tbodyHtml += `<td style="width: 25px;">
+    //                         <i class="fa-solid ${icon.icon} m-1 ${icon.class}" title="${icon.title}" style="${icon.style}"></i>
+    //                     </td>`;
+    //                 });
+
+    //                 tbodyHtml += `</tr>`;
+    //             });
+    //         } else {
+    //             tbodyHtml = `<tr><td colspan="15" class="text-center">No details found</td></tr>`;
+    //         }
+
+    //         $('#containerTbody').html(tbodyHtml);
+
+    //         loadSelectOptions({
+    //             url: urls.getCntrSize,
+    //             selectId: '.size_iso',
+    //             valueField: 'eq_code',
+    //             textField: 'eq_size_display',
+    //             placeholder: ''
+    //         });
+
+    //         loadSelectOptions({
+    //             url: urls.getPKG,
+    //             selectId: '.pkg_type',
+    //             valueField: 'pkg_code',
+    //             textField: 'pkg_code',
+    //             extraTextField: 'pkg_description',
+    //             placeholder: ''
+    //         });
+
+    //         enableAllSaveIcons(); // Optional
+    //     }
+    // );
+    //-------- Edit Button Click end-------------///
+
+
+
+    ///-----row add start---//
     $('#addRowBtn').click(function () {
         addNewRow();
         var savebutton = $('#saveBtn').text().trim();
@@ -602,7 +659,6 @@ $(document).ready(function () {
             enableAllSaveIcons();
         }
     });
-
     function addNewRow() {
         let row = `
             <tr class="text-center addedRow">
@@ -624,8 +680,8 @@ $(document).ready(function () {
                 <td style="width: 57px;"><input type="text" name="cbm[]" class="form-control cbm" required autocomplete="off"></td>
                 <td style="width: 65px;"><input type="text" name="hs_code[]" class="form-control hs_code" required autocomplete="off"></td>
                 <td style="width: 50px;"><input type="text" name="un_code_dg[]" class="form-control un_code_dg" required autocomplete="off"></td>
-                <td style="width: 130px;"><input type="text" name="cargo_marks[]" class="form-control" required autocomplete="off"></td>
-                <td><input type="text" name="cargo_description[]" class="form-control" required autocomplete="off"></td>
+                <td style="width: 130px;"><input type="text" name="cargo_marks[]" class="form-control uppercase-only" required autocomplete="off"></td>
+                <td><input type="text" name="cargo_description[]" class="form-control uppercase-only" required autocomplete="off"></td>
                 <td><i class="fa-solid fa-floppy-disk m-1 saveIcon" title="Save"></i></td>
                 <td><i class="fa-solid fa-copy m-1 copyRow" title="Copy" style="cursor: pointer;"></i></td>
                 <td><i class="fa-solid fa-trash deleteRow" title="Delete" style="color: #CD1212; cursor: pointer;"></i></td>
@@ -654,14 +710,20 @@ $(document).ready(function () {
             placeholder: ''
         });
     }
+    ///-----row add end---//
 
-    ///--- row delete ---///
+
+
+    ///--- row delete start---///
     $('#containerTbody').on('click', '.deleteRow', function () {
         $(this).closest('tr').remove();
         resetSerialNumbers();                
     });
+    ///--- row delete end---///
 
-    ///-----row copy ------///
+
+
+    ///-----row copy start------///
     $('#containerTbody').on('click', '.copyRow', function () {
         let currentRow = $(this).closest('tr');
         let newRow = $('<tr class="text-center addedRow"></tr>');
@@ -766,16 +828,21 @@ $(document).ready(function () {
             selectEl.val(copiedSizeIsoValue); // Set after options loaded
         });
     });
+    ///-----row copy end------///
 
-    /// ---Reset Serial Numbers ----//
+
+
+    /// ---Reset Serial Numbers start----//
     function resetSerialNumbers() {
         $('#containerTbody tr').each(function (index) {
             $(this).find('td:first').text(index + 1);
         });
     }
+    /// ---Reset Serial Numbers end----//
 
-    
-    ///---- Close Modal ------///
+
+
+    ///---- Close Modal start------///
     $(document).on('click', '.ins_modal_close', function () {
         allowLoadEditData = false;
         $(this).blur();
@@ -783,6 +850,9 @@ $(document).ready(function () {
         // modal fields clear
         $('#bs-example-modal-lg').find('input, select, textarea').val('');
     });
+    ///---- Close Modal end------///
+
+
 
     /// Uppercase Only  ////
     $(document).on('input', '.uppercase-only', function () {
@@ -792,6 +862,8 @@ $(document).ready(function () {
             $(this).val(upper);
         }
     });
+
+
 
     /// ALPHA, NUMBER, /, -, _, # ///
     $('#hbl_no, #mbl_no').on('input', function () {
@@ -805,6 +877,8 @@ $(document).ready(function () {
     });
 
 
+
+
     /// ALPHA, NUMBER
     $(document).on('input', '.container-no, .seal_no', function () {
         let value   = $(this).val();
@@ -815,6 +889,8 @@ $(document).ready(function () {
         }
     });
 
+
+
     ///// Number Dot Only ////
     $(document).on('input', '.pkg_qty, .hs_code', function () {
         let value = $(this).val();
@@ -824,6 +900,8 @@ $(document).ready(function () {
             $(this).val(cleaned);
         }
     });
+
+
 
     ///// Number Dot Only ////
     $(document).on('input', '.weight_kg, .cbm, .un_code_dg', function () {
@@ -837,6 +915,8 @@ $(document).ready(function () {
             $(this).val(cleaned);
         }
     });
+
+
 
     ///// ALPHA Only ////
     $(document).on('input', '.from_location, .to_location', function () {
