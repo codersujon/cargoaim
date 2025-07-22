@@ -1517,12 +1517,11 @@ return [
         'module' => 'Customsfiling',
         'target' => '_self',
     ],
-
     [
         'title' => 'EU ICS-2/ENS',
         'icon' => 'fa-solid fa-angle-right',
         'url' => 'ics_ens',
-        'route' => 'ics_ens',
+        'route' => 'ics_ens.index',
         'params' => null,
         'parent_route' => 'customs.filing.index',
         'order' => 1,

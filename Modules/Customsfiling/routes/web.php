@@ -22,8 +22,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/get-pol-pod-details', [AllSearchingController::class, 'getPolPodDtlRecords']);
     Route::post('get-city', [AllSearchingController::class, 'getCityRecords']);
-    
+ 
     Route::resource('ics_ens', IcsEnsController::class);
+
     Route::post('/filing_fetch', [IcsEnsController::class, 'filingFetch']);
     Route::post('/liner', [IcsEnsController::class, 'liner']);
 
