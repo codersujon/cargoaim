@@ -120,7 +120,7 @@
         border-radius: 0 5px 5px 5px;
         border: 1px solid #d9d9d9;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        min-height: 590px
+        min-height: 500px
     }
 
     .tab-content.active {
