@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 {{-- <html lang="en"> --}}
-<html lang="en" data-sidenav-size="condensed" data-bs-theme="light" data-menu-color="dark" data-topbar-color="light" data-layout-mode="fluid">
+<html lang="en" data-sidenav-size="condensed" data-bs-theme="light" data-menu-color="dark" data-topbar-color="light" data-layout-mode="detached">
 
 <head>
     <meta charset="utf-8" />
