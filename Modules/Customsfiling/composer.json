@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/customsfiling",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Customsfiling\\": "app/",
+            "Modules\\Customsfiling\\Database\\Factories\\": "database/factories/",
+            "Modules\\Customsfiling\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Customsfiling\\Tests\\": "tests/"
+        }
+    }
+}

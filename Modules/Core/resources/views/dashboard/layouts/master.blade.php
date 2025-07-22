@@ -42,12 +42,10 @@
         'Modules/Core/resources/assets/css/custom-icon.css',
         'resources/css/app.css',
         'resources/js/app.js',
+        'Modules/Customsfiling/Resources/assets/js/ics2_ens.js',
     ])
 
 </head>
-
-
-
 <body>
 
     @php
@@ -153,24 +151,7 @@
     <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
     
     <script>
-        const sweetAlertConfirmation = {
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        };
-
-        const toastConfiguration = {
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true
-        };
-
+        
         window.transText = {
             err_ttl_msg: @json(transText('err_ttl_msg')),
             err_msg: @json(transText('err_msg')),
@@ -185,6 +166,7 @@
             try_msg: @json(transText('try_msg')),
             save_btn: @json(transText('save_btn')),
             ics2_hbl_ens_create_new: @json(transText('ics2_hbl_ens_create_new')),
+            f_upd_msg: @json(transText('f_upd_msg')),
         };        
 
         $(document).ready( function () {

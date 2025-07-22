@@ -267,7 +267,7 @@
     //----- Data Active and Inactive End------///// 
 
     
-    ///----- select box select function Start-----/////
+    ///----- select box select function Start-----////
     function loadSelectOptions({
         url,
         selectId,
@@ -276,31 +276,67 @@
         placeholder = 'Select an option',
         extraTextField = null,
         params = {},
-        selectedValue = null  // নতুন প্যারামিটার
+        selectedValue = null,
+        callback = null
     }) {
         $.ajax({
             url: url,
-            type: 'GET',
+            type: 'POST',
             data: params,
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 let options = `<option value="">${placeholder}</option>`;
-                $.each(data, function(index, item) {
+
+                if (data.length === 1 && !selectedValue) {
+                    selectedValue = data[0][valueField];
+                }
+
+                $.each(data, function (index, item) {
                     let text = item[textField];
                     if (extraTextField && item[extraTextField]) {
                         text += ' - ' + item[extraTextField];
                     }
+
                     const isSelected = (selectedValue && item[valueField] == selectedValue) ? 'selected' : '';
                     options += `<option value="${item[valueField]}" ${isSelected}>${text}</option>`;
                 });
+
                 $(selectId).html(options);
+
+                if (typeof callback === 'function') {
+                    callback();
+                }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('Error loading select options:', error);
                 $(selectId).html('<option value="">Error loading data</option>');
             }
         });
     }
+
+
+    function loadSelectOptions2({ url, selectId, valueField, textField, placeholder }, callback = null) {
+        $.get(url, function (data) {
+            let options = placeholder ? `<option value="">${placeholder}</option>` : '';
+            data.forEach(item => {
+                options += `<option value="${item[valueField]}">${item[textField]}</option>`;
+            });
+
+            if (selectId instanceof jQuery) {
+                selectId.html(options);
+            } else {
+                selectId = $(selectId);
+                selectId.html(options);
+            }
+
+            // ✅ Call the callback after options are loaded
+            if (typeof callback === 'function') {
+                callback(selectId);
+            }
+        });
+    }
+    ///----- select box select function End -----/////
+    
 
     ///----- City Name ------///
     function loadDependentDropdown(url, sourceSelector, targetSelector, postKey = 'id') {
@@ -326,27 +362,7 @@
         });
     }
 
-    function loadSelectOptions2({ url, selectId, valueField, textField, placeholder }, callback = null) {
-        $.get(url, function (data) {
-            let options = placeholder ? `<option value="">${placeholder}</option>` : '';
-            data.forEach(item => {
-                options += `<option value="${item[valueField]}">${item[textField]}</option>`;
-            });
-
-            if (selectId instanceof jQuery) {
-                selectId.html(options);
-            } else {
-                selectId = $(selectId);
-                selectId.html(options);
-            }
-
-            // ✅ Call the callback after options are loaded
-            if (typeof callback === 'function') {
-                callback(selectId);
-            }
-        });
-    }
-    ///----- select box select function End -----/////
+    
 
 
    
@@ -396,7 +412,7 @@
             $loader.show();
             $.ajax({
                 url: fetchUrl,
-                type: 'GET',
+                type: 'POST',
                 data: { name },
                 success: (response) => {
                     $loader.hide();
@@ -654,5 +670,4 @@
             backdrop: 'static', // Modal বাইরে ক্লিক করলে বন্ধ হবে না
             keyboard: true      // ESC চাপলে modal বন্ধ হবে
         });
-
     });

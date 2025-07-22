@@ -48,6 +48,8 @@ class CustomerAddress extends Model
         
     ];
 
+    public $timestamps = false;
+
     // protected static function newFactory(): CustomerAddressFactory
     // {
     //     // return CustomerAddressFactory::new();

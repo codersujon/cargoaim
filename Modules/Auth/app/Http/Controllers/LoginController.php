@@ -28,6 +28,18 @@ class LoginController extends Controller {
         $credentials = $request->only('userId', 'password');
         $user = UserAccess::where('userId', $credentials['userId'])->first();
 
+        $soft_cust_id = $user->soft_cust_id;
+        $partition_id = $user->partition_id;
+        
+        $billing_id = $user->billing_id;
+        $user_id = $user->userId;
+        $password = $user->userPassword;
+        $super_admin_type = $user->super_admin_type;
+        $user_time_zone = $user->user_time_zone;
+        $loginLiveMinute = $user->loginLiveMinute;
+        $userCurrency = $user->userCurrency;
+        $userCountry = $user->userCountry;
+
         if (! $user) {
             flasher_error('User not found.', [
                 'timeout' => 3000,
