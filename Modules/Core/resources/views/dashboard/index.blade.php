@@ -1,6 +1,6 @@
 @extends('core::dashboard.layouts.master')
 
-@section('title', "| Dashboard")
+@section('title', "Dashboard")
 
 @section('content')
     <div class="row">

@@ -10,7 +10,7 @@
         $profile = \Modules\Auth\Models\Profile::first();
     @endphp
 
-    <title> {{ $profile? $profile->name : '' }} </title>
+    <title> {{ $profile? $profile->name : '' }} | @yield('title') </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="CargoAIM is an ERP (Enterprise Resource Planning) software specifically designed for freight forwarders" name="description" />
@@ -39,11 +39,21 @@
     <!-- flatpickr -->
 
     @vite([
-        'Modules/Core/resources/assets/css/custom-icon.css',
+        // Default Laravel assets
         'resources/css/app.css',
         'resources/js/app.js',
+
+        // Module: Core
+        'Modules/Core/resources/assets/css/custom-icon.css',
+
+        // Module: Customsfiling
         'Modules/Customsfiling/resources/assets/js/ics2_ens.js',
+
+        // Module: NVOCC
+        'Modules/NVOCC/resources/assets/css/nvocc.css',
+        'Modules/NVOCC/resources/assets/js/app.js',
     ])
+
 
 </head>
 <body>
