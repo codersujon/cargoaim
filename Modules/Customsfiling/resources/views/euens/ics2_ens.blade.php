@@ -20,21 +20,19 @@
         .modal-backdrop.show:nth-of-type(2) {
             z-index: 1055 !important;
         }
+        .ics2_ens_card{
+            min-height: 89vh;
+        }
         
-        /* input[required],
-        select[required],
-        textarea[required] {
-            border: 1px solid rgb(255, 101, 101) !important;
-        } */
 
     </style>
 
-    <div class="row pt-3">
+    <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card ics2_ens_card">
 
-               <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0" style="font-weight: 750;">{{ transText('ens_ch') }}</h4>
+               <div class="card-header border-bottom border-dashed d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0" style="font-weight: 550;">{{ transText('ens_ch') }}</h4>
                     <button type="button" class="btn btn-primary ms-1" id="createNew1">
                         {{ transText('new_hbl_file_btn') }}
                     </button>
@@ -120,7 +118,7 @@
                     </form>
 
                     <div class="mb-2" id="hbl_content_div">
-                        <div class="p-4 shadow rounded text-left" style="background: #FCFCFC; border: 1.5px solid var(--osen-topbar-bg, #ddd);">
+                        <div class="p-4 shadow rounded text-left" style="background: #FCFCFC; border: 1.5px solid #d9d9d9; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
                             <h5 class="text-muted mb-0">📄 {{ transText('data_load_msg') }}...!</h5>
                         </div>
                     </div>
@@ -171,7 +169,7 @@
         <div class="modal-dialog modal-full-width">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel" style="font-weight: 750;"></h4>
+                    <h4 class="modal-title" id="myLargeModalLabel" style="font-weight: 500;"></h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -751,8 +749,6 @@
 
 @section('script')
     <script>
-        const urls = @json($urlData);
-
         $(document).ready(function () {
             $('#customer_form').on('submit', function (e) {
                 e.preventDefault();
