@@ -57,9 +57,8 @@
         position: fixed;
         display: flex;
         justify-content: center;
-        padding: 8px 0;
+        padding: 5px 0;
         margin-left: -44px;
-        
     }
 
     .tabs {
@@ -74,6 +73,7 @@
         overflow-x: auto;
         scrollbar-width: none;
         gap: 4px;
+        margin-left: 20px;
     }
 
     .tab-link {
@@ -117,16 +117,12 @@
         display: none;
         padding: 10px;
         background: #f5f5f5;
-        border-radius: 0 5px 5px 5px;
         border: 1px solid #d9d9d9;
+        border-radius: 5px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+        overflow: auto;
         min-height: 86vh
-    }
-
-    @media (max-width: 1366px) and (max-height: 768px) {
-        .tab-content {
-            min-height: 500px;
-        }
     }
 
     .tab-content.active {

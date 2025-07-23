@@ -15021,7 +15021,7 @@ html[data-layout-mode="detached"]:not([data-layout="topnav"])
   .wrapper
   .app-topbar
   .topbar-menu {
-  max-width: 95%;
+  max-width: 98%;
 }
 html[data-layout-mode="detached"]:not([data-layout="topnav"])
   .wrapper
@@ -15034,6 +15034,7 @@ html[data-layout-mode="detached"]:not([data-layout="topnav"])
   padding-bottom: 0;
   left: 0px;
   top: 52px !important;
+  position: fixed;
 }
 html[data-layout-mode="detached"]:not([data-layout="topnav"])
   .wrapper

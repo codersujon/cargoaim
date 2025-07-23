@@ -284,7 +284,7 @@
 .brand_name a {
     font-size: 1.25rem;
     line-height: 1.25;            /* Avoid height shifts */
-    margin-left: -2.7rem;
+    margin-left: -0.5rem;
     margin-right: 1.5rem;
     font-weight: 600;
     text-transform: uppercase;
