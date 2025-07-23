@@ -5,5 +5,5 @@ use Modules\NVOCC\Http\Controllers\NVOCCController;
 
 // NVOCC
 Route::middleware(['auth'])->group(function () {
-    Route::get('/nvocc/index', [NVOCCController::class, 'index']);
+    Route::get('/nvocc', [NVOCCController::class, 'index']);
 });

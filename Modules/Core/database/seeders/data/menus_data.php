@@ -1486,7 +1486,7 @@ return [
         'title'         => 'NVO',
         'tooltip_title' => 'Non Vessel Operated Common Carrier',
         'icon'          => '',
-        'url'           => '/nvocc/index',
+        'url'           => '/nvocc',
         'route'         => 'nvocc.index',
         'params'        => null,
         'parent_route'  => null,
