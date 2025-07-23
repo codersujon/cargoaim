@@ -1,10 +1,9 @@
 .tabs-container {
-    width: 97%;
+    width: 97.2%;
     position: fixed;
     display: flex;
     justify-content: center;
-    padding: 5px 0;
-    margin-left: -44px;
+    padding-left: 0;
 }
 
 .tabs {
@@ -75,4 +74,8 @@
 
 .tab-content.active {
     display: block;
+}
+
+row.modules-tabs{
+    padding-left: 0 !important;
 }

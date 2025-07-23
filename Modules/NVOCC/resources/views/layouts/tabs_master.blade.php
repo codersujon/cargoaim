@@ -1,4 +1,4 @@
- <div class="row modules-tabs pt-1">
+ <div class="row modules-tabs">
      {{-- tabs  start --}}
      <div class="tabs-container">
          <div class="tabs">
