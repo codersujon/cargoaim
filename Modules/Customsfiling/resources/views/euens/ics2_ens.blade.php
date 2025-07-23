@@ -20,13 +20,16 @@
         .modal-backdrop.show:nth-of-type(2) {
             z-index: 1055 !important;
         }
+        .ics2_ens_card{
+            min-height: 89vh;
+        }
         
 
     </style>
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card ics2_ens_card">
 
                <div class="card-header border-bottom border-dashed d-flex justify-content-between align-items-center">
                     <h4 class="card-title mb-0" style="font-weight: 550;">{{ transText('ens_ch') }}</h4>
@@ -746,8 +749,6 @@
 
 @section('script')
     <script>
-        const urls = @json($urlData);
-
         $(document).ready(function () {
             $('#customer_form').on('submit', function (e) {
                 e.preventDefault();

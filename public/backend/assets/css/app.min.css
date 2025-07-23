@@ -4926,7 +4926,7 @@ fieldset:disabled .btn {
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
-  min-height: 89vh;
+  /* min-height: 89vh; */
   /* height: var(--osen-card-height); */
   /* color: var(--osen-body-color)!important; */
   color: var(--osen-body-color-new)!important;
