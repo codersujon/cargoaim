@@ -265,13 +265,13 @@ $(document).ready(function () {
                                 <td class="text-center bg-info">${item.mbl_no ?? ''}</td>
                                 <td class="text-center bg-warning">${item.ultimate_hbl_no ?? ''}</td>
                                 <td class="text-center">
-                                    <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn">
-                                        <i class="ti ti-edit"></i>
+                                    <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn" style="margin: 4px 0px">
+                                        <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                 </td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-sm btn-dark copyBtn" data-copy="${item.filing_t_ultimate_hbl_no ?? ''}">
-                                        <i class="fa-solid fa-copy" title="Copy"></i>
+                                        <i class="fa-solid fa-copy"title="Copy"></i>
                                     </button>
                                 </td>
                                 <td class="text-center bg-light">${item.ens_mrn_no ?? ''}</td>
@@ -387,7 +387,7 @@ $(document).ready(function () {
         ],
 
         window.transText.ics2_hbl_ens_create_new,
-        window.transText?.f_upd_msg ?? 'No data found',
+        window.transText?.update_btn ?? 'No data found',
 
         function (response) {
             const details = response.details || [];

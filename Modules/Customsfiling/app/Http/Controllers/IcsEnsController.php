@@ -472,36 +472,45 @@ class IcsEnsController extends Controller
                 'cargo_description.*' => 'required|string',
             ]);
 
-            // ✅ Insert container rows
+
+
+            // ✅ Insert and Update container rows
+            $containerRowIds = $request->input('row_id_eqd', []);  // hidden input from form
+            // dd($containerRowIds);
+
             foreach ($request->container_no as $i => $no) {
                 if (!$no) continue;
 
-                CustomsFilingEqDetails::create([
-                    'soft_cust_id' => $user->soft_cust_id,
-                    'partition_id' => $user->partition_id,
-                    'bkg_no' => '',
-                    'hbl_no' => $validated['hbl_no'],
-                    'ultimate_hbl_no' => $validated['ultimate_hbl_no'],
-                    'mbl_no' => $validated['mbl_no'],
-                    'container_no' => $no,
-                    'size_iso' => $request->size_iso[$i],
-                    'seal_no' => $request->seal_no[$i],
-                    'pkg_qty' => $request->pkg_qty[$i],
-                    'pkg_type' => $request->pkg_type[$i],
-                    'weight_kg' => $request->weight_kg[$i],
-                    'cbm' => $request->cbm[$i],
-                    'hs_code' => $request->hs_code[$i],
-                    'cargo_marks' => $request->cargo_marks[$i],
-                    'cargo_description' => $request->cargo_description[$i],
-                    'version' => 1,
-                    'status' => 'A',
-                    'entry_by' => $user->userId,
-                    'entry_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
-                    'update_by' => '',
-                    'update_date' => '0000-00-00 00:00:00',
-                    'delete_by' => '',
-                    'delete_date' => '0000-00-00 00:00:00',
-                ]);
+                CustomsFilingEqDetails::updateOrCreate(
+                    ['row_id' => $containerRowIds[$i] ?? null],  // যদি null হয় তাহলে insert হবে
+                    [
+                        'soft_cust_id' => $user->soft_cust_id,
+                        'partition_id' => $user->partition_id,
+                        'bkg_no' => '',
+                        'hbl_no' => $validated['hbl_no'],
+                        'ultimate_hbl_no' => $validated['ultimate_hbl_no'],
+                        'mbl_no' => $validated['mbl_no'],
+                        'container_no' => $no,
+                        'size_iso' => $request->size_iso[$i],
+                        'seal_no' => $request->seal_no[$i],
+                        'pkg_qty' => $request->pkg_qty[$i],
+                        'pkg_type' => $request->pkg_type[$i],
+                        'weight_kg' => $request->weight_kg[$i],
+                        'cbm' => $request->cbm[$i],
+                        'hs_code' => $request->hs_code[$i],
+                        'un_code_dg' => $request->un_code_dg[$i] ?? '',
+                        'cargo_marks' => $request->cargo_marks[$i],
+                        'cargo_description' => $request->cargo_description[$i],
+                        'version' => 1,
+                        'status' => 'A',
+                        'entry_by' => $user->userId,
+                        'entry_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
+                        'update_by' => $user->userId,
+                        'update_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
+                        'delete_by' => '',
+                        'delete_date' => '0000-00-00 00:00:00',
+                    ]
+                );
             }
 
             $message = $request->row_id != 0 ? transText('f_upd_msg') :  transText('f_ins_msg');
@@ -816,14 +825,20 @@ class IcsEnsController extends Controller
         $userID = $user->userId;
         $softCustID = $user->soft_cust_id;
         $billing_id = $user->billing_id;
+        $partition_id = $user->partition_id;
 
-        $data = CustomsFiling::where('row_id', $id)->first();
+        $data = CustomsFiling::where('row_id', $id)
+                ->where('soft_cust_id', $softCustID)
+                ->where('partition_id', $partition_id)
+                ->first();
 
         $detailsData = CustomsFilingEqDetails::where('soft_cust_id', $softCustID)
-            // ->where('billing_id', $billing_id)
+            ->where('partition_id', $data->partition_id)
             ->select(
                 'row_id as row_id_eqd',
                 'container_no',
+                'hbl_no',
+                'mbl_no',
                 'size_iso',
                 'seal_no',
                 'pkg_qty',

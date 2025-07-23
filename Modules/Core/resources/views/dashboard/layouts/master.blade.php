@@ -167,6 +167,7 @@
             save_btn: @json(transText('save_btn')),
             ics2_hbl_ens_create_new: @json(transText('ics2_hbl_ens_create_new')),
             f_upd_msg: @json(transText('f_upd_msg')),
+            update_btn: @json(transText('update_btn')),
         };        
 
         $(document).ready( function () {
