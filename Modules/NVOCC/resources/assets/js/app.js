@@ -32,3 +32,4 @@ document.addEventListener("DOMContentLoaded", () => {
     const initial = document.querySelector(".tab-link.active") || tabLinks[0];
     if (initial) activateTab(initial);
 });
+
