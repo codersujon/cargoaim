@@ -269,13 +269,9 @@ class IcsEnsController extends Controller
         return response()->json($query);
     }
 
-
-
     public function store(Request $request)
     {
         $user = Auth::guard('web')->user();
-        
-        // $user->user_time_zone
 
         return DB::transaction(function () use ($request, $user) {
             // ✅ Validation error messages
@@ -382,22 +378,16 @@ class IcsEnsController extends Controller
 
             // ✅ Add default and optional fields
             $validated += [
-                'billing_id' => $user->billing_id,
                 'ultimate_hbl_no' => $validated['hbl_no'],
                 // 'business_unit' => $validated['hbl_no'],
-                'ts_one' => $request->ts_one,
-                'ts_two' => $request->ts_two,
-                'ts_three' => $request->ts_three,
-
+                'ts_one' => $request->ts_one ?? '',
+                'ts_two' => $request->ts_two ?? '',
+                'ts_three' => $request->ts_three ?? '',
                 'hbl_type' => 'OBL',
                 'mbl_type' => 'OBL',
                 'filing_type' => 'EUENS',
                 'original_hbl_no' => $validated['hbl_no'],
                 'original_mbl_no' => $validated['mbl_no'],
-                'entry_by' => $user->userId,
-                'entry_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
-                'soft_cust_id' => $user->soft_cust_id,
-                'partition_id' => $user->partition_id,
                 'cargoaim_inv_amount' => 0.000,
                 'cargoaim_inv_roe' => 0.000,
                 'vsl_cutoms_office_code' => 0.000,
@@ -419,13 +409,54 @@ class IcsEnsController extends Controller
             }
 
             // ✅ Optional date fields
-            $dateFields = [
+            $nullabledateFields = [
                 'actual_pol_etd_hbl', 'actual_pod_eta_hbl', 'pol_for_us_date', 'first_us_port_eta', 'hbl_shipping_bill_date', 
                 'last_update_date', 'first_ams_submit_date', 'update_date', 'delete_date', 'case_close_date',
             ];
             
-            foreach ($dateFields as $field) {
+            foreach ($nullabledateFields as $field) {
                 $validated[$field] = $request->input($field, '0000-00-00 00:00:00');
+            }
+
+            // 🔹 Calculate version
+            $version = CustomsFiling::where('soft_cust_id', $user->soft_cust_id)
+                ->where('hbl_no', $validated['hbl_no'])
+                ->where('ultimate_hbl_no', $validated['ultimate_hbl_no'])
+                ->max('version') ?? 0;
+
+            // 🔹 Check if updating or creating
+            $existing = CustomsFiling::where('row_id', $request->row_id)->first();
+
+            if ($existing) {
+                // ✅ It's an update
+                $validated['update_by'] = $user->userId;
+                $validated['update_date'] = Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s');
+            } else {
+                // ✅ It's a new entry
+                $validated['billing_id'] = $validated['billing_id'];
+                $validated['version'] = $version + 1;
+                $validated['entry_by'] = $user->userId;
+                $validated['entry_date'] = Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s');
+                $validated['soft_cust_id'] = $user->soft_cust_id;
+                $validated['partition_id'] = $user->partition_id;
+            }
+
+            // 🔹 Only check duplicate when inserting
+            if (empty($request->row_id)) {
+                $statusExists = CustomsFiling::where('soft_cust_id', $user->soft_cust_id)
+                    ->where('hbl_no', $validated['hbl_no'])
+                    ->where('mbl_no', $validated['mbl_no'])
+                    ->where('filing_type', 'EUENS')
+                    ->where('status', 'A')
+                    ->exists();
+
+                if ($statusExists) {
+                    // ❌ Prevent insert if duplicate found
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Same HBL number is already available to submit to EU Customs. You cannot entry twice unless delete old one.'
+                    ], 422);
+                }
             }
 
             // ✅ Insert or Update CustomsFiling
@@ -433,6 +464,7 @@ class IcsEnsController extends Controller
                 ['row_id' => $request->row_id],
                 $validated
             );
+
 
             // ✅ Sanitize & validate container inputs (merge part)
             $request->merge([
@@ -470,46 +502,106 @@ class IcsEnsController extends Controller
                 'hs_code.*' => 'required|integer',
                 'cargo_marks.*' => 'required|string',
                 'cargo_description.*' => 'required|string',
+                ], [
+                'container_no.*.required'      => 'Container number is required.',
+                'container_no.*.max'           => 'Each container number must not exceed 11 characters.',
+
+                'size_iso.*.required'     => 'Size ISO is required.',
+                'size_iso.*.string'       => 'Size ISO must be a string.',
+
+                // ✅ seal_no
+                'seal_no.*.required'      => 'Seal number is required.',
+                'seal_no.*.string'        => 'Seal number must be a string.',
+
+                // ✅ pkg_qty
+                'pkg_qty.*.required'      => 'Package quantity is required.',
+                'pkg_qty.*.integer'       => 'Package quantity must be an integer.',
+
+                // ✅ pkg_type
+                'pkg_type.*.required'     => 'Package type is required.',
+                'pkg_type.*.string'       => 'Package type must be a string.',
+
+                // ✅ weight_kg
+                'weight_kg.*.required'    => 'Weight (KG) is required.',
+                'weight_kg.*.integer'     => 'Weight (KG) must be an integer.',
+
+                // ✅ cbm
+                'cbm.*.required'          => 'CBM is required.',
+                'cbm.*.integer'           => 'CBM must be an integer.',
+
+                // ✅ hs_code
+                'hs_code.*.required'      => 'HS Code is required.',
+                'hs_code.*.integer'       => 'HS Code must be an integer.',
+
+                // ✅ un_code_dg
+                'un_code_dg.*.integer'    => 'UN Code DG must be an integer.',
+
+                // ✅ cargo_marks
+                'cargo_marks.*.required'  => 'Cargo marks are required.',
+                'cargo_marks.*.string'    => 'Cargo marks must be a string.',
+                'cargo_marks.*.max'       => 'Cargo marks must not exceed 178 characters.',
+
+                // ✅ cargo_description
+                'cargo_description.*.required' => 'Cargo description is required.',
+                'cargo_description.*.string'   => 'Cargo description must be a string.',
+                'cargo_description.*.max'      => 'Cargo description must not exceed 510 characters.',
             ]);
 
 
-
-            // ✅ Insert and Update container rows
+           // ✅ Insert and Update container rows
             $containerRowIds = $request->input('row_id_eqd', []);  // hidden input from form
-            // dd($containerRowIds);
 
             foreach ($request->container_no as $i => $no) {
                 if (!$no) continue;
 
+                $rowId_eqd = $containerRowIds[$i] ?? null;
+
+                // আগের রেকর্ড আছে কিনা চেক করা
+                $existing_eqd = $rowId_eqd ? CustomsFilingEqDetails::where('row_id', $rowId_eqd)->first() : null;
+
+                // Data তৈরি
+                $data_eqd = [
+                    'soft_cust_id' => $user->soft_cust_id,
+                    'partition_id' => $user->partition_id,
+                    'bkg_no' => '',
+                    'hbl_no' => $validated['hbl_no'],
+                    'ultimate_hbl_no' => $validated['ultimate_hbl_no'],
+                    'mbl_no' => $validated['mbl_no'],
+                    'container_no' => $no,
+                    'size_iso' => $request->size_iso[$i],
+                    'seal_no' => $request->seal_no[$i],
+                    'pkg_qty' => $request->pkg_qty[$i],
+                    'pkg_type' => $request->pkg_type[$i],
+                    'weight_kg' => $request->weight_kg[$i],
+                    'cbm' => $request->cbm[$i],
+                    'hs_code' => $request->hs_code[$i],
+                    'un_code_dg' => $request->un_code_dg[$i] ?? '',
+                    'cargo_marks' => $request->cargo_marks[$i],
+                    'cargo_description' => $request->cargo_description[$i],
+                    'status' => 'A',
+                ];
+
+                if (!$existing_eqd) {
+                    // ✅ Insert case
+                    $data_eqd['entry_by'] = $user->userId;
+                    $data_eqd['version'] = $validated['version'];
+                    $data_eqd['entry_date'] = Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s');
+                    $data_eqd['update_by'] = '';
+                    $data_eqd['update_date'] = '0000-00-00 00:00:00';
+                    $data_eqd['delete_by'] = '';
+                    $data_eqd['delete_date'] = '0000-00-00 00:00:00';
+                } else {
+                    // ✅ Update case
+                    $data_eqd['update_by'] = $user->userId;
+                    $data_eqd['update_date'] = Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s');
+
+                    // Keep previous version
+                    $validated['version'] = $existing_eqd->version ?? $version;
+                }
+
                 CustomsFilingEqDetails::updateOrCreate(
-                    ['row_id' => $containerRowIds[$i] ?? null],  // যদি null হয় তাহলে insert হবে
-                    [
-                        'soft_cust_id' => $user->soft_cust_id,
-                        'partition_id' => $user->partition_id,
-                        'bkg_no' => '',
-                        'hbl_no' => $validated['hbl_no'],
-                        'ultimate_hbl_no' => $validated['ultimate_hbl_no'],
-                        'mbl_no' => $validated['mbl_no'],
-                        'container_no' => $no,
-                        'size_iso' => $request->size_iso[$i],
-                        'seal_no' => $request->seal_no[$i],
-                        'pkg_qty' => $request->pkg_qty[$i],
-                        'pkg_type' => $request->pkg_type[$i],
-                        'weight_kg' => $request->weight_kg[$i],
-                        'cbm' => $request->cbm[$i],
-                        'hs_code' => $request->hs_code[$i],
-                        'un_code_dg' => $request->un_code_dg[$i] ?? '',
-                        'cargo_marks' => $request->cargo_marks[$i],
-                        'cargo_description' => $request->cargo_description[$i],
-                        'version' => 1,
-                        'status' => 'A',
-                        'entry_by' => $user->userId,
-                        'entry_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
-                        'update_by' => $user->userId,
-                        'update_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
-                        'delete_by' => '',
-                        'delete_date' => '0000-00-00 00:00:00',
-                    ]
+                    ['row_id' => $rowId_eqd],
+                    $data_eqd
                 );
             }
 
@@ -523,299 +615,6 @@ class IcsEnsController extends Controller
             ]);
         });
     }
-
-
-    // public function store(Request $request)
-    // {
-    //     $user = Auth::guard('web')->user();
-
-    //     // 🔹 Custom error messages
-    //     $messages = [
-    //         'billing_id.required' => 'The Company field is required.',
-    //         'hbl_no.required' => 'The Ultimate HBL field is required.',
-    //         'nvocc_scac.required' => 'The HBL Filler EORI field is required.',
-    //         'mbl_no.required' => 'The Carrier MBL field is required.',
-    //         'carrier_scac.required' => 'The Carrier EORI field is required.',
-    //         'import_export.required' => 'The IM/EX/FROB field is required.',
-    //         'from_location.required' => 'The Port of Loading field is required.',
-    //         'to_location.required' => 'The Port of Discharge field is required.',
-    //         'incoterm.required' => 'The HBL Prepaid/Collect field is required.',
-    //         'shipper_name.required' => 'The Shipper Name field is required.',
-    //         'shipper_address.required' => 'The Shipper Address field is required.',
-    //         'shipper_country.required' => 'The Shipper Country field is required.',
-    //         'shipper_location.required' => 'The Shipper Location field is required.',
-    //         'shipper_phone.required' => 'The Shipper Phone field is required.',
-    //         'shipper_zip_code.required' => 'The Shipper Postal/Zip field is required.',
-    //         'shipper_code.required' => 'The Shipper Code field is required.',
-    //         'consignee_name.required' => 'The Consignee Name field is required.',
-    //         'consignee_address.required' => 'The Consignee Address field is required.',
-    //         'consignee_country.required' => 'The Consignee Country field is required.',
-    //         'consignee_location.required' => 'The Consignee Location field is required.',
-    //         'consignee_phone.required' => 'The Consignee Phone field is required.',
-    //         'consignee_zip_code.required' => 'The Consignee Postal/Zip field is required.',
-    //         'consignee_code.required' => 'The Consignee Code field is required.',
-    //         'notify_name.required' => 'The Notify Name field is required.',
-    //         'notify_address.required' => 'The Notify Address field is required.',
-    //         'notify_country.required' => 'The Notify Country field is required.',
-    //         'notify_location.required' => 'The Notify Location field is required.',
-    //         'notify_phone.required' => 'The Notify Phone field is required.',
-    //         'notify_zip_code.required' => 'The Notify Postal/Zip field is required.',
-    //         'notify_code.required' => 'The Notify Code field is required.',
-    //     ];
-
-    //     $request->merge([
-    //         'hbl_no' => substr(preg_replace('/[^0-9a-zA-Z\-_.\/]/', '', $request->hbl_no), 0, 50),
-    //         'nvocc_scac'       => substr(preg_replace('/[^0-9a-zA-Z.\- ]/', '', $request->nvocc_scac), 0, 50),
-    //         'mbl_no'           => substr(preg_replace('/[^0-9a-zA-Z\-_.\/]/', '', $request->mbl_no), 0, 50),
-    //         'carrier_scac'     => substr(preg_replace('/[^0-9a-zA-Z.\- ]/', '', $request->carrier_scac), 0, 50),
-    //         'from_location'    => strtoupper(preg_replace('/[^A-Z]/', '', strtoupper($request->from_location))),
-    //         'to_location'      => strtoupper(preg_replace('/[^A-Z]/', '', strtoupper($request->to_location))),
-            
-    //         'shipper_name'     => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->shipper_name)), 0, 69),
-    //         'shipper_address'  => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->shipper_address)), 0, 69),
-    //         'shipper_location' => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->shipper_location)), 0, 69),
-    //         'shipper_phone'    => substr(preg_replace('/[^0-9.a-zA-Z\-_\/]/', '', $request->shipper_phone), 0, 50),
-    //         'shipper_zip_code' => substr(preg_replace('/[^0-9.a-zA-Z\-_\/]/', '', $request->shipper_zip_code), 0, 50),
-    //         'shipper_email'    => substr(preg_replace('/[^0-9.@a-zA-Z\-_\/]/', '', $request->shipper_email), 0, 50),
-
-    //         'consignee_name'     => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->consignee_name)), 0, 69),
-    //         'consignee_address'  => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->consignee_address)), 0, 69),
-    //         'shipper_location' => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->shipper_location)), 0, 69),
-    //         'consignee_phone'    => substr(preg_replace('/[^0-9.a-zA-Z\-_\/]/', '', $request->consignee_phone), 0, 50),
-    //         'consignee_zip_code' => substr(preg_replace('/[^0-9.a-zA-Z\-_\/]/', '', $request->consignee_zip_code), 0, 50),
-    //         'consignee_email'    => substr(preg_replace('/[^0-9.@a-zA-Z\-_\/]/', '', $request->consignee_email), 0, 50),
-
-    //         'notify_name'     => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->notify_name)), 0, 69),
-    //         'notify_address'  => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->notify_address)), 0, 69),
-    //         'notify_location' => substr(preg_replace('/[^0-9. a-zA-Z\-_\/]/', '', str_replace(['#', '&'], ['NO', 'AND'], $request->notify_location)), 0, 69),
-    //         'notify_phone'    => substr(preg_replace('/[^0-9.a-zA-Z\-_\/]/', '', $request->notify_phone), 0, 50),
-    //         'notify_zip_code' => substr(preg_replace('/[^0-9.a-zA-Z\-_\/]/', '', $request->notify_zip_code), 0, 50),
-    //         'notify_email'    => substr(preg_replace('/[^0-9.@a-zA-Z\-_\/]/', '', $request->notify_email), 0, 50),
-    //     ]);
-
-    //     // 🔹 Main validation
-    //     $validated = $request->validate([
-    //         'billing_id' => 'required|string',
-    //         'hbl_no' => 'required|string',
-    //         'nvocc_scac' => 'required|string',
-    //         'mbl_no' => 'required|string',
-    //         'carrier_scac' => 'required|string',
-    //         'import_export' => 'required|string',
-    //         'from_location' => 'required|string',
-    //         'to_location' => 'required|string',
-    //         'incoterm' => 'required|string',
-    //         'shipper_name' => 'required|string',
-    //         'shipper_address' => 'required|string',
-    //         'shipper_country' => 'required|string',
-    //         'shipper_location' => 'required|string',
-    //         'shipper_phone' => 'required|string',
-    //         'shipper_zip_code' => 'required|string',
-    //         'shipper_email' => 'nullable|string|email',
-    //         'shipper_code' => 'required|string',
-
-    //         'consignee_name' => 'required|string',
-    //         'consignee_address' => 'required|string',
-    //         'consignee_country' => 'required|string',
-    //         'consignee_location' => 'required|string',
-    //         'consignee_phone' => 'required|string',
-    //         'consignee_zip_code' => 'required|string',
-    //         'consignee_email' => 'nullable|string|email',
-    //         'consignee_code' => 'required|string',
-
-    //         'notify_name' => 'required|string',
-    //         'notify_address' => 'required|string',
-    //         'notify_country' => 'required|string',
-    //         'notify_location' => 'required|string',
-    //         'notify_phone' => 'required|string',
-    //         'notify_zip_code' => 'required|string',
-    //         'notify_email' => 'nullable|string|email',
-    //         'notify_code' => 'required|string',
-
-    //     ], $messages);
-
-    //     // 🔹 Default & additional fields
-    //     $validated += [
-    //         'billing_id' => $user->billing_id,
-    //         'ultimate_hbl_no' => $validated['hbl_no'],
-    //         'hbl_type' => 'OBL',
-    //         'mbl_type' => 'OBL',
-    //         'filing_type' => 'EUENS',
-    //         'original_hbl_no' => $validated['hbl_no'],
-    //         'original_mbl_no' => $validated['mbl_no'],
-    //         'entry_by' => $user->userId,
-    //         'entry_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
-    //         'soft_cust_id' => $user->soft_cust_id,
-    //         'partition_id' => $user->partition_id,
-    //         'cargoaim_inv_amount' => 0.000,
-    //         'cargoaim_inv_roe' => 0.000,
-    //         'vsl_cutoms_office_code' => 0.000,
-    //     ];
-
-    //     // 🔹 Calculate version
-    //     $version = CustomsFiling::where('soft_cust_id', $validated['soft_cust_id'])
-    //         ->where('hbl_no', $validated['hbl_no'])
-    //         ->where('ultimate_hbl_no', $validated['ultimate_hbl_no'])
-    //         ->max('version') ?? 0;
-    //     $validated['version'] = $version + 1;
-
-    //     // 🔹 Null-যোগ্য ফিল্ড লিস্ট
-    //     $nullableFields = [
-    //         'inv_no', 'inv_per_cycle_mbl', 'cargoaim_inv_currency', 'hbl_shipping_bill_no', 'vsl_name', 'vsl_voyage', 'lloyed_no', 
-    //         'vsl_call_sign', 'vsl_register_country', 'vsl_route_start_port', 'pol_for_us', 'last_foreign_port', 'first_us_port',
-    //         'seller_code', 'seller_name', 'seller_address', 'seller_location', 'seller_zip_code', 'seller_country', 'seller_phone',
-    //         'seller_email', 'seller_registration', 'buyer_code', 'buyer_name', 'buyer_address', 'buyer_location', 'buyer_zip_code',
-    //         'buyer_country', 'buyer_phone', 'buyer_email', 'buyer_registration', 'hbl_cutoms_office_code', 'hbl_shipping_bill_reg_serial',
-    //         'mbl_ams_last_status', 'hbl_ams_last_status', 'isf_last_status', 'first_ams_submit_by', 'filing_channel', 'ams_reference_no', 
-    //         'submission_status', 'ens_status_code', 'ens_disposition_code', 'ens_mrn_no', 'eu_lrn_no', 'notification_email', 
-    //         'notification_mobile', 'delete_by', 'case_close', 'case_close_by', 'update_by'
-    //     ];
-
-    //     foreach ($nullableFields as $field) {
-    //         $validated[$field] = $request->input($field, '');
-    //     }
-
-    //     // 🔹 Step 4: Date Fields (set default '0000-00-00 00:00:00' if empty)
-    //     $dateFields = [
-    //         'actual_pol_etd_hbl', 'actual_pod_eta_hbl', 'pol_for_us_date', 'first_us_port_eta', 'hbl_shipping_bill_date', 
-    //         'last_update_date', 'first_ams_submit_date', 'update_date', 'delete_date', 'case_close_date',
-    //     ];
-
-    //     foreach ($dateFields as $field) {
-    //         $validated[$field] = $request->input($field, '0000-00-00 00:00:00');
-    //     }
-
-    //     // 🔹 Insert or update main record
-    //     $data = CustomsFiling::updateOrCreate(
-    //         ['row_id' => $request->row_id],
-    //         $validated
-    //     );
-
-    //     // seal_no থাকলে, সরাসরি sanitize করে merge
-    //     $request->merge([
-    //         'container_no' => collect($request->input('container_no', []))->map(fn($item) => preg_replace('/[^0-9.a-zA-Z_\/-]/', '', $item))->toArray(),
-    //         'seal_no' => collect($request->input('seal_no', []))->map(fn($item) => preg_replace('/[^0-9.a-zA-Z_\/-]/', '', $item))->toArray(),
-    //         'pkg_qty' => collect($request->input('pkg_qty', []))->map(fn($item) => preg_replace('/[^0-9]/', '', $item))->toArray(),
-    //         'weight_kg' => collect($request->input('weight_kg', []))->map(fn($item) => preg_replace('/[^0-9]/', '', $item))->toArray(),
-    //         'cbm' => collect($request->input('cbm', []))->map(fn($item) => preg_replace('/[^0-9]/', '', $item))->toArray(),
-    //         'hs_code' => collect($request->input('hs_code', []))->map(fn($item) => preg_replace('/[^0-9]/', '', $item))->toArray(),
-
-    //         'cargo_marks' => collect($request->input('cargo_marks', []))
-    //             ->map(function($item) {
-    //                 $item = str_replace(['#', '&'], ['NO', 'AND'], $item);
-    //                 $item = preg_replace('/[^0-9. %a-zA-Z_\/-]/', '', $item);
-    //                 return substr($item, 0, 178);
-    //             })->toArray(),
-
-    //         'cargo_description' => collect($request->input('cargo_description', []))
-    //             ->map(function($item) {
-    //                 $item = str_replace(['#', '&'], ['NO', 'AND'], $item);
-    //                 $item = preg_replace('/[^0-9. %a-zA-Z_\/-]/', '', $item);
-    //                 return substr($item, 0, 510);
-    //             })->toArray(),
-    //     ]);
-
-    //     // 🔹 Validate containers
-    //     $request->validate([
-    //         'container_no.*'       => 'required|string|size:11',
-    //         'size_iso.*'           => 'required|string',
-    //         'seal_no.*'            => 'required|string',
-    //         'pkg_qty.*'            => 'required|integer',
-    //         'pkg_type.*'           => 'required|string',
-    //         'weight_kg.*'          => 'required|integer',
-    //         'cbm.*'                => 'required|integer',
-    //         'hs_code.*'            => 'required|integer',
-    //         'un_code_dg.*'         => 'nullable|integer',
-    //         'cargo_marks.*'        => 'required|string',
-    //         'cargo_description.*'  => 'required|string',
-    //     ], [
-    //         'container_no.*.required'      => 'Container number is required.',
-    //         'container_no.*.max'           => 'Each container number must not exceed 11 characters.',
-
-    //         'size_iso.*.required'     => 'Size ISO is required.',
-    //         'size_iso.*.string'       => 'Size ISO must be a string.',
-
-    //         // ✅ seal_no
-    //         'seal_no.*.required'      => 'Seal number is required.',
-    //         'seal_no.*.string'        => 'Seal number must be a string.',
-
-    //         // ✅ pkg_qty
-    //         'pkg_qty.*.required'      => 'Package quantity is required.',
-    //         'pkg_qty.*.integer'       => 'Package quantity must be an integer.',
-
-    //         // ✅ pkg_type
-    //         'pkg_type.*.required'     => 'Package type is required.',
-    //         'pkg_type.*.string'       => 'Package type must be a string.',
-
-    //         // ✅ weight_kg
-    //         'weight_kg.*.required'    => 'Weight (KG) is required.',
-    //         'weight_kg.*.integer'     => 'Weight (KG) must be an integer.',
-
-    //         // ✅ cbm
-    //         'cbm.*.required'          => 'CBM is required.',
-    //         'cbm.*.integer'           => 'CBM must be an integer.',
-
-    //         // ✅ hs_code
-    //         'hs_code.*.required'      => 'HS Code is required.',
-    //         'hs_code.*.integer'       => 'HS Code must be an integer.',
-
-    //         // ✅ un_code_dg
-    //         'un_code_dg.*.integer'    => 'UN Code DG must be an integer.',
-
-    //         // ✅ cargo_marks
-    //         'cargo_marks.*.required'  => 'Cargo marks are required.',
-    //         'cargo_marks.*.string'    => 'Cargo marks must be a string.',
-    //         'cargo_marks.*.max'       => 'Cargo marks must not exceed 178 characters.',
-
-    //         // ✅ cargo_description
-    //         'cargo_description.*.required' => 'Cargo description is required.',
-    //         'cargo_description.*.string'   => 'Cargo description must be a string.',
-    //         'cargo_description.*.max'      => 'Cargo description must not exceed 510 characters.',
-    //     ]);
-
-    //     // 🔹 Insert container rows
-    //     if ($request->has('container_no')) {
-    //         foreach ($request->container_no as $i => $no) {
-    //             if (!$no) continue;
-
-    //             CustomsFilingEqDetails::create([
-    //                 'soft_cust_id' => $validated['soft_cust_id'],
-    //                 'partition_id' => $validated['partition_id'],
-    //                 'partition_id' => $validated['partition_id'],
-    //                 'business_unit' => '',
-    //                 'bkg_no' => '',
-    //                 'hbl_no' => $validated['hbl_no'],
-    //                 'ultimate_hbl_no' => $validated['ultimate_hbl_no'],
-    //                 'mbl_no' => $validated['mbl_no'],
-    //                 'container_no' => $no,
-    //                 'size_iso' => $request->size_iso[$i],
-    //                 'seal_no' => $request->seal_no[$i],
-    //                 'pkg_qty' => $request->pkg_qty[$i],
-    //                 'pkg_type' => $request->pkg_type[$i],
-    //                 'weight_kg' => $request->weight_kg[$i],
-    //                 'cbm' => $request->cbm[$i],
-    //                 'hs_code' => $request->hs_code[$i],
-    //                 'un_code_dg' => $request->un_code_dg[$i] ?? '',
-    //                 'cargo_marks' => $request->cargo_marks[$i],
-    //                 'cargo_description' => $request->cargo_description[$i],
-    //                 'version' => 1,
-    //                 'status' => 'A',
-    //                 'entry_by' => $user->userId,
-    //                 'entry_date' => Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s'),
-    //                 'update_by' => '',
-    //                 'update_date' => '0000-00-00 00:00:00',
-    //                 'delete_by' => '',
-    //                 'delete_date' => '0000-00-00 00:00:00',
-    //             ]);
-    //         }
-    //     }
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => $request->row_id ? 'Updated successfully!' : 'Inserted successfully!',
-    //         'data' => $data
-    //     ]);
-    // }
-
 
     public function show($id){}
 

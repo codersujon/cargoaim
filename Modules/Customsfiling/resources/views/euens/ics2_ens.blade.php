@@ -1,6 +1,6 @@
 @extends('core::dashboard.layouts.master')
 
-@section('title', "| {{ transText('ens_ch') }}")
+@section('title', transText('ens_ch'))
 
 @section('content')
     <style>
@@ -128,7 +128,7 @@
                             <thead class="text-center">
                                 <tr>
                                     <th style="width: 10px;">-</th>
-                                    <th style="width: 10px;">{{ transText('sn_th') }}</th>
+                                    <th class="p-3 m-3" style="width: 10px;">{{ transText('sn_th') }}</th>
                                     <th style="width: 100px;">MBL</th>
                                     <th style="width: 100px;">HBL/ENS BL</th>
                                     <th style="width: 40px;">-</th>
@@ -144,7 +144,7 @@
                                     <th style="width: 150px;">SHIPPER</th>
                                     <th style="width: 150px;">CONSIGNEE</th>
                                     <th style="width: 20px;">-</th>
-                                    <th style="width: 20px;">{{ transText('action_th') }}</th>
+                                    <th style="width: 20px;">-</th>
                                 </tr>
                             </thead>
                             <tbody id="dataBody">

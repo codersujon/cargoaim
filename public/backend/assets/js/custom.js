@@ -51,7 +51,6 @@
                 processData: false,
                 success: function (res) {
                     if (res.success) {
-
                         Swal.fire({
                             text: res.message,
                             icon: "success",
@@ -69,16 +68,25 @@
                 },
                 error: function (xhr) {
                     if (xhr.status === 422) {
-                        let errors = xhr.responseJSON.errors;
+                        let res = xhr.responseJSON;
                         let errorMessages = '';
-                        $.each(errors, function (key, value) {
-                            errorMessages += `${value[0]}<br>`;
-                        });
+
+                        // 🔹 Show validation errors (res.errors)
+                        if (res.errors) {
+                            $.each(res.errors, function (key, value) {
+                                errorMessages += `${value[0]}<br>`;
+                            });
+                        }
+
+                        // 🔹 Also show custom single message if exists
+                        if (res.message) {
+                            errorMessages += `<b>${res.message}</b>`;
+                        }
 
                         Swal.fire({
                             icon: 'error',
                             title: window.transText.err_val_ttl_msg,
-                            html: errorMessages,
+                            html: errorMessages || 'Unknown validation error.',
                         });
                     } else {
                         Swal.fire({
@@ -91,6 +99,7 @@
             });
         });
     }
+
 
     // Form Submit 2
     function submitFormWithAjax1(formSelector, url) {

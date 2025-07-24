@@ -237,8 +237,8 @@
                             <div class="dropdown-item notification-item py-2 text-wrap active" id="notification-1">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-2.jpg"
-                                            class="avatar-md rounded-circle" alt="" />
+                                        {{-- <img src="{{ asset('backend') }}/assets/images/users/avatar-2.jpg"
+                                            class="avatar-md rounded-circle" alt="" /> --}}
                                         <span class="position-absolute rounded-pill bg-danger notification-badge">
                                             <i class="ti ti-message-circle"></i>
                                             <span class="visually-hidden">unread messages</span>
@@ -264,8 +264,8 @@
                             <div class="dropdown-item notification-item py-2 text-wrap" id="notification-2">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-4.jpg"
-                                            class="avatar-md rounded-circle" alt="" />
+                                        {{-- <img src="{{ asset('backend') }}/assets/images/users/avatar-4.jpg"
+                                            class="avatar-md rounded-circle" alt="" /> --}}
                                         <span class="position-absolute rounded-pill bg-info notification-badge">
                                             <i class="ti ti-currency-dollar"></i>
                                             <span class="visually-hidden">unread messages</span>
@@ -316,8 +316,8 @@
                             <div class="dropdown-item notification-item py-2 text-wrap" id="notification-4">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-7.jpg"
-                                            class="avatar-md rounded-circle" alt="" />
+                                        {{-- <img src="{{ asset('backend') }}/assets/images/users/avatar-7.jpg"
+                                            class="avatar-md rounded-circle" alt="" /> --}}
                                         <span class="position-absolute rounded-pill bg-secondary notification-badge">
                                             <i class="ti ti-plus"></i>
                                             <span class="visually-hidden">unread messages</span>
@@ -343,8 +343,8 @@
                             <div class="dropdown-item notification-item py-2 text-wrap" id="notification-5">
                                 <span class="d-flex align-items-center">
                                     <span class="me-3 position-relative flex-shrink-0">
-                                        <img src="{{ asset('backend') }}/assets/images/users/avatar-10.jpg"
-                                            class="avatar-md rounded-circle" alt="" />
+                                        {{-- <img src="{{ asset('backend') }}/assets/images/users/avatar-10.jpg"
+                                            class="avatar-md rounded-circle" alt="" /> --}}
                                         <span class="position-absolute rounded-pill bg-danger notification-badge">
                                             <i class="ti ti-heart-filled"></i>
                                             <span class="visually-hidden">unread messages</span>
@@ -391,8 +391,8 @@
                 <div class="dropdown">
                     <a class="topbar-link dropdown-toggle drop-arrow-none px-2"
                         data-bs-offset="0,19" type="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('backend') }}/assets/images/users/avatar-1.jpg" width="32"
-                            class="rounded-circle me-lg-2 d-flex" alt="user-image">
+                        {{-- <img src="{{ asset('backend') }}/assets/images/users/avatar-1.jpg" width="32"
+                            class="rounded-circle me-lg-2 d-flex" alt="user-image"> --}}
                         <span class="d-lg-flex flex-column gap-1 d-none">
                             <h5 class="my-0">{{ auth()->user()->userFullName }}</h5>
                             <h6 class="my-0 fw-normal">{{ auth()->user()->userOfficeEmail }}</h6>

@@ -54,7 +54,7 @@ $(document).ready(function () {
                 <input type="text" name="hs_code[]" class="form-control hs_code" autocomplete="off" required>
             </td>
             <td style="width: 50px;">
-                <input type="text" name="un_code_dg[]" class="form-control un_code_dg" autocomplete="off">
+                <input type="text" name="un_code_dg[]" class="form-control uppercase-only" autocomplete="off">
             </td>
             <td style="width: 130px;">
                 <input type="text" name="cargo_marks[]" class="form-control uppercase-only" autocomplete="off" required>
@@ -338,7 +338,6 @@ $(document).ready(function () {
 
 
     //-------- Edit Button Click start-------------///
-
     loadEditDataToModal(
         '.editBtn',
         urls.icsEns,
@@ -402,7 +401,7 @@ $(document).ready(function () {
                 { name: 'weight_kg', type: 'input', class: 'form-control weight_kg', width: '60px', required:true },
                 { name: 'cbm', type: 'input', class: 'form-control cbm', width: '57px', required:true },
                 { name: 'hs_code', type: 'input', class: 'form-control hs_code', width: '65px', required:true },
-                { name: 'un_code_dg', type: 'input', class: 'form-control un_code_dg', width: '50px' },
+                { name: 'un_code_dg', type: 'input', class: 'form-control uppercase-only', width: '50px' },
                 { name: 'cargo_marks', type: 'input', class: 'form-control cargo_marks uppercase-only', width: '130px', required:true },
                 { name: 'cargo_description', type: 'input', class: 'form-control cargo_description uppercase-only', required:true }
             ];
@@ -490,163 +489,10 @@ $(document).ready(function () {
             enableAllSaveIcons();
         }
     );
-
-
-
-
-    // loadEditDataToModal(
-    //     '.editBtn',
-    //     urls.icsEns,
-    //     '#bs-example-modal-lg',
-    //     [
-    //         { selector: '#row_id', key: 'main.row_id' },
-    //         { selector: '#billing_id', key: 'main.billing_id' },
-    //         { selector: '#nvocc_scac', key: 'main.nvocc_scac' },
-    //         { selector: '#hbl_no', key: 'main.hbl_no' },
-    //         { selector: '#mbl_no', key: 'main.mbl_no' },
-    //         { selector: '#carrier_scac', key: 'main.carrier_scac' },
-    //         { selector: '#import_export', key: 'main.import_export' },
-    //         { selector: '#from_location', key: 'main.from_location' },
-    //         { selector: '#to_location', key: 'main.to_location' },
-    //         { selector: '#ts_one', key: 'main.ts_one' },
-    //         { selector: '#ts_two', key: 'main.ts_two' },
-    //         { selector: '#ts_three', key: 'main.ts_three' },
-    //         { selector: '#incoterm', key: 'main.incoterm' },
-    //         { selector: '#shipper_name', key: 'main.shipper_name' },
-    //         { selector: '#shipper_address', key: 'main.shipper_address' },
-    //         { selector: '#shipper_country', key: 'main.shipper_country' },
-    //         { selector: '#shipper_location', key: 'main.shipper_location' },
-    //         { selector: '#shipper_phone', key: 'main.shipper_phone' },
-    //         { selector: '#shipper_zip_code', key: 'main.shipper_zip_code' },
-    //         { selector: '#shipper_email', key: 'main.shipper_email' },
-    //         { selector: '#shipper_registration', key: 'main.shipper_registration' },
-    //         { selector: '#shipper_code', key: 'main.shipper_code' },
-    //         { selector: '#consignee_name', key: 'main.consignee_name' },
-    //         { selector: '#consignee_address', key: 'main.consignee_address' },
-    //         { selector: '#consignee_country', key: 'main.consignee_country' },
-    //         { selector: '#consignee_location', key: 'main.consignee_location' },
-    //         { selector: '#consignee_phone', key: 'main.consignee_phone' },
-    //         { selector: '#consignee_zip_code', key: 'main.consignee_zip_code' },
-    //         { selector: '#consignee_email', key: 'main.consignee_email' },
-    //         { selector: '#consignee_registration', key: 'main.consignee_registration' },
-    //         { selector: '#consignee_code', key: 'main.consignee_code' },
-    //         { selector: '#notify_name', key: 'main.notify_name' },
-    //         { selector: '#notify_address', key: 'main.notify_address' },
-    //         { selector: '#notify_country', key: 'main.notify_country' },
-    //         { selector: '#notify_location', key: 'main.notify_location' },
-    //         { selector: '#notify_phone', key: 'main.notify_phone' },
-    //         { selector: '#notify_zip_code', key: 'main.notify_zip_code' },
-    //         { selector: '#notify_email', key: 'main.notify_email' },
-    //         { selector: '#notify_registration', key: 'main.notify_registration' },
-    //         { selector: '#notify_code', key: 'main.notify_code' },
-    //     ],
-
-    //     window.transText.ics2_hbl_ens_create_new,
-    //     window.transText?.f_upd_msg ?? 'No data found',
-
-    //     function (response) {
-    //         const details = response.details || [];
-
-    //         const columns = [
-    //             { name: 'row_id_eqd', type: 'hidden' },
-    //             { name: 'container_no', type: 'input', class: 'form-control container-no', width: '100px', required:true },
-    //             { name: 'size_iso', type: 'select', class: 'form-select size_iso', width: '55px', required: true, options: ['20GP', '40GP', '40HQ'] },
-    //             { name: 'seal_no', type: 'input', class: 'form-control seal_no', width: '108px', required:true },
-    //             { name: 'pkg_qty', type: 'input', class: 'form-control pkg_qty', width: '57px', required:true },
-    //             { name: 'pkg_type', type: 'select', class: 'form-select pkg_type', width: '82px', required:true, options: ['BOX', 'CRT', 'PALLET'] },
-    //             { name: 'weight_kg', type: 'input', class: 'form-control weight_kg', width: '60px', required:true },
-    //             { name: 'cbm', type: 'input', class: 'form-control cbm', width: '57px', required:true },
-    //             { name: 'hs_code', type: 'input', class: 'form-control hs_code', width: '65px', required:true },
-    //             { name: 'un_code_dg', type: 'input', class: 'form-control un_code_dg', width: '50px' },
-    //             { name: 'cargo_marks', type: 'input', class: 'form-control cargo_marks uppercase-only', width: '130px', required:true },
-    //             { name: 'cargo_description', type: 'input', class: 'form-control cargo_description uppercase-only', required:true }
-    //         ];
-
-    //         const actionIcons = [
-    //             {
-    //                 icon: 'fa-floppy-disk',
-    //                 class: 'saveIcon',
-    //                 title: 'Save',
-    //                 style: 'cursor: pointer;'
-    //             },
-    //             {
-    //                 icon: 'fa-copy',
-    //                 class: 'copyRow',
-    //                 title: 'Copy',
-    //                 style: 'cursor: pointer;'
-    //             },
-    //             {
-    //                 icon: 'fa-trash',
-    //                 class: '',
-    //                 title: 'Delete',
-    //                 style: 'color: #CD1212; cursor: pointer;'
-    //             }
-    //         ];
-
-    //         let tbodyHtml = '';
-
-    //         if (details.length > 0) {
-    //             details.forEach(function (item, index) {
-    //                 // row start
-    //                 tbodyHtml += `<tr class="text-center addedRow2" data-row-id-eqd="${item['row_id_eqd'] || ''}" style="width: 20px;"><td>${index + 1}</td>`;
-
-
-    //                 columns.forEach(function (col) {
-    //                     const value = item[col.name] || '';
-    //                     const widthStyle = col.width ? ` style="width: ${col.width};"` : '';
-
-    //                     if (col.type === 'hidden') {
-    //                         tbodyHtml += `<input type="hidden" name="${col.name}[]" value="${value}" ${col.required ? 'required' : ''}>`;
-    //                     } else if (col.type === 'input') {
-    //                         tbodyHtml += `<td${widthStyle}><input type="text" name="${col.name}[]" class="${col.class}" value="${value}" autocomplete="off"></td>`;
-    //                     } else if (col.type === 'select') {
-    //                         let optionsHtml = '';
-    //                         (col.options || []).forEach(opt => {
-    //                             const selected = (opt.toLowerCase() === (value || '').toLowerCase()) ? 'selected' : '';
-    //                             optionsHtml += `<option value="${opt}" ${selected}>${opt}</option>`;
-    //                         });
-    //                         tbodyHtml += `<td${widthStyle}><select name="${col.name}[]" class="${col.class}" ${col.required ? 'required' : ''}>${optionsHtml}</select></td>`;
-    //                     }
-
-    //                 });
-
-
-    //                 actionIcons.forEach(icon => {
-    //                     tbodyHtml += `<td style="width: 25px;">
-    //                         <i class="fa-solid ${icon.icon} m-1 ${icon.class}" title="${icon.title}" style="${icon.style}"></i>
-    //                     </td>`;
-    //                 });
-
-    //                 tbodyHtml += `</tr>`;
-    //             });
-    //         } else {
-    //             tbodyHtml = `<tr><td colspan="15" class="text-center">No details found</td></tr>`;
-    //         }
-
-    //         $('#containerTbody').html(tbodyHtml);
-
-    //         loadSelectOptions({
-    //             url: urls.getCntrSize,
-    //             selectId: '.size_iso',
-    //             valueField: 'eq_code',
-    //             textField: 'eq_size_display',
-    //             placeholder: ''
-    //         });
-
-    //         loadSelectOptions({
-    //             url: urls.getPKG,
-    //             selectId: '.pkg_type',
-    //             valueField: 'pkg_code',
-    //             textField: 'pkg_code',
-    //             extraTextField: 'pkg_description',
-    //             placeholder: ''
-    //         });
-
-    //         enableAllSaveIcons(); // Optional
-    //     }
-    // );
+    $(document).on('input', '.container-no', function () {
+        this.value = this.value.slice(0, 11); // ১১ অক্ষরের বেশি হলে কাটবে
+    });
     //-------- Edit Button Click end-------------///
-
 
 
     ///-----row add start---//
@@ -679,7 +525,7 @@ $(document).ready(function () {
                 <td style="width: 60px;"><input type="text" name="weight_kg[]" class="form-control weight_kg" required autocomplete="off"></td>
                 <td style="width: 57px;"><input type="text" name="cbm[]" class="form-control cbm" required autocomplete="off"></td>
                 <td style="width: 65px;"><input type="text" name="hs_code[]" class="form-control hs_code" required autocomplete="off"></td>
-                <td style="width: 50px;"><input type="text" name="un_code_dg[]" class="form-control un_code_dg" required autocomplete="off"></td>
+                <td style="width: 50px;"><input type="text" name="un_code_dg[]" class="form-control uppercase-only" required autocomplete="off"></td>
                 <td style="width: 130px;"><input type="text" name="cargo_marks[]" class="form-control uppercase-only" required autocomplete="off"></td>
                 <td><input type="text" name="cargo_description[]" class="form-control uppercase-only" required autocomplete="off"></td>
                 <td><i class="fa-solid fa-floppy-disk m-1 saveIcon" title="Save"></i></td>
@@ -712,16 +558,12 @@ $(document).ready(function () {
     }
     ///-----row add end---//
 
-
-
     ///--- row delete start---///
     $('#containerTbody').on('click', '.deleteRow', function () {
         $(this).closest('tr').remove();
         resetSerialNumbers();                
     });
     ///--- row delete end---///
-
-
 
     ///-----row copy start------///
     $('#containerTbody').on('click', '.copyRow', function () {
@@ -830,8 +672,6 @@ $(document).ready(function () {
     });
     ///-----row copy end------///
 
-
-
     /// ---Reset Serial Numbers start----//
     function resetSerialNumbers() {
         $('#containerTbody tr').each(function (index) {
@@ -904,7 +744,7 @@ $(document).ready(function () {
 
 
     ///// Number Dot Only ////
-    $(document).on('input', '.weight_kg, .cbm, .un_code_dg', function () {
+    $(document).on('input', '.weight_kg, .cbm', function () {
         let value = $(this).val();
         
         // শুধুমাত্র সংখ্যা ও একটি মাত্র ডট রাখতে দিচ্ছে
