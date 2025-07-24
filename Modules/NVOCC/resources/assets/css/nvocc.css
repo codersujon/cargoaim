@@ -62,20 +62,94 @@
 
 .tab-content {
     display: none;
-    padding: 10px;
     background: #f5f5f5;
     border: 1px solid #d9d9d9;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
     overflow: auto;
-    min-height: 86vh
+    min-height: 86vh;
+    position: relative;
 }
 
 .tab-content.active {
     display: block;
 }
 
-row.modules-tabs{
+row.modules-tabs {
     padding-left: 0 !important;
+}
+
+
+
+/* ================================
+   Tab Content Wrapper Structure
+================================== */
+.tab-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+/* ================================
+   Header Section
+================================== */
+.tab-content-header {
+    padding: 8px 12px;
+    background-color: rgb(240, 234, 254);
+    border-bottom: 1px dashed #b199e8;
+    border-radius: 6px 6px 0 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.tab-content-header h4 {
+    margin: 0;
+    font-size: 15px;
+    color: #6830e2;
+    letter-spacing: 0.02em;
+    user-select: none;
+    text-transform: capitalize;
+}
+
+/* ================================
+   Body Section
+================================== */
+.tab-content-body {
+    flex-grow: 1;
+    padding: 8px 12px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+/* ================================
+   Bottom Action Bar
+================================== */
+.tab-content-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 15px 12px;
+    background-color: #dacff4;
+    border-top: 1px dashed #b199e8;
+    border-radius: 0 0 6px 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.tab-content-bottom button {
+    height: 32px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    text-shadow: 0px 0.5px 0px blue;
+}
+
+.tab-content-wrapper .suggestions-box{
+    border: none;
 }
