@@ -15,40 +15,68 @@
          {{-- tab content bottom --}}
          <div class="tab-content-bottom">
 
+             <!-- Group -->
              <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
-                 <iconify-icon icon="mdi:cancel" class="fs-22 align-middle"></iconify-icon>
+                 <iconify-icon icon="mdi:account-group" class="fs-20 align-middle"></iconify-icon>
+             </button>
+
+             <!-- Fire -->
+             <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
+                 <iconify-icon icon="mdi:fire" class="fs-20 align-middle"></iconify-icon>
+             </button>
+
+             <!-- Share -->
+             <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
+                 <iconify-icon icon="mdi:share-variant" class="fs-20 align-middle"></iconify-icon>
+             </button>
+
+             <!-- Calendar -->
+             <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
+                 <iconify-icon icon="mdi:calendar-month" class="fs-20 align-middle"></iconify-icon>
+             </button>
+
+             <!-- Cancel -->
+             <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
+                 <iconify-icon icon="mdi:cancel" class="align-middle"></iconify-icon>
                  Cancel
              </button>
 
+             <!-- Hold -->
              <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
-                 <iconify-icon icon="mdi:pause-circle" class="fs-22 align-middle"></iconify-icon>
+                 <iconify-icon icon="mdi:pause-circle" class="align-middle"></iconify-icon>
                  Hold
              </button>
 
+             <!-- Complete -->
              <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
-                 <iconify-icon icon="mdi:check-circle" class="fs-22 align-middle"></iconify-icon>
+                 <iconify-icon icon="mdi:check-circle" class="align-middle"></iconify-icon>
                  Complete
              </button>
 
+             <!-- Clear Form -->
              <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
-                 <iconify-icon icon="mdi:broom" class="fs-22 align-middle"></iconify-icon>
+                 <iconify-icon icon="mdi:broom" class="align-middle"></iconify-icon>
                  Clear Form
              </button>
 
+             <!-- Confirm BKG -->
              <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
-                 <iconify-icon icon="mdi:clipboard-check" class="fs-22 align-middle"></iconify-icon>
+                 <iconify-icon icon="mdi:clipboard-check" class="align-middle"></iconify-icon>
                  Confirm BKG
              </button>
 
+             <!-- Send -->
              <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
-                 <iconify-icon icon="mdi:send" class="fs-22 align-middle"></iconify-icon>
+                 <iconify-icon icon="mdi:send" class="align-middle"></iconify-icon>
                  Send
              </button>
 
+             <!-- Save -->
              <button type="submit" class="btn btn-primary bg-gradient d-flex align-items-center gap-1">
-                 <iconify-icon icon="mdi:content-save" class="fs-22 align-middle"></iconify-icon>
+                 <iconify-icon icon="mdi:content-save" class="align-middle"></iconify-icon>
                  Save
              </button>
+
 
          </div>
      </div>
