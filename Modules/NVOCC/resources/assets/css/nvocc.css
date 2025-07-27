@@ -191,10 +191,9 @@ row.modules-tabs {
     height: 100%;
 }
 
-.tab-content-body table, tr, th, td{
+/* .tab-content-body table, tr, th, td{
     border: 1px dashed #ddd;
     border-radius: 5px !important;
     padding: 2px !important;
-    background-color: #f5f5f5;
-}
+} */
 
