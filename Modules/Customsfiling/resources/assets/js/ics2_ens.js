@@ -262,8 +262,8 @@ $(document).ready(function () {
                             <tr>
                                 <td class="text-center"><input type="checkbox" name="check_name[]" value="${item.row_id}" /></td>
                                 <td class="text-center">${i++}</td>
-                                <td class="text-center bg-info">${item.mbl_no ?? ''}</td>
-                                <td class="text-center bg-warning">${item.ultimate_hbl_no ?? ''}</td>
+                                <td class="text-center">${item.mbl_no ?? ''}</td>
+                                <td class="text-center">${item.ultimate_hbl_no ?? ''}</td>
                                 <td class="text-center">
                                     <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn" style="margin: 4px 0px">
                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -431,7 +431,7 @@ $(document).ready(function () {
 
             if (details.length > 0) {
                 details.forEach(function (item, index) {
-                    tbodyHtml += `<tr class="text-center addedRow2" data-row-id-eqd="${item['row_id_eqd'] || ''}"><td>${index + 1}</td>`;
+                    tbodyHtml += `<tr class="text-center addedRow2" data-row-id-eqd="${item['row_id_eqd'] || ''}"><td style="width: 20px;">${index + 1}</td>`;
 
                     columns.forEach(function (col) {
                         const value = item[col.name] || '';

@@ -92,8 +92,31 @@ class GlobalSearchService
     {
         $name = $request->get('name');
 
-        return CustomerAddress::where('customer_full_name', 'like', '%' . $name . '%')->get(); // সব matching result আনবে
+        return CustomerAddress::where('customer_full_name', 'like', '%' . $name . '%')
+                    ->limit(50)
+                    ->get();
     }
+
+    // public function getCustomerDetails(Request $request)
+    // {
+    //     $name = $request->input('name');
+
+    //     $customers = CustomerAddress::select([
+    //             'customerAddress',
+    //             'customerAddressPhone',
+    //             'customerAddressEmail',
+    //             'customer_address_bin_number',
+    //             'customerAddressCountry',
+    //             'address_city',
+    //             'address_zip',
+    //             'customerCode'
+    //         ])
+    //         ->where('customer_full_name', 'like', '%' . $name . '%')
+    //         ->limit(50)
+    //         ->get();
+
+    //     return response()->json($customers);
+    // }
 
     public function getPolPodDetails(Request $request)
     {
