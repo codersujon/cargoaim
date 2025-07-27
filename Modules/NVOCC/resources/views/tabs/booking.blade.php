@@ -16,321 +16,424 @@
                      <input type="hidden" name="row_id" id="row_id">
 
                      <div class="table-responsive table-spacing">
-                         <table class="table table-borderless">
+                         <table class="table">
                              <tbody>
-
-                                 <tr class="text-center border-bottom border-dashed">
+                                 <tr class="tabs_form_row">
                                      {{-- bkg --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_form_label">
                                              <span>BKG</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
-                                         <input type="text" name="bkg" id="bkg" class="form-control uppercase-only"
-                                             autocomplete="off" required style="margin-top: 2px; margin-bottom: 1px;">
+                                     <td>
+                                         <input type="text" name="bkg" id="bkg" class="form-control uppercase"
+                                             autocomplete="off" required>
                                      </td>
-                                     <td style="width: 20px"></td>
 
                                      {{-- mbl --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>{{ transText('mbl_lable') }}</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
                                      <td>
                                          <input type="text" name="mbl_no" id="mbl_no" class="form-control"
-                                             autocomplete="off" required style="margin-top: 1px; margin-bottom: 1px;">
+                                             autocomplete="off" required>
                                      </td>
-                                     <td style="width: 20px"></td>
                                      {{-- ref --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>REF</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <input type="text" name="ref" id="ref" class="form-control uppercase-only"
-                                             autocomplete="off" required style="margin-top: 2px; margin-bottom: 1px;">
+                                             autocomplete="off" required>
                                      </td>
-                                     <td style="width: 20px"></td>
-
                                  </tr>
 
-                                 <tr class="text-center border-bottom border-dashed">
+                                 <tr class="tabs_form_row">
 
                                      {{-- IMP/EXP --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>IMP/EXP</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="imp_exp" id="imp_exp" autocomplete="off"
-                                             style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             required>
                                              <option value="">Loading...</option>
                                          </select>
                                      </td>
-                                     <td style="width: 20px"></td>
 
                                      {{-- Load Type --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>LOAD.T</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="load_type" id="load_type" autocomplete="off"
-                                             style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             required>
                                              <option value="">Loading...</option>
                                          </select>
                                      </td>
-                                     <td style="width: 20px"></td>
+
                                      {{-- Business Owner --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>BO</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="bus_own" id="bus_own" autocomplete="off"
-                                             style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             required>
                                              <option value="">--Business Owner--</option>
                                              <option value="">Loading...</option>
                                          </select>
                                      </td>
-                                     <td style="width: 20px"></td>
+
 
                                      {{-- INCOTERM --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>INCOTERM</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="incoterm" id="incoterm" autocomplete="off"
-                                             style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             required>
                                              <option value="">Loading...</option>
                                          </select>
                                      </td>
-                                     <td style="width: 20px"></td>
+
 
                                      {{-- BUSINESS UNIT --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>B.UNIT</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="bus_unit" id="bus_unit" autocomplete="off"
-                                             style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             required>
                                              <option value="">Loading...</option>
                                          </select>
                                      </td>
-                                     <td style="width: 20px"></td>
+
+
                                  </tr>
 
-                                 <tr class="text-center border-bottom border-dashed">
+                                 <tr class="tabs_form_row">
                                      <!-- POR -->
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>POR</span>
-                                             <span style="margin-left: 2px; margin-right: 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
                                      <td style="position: relative;">
                                          <input type="text" name="port_of_receipt" id="port_of_receipt"
                                              class="form-control uppercase-only" autocomplete="off"
-                                             placeholder="Port of Receipt" required
-                                             style="margin-top: 2px; margin-bottom: 1px;">
-
-                                         <div id="pod_suggestions_box" class="suggestions-box"
-                                             style="width: 540px!important;max-height: 210px!important;"></div>
-                                         <div id="pod_loader" class="circle-dot-loader" style="display: none;">
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                         </div>
+                                             placeholder="Port of Receipt" required>
                                      </td>
-                                     <td style="width: 20px"></td>
 
                                      {{-- pic --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>PIC</span>
-                                             <span style="margin-left: 2px; margin-right: 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="bus_unit" id="bus_unit" disabled
-                                             autocomplete="off" style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             autocomplete="off" required>
                                              <option value="">PIC</option>
                                          </select>
                                      </td>
                                  </tr>
 
-                                 <tr class="text-center border-bottom border-dashed">
+                                 <tr class="tabs_form_row">
                                      <!-- POL -->
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>POL</span>
-                                             <span style="margin-left: 2px; margin-right: 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
                                      <td style="position: relative;">
                                          <input type="text" name="port_of_loading" id="port_of_loading"
                                              class="form-control uppercase-only" autocomplete="off"
-                                             placeholder="Port of Loading" required
-                                             style="margin-top: 2px; margin-bottom: 1px;">
-
-                                         <div id="pod_suggestions_box" class="suggestions-box"
-                                             style="width: 540px!important;max-height: 210px!important;"></div>
-                                         <div id="pod_loader" class="circle-dot-loader" style="display: none;">
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                         </div>
+                                             placeholder="Port of Loading" required>
                                      </td>
-                                     <td style="width: 20px"></td>
 
                                      {{-- pic --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>PIC</span>
-                                             <span style="margin-left: 2px; margin-right: 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="bus_unit" id="bus_unit" disabled
-                                             autocomplete="off" style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             autocomplete="off" required>
                                              <option value="">PIC</option>
                                          </select>
                                      </td>
 
                                  </tr>
 
-                                 <tr class="text-center border-bottom border-dashed">
+                                 <tr class="tabs_form_row">
                                      <!-- POD -->
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>{{ transText('pod_lable') }}</span>
-                                             <span style="margin-left: 2px; margin-right: 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
                                      <td style="position: relative;">
                                          <input type="text" name="to_location" id="to_location"
                                              class="form-control uppercase-only" autocomplete="off"
-                                             placeholder="Port of Discharge" required
-                                             style="margin-top: 2px; margin-bottom: 1px;">
-
-                                         <div id="pod_suggestions_box" class="suggestions-box"
-                                             style="width: 540px!important;max-height: 210px!important;"></div>
-                                         <div id="pod_loader" class="circle-dot-loader" style="display: none;">
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                         </div>
+                                             placeholder="Port of Discharge" required>
                                      </td>
-                                     <td style="width: 20px"></td>
 
                                      {{-- pic --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>PIC</span>
-                                             <span style="margin-left: 2px; margin-right: 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="bus_unit" id="bus_unit" disabled
-                                             autocomplete="off" style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             autocomplete="off" required>
                                              <option value="">PIC</option>
                                          </select>
                                      </td>
                                  </tr>
 
-                                 <tr class="text-center border-bottom border-dashed">
+                                 <tr class="tabs_form_row">
                                      <!-- DEL -->
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>DEL</span>
-                                             <span style="margin: 0 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
                                      <td style="position: relative;">
                                          <input type="text" name="delivery_location" id="delivery_location"
                                              class="form-control uppercase-only" autocomplete="off"
-                                             placeholder="Delivery Location" required
-                                             style="margin-top: 2px; margin-bottom: 1px;">
-
-                                         <div id="pod_suggestions_box" class="suggestions-box"
-                                             style="width: 540px!important;max-height: 210px!important;"></div>
-                                         <div id="pod_loader" class="circle-dot-loader" style="display: none;">
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                             <div></div>
-                                         </div>
+                                             placeholder="Delivery Location" required>
                                      </td>
-                                     <td style="width: 20px"></td>
+
 
                                      {{-- pic --}}
                                      <th>
-                                         <div
-                                             style="display: flex; justify-content: space-between; align-items: center; height: 100%;">
+                                         <div class="tabs_label">
                                              <span>PIC</span>
-                                             <span style="margin-left: 2px; margin-right: 2px;">:</span>
+                                             <span>:</span>
                                          </div>
                                      </th>
-                                     <td style="width: 130px;">
+                                     <td>
                                          <select class="form-select" name="bus_unit" id="bus_unit" disabled
-                                             autocomplete="off" style="margin-top: 2px; margin-bottom: 1px;" required>
+                                             autocomplete="off" required>
                                              <option value="">PIC</option>
                                          </select>
                                      </td>
                                  </tr>
 
+                                 <tr class="tabs_form_row">
+                                     {{-- carr-1 --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>Carr-1</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td style="position: relative;">
+                                         <select class="form-select" name="voc_carr_1" id="voc_carr_1"
+                                             autocomplete="off" required>
+                                             <option value="">Loading...</option>
+                                         </select>
+                                     </td>
+
+                                     {{-- carr-2 --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>Carr-2</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td style="position: relative;">
+                                         <select class="form-select" name="voc_carr_2" id="voc_carr_2"
+                                             autocomplete="off" required>
+                                             <option value="">Loading...</option>
+                                         </select>
+                                     </td>
+
+                                     {{-- carr-3 --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>Carr-3</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td style="position: relative;">
+                                         <select class="form-select" name="voc_carr_3" id="voc_carr_3"
+                                             autocomplete="off" required>
+                                             <option value="">Loading...</option>
+                                         </select>
+                                     </td>
+
+                                 </tr>
+
+                                 <tr class="tabs_form_row">
+                                     {{-- Contact Customer --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>Contact Cust</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <input type="text" name="contact_cust" id="contact_cust"
+                                             class="form-control uppercase-only" autocomplete="off" required
+                                             placeholder="Contact Customer">
+                                     </td>
+                                     <td>
+                                         <select class="form-select" name="voc_carr_3" id="voc_carr_3"
+                                             autocomplete="off" required>
+                                             <option value="">PIC LIST</option>
+                                         </select>
+                                     </td>
+
+                                 </tr>
+
+                                 <tr class="tabs_form_row">
+                                     {{-- Shipper --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>Shipper</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <input type="text" name="contact_cust" id="contact_cust"
+                                             class="form-control uppercase-only" autocomplete="off" required
+                                             placeholder="Shipper">
+                                     </td>
+                                 </tr>
+
+                                 <tr class="tabs_form_row">
+                                     {{-- consignee --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>Consignee</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <input type="text" name="contact_cust" id="contact_cust"
+                                             class="form-control uppercase-only" autocomplete="off" required
+                                             placeholder="Consignee">
+                                     </td>
+                                 </tr>
+
+                                 <tr class="tabs_form_row">
+                                     {{-- 3rd Party Pay --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>3rd Party Pay</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <input type="text" name="3rd_party_pay" id="3rd_party_pay"
+                                             class="form-control uppercase-only" autocomplete="off" required
+                                             placeholder="3rd Party Pay">
+                                     </td>
+                                 </tr>
+
+                                 <tr class="tabs_form_row">
+                                     {{-- More Party Pay --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>More Party Pay</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <input type="text" name="More_party_pay" id="More_party_pay"
+                                             class="form-control uppercase-only" autocomplete="off" required
+                                             placeholder="More Party Pay">
+                                     </td>
+                                 </tr>
+
+                                 <tr>
+                                     {{-- Off Dock --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>OFF-DOCK</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <input type="text" name="off_dock" id="off_dock"
+                                             class="form-control uppercase-only" autocomplete="off" required
+                                             placeholder="Off-Dock">
+                                     </td>
+
+                                     {{-- SALES PIC --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>SALES</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <select class="form-select" name="sales_pic" id="sales_pic" autocomplete="off"
+                                             required>
+                                             <option value="">PIC LIST</option>
+                                         </select>
+                                     </td>
+
+                                     {{-- SALES PIC --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>CS</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <select class="form-select" name="cs_pic" id="cs_pic" autocomplete="off"
+                                             required>
+                                             <option value="">PIC LIST</option>
+                                         </select>
+                                     </td>
+
+                                     {{-- REF PIC --}}
+                                     <th>
+                                         <div class="tabs_label">
+                                             <span>REF</span>
+                                             <span>:</span>
+                                         </div>
+                                     </th>
+                                     <td>
+                                         <select class="form-select" name="ref_pic" id="ref_pic" autocomplete="off"
+                                             required>
+                                             <option value="">PIC LIST</option>
+                                         </select>
+                                     </td>
+                                 </tr>
                              </tbody>
                          </table>
                      </div>
