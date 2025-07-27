@@ -1502,13 +1502,13 @@ return [
 
     [
         // Main Menu - Customsfiling
-        'title' => 'Customs Filing',
+        'title' => 'Filing',
         'icon' => 'fa fa-cogs',
         'url' => '#',
         'route' => 'customs.filing.index',
         'params' => null,
         'parent_route' => null,
-        'order' => 110,
+        'order' => 90,
         'permission' => 'access_customs_filing',
         'roles' => json_encode(["admin", "user"]),
         'is_active' => 1,

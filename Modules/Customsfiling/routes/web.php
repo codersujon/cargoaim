@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/filing_fetch', [IcsEnsController::class, 'filingFetch']);
     Route::post('/liner', [IcsEnsController::class, 'liner']);
-
+    
     Route::resource('customer_address', CustomerAddressController::class);
+    
 });

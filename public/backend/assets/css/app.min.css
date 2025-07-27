@@ -20839,12 +20839,13 @@ thead th {
 }
 
 .suggestions-box {
-    position: absolute;
-    top: 100%;
-    left: 0;
+    position: fixed;
+    top: 162px; /* আপনার প্রয়োজন অনুযায়ী উপরে-নিচে adjust করুন */
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 9999;
-    width: 100%;
-    max-height: 140px;
+    width: 1100px;
+    max-height: 450px;
     overflow-y: auto;
     background: var(--osen-inp-suggestions-box-bg-color, #fff);
     border: 1px solid #ccc;
@@ -20853,6 +20854,14 @@ thead th {
     font-family: Arial, sans-serif;
     font-size: 11px;
     text-align: left;
+}
+
+/* ✅ Sticky header */
+.suggestions-box table thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--osen-table-header-bg-color) !important;
+    z-index: 1;
 }
 
 .suggestions-box div {
@@ -20873,7 +20882,7 @@ thead th {
 .suggestions-box div.active {
     background-color: #d8f0ff;
     font-weight: bold;
-    width: 273px !important;
+    width: auto;
 }
 
 .suggestion-row.active,

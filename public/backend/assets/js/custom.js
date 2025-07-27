@@ -3,6 +3,8 @@
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
 
+
+    //------ Show Modal ------////
     function showModalForCreateNew(saveText, createNewText) {
         $('#loader').fadeIn();
 
@@ -346,7 +348,6 @@
     }
     ///----- select box select function End -----/////
     
-
     ///----- City Name ------///
     function loadDependentDropdown(url, sourceSelector, targetSelector, postKey = 'id') {
         const selectedValue = $(sourceSelector).val();
@@ -372,6 +373,8 @@
     }
 
     
+
+
 
 
    
@@ -429,23 +432,42 @@
                     dataMap = {};
 
                     if (response.length > 0) {
-                        let tableHTML = '<table class="table table-striped mb-0"><tbody>';
-                        response.forEach(customer => {
+                        let tableHTML = `
+                            <table class="table table-striped" style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 20px; padding: 4px; border: 1px solid #ccc;">-</th>
+                                        <th class="text-center" style="width: 60px; padding: 4px; border: 1px solid #ccc;">CODE</th>
+                                        <th class="text-center" style="width: 150px; padding: 4px; border: 1px solid #ccc;">NAME</th>
+                                        <th class="text-center" style="width: 300px; padding: 4px; border: 1px solid #ccc;">ADDRESS</th>
+                                        <th class="text-center" style="width: 100px; padding: 4px; border: 1px solid #ccc;">CITY</th>
+                                        <th class="text-center" style="width: 100px; padding: 4px; border: 1px solid #ccc;">STATE</th>
+                                        <th class="text-center" style="width: 100px; padding: 4px; border: 1px solid #ccc;">ZIP</th>
+                                        <th class="text-center" style="width: 120px; padding: 4px; border: 1px solid #ccc;">LICENSE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        response.forEach((customer, index) => {
                             dataMap[customer.customer_full_name] = customer;
                             tableHTML += `
-                                <tr style="cursor: pointer;">
-                                    <td>
-                                        <div data-name="${customer.customer_full_name}" style="width: 250px;">
-                                            ${customer.customer_full_name}
-                                        </div>
-                                    </td>
+                                <tr class="suggestion-row" data-name="${customer.customer_full_name}" style="cursor: pointer; font-size: 12px;">
+                                    <td class="text-center" style="width: 20px; padding: 4px!important; border: 1px solid #ccc;">${index + 1}</td>
+                                    <td class="text-center" style="width: 60px; padding: 4px!important; border: 1px solid #ccc;">${customer.customerCode}</td>
+                                    <td style="width: 150px; padding: 4px!important; border: 1px solid #ccc;">${customer.customer_full_name}</td>
+                                    <td style="width: 300px; padding: 4px!important; border: 1px solid #ccc;">${customer.customerAddress}</td>
+                                    <td class="text-center" style="width: 100px; padding: 4px!important; border: 1px solid #ccc;">${customer.address_city}</td>
+                                    <td style="width: 100px; padding: 4px!important; border: 1px solid #ccc;">${customer.address_state}</td>
+                                    <td class="text-center" style="width: 100px; padding: 4px!important; border: 1px solid #ccc;">${customer.address_zip}</td>
+                                    <td class="text-center" style="width: 120px; padding: 4px!important; border: 1px solid #ccc;">${customer.customer_address_bin_number}</td>
                                 </tr>
                             `;
                         });
                         tableHTML += '</tbody></table>';
 
                         $suggestionBox.html(tableHTML).show();
-                    } else {
+                    }
+                    else {
                         $suggestionBox.hide();
                     }
                 },
@@ -456,20 +478,22 @@
             });
         };
 
+        // ✅ INPUT EVENT WITH 3-CHARACTER CONDITION
         $input.on('input', () => {
             clearMessage();
             const name = $input.val().trim();
             selectedIndex = -1;
             $suggestionBox.empty().hide();
 
-            if (name) fetchSuggestions(name);
-            else {
+            if (name.length >= 3) {
+                fetchSuggestions(name);
+            } else {
                 clearDetails();
             }
         });
 
         $input.on('keydown', (e) => {
-            const $items = $suggestionBox.find('div[data-name]');
+            const $items = $suggestionBox.find('tr.suggestion-row');
             const count = $items.length;
             if (count === 0) return;
 
@@ -489,7 +513,7 @@
             }
         });
 
-        $suggestionBox.on('click', 'div[data-name]', function () {
+        $suggestionBox.on('click', 'tr.suggestion-row', function () {
             const selectedName = $(this).data('name');
             $input.val(selectedName);
             $suggestionBox.hide();
@@ -511,6 +535,9 @@
         });
     }
 
+
+
+    
     ////---- Set up POL/POD autocomplete based on Sea, Air, or Land-----/////
     function setupPolPodAutocomplete(type, seaAirLand, fetchUrl = null) {
         let dataMap = {};
@@ -596,18 +623,14 @@
                                     <td style="padding: 4px; border: 1px solid #ccc;"><span style="margin-left: 4px;">${item.locationName}</span></td>
                                     <td class="text-center" style="padding: 4px; border: 1px solid #ccc;">${item.zip_code ?? ''}</td>
                                     <td style="padding: 4px; border: 1px solid #ccc;"><span style="margin-left: 4px;">${item.state_full ?? ''}</span></td>
-                                </tr>
+                                </tr>   
                             `;
                         });
 
                         tableHtml += `</tbody></table>`;
                         
                         // Show suggestion box
-                        $suggestionBox.html(tableHtml).css({
-                            display: 'block',
-                            position: 'absolute',
-                            zIndex: 9999
-                        }).show();
+                        $suggestionBox.html(tableHtml).show();
 
                     } else {
                         $suggestionBox.hide();
@@ -620,11 +643,17 @@
             });
         };
 
+        // ✅ Only fetch if input has 3 or more characters
         $input.on('input', () => {
             const polpod = $input.val().trim();
             selectedIndex = -1;
             $suggestionBox.empty().hide();
-            if (polpod) fetchSuggestions(polpod);
+
+            if (polpod.length >= 3) {
+                fetchSuggestions(polpod);
+            } else {
+                clearDetails();
+            }
         });
 
         $input.on('keydown', (e) => {

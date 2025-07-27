@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Modules\Customsfiling\Models\CustomsFiling;
 use Modules\Customsfiling\Models\CustomsFilingEqDetails;
 use Modules\Core\Models\CarrierBasic;
+use Modules\Core\Models\LocationTable;
+use Modules\Core\Models\CountryTable;
 use Modules\Core\Models\CustomsFilingScacEoriCoded;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
@@ -17,7 +19,7 @@ class IcsEnsController extends Controller
 {
     public function index()
     {
-        return view('customsfiling::euens.ics2_ens');
+        return view('customsfiling::index');
     }
 
     public function create(){}
@@ -283,7 +285,9 @@ class IcsEnsController extends Controller
                 'carrier_scac.required' => 'The Carrier EORI field is required.',
                 'import_export.required' => 'The IM/EX/FROB field is required.',
                 'from_location.required' => 'The Port of Loading field is required.',
+                'from_location.regex' => 'The Port of Loading must be exactly 5 digits.',
                 'to_location.required' => 'The Port of Discharge field is required.',
+                'to_location.regex' => 'The Port of Discharge must be exactly 5 digits.',
                 'incoterm.required' => 'The HBL Prepaid/Collect field is required.',
                 'shipper_name.required' => 'The Shipper Name field is required.',
                 'shipper_address.required' => 'The Shipper Address field is required.',
@@ -307,6 +311,7 @@ class IcsEnsController extends Controller
                 'notify_zip_code.required' => 'The Notify Postal/Zip field is required.',
                 'notify_code.required' => 'The Notify Code field is required.',
             ];
+
 
             // ✅ Sanitize input values (your existing $request->merge([...]) part)
              $request->merge([
@@ -347,8 +352,8 @@ class IcsEnsController extends Controller
                 'mbl_no' => 'required|string',
                 'carrier_scac' => 'required|string',
                 'import_export' => 'required|string',
-                'from_location' => 'required|string',
-                'to_location' => 'required|string',
+                'from_location' => 'required|string|regex:/^[A-Za-z0-9]{5}$/',
+                'to_location'   => 'required|string|regex:/^[A-Za-z0-9]{5}$/',
                 'incoterm' => 'required|string',
                 'shipper_name' => 'required|string',
                 'shipper_address' => 'required|string',
@@ -458,6 +463,55 @@ class IcsEnsController extends Controller
                     ], 422);
                 }
             }
+
+
+
+
+            $pol = $validated['from_location'];
+            $pod = $validated['to_location'];
+            $im_ex = $validated['import_export'];
+            $ts_one = $request->ts_one;
+            $ts_two = $request->ts_two;
+            $ts_three = $request->ts_three;
+
+            foreach (['POL' => $pol, 'POD' => $pod] as $type => $code) {
+                if (!LocationTable::where('locationCode', $code)->exists()) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => "Invalid {$type} Location Code."
+                    ], 422);
+                }
+            }
+
+
+            
+            $pol_prefix = substr($pol, 0, 2);
+            $pod_prefix = substr($pod, 0, 2);
+
+            // Check if either pol_prefix OR pod_prefix exists in EU country
+            $existsInEU = CountryTable::where('eu_country', 'Y')
+                ->where(function ($query) use ($pol_prefix, $pod_prefix) {
+                    $query->where('countryCode', $pol_prefix)
+                        ->orWhere('countryCode', $pod_prefix);
+                })
+                ->exists();
+
+            if (!$existsInEU) {
+                if ($validated['import_export'] !== 'FROB') {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Neither your POL nor POD is in an EU Country. Please select "FROB" in the I/EX field.'
+                    ], 422);
+                }
+                $im_ex = 'FROB';
+            } else {
+                $im_ex = $validated['import_export'];
+            }
+
+
+
+
+
 
             // ✅ Insert or Update CustomsFiling
             $data = CustomsFiling::updateOrCreate(
