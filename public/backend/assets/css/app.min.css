@@ -766,7 +766,7 @@ progress {
 .container-xxl,
 .page-container {
   --osen-gutter-x: 0.3rem;
-  --osen-gutter-y: 0;
+  --osen-gutter-y: 5rem;
   width: 100%;
   padding-right: calc(var(--osen-gutter-x) * 0.5);
   padding-left: calc(var(--osen-gutter-x) * 0.5);
@@ -4903,7 +4903,7 @@ fieldset:disabled .btn {
   --osen-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 .card {
-  --osen-card-spacer-y: 0.1rem;
+  --osen-card-spacer-y: 1rem;
   --osen-card-spacer-x: 0.8rem;
   --osen-card-title-spacer-y: 0.5rem;
   --osen-card-border-width: 0;
@@ -14439,10 +14439,12 @@ html[data-sidenav-size="condensed"]:not([data-layout="topnav"]) .app-topbar {
   margin-left: var(--osen-sidenav-width-sm);
 }
 html[data-sidenav-size="condensed"]:not([data-layout="topnav"]) .page-content {
-  margin-left: var(--osen-sidenav-width-sm);
-  min-height: 680px;
-  width: 100%;
-  margin: 17px 0 0 27px;
+  margin: 52px 0 0 27px; 
+  min-height: calc(100vh - 52px); 
+  width: calc(100% - 27px);
+  overflow: auto;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 html[data-sidenav-size="condensed"]:not([data-layout="topnav"]) .sidenav-menu {
   position: absolute;
@@ -15008,8 +15010,11 @@ html[data-layout-mode="detached"]:not([data-layout="topnav"]) .wrapper {
 html[data-layout-mode="detached"]:not([data-layout="topnav"])
   .wrapper
   .app-topbar {
-  margin: 0 -2.65%;
-  z-index: 1005;
+    z-index: 1005;
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 html[data-layout-mode="detached"]:not([data-layout="topnav"])
   .wrapper
@@ -16292,9 +16297,9 @@ html[data-layout-mode="detached"]:not([data-layout="topnav"])
 .card {
   -webkit-box-shadow: var(--osen-box-shadow);
   box-shadow: var(--osen-box-shadow);
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem;
   border: 1px solid #d9d9d9;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
 }
 .card .header-title {
   margin-bottom: 0;
