@@ -15,7 +15,7 @@
                  <div class="row">
                      <input type="hidden" name="row_id" id="row_id">
 
-                     <div class="table-responsive table-spacing">
+                     <div class="table-responsive table-spacing tab_module">
                          <table class="table">
                              <tbody>
                                  <tr class="tabs_form_row">
