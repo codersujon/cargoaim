@@ -13,7 +13,7 @@ class CustomsFilingEqDetails extends Model
     /**
      * The attributes that are mass assignable.
      */
-     protected $table = 'customs_filing_eq_details';
+    protected $table = 'customs_filing_eq_details';
     protected $primaryKey = 'row_id';
     protected $fillable = [
         'soft_cust_id',

@@ -412,6 +412,7 @@
                                         </tr>
                                     </thead>
                                 </table>
+                                
                                 <div class="table-body-scroll">
                                     <table class="table table-bordered table-striped" id="containerTableBody">
                                         <tbody id="containerTbody">

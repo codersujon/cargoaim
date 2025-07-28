@@ -1,7 +1,6 @@
 <div class="row">
-    <div class="col-lg-12">
+    <div class="ics_ens_display">
         <div class="card ics2_ens_card">
-
             <div class="card-header border-bottom border-dashed d-flex justify-content-between align-items-center">
                 <h4 class="card-title mb-0" style="font-weight: 550;">{{ transText('ens_ch') }}</h4>
                 <button type="button" class="btn btn-primary ms-1" id="createNew1">

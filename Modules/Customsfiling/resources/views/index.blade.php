@@ -19,10 +19,19 @@
         .modal-backdrop.show:nth-of-type(2) {
             z-index: 1055 !important;
         }
+        .ics_ens_display {
+            width: 96.15%;
+            position: fixed;
+            padding-left: 8px;
+            /* margin-top: 10px; */
+        }
         .ics2_ens_card{
             max-height: auto !important;
             padding-bottom: 20px!important;
+            margin-top: 10px;
+            border: 1px solid #d9d9d9;
         }
+        
     </style>
 
     {{-- Load ENS Data --}}

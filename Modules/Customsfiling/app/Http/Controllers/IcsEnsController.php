@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Customsfiling\Models\CustomsFiling;
 use Modules\Customsfiling\Models\CustomsFilingEqDetails;
+use Modules\Customsfiling\Models\FilingUnsupportedFacts;
 use Modules\Core\Models\CarrierBasic;
 use Modules\Core\Models\LocationTable;
 use Modules\Core\Models\CountryTable;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class IcsEnsController extends Controller
 {
@@ -314,7 +316,7 @@ class IcsEnsController extends Controller
 
 
             // ✅ Sanitize input values (your existing $request->merge([...]) part)
-             $request->merge([
+            $request->merge([
                 'hbl_no' => substr(preg_replace('/[^0-9a-zA-Z\-_.\/]/', '', $request->hbl_no), 0, 50),
                 'nvocc_scac'       => substr(preg_replace('/[^0-9a-zA-Z.\- ]/', '', $request->nvocc_scac), 0, 50),
                 'mbl_no'           => substr(preg_replace('/[^0-9a-zA-Z\-_.\/]/', '', $request->mbl_no), 0, 50),
@@ -474,6 +476,7 @@ class IcsEnsController extends Controller
             $ts_two = $request->ts_two;
             $ts_three = $request->ts_three;
 
+            // Validate POL and POD
             foreach (['POL' => $pol, 'POD' => $pod] as $type => $code) {
                 if (!LocationTable::where('locationCode', $code)->exists()) {
                     return response()->json([
@@ -483,35 +486,50 @@ class IcsEnsController extends Controller
                 }
             }
 
-
-            
+            // Extract prefix (first 2 letters) from POL and POD
             $pol_prefix = substr($pol, 0, 2);
             $pod_prefix = substr($pod, 0, 2);
 
-            // Check if either pol_prefix OR pod_prefix exists in EU country
-            $existsInEU = CountryTable::where('eu_country', 'Y')
+            // Check if either POL or POD prefix belongs to an EU country
+            $exists_in_eu = CountryTable::where('eu_country', 'Y')
                 ->where(function ($query) use ($pol_prefix, $pod_prefix) {
                     $query->where('countryCode', $pol_prefix)
                         ->orWhere('countryCode', $pod_prefix);
                 })
                 ->exists();
 
-            if (!$existsInEU) {
+            if (!$exists_in_eu) {
                 if ($validated['import_export'] !== 'FROB') {
                     return response()->json([
                         'status' => 'error',
                         'message' => 'Neither your POL nor POD is in an EU Country. Please select "FROB" in the I/EX field.'
                     ], 422);
                 }
-                $im_ex = 'FROB';
+
+                // Since it's FROB, TS1/TS2/TS3 must be in EU
+                $exists_ts_eu = CountryTable::where('eu_country', 'Y')
+                    ->where(function ($query) use ($ts_one, $ts_two, $ts_three) {
+                        $query->where('countryCode', $ts_one)
+                            ->orWhere('countryCode', $ts_two)
+                            ->orWhere('countryCode', $ts_three);
+                    })
+                    ->exists();
+
+                if (!$exists_ts_eu) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Since POL and POD are not in EU, at least one of TS1, TS2, or TS3 must be an EU Country.'
+                    ], 422);
+                }
+
+                $im_ex = 'FROB'; // force assign
             } else {
                 $im_ex = $validated['import_export'];
             }
 
 
 
-
-
+            
 
             // ✅ Insert or Update CustomsFiling
             $data = CustomsFiling::updateOrCreate(
@@ -608,6 +626,42 @@ class IcsEnsController extends Controller
             foreach ($request->container_no as $i => $no) {
                 if (!$no) continue;
 
+                $hs_code = $request->hs_code[$i];
+                $cargo_description = $request->cargo_description[$i];
+
+                $hs_code_check_data = FilingUnsupportedFacts::where('filing_type', 'EUENS')
+                    ->where('type', 'hs_code')
+                    ->where('status', 'A')
+                    ->where('value', $hs_code)
+                    ->exists();
+
+                $hs_code_cargo_description = FilingUnsupportedFacts::where('filing_type', 'EUENS')
+                    ->where('type', 'commodity')
+                    ->where('status', 'A')
+                    ->where('value', $cargo_description)
+                    ->exists();
+                
+                if ($hs_code_check_data == false) {
+                    throw ValidationException::withMessages([
+                        "hs_code.{$i}" => "Unsupported HS Code: {$hs_code} in container #{$no}"
+                    ]);
+                }
+
+                if ($hs_code_cargo_description == false) {
+                    throw ValidationException::withMessages([
+                        "cargo_description.{$i}" => "Unsupported Commodity Description: {$cargo_description} in container #{$no}"
+                    ]);
+                }
+
+
+               
+                // if ($hs_code_check_data == false) {
+                //     return response()->json([
+                //         'status' => 'error',
+                //         'message' => "Unsupported HS Code: {$hs_code} in container #{$no}",
+                //     ], 422);
+                // }
+
                 $rowId_eqd = $containerRowIds[$i] ?? null;
 
                 // আগের রেকর্ড আছে কিনা চেক করা
@@ -652,6 +706,9 @@ class IcsEnsController extends Controller
                     // Keep previous version
                     $validated['version'] = $existing_eqd->version ?? $version;
                 }
+
+
+
 
                 CustomsFilingEqDetails::updateOrCreate(
                     ['row_id' => $rowId_eqd],
