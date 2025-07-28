@@ -96,6 +96,8 @@ row.modules-tabs {
     right: 0;
 }
 
+
+
 /* ================================
    Header Section
 ================================== */
@@ -196,31 +198,32 @@ row.modules-tabs {
     padding: 0 3px;
 }
 
-.tab-content-body .tab_module table, 
-.tab-content-body .tab_module tr, 
-.tab-content-body .tab_module th, 
-.tab-content-body .tab_module td{
-    border: 1px dashed #ddd;
-    border-radius: 5px !important;
-    padding: 2px !important;
-}
-
-.tab-content-body .tab_module th, 
-.tab-content-body .tab_module td{
-     border: none;
-}
-
-.tab-content-body .tab_module table {
-    border-collapse: separate; 
-    border-spacing: 2px; 
-    width: 100%;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px dashed #b199e8;
-}
-
 .tab-content-body .form-control, .form-select{
     padding: 0.4rem .2rem 0.4rem .2rem;
 }
 
+
+
+
+/* Common cell styles */
+.tab-content-body .tab_module th,
+.tab-content-body .tab_module td {
+    padding: 2.5px;
+    border-bottom: 1px dashed #ddd;
+}
+
+/* Outer table container style */
+.tab-content-body .tab_module table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #f5f5f5;
+    border: 1px dashed #b199e8;
+    border-radius: 5px;
+}
+
+/* Remove last row's bottom border (optional for clean finish) */
+.tab-content-body .tab_module tr:last-child th,
+.tab-content-body .tab_module tr:last-child td {
+    border-bottom: none;
+}
