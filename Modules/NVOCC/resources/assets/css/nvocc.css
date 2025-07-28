@@ -69,7 +69,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
     overflow: auto;
-    min-height: 86vh;
+    min-height: 87vh;
     position: relative;
 }
 
@@ -186,14 +186,30 @@ row.modules-tabs {
 
 .tabs_form_label{
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
     height: 100%;
+    padding: 0 3px;
 }
 
-/* .tab-content-body table, tr, th, td{
+.tab-content-body table, tr, th, td{
     border: 1px dashed #ddd;
     border-radius: 5px !important;
     padding: 2px !important;
-} */
+}
+
+.tab-content-body th{
+     border: none;
+}
+
+.tab-content-body table {
+    border-collapse: separate; 
+    border-spacing: 2px; 
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px dashed #b199e8;
+}
+
 

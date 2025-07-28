@@ -33,7 +33,7 @@
 
                                      {{-- mbl --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>{{ transText('mbl_lable') }}</span>
                                              <span>:</span>
                                          </div>
@@ -44,7 +44,7 @@
                                      </td>
                                      {{-- ref --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>REF</span>
                                              <span>:</span>
                                          </div>
@@ -59,7 +59,7 @@
 
                                      {{-- IMP/EXP --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>IMP/EXP</span>
                                              <span>:</span>
                                          </div>
@@ -73,7 +73,7 @@
 
                                      {{-- Load Type --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>LOAD.T</span>
                                              <span>:</span>
                                          </div>
@@ -87,7 +87,7 @@
 
                                      {{-- Business Owner --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>BO</span>
                                              <span>:</span>
                                          </div>
@@ -103,7 +103,7 @@
 
                                      {{-- INCOTERM --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>INCOTERM</span>
                                              <span>:</span>
                                          </div>
@@ -118,7 +118,7 @@
 
                                      {{-- BUSINESS UNIT --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>B.UNIT</span>
                                              <span>:</span>
                                          </div>
@@ -136,7 +136,7 @@
                                  <tr class="tabs_form_row">
                                      <!-- POR -->
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>POR</span>
                                              <span>:</span>
                                          </div>
@@ -149,7 +149,7 @@
 
                                      {{-- pic --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>PIC</span>
                                              <span>:</span>
                                          </div>
@@ -165,7 +165,7 @@
                                  <tr class="tabs_form_row">
                                      <!-- POL -->
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>POL</span>
                                              <span>:</span>
                                          </div>
@@ -178,7 +178,7 @@
 
                                      {{-- pic --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>PIC</span>
                                              <span>:</span>
                                          </div>
@@ -195,7 +195,7 @@
                                  <tr class="tabs_form_row">
                                      <!-- POD -->
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>{{ transText('pod_lable') }}</span>
                                              <span>:</span>
                                          </div>
@@ -208,7 +208,7 @@
 
                                      {{-- pic --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>PIC</span>
                                              <span>:</span>
                                          </div>
@@ -224,7 +224,7 @@
                                  <tr class="tabs_form_row">
                                      <!-- DEL -->
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>DEL</span>
                                              <span>:</span>
                                          </div>
@@ -238,7 +238,7 @@
 
                                      {{-- pic --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>PIC</span>
                                              <span>:</span>
                                          </div>
@@ -254,7 +254,7 @@
                                  <tr class="tabs_form_row">
                                      {{-- carr-1 --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>Carr-1</span>
                                              <span>:</span>
                                          </div>
@@ -268,7 +268,7 @@
 
                                      {{-- carr-2 --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>Carr-2</span>
                                              <span>:</span>
                                          </div>
@@ -282,7 +282,7 @@
 
                                      {{-- carr-3 --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>Carr-3</span>
                                              <span>:</span>
                                          </div>
@@ -299,7 +299,7 @@
                                  <tr class="tabs_form_row">
                                      {{-- Contact Customer --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>Contact Cust</span>
                                              <span>:</span>
                                          </div>
@@ -321,7 +321,7 @@
                                  <tr class="tabs_form_row">
                                      {{-- Shipper --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>Shipper</span>
                                              <span>:</span>
                                          </div>
@@ -336,7 +336,7 @@
                                  <tr class="tabs_form_row">
                                      {{-- consignee --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>Consignee</span>
                                              <span>:</span>
                                          </div>
@@ -351,7 +351,7 @@
                                  <tr class="tabs_form_row">
                                      {{-- 3rd Party Pay --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>3rd Party Pay</span>
                                              <span>:</span>
                                          </div>
@@ -366,7 +366,7 @@
                                  <tr class="tabs_form_row">
                                      {{-- More Party Pay --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>More Party Pay</span>
                                              <span>:</span>
                                          </div>
@@ -381,7 +381,7 @@
                                  <tr>
                                      {{-- Off Dock --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>OFF-DOCK</span>
                                              <span>:</span>
                                          </div>
@@ -394,7 +394,7 @@
 
                                      {{-- SALES PIC --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>SALES</span>
                                              <span>:</span>
                                          </div>
@@ -408,7 +408,7 @@
 
                                      {{-- SALES PIC --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>CS</span>
                                              <span>:</span>
                                          </div>
@@ -422,7 +422,7 @@
 
                                      {{-- REF PIC --}}
                                      <th>
-                                         <div class="tabs_label">
+                                         <div class="tabs_form_label">
                                              <span>REF</span>
                                              <span>:</span>
                                          </div>
