@@ -42,13 +42,10 @@
 .tab-link.active {
     color: #3347e4;
     border: 1px solid #7988f9;
-    /* Solid border */
     border-bottom: none;
     background: none;
-    /* Remove gradient */
     background-clip: border-box;
 }
-
 
 .tab-indicator {
     position: absolute;
@@ -81,8 +78,6 @@ row.modules-tabs {
     padding-left: 0 !important;
 }
 
-
-
 /* ================================
    Tab Content Wrapper Structure
 ================================== */
@@ -95,8 +90,6 @@ row.modules-tabs {
     left: 0;
     right: 0;
 }
-
-
 
 /* ================================
    Header Section
@@ -123,11 +116,9 @@ row.modules-tabs {
 ================================== */
 .tab-content-body {
     flex-grow: 1;
-    overflow-y: auto;
     background-color: #fff;
-    min-height: 0;
-    overflow: hidden;
-    padding: 5px;
+    overflow-x: hidden;
+    padding: 6px;
 }
 
 /* ================================
@@ -172,7 +163,6 @@ row.modules-tabs {
     border-bottom-right-radius: 4px;
 }
 
-
 .tab-content-wrapper .suggestions-box{
     border: none;
 }
@@ -181,16 +171,16 @@ row.modules-tabs {
     font-size: 50px;
 }
 
-
 /*******************
 * Tables Design
 ********************/
-.tabs_label{
+
+.tabs_label {
     display: flex;
     justify-content: space-between;
 }
 
-.tabs_form_label{
+.tabs_form_label {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -198,32 +188,45 @@ row.modules-tabs {
     padding: 0 3px;
 }
 
-.tab-content-body .form-control, .form-select{
-    padding: 0.4rem .2rem 0.4rem .2rem;
-}
-
-
-
-
-/* Common cell styles */
-.tab-content-body .tab_module th,
-.tab-content-body .tab_module td {
-    padding: 2.5px;
-    border-bottom: 1px dashed #ddd;
-}
-
-/* Outer table container style */
-.tab-content-body .tab_module table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background-color: #f5f5f5;
+.tab_custom{
     border: 1px dashed #b199e8;
     border-radius: 5px;
 }
 
-/* Remove last row's bottom border (optional for clean finish) */
-.tab-content-body .tab_module tr:last-child th,
-.tab-content-body .tab_module tr:last-child td {
+.tab_custom_table tbody, 
+.tab_custom_table th, 
+.tab_custom_table td, 
+.tab_custom_table tr{
+    border: none;
+}
+
+/* Row border inside tab form */
+.tab-content-body .tabs_form_row {
+    border-bottom: 1px dashed #ddd;
+}
+
+.tab-content-body .tabs_form_row:last-child {
     border-bottom: none;
+}
+
+/* Table inside the custom table */
+.tab-content-body .tab_custom_table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    background-color: #fff;
+}
+
+/* Table header and cell */
+.tab-content-body .tab_custom_table th,
+.tab-content-body .tab_custom_table td {
+    padding: 3px 2px;
+    word-break: break-word;
+}
+
+/* Form control height in table */
+.tab_custom_table .form-control,
+.tab_custom_table .form-select {
+    height: 26px;
 }
