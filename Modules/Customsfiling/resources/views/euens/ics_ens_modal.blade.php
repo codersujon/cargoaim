@@ -1,3 +1,13 @@
+<style>
+    .is-invalid {
+        border-color: red !important;
+    }
+    .invalid-feedback {
+        /* display: block; */
+        color: red;
+        font-size: 13px;
+    }
+</style>
     <!-- The Modal -->
     <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
         aria-hidden="true">

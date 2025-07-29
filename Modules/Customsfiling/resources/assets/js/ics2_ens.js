@@ -1,3 +1,224 @@
+// Submit function
+// function submitFormWithAjax2(formSelector, url, reloadCallback) {
+//     $(formSelector).on('submit', function (e) {
+//         e.preventDefault();
+
+//         let form = $(this);
+//         let formData = new FormData(this);
+
+//         // 🔸 Remove previous red borders
+//         form.find('.is-invalid').removeClass('is-invalid');
+
+//         $.ajax({
+//             type: "POST",
+//             url: url,
+//             data: formData,
+//             contentType: false,
+//             processData: false,
+//             success: function (res) {
+//                 if (res.success) {
+//                     Swal.fire({
+//                         text: res.message,
+//                         icon: "success",
+//                         timer: 1000,
+//                         showConfirmButton: true
+//                     });
+
+//                     $('#bs-example-modal-lg').modal('hide');
+//                     form[0].reset();
+
+//                     if (typeof reloadCallback === "function") {
+//                         reloadCallback();
+//                     }
+//                 }
+//             },
+//             error: function (xhr) {
+//                 if (xhr.status === 422) {
+//                     let res = xhr.responseJSON;
+//                     let firstErrorInput = null;
+
+//                     if (res.errors) {
+//                         $.each(res.errors, function (key, messages) {
+//                             let parts = key.split('.');
+//                             let baseName = parts[0] + '[]';
+//                             let index = parseInt(parts[1]);
+
+//                             let input = form.find(`[name="${baseName}"]`).eq(index);
+
+//                             if (input.length) {
+//                                 input.addClass('is-invalid');
+
+//                                 if (!firstErrorInput) {
+//                                     firstErrorInput = input;
+//                                 }
+//                             }
+//                         });
+
+//                         if (firstErrorInput) {
+//                             firstErrorInput.focus();
+//                         }
+//                     }
+
+
+//                     // ✅ Show Notyf popup error summary
+//                     const notyf = new Notyf({
+//                         duration: 3000,
+//                         position: {
+//                             x: 'end',
+//                             y: 'bottom'
+//                         }
+//                     });
+
+//                     notyf.error(
+//                         `<b>${window.transText.err_val_ttl_msg}</b><br> ${res.message || 'Please correct the highlighted fields.'}`
+//                     );
+
+
+                    
+
+//                 } else {
+//                     // Other error
+//                     notyf.open({
+//                         type: 'error',
+//                         message: `<b>${window.transText.err_ttl_msg}</b><br> ${window.transText.err_msg}`,
+//                         dangerouslyUseHTMLString: true
+//                     });
+//                 }
+//             }
+//         });
+//     });
+// }
+
+
+function submitFormWithAjax2(formSelector, url, reloadCallback) {
+    $(formSelector).on('submit', function (e) {
+        e.preventDefault();
+
+        let form = $(this);
+        let formData = new FormData(this);
+
+        // 🔸 Remove previous red borders
+        form.find('.is-invalid').removeClass('is-invalid');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                if (res.success) {
+                    Swal.fire({
+                        text: res.message,
+                        icon: "success",
+                        timer: 1000,
+                        showConfirmButton: true
+                    });
+
+                    $('#bs-example-modal-lg').modal('hide');
+                    form[0].reset();
+
+                    if (typeof reloadCallback === "function") {
+                        reloadCallback(); // Table reload function
+                    }
+                }
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    let res = xhr.responseJSON;
+                    let firstErrorInput = null;
+
+                    if (res.errors) {
+                        $.each(res.errors, function (key, messages) {
+                            // 🔍 Try to find input field regardless of array format
+                            let input = form.find(`[name="${key}"]`);
+
+                            // ✅ Support for array inputs like: container_no.0 => container_no[]
+                            if (!input.length && key.includes('.')) {
+                                let parts = key.split('.');
+                                let baseName = parts[0] + '[]';
+                                let index = parseInt(parts[1]);
+                                input = form.find(`[name="${baseName}"]`).eq(index);
+                            }
+
+                            if (input.length) {
+                                input.addClass('is-invalid');
+                                if (!firstErrorInput) {
+                                    firstErrorInput = input;
+                                }
+                            }
+                        });
+
+                        if (firstErrorInput) {
+                            firstErrorInput.focus();
+                        }
+                    }
+
+                    Swal.fire({
+                        icon: 'error',
+                        timer: 1000,
+                        title: window.transText.err_val_ttl_msg,
+                        html: res.message || 'Please correct the highlighted fields.'
+                    });
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        timer: 1000,
+                        title: window.transText.err_ttl_msg,
+                        text: window.transText.err_msg
+                    });
+                }
+            }
+        });
+    });
+}
+
+
+
+
+//---- Edit Data Start----//
+    function loadEditDataToModal2(editBtnSelector, editUrlPrefix, modalSelector, fieldMappings, modalTitleText, saveBtnText, callback = null) {
+        $('body').on('click', editBtnSelector, function () {
+            let id = $(this).data('id');
+            $('#loader').fadeIn(200);
+
+            $.get(editUrlPrefix + "/" + id + "/edit", function (data) {
+                // Modal Title & Button Text
+                $(`${modalSelector} .modal-title`).text(modalTitleText);
+                $(`${modalSelector} #saveBtn`).text(saveBtnText);
+
+                // Form Fields Fill
+                fieldMappings.forEach(function (map) {
+                    const value = map.key.includes('.') ? getNestedValue(data, map.key) : data[map.key];
+                    $(`${modalSelector} ${map.selector}`).val(value || '');
+                });
+
+                // Custom Callback Logic (like dynamic table rendering)
+                if (typeof callback === "function") {
+                    callback(data);
+                }
+
+                $(modalSelector).modal('show');
+            })
+            .fail(function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: window.transText.err_ttl_msg,
+                    text: window.transText.err_msg
+                });
+            })
+            .always(function () {
+                $('#loader').fadeOut(200);
+            });
+        });
+    }
+    // Helper to get nested value like data['main']['row_id']
+    function getNestedValue(obj, path) {
+        return path.split('.').reduce((o, key) => (o && o[key] !== undefined ? o[key] : ''), obj);
+    }
+//--- Edit Data End -----/////
+
 $(document).ready(function () {
         
     let today = new Date(); 
@@ -204,7 +425,7 @@ $(document).ready(function () {
     });
 
     // Submit Button Click
-    submitFormWithAjax('#form', urls.icsEns, submitLoadForm);
+    submitFormWithAjax2('#form', urls.icsEns, submitLoadForm);
 
     // Function to disable all .saveIcon elements
     function disableAllSaveIcons() {
@@ -338,7 +559,7 @@ $(document).ready(function () {
 
 
     //-------- Edit Button Click start-------------///
-    loadEditDataToModal(
+    loadEditDataToModal2(
         '.editBtn',
         urls.icsEns,
         '#bs-example-modal-lg',

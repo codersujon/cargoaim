@@ -7,7 +7,6 @@
     //------ Show Modal ------////
     function showModalForCreateNew(saveText, createNewText) {
         $('#loader').fadeIn();
-
         setTimeout(function () {
             $('#bs-example-modal-lg').modal('show');
             $('#myLargeModalLabel').text(createNewText);
@@ -70,32 +69,19 @@
                 },
                 error: function (xhr) {
                     if (xhr.status === 422) {
-                        let res = xhr.responseJSON;
+                        let errors = xhr.responseJSON.errors;
                         let errorMessages = '';
-
-                        // 🔹 Show validation errors (res.errors)
-                        if (res.errors) {
-                            $.each(res.errors, function (key, value) {
-                                errorMessages += `${value[0]}<br>`;
-                            });
-                        }
-
-                        // 🔹 Also show custom single message if exists
-                        if (res.message) {
-                            errorMessages += `<b>${res.message}</b>`;
-                        }
-
-                        Swal.fire({
-                            icon: 'error',
-                            title: window.transText.err_val_ttl_msg,
-                            html: errorMessages || 'Unknown validation error.',
+                        $.each(errors, function (key, value) {
+                            errorMessages += `${value[0]}<br>`;
                         });
-                    } else {
+
                         Swal.fire({
                             icon: 'error',
                             title: window.transText.err_ttl_msg,
                             text: window.transText.err_msg
                         });
+                    } else {
+                        Swal.fire('Error', 'Something went wrong!', 'error');
                     }
                 }
             });
@@ -103,7 +89,7 @@
     }
 
 
-    // Form Submit 2
+    // Form Submit 1
     function submitFormWithAjax1(formSelector, url) {
         $(formSelector).on('submit', function (e) {
             e.preventDefault();
@@ -179,23 +165,21 @@
                 $(modalSelector).modal('show');
             })
             .fail(function () {
-                Swal.fire({
-                    icon: 'error',
-                    title: window.transText.err_ttl_msg,
-                    text: window.transText.err_msg
-                });
+                alert('ডেটা লোড করতে সমস্যা হয়েছে।');
             })
             .always(function () {
                 $('#loader').fadeOut(200);
             });
         });
     }
-
     // Helper to get nested value like data['main']['row_id']
     function getNestedValue(obj, path) {
         return path.split('.').reduce((o, key) => (o && o[key] !== undefined ? o[key] : ''), obj);
     }
     //--- Edit Data End -----/////
+
+
+    
 
 
     // Delete Button Click
