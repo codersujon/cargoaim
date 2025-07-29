@@ -1,3 +1,22 @@
+<style>
+    .is-invalid {
+        border-color: red !important;
+    }
+    .invalid-feedback {
+        display: block;
+        color: red;
+        font-size: 13px;
+    }
+
+    .form-control.is-invalid, .was-validated .form-control:invalid {
+        padding-right: calc(0em + 0rem)!important;
+        background-image: none!important;
+    }
+    .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"] {
+        --osen-form-select-bg-icon: none!important;
+        padding-right: 0rem!important;
+    }
+</style>
     <!-- The Modal -->
     <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
         aria-hidden="true">

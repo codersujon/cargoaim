@@ -190,6 +190,10 @@
 
     @yield('script')
 
+
+
+    @flasher_render
+    
 </body>
 
 

@@ -16,6 +16,7 @@ use Illuminate\Database\Query\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Flasher\Laravel\Facade\Flasher;
 
 class IcsEnsController extends Controller
 {
@@ -472,60 +473,45 @@ class IcsEnsController extends Controller
             $pol = $validated['from_location'];
             $pod = $validated['to_location'];
             $im_ex = $validated['import_export'];
-            $ts_one = $request->ts_one;
-            $ts_two = $request->ts_two;
-            $ts_three = $request->ts_three;
+            $ts = [$request->ts_one, $request->ts_two, $request->ts_three];
 
-            // Validate POL and POD
-            foreach (['POL' => $pol, 'POD' => $pod] as $type => $code) {
+            // ✅ Validate POL & POD existence
+            foreach (compact('pol', 'pod') as $type => $code) {
                 if (!LocationTable::where('locationCode', $code)->exists()) {
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => "Invalid {$type} Location Code."
-                    ], 422);
+                    throw ValidationException::withMessages([
+                        $type => ["Invalid " . strtoupper($type) . " code."]
+                    ]);
                 }
             }
 
-            // Extract prefix (first 2 letters) from POL and POD
-            $pol_prefix = substr($pol, 0, 2);
-            $pod_prefix = substr($pod, 0, 2);
-
-            // Check if either POL or POD prefix belongs to an EU country
-            $exists_in_eu = CountryTable::where('eu_country', 'Y')
-                ->where(function ($query) use ($pol_prefix, $pod_prefix) {
-                    $query->where('countryCode', $pol_prefix)
-                        ->orWhere('countryCode', $pod_prefix);
-                })
+            // ✅ Check EU presence for POL or POD
+            $prefixes = [substr($pol, 0, 2), substr($pod, 0, 2)];
+            $existsInEU = CountryTable::where('eu_country', 'Y')
+                ->whereIn('countryCode', $prefixes)
                 ->exists();
 
-            if (!$exists_in_eu) {
-                if ($validated['import_export'] !== 'FROB') {
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => 'Neither your POL nor POD is in an EU Country. Please select "FROB" in the I/EX field.'
-                    ], 422);
+            if (!$existsInEU) {
+                if ($im_ex !== 'FROB') {
+                    throw ValidationException::withMessages([
+                        'import_export' => ['Neither POL nor POD is in EU. Please select "FROB".']
+                    ]);
                 }
 
-                // Since it's FROB, TS1/TS2/TS3 must be in EU
-                $exists_ts_eu = CountryTable::where('eu_country', 'Y')
-                    ->where(function ($query) use ($ts_one, $ts_two, $ts_three) {
-                        $query->where('countryCode', $ts_one)
-                            ->orWhere('countryCode', $ts_two)
-                            ->orWhere('countryCode', $ts_three);
-                    })
+                // ✅ Ensure at least one TS is in EU
+                $existsTsInEU = CountryTable::where('eu_country', 'Y')
+                    ->whereIn('countryCode', array_filter($ts))
                     ->exists();
 
-                if (!$exists_ts_eu) {
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => 'Since POL and POD are not in EU, at least one of TS1, TS2, or TS3 must be an EU Country.'
-                    ], 422);
+                if (!$existsTsInEU) {
+                    throw ValidationException::withMessages([
+                        'ts_one' => ['Since POL and POD are not in EU, at least one of TS1, TS2, or TS3 must be in EU.']
+                    ]);
                 }
 
-                $im_ex = 'FROB'; // force assign
-            } else {
-                $im_ex = $validated['import_export'];
+                $im_ex = 'FROB'; // Force override
             }
+
+
 
 
 
@@ -620,8 +606,12 @@ class IcsEnsController extends Controller
             ]);
 
 
-           // ✅ Insert and Update container rows
-            $containerRowIds = $request->input('row_id_eqd', []);  // hidden input from form
+            
+            // ✅ Insert and Update container rows
+            $container_row_ids = $request->input('row_id_eqd', []); // hidden input from form
+
+            $errors = [];
+            $shown_error_keys = [];
 
             foreach ($request->container_no as $i => $no) {
                 if (!$no) continue;
@@ -640,78 +630,84 @@ class IcsEnsController extends Controller
                     ->where('status', 'A')
                     ->where('value', $cargo_description)
                     ->exists();
-                
-                if ($hs_code_check_data == false) {
-                    throw ValidationException::withMessages([
-                        "hs_code.{$i}" => "Unsupported HS Code: {$hs_code} in container #{$no}"
-                    ]);
+
+                // ✅ Collect only unique error messages
+                if (!$hs_code_check_data) {
+                    $key = "hs_code.{$i}";
+                    $msg = "Unsupported HS Code: {$hs_code} in Container {$no}";
+                    if (!in_array($msg, $shown_error_keys)) {
+                        $errors[$key] = $msg;
+                        $shown_error_keys[] = $msg;
+                    }
                 }
 
-                if ($hs_code_cargo_description == false) {
-                    throw ValidationException::withMessages([
-                        "cargo_description.{$i}" => "Unsupported Commodity Description: {$cargo_description} in container #{$no}"
-                    ]);
+                if (!$hs_code_cargo_description) {
+                    $key = "cargo_description.{$i}";
+                    $msg = "Unsupported Commodity Description: {$cargo_description} in Container {$no}";
+                    if (!in_array($msg, $shown_error_keys)) {
+                        $errors[$key] = $msg;
+                        $shown_error_keys[] = $msg;
+                    }
                 }
+            }
 
+            // ❗ Throw all validation errors at once (if any)
+            if (!empty($errors)) {
+                throw ValidationException::withMessages($errors);
+            }
 
-               
-                // if ($hs_code_check_data == false) {
-                //     return response()->json([
-                //         'status' => 'error',
-                //         'message' => "Unsupported HS Code: {$hs_code} in container #{$no}",
-                //     ], 422);
-                // }
+            // ✅ Proceed to insert/update if no validation error
+            foreach ($request->container_no as $i => $no) {
+                if (!$no) continue;
 
-                $rowId_eqd = $containerRowIds[$i] ?? null;
+                $row_id_eqd = $container_row_ids[$i] ?? null;
 
-                // আগের রেকর্ড আছে কিনা চেক করা
-                $existing_eqd = $rowId_eqd ? CustomsFilingEqDetails::where('row_id', $rowId_eqd)->first() : null;
+                // Check if record exists
+                $existing_eqd = $row_id_eqd ? CustomsFilingEqDetails::where('row_id', $row_id_eqd)->first() : null;
 
-                // Data তৈরি
+                // Build data array
                 $data_eqd = [
-                    'soft_cust_id' => $user->soft_cust_id,
-                    'partition_id' => $user->partition_id,
-                    'bkg_no' => '',
-                    'hbl_no' => $validated['hbl_no'],
-                    'ultimate_hbl_no' => $validated['ultimate_hbl_no'],
-                    'mbl_no' => $validated['mbl_no'],
-                    'container_no' => $no,
-                    'size_iso' => $request->size_iso[$i],
-                    'seal_no' => $request->seal_no[$i],
-                    'pkg_qty' => $request->pkg_qty[$i],
-                    'pkg_type' => $request->pkg_type[$i],
-                    'weight_kg' => $request->weight_kg[$i],
-                    'cbm' => $request->cbm[$i],
-                    'hs_code' => $request->hs_code[$i],
-                    'un_code_dg' => $request->un_code_dg[$i] ?? '',
-                    'cargo_marks' => $request->cargo_marks[$i],
+                    'soft_cust_id'      => $user->soft_cust_id,
+                    'partition_id'      => $user->partition_id,
+                    'bkg_no'            => '',
+                    'hbl_no'            => $validated['hbl_no'],
+                    'ultimate_hbl_no'   => $validated['ultimate_hbl_no'],
+                    'mbl_no'            => $validated['mbl_no'],
+                    'container_no'      => $no,
+                    'size_iso'          => $request->size_iso[$i],
+                    'seal_no'           => $request->seal_no[$i],
+                    'pkg_qty'           => $request->pkg_qty[$i],
+                    'pkg_type'          => $request->pkg_type[$i],
+                    'weight_kg'         => $request->weight_kg[$i],
+                    'cbm'               => $request->cbm[$i],
+                    'hs_code'           => $request->hs_code[$i],
+                    'un_code_dg'        => $request->un_code_dg[$i] ?? '',
+                    'cargo_marks'       => $request->cargo_marks[$i],
                     'cargo_description' => $request->cargo_description[$i],
-                    'status' => 'A',
+                    'status'            => 'A',
                 ];
 
                 if (!$existing_eqd) {
-                    // ✅ Insert case
-                    $data_eqd['entry_by'] = $user->userId;
-                    $data_eqd['version'] = $validated['version'];
-                    $data_eqd['entry_date'] = Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s');
-                    $data_eqd['update_by'] = '';
+                    // INSERT case
+                    $data_eqd['entry_by']    = $user->userId;
+                    $data_eqd['version']     = $validated['version'];
+                    $data_eqd['entry_date']  = Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s');
+                    $data_eqd['update_by']   = '';
                     $data_eqd['update_date'] = '0000-00-00 00:00:00';
-                    $data_eqd['delete_by'] = '';
+                    $data_eqd['delete_by']   = '';
                     $data_eqd['delete_date'] = '0000-00-00 00:00:00';
                 } else {
-                    // ✅ Update case
-                    $data_eqd['update_by'] = $user->userId;
+                    // UPDATE case
+                    $data_eqd['update_by']   = $user->userId;
                     $data_eqd['update_date'] = Carbon::now($user->user_time_zone)->format('Y-m-d H:i:s');
 
-                    // Keep previous version
-                    $validated['version'] = $existing_eqd->version ?? $version;
+                    // Keep existing version if found
+                    $validated['version'] = $existing_eqd->version ?? $validated['version'];
                 }
 
-
-
-
+                // ✅ Insert or Update
                 CustomsFilingEqDetails::updateOrCreate(
-                    ['row_id' => $rowId_eqd],
+                    ['row_id' => $row_id_eqd],
                     $data_eqd
                 );
             }

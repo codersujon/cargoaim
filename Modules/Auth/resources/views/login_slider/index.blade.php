@@ -40,7 +40,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form" name="form" class="form-horizontal" method="POST"
+                    <form id="lp_slider_form" name="form" class="form-horizontal" method="POST"
                         action="{{ url('login_page_slider') }}" enctype="multipart/form-data">
                         @csrf()
 
@@ -153,7 +153,7 @@
 
             reloadTable();
 
-            submitFormWithAjax('#form', "{{ url('login_page_slider') }}", reloadTable);
+            submitFormWithAjax('#lp_slider_form', "{{ url('login_page_slider') }}", reloadTable);
 
             /*------------------Click to Edit Button------------------*/
             // Edit Button Click
