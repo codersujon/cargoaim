@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('th', 512)->nullable()->comment('Thailand Text');
             $table->string('vn', 512)->nullable()->comment('Vietnam Text');
             $table->string('kh', 512)->nullable()->comment('Cambodia Text');
+            $table->string('module')->nullable()->comment('Module Name');
 
             $table->string('remarks', 255)->nullable()->comment('Open comment for understanding');
             

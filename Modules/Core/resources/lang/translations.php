@@ -10,6 +10,7 @@ return [
         'th'                 => 'TH Save',
         'vn'                 => 'VN Save',
         'kh'                 => 'KH Save',
+        'module'             => 'Core',
         'remarks'            => 'any page save button',
     ],
     [
@@ -21,6 +22,7 @@ return [
         'th'                 => 'TH Delete',
         'vn'                 => 'VN Delete',
         'kh'                 => 'KH Delete',
+        'module'             => 'Core',
         'remarks'            => 'any page delete button',
     ],
     [
@@ -32,6 +34,7 @@ return [
         'th'                 => 'TH Add New',
         'vn'                 => 'VN Add New',
         'kh'                 => 'KH Add New',
+        'module'             => 'Core',
         'remarks'            => 'any page add new button',
     ],
     [
@@ -43,6 +46,7 @@ return [
         'th'                 => 'TH Close',
         'vn'                 => 'VN Close',
         'kh'                 => 'KH Close',
+        'module'             => 'Core',
         'remarks'            => 'any page close button',
     ],
     [
@@ -54,6 +58,7 @@ return [
         'th'                 => 'TH Create New',
         'vn'                 => 'VN Create New',
         'kh'                 => 'KH Create New',
+        'module'             => 'Core',
         'remarks'            => 'any page save create new header text',
     ],
     [
@@ -65,6 +70,7 @@ return [
         'th'                 => 'TH Edit',
         'vn'                 => 'VN Edit',
         'kh'                 => 'KH Edit',
+        'module'             => 'Core',
         'remarks'            => 'any page modal header text edit',
     ],
     [
@@ -76,6 +82,7 @@ return [
         'th'                 => 'TH Update',
         'vn'                 => 'VN Update',
         'kh'                 => 'KH Update',
+        'module'             => 'Core',
         'remarks'            => 'any page update button',
     ],
     [
@@ -87,6 +94,7 @@ return [
         'th'                 => 'TH Basic Information',
         'vn'                 => 'VN Basic Information',
         'kh'                 => 'KH Basic Information',
+        'module'             => 'Core',
         'remarks'            => 'any page basic information menu',
     ],
     [
@@ -98,6 +106,7 @@ return [
         'th'                 => 'TH Login Page Slider',
         'vn'                 => 'VN Login Page Slider',
         'kh'                 => 'KH Login Page Slider',
+        'module'             => 'Core',
         'remarks'            => 'any page login page slider menu',
     ],
     [
@@ -109,6 +118,7 @@ return [
         'th'                 => 'TH Language Manage',
         'vn'                 => 'VN Language Manage',
         'kh'                 => 'KH Language Manage',
+        'module'             => 'Core',
         'remarks'            => 'any page language manage menu',
     ],
     [
@@ -120,6 +130,7 @@ return [
         'th'                 => 'TH Color Settings',
         'vn'                 => 'VN Color Settings',
         'kh'                 => 'KH Color Settings',
+        'module'             => 'Core',
         'remarks'            => 'any page color settings button',
     ],
     [
@@ -131,6 +142,7 @@ return [
         'th'                 => 'TH Reset',
         'vn'                 => 'VN Reset',
         'kh'                 => 'KH Reset',
+        'module'             => 'Core',
         'remarks'            => 'any page color reset button',
     ],
     [
@@ -142,6 +154,7 @@ return [
         'th'                 => 'TH Layout Mode',
         'vn'                 => 'VN Layout Mode',
         'kh'                 => 'KH Layout Mode',
+        'module'             => 'Core',
         'remarks'            => 'any page layout mode settings',
     ],
     [
@@ -153,6 +166,7 @@ return [
         'th'                 => 'TH Fluid',
         'vn'                 => 'VN Fluid',
         'kh'                 => 'KH Fluid',
+        'module'             => 'Core',
         'remarks'            => 'any page layout mode fluid settings',
     ],
     [
@@ -164,6 +178,7 @@ return [
         'th'                 => 'TH Detached',
         'vn'                 => 'VN Detached',
         'kh'                 => 'KH Detached',
+        'module'             => 'Core',
         'remarks'            => 'any page layout mode detached settings',
     ],
     [
@@ -175,6 +190,7 @@ return [
         'th'                 => 'TH Sidebar Size',
         'vn'                 => 'VN Sidebar Size',
         'kh'                 => 'KH Sidebar Size',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar size settings',
     ],
     [
@@ -186,6 +202,7 @@ return [
         'th'                 => 'TH Default',
         'vn'                 => 'VN Default',
         'kh'                 => 'KH Default',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar size default settings',
     ],
     [
@@ -197,6 +214,7 @@ return [
         'th'                 => 'TH Condensed',
         'vn'                 => 'VN Condensed',
         'kh'                 => 'KH Condensed',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar size condensed settings',
     ],
     [
@@ -208,6 +226,7 @@ return [
         'th'                 => 'TH Full Layout',
         'vn'                 => 'VN Full Layout',
         'kh'                 => 'KH Full Layout',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar size full layout settings',
     ],
     [
@@ -219,6 +238,7 @@ return [
         'th'                 => 'TH Hover View',
         'vn'                 => 'VN Hover View',
         'kh'                 => 'KH Hover View',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar size hover view settings',
     ],
     [
@@ -230,6 +250,7 @@ return [
         'th'                 => 'TH Compact',
         'vn'                 => 'VN Compact',
         'kh'                 => 'KH Compact',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar size compact settings',
     ],
     [
@@ -241,6 +262,7 @@ return [
         'th'                 => 'TH Type',
         'vn'                 => 'VN Type',
         'kh'                 => 'KH Type',
+        'module'             => 'Core',
         'remarks'            => 'any page type label',
     ],
     [
@@ -252,6 +274,7 @@ return [
         'th'                 => 'TH Message',
         'vn'                 => 'VN Message',
         'kh'                 => 'KH Message',
+        'module'             => 'Core',
         'remarks'            => 'any page message label',
     ],
     [
@@ -263,6 +286,7 @@ return [
         'th'                 => 'TH English',
         'vn'                 => 'VN English',
         'kh'                 => 'KH English',
+        'module'             => 'Core',
         'remarks'            => 'any page english label',
     ],
     [
@@ -274,6 +298,7 @@ return [
         'th'                 => 'TH Bangla',
         'vn'                 => 'VN Bangla',
         'kh'                 => 'KH Bangla',
+        'module'             => 'Core',
         'remarks'            => 'any page bangla label',
     ],
     [
@@ -285,6 +310,7 @@ return [
         'th'                 => 'TH China',
         'vn'                 => 'VN China',
         'kh'                 => 'KH China',
+        'module'             => 'Core',
         'remarks'            => 'any page china label',
     ],
     [
@@ -296,6 +322,7 @@ return [
         'th'                 => 'TH Thailand',
         'vn'                 => 'VN Thailand',
         'kh'                 => 'KH Thailand',
+        'module'             => 'Core',
         'remarks'            => 'any page thailand label',
     ],
     [
@@ -307,6 +334,7 @@ return [
         'th'                 => 'TH Vietnam',
         'vn'                 => 'VN Vietnam',
         'kh'                 => 'KH Vietnam',
+        'module'             => 'Core',
         'remarks'            => 'any page vietnam label',
     ],
     [
@@ -318,6 +346,7 @@ return [
         'th'                 => 'TH Cambodia',
         'vn'                 => 'VN Cambodia',
         'kh'                 => 'KH Cambodia',
+        'module'             => 'Core',
         'remarks'            => 'any page cambodia label',
     ],
     [
@@ -329,6 +358,7 @@ return [
         'th'                 => 'TH Remarks',
         'vn'                 => 'VN Remarks',
         'kh'                 => 'KH Remarks',
+        'module'             => 'Core',
         'remarks'            => 'any page remarks label',
     ],
     [
@@ -340,6 +370,7 @@ return [
         'th'                 => 'TH Enter Type',
         'vn'                 => 'VN Enter Type',
         'kh'                 => 'KH Enter Type',
+        'module'             => 'Core',
         'remarks'            => 'any page type placeholder',
     ],
     [
@@ -351,6 +382,7 @@ return [
         'th'                 => 'TH Enter Message',
         'vn'                 => 'VN Enter Message',
         'kh'                 => 'KH Enter Message',
+        'module'             => 'Core',
         'remarks'            => 'any page message placeholder',
     ],
     [
@@ -362,6 +394,7 @@ return [
         'th'                 => 'TH Enter English Language',
         'vn'                 => 'VN Enter English Language',
         'kh'                 => 'KH Enter English Language',
+        'module'             => 'Core',
         'remarks'            => 'any page english language placeholder',
     ],
     [
@@ -373,6 +406,7 @@ return [
         'th'                 => 'TH Enter Bangla Language',
         'vn'                 => 'VN Enter Bangla Language',
         'kh'                 => 'KH Enter Bangla Language',
+        'module'             => 'Core',
         'remarks'            => 'any page bangla language placeholder',
     ],
     [
@@ -384,6 +418,7 @@ return [
         'th'                 => 'TH Enter China Language',
         'vn'                 => 'VN Enter China Language',
         'kh'                 => 'KH Enter China Language',
+        'module'             => 'Core',
         'remarks'            => 'any page china language placeholder',
     ],
     [
@@ -395,6 +430,7 @@ return [
         'th'                 => 'TH Enter Thailand Language',
         'vn'                 => 'VN Enter Thailand Language',
         'kh'                 => 'KH Enter Thailand Language',
+        'module'             => 'Core',
         'remarks'            => 'any page thailand language placeholder',
     ],
     [
@@ -406,6 +442,7 @@ return [
         'th'                 => 'TH Enter Vietnam Language',
         'vn'                 => 'VN Enter Vietnam Language',
         'kh'                 => 'KH Enter Vietnam Language',
+        'module'             => 'Core',
         'remarks'            => 'any page vietnam language placeholder',
     ],
     [
@@ -417,6 +454,7 @@ return [
         'th'                 => 'TH Enter Cambodia Language',
         'vn'                 => 'VN Enter Cambodia Language',
         'kh'                 => 'KH Enter Cambodia Language',
+        'module'             => 'Core',
         'remarks'            => 'any page cambodia language placeholder',
     ],
     [
@@ -428,6 +466,7 @@ return [
         'th'                 => 'TH Enter Remarks',
         'vn'                 => 'VN Enter Remarks',
         'kh'                 => 'KH Enter Remarks',
+        'module'             => 'Core',
         'remarks'            => 'any page remarks placeholder',
     ],
     [
@@ -439,6 +478,7 @@ return [
         'th'                 => 'TH SN',
         'vn'                 => 'VN SN',
         'kh'                 => 'KH SN',
+        'module'             => 'Core',
         'remarks'            => 'any page table header serial number',
     ],
     [
@@ -450,6 +490,7 @@ return [
         'th'                 => 'TH Type',
         'vn'                 => 'VN Type',
         'kh'                 => 'KH Type',
+        'module'             => 'Core',
         'remarks'            => 'any page type table header',
     ],
     [
@@ -461,6 +502,7 @@ return [
         'th'                 => 'TH Message',
         'vn'                 => 'VN Message',
         'kh'                 => 'KH Message',
+        'module'             => 'Core',
         'remarks'            => 'any page message table header',
     ],
     [
@@ -472,6 +514,7 @@ return [
         'th'                 => 'TH English',
         'vn'                 => 'VN English',
         'kh'                 => 'KH English',
+        'module'             => 'Core',
         'remarks'            => 'any page english table header',
     ],
     [
@@ -483,6 +526,7 @@ return [
         'th'                 => 'TH Bangla',
         'vn'                 => 'VN Bangla',
         'kh'                 => 'KH Bangla',
+        'module'             => 'Core',
         'remarks'            => 'any page bangla table header',
     ],
     [
@@ -494,6 +538,7 @@ return [
         'th'                 => 'TH China',
         'vn'                 => 'VN China',
         'kh'                 => 'KH China',
+        'module'             => 'Core',
         'remarks'            => 'any page china table header',
     ],
     [
@@ -505,6 +550,7 @@ return [
         'th'                 => 'TH Thailand',
         'vn'                 => 'VN Thailand',
         'kh'                 => 'KH Thailand',
+        'module'             => 'Core',
         'remarks'            => 'any page thailand table header',
     ],
     [
@@ -516,6 +562,7 @@ return [
         'th'                 => 'TH Vietnam',
         'vn'                 => 'VN Vietnam',
         'kh'                 => 'KH Vietnam',
+        'module'             => 'Core',
         'remarks'            => 'any page vietnam table header',
     ],
     [
@@ -527,6 +574,7 @@ return [
         'th'                 => 'TH Cambodia',
         'vn'                 => 'VN Cambodia',
         'kh'                 => 'KH Cambodia',
+        'module'             => 'Core',
         'remarks'            => 'any page cambodia table header',
     ],
     [
@@ -538,6 +586,7 @@ return [
         'th'                 => 'TH Remarks',
         'vn'                 => 'VN Remarks',
         'kh'                 => 'KH Remarks',
+        'module'             => 'Core',
         'remarks'            => 'any page remarks table header',
     ],
     [
@@ -549,6 +598,7 @@ return [
         'th'                 => 'TH Action',
         'vn'                 => 'VN Action',
         'kh'                 => 'KH Action',
+        'module'             => 'Core',
         'remarks'            => 'any page action table header',
     ],
     [
@@ -560,6 +610,7 @@ return [
         'th'                 => 'TH Language Manage',
         'vn'                 => 'VN Language Manage',
         'kh'                 => 'KH Language Manage',
+        'module'             => 'Core',
         'remarks'            => 'any page language manage card header',
     ],
     [
@@ -571,6 +622,7 @@ return [
         'th'                 => 'TH Login Page Content Slider',
         'vn'                 => 'VN Login Page Content Slider',
         'kh'                 => 'KH Login Page Content Slider',
+        'module'             => 'Core',
         'remarks'            => 'any page login page content slider card header',
     ],
     [
@@ -582,6 +634,7 @@ return [
         'th'                 => 'TH Title',
         'vn'                 => 'VN Title',
         'kh'                 => 'KH Title',
+        'module'             => 'Core',
         'remarks'            => 'any page title table header',
     ],
     [
@@ -593,6 +646,7 @@ return [
         'th'                 => 'TH Description',
         'vn'                 => 'VN Description',
         'kh'                 => 'KH Description',
+        'module'             => 'Core',
         'remarks'            => 'any page description table header',
     ],
     [
@@ -604,6 +658,7 @@ return [
         'th'                 => 'TH Status',
         'vn'                 => 'VN Status',
         'kh'                 => 'KH Status',
+        'module'             => 'Core',
         'remarks'            => 'any page status table header',
     ],
     [
@@ -615,6 +670,7 @@ return [
         'th'                 => 'TH Title',
         'vn'                 => 'VN Title',
         'kh'                 => 'KH Title',
+        'module'             => 'Core',
         'remarks'            => 'any page title label',
     ],
     [
@@ -626,6 +682,7 @@ return [
         'th'                 => 'TN Description',
         'vn'                 => 'Vn Description',
         'kh'                 => 'KH Description',
+        'module'             => 'Core',
         'remarks'            => 'any page description label',
     ],
     [
@@ -637,6 +694,7 @@ return [
         'th'                 => 'TN Enter Title',
         'vn'                 => 'VN Enter Title',
         'kh'                 => 'KH Enter Title',
+        'module'             => 'Core',
         'remarks'            => 'any page title placeholder',
     ],
     [
@@ -648,6 +706,7 @@ return [
         'th'                 => 'TN Enter Description',
         'vn'                 => 'VN Enter Description',
         'kh'                 => 'KH Enter Description',
+        'module'             => 'Core',
         'remarks'            => 'any page description placeholder',
     ],
     [
@@ -659,6 +718,7 @@ return [
         'th'                 => 'TH Profile',
         'vn'                 => 'VN Profile',
         'kh'                 => 'KH Profile',
+        'module'             => 'Core',
         'remarks'            => 'any page profile card header',
     ],
     [
@@ -670,6 +730,7 @@ return [
         'th'                 => 'TH Name',
         'vn'                 => 'VN Name',
         'kh'                 => 'KH Name',
+        'module'             => 'Core',
         'remarks'            => 'any page name table header',
     ],
     [
@@ -681,6 +742,7 @@ return [
         'th'                 => 'TH Fave Icon',
         'vn'                 => 'VN Fave Icon',
         'kh'                 => 'KH Fave Icon',
+        'module'             => 'Core',
         'remarks'            => 'any page fave icon table header',
     ],
     [
@@ -692,6 +754,7 @@ return [
         'th'                 => 'TH Contact No',
         'vn'                 => 'VN Contact No',
         'kh'                 => 'KH Contact No',
+        'module'             => 'Core',
         'remarks'            => 'any page contact no table header',
     ],
     [
@@ -703,6 +766,7 @@ return [
         'th'                 => 'TH Other Contact No',
         'vn'                 => 'VN Other Contact No',
         'kh'                 => 'KH Other Contact No',
+        'module'             => 'Core',
         'remarks'            => 'any page other contact no table header',
     ],
     [
@@ -714,6 +778,7 @@ return [
         'th'                 => 'TH Logo',
         'vn'                 => 'VN Logo',
         'kh'                 => 'KH Logo',
+        'module'             => 'Core',
         'remarks'            => 'any page logo table header',
     ],
     [
@@ -725,6 +790,7 @@ return [
         'th'                 => 'TH Email',
         'vn'                 => 'VN Email',
         'kh'                 => 'KH Email',
+        'module'             => 'Core',
         'remarks'            => 'any page email table header',
     ],
     [
@@ -736,6 +802,7 @@ return [
         'th'                 => 'TH Whatsapp Link',
         'vn'                 => 'VN Whatsapp Link',
         'kh'                 => 'KH Whatsapp Link',
+        'module'             => 'Core',
         'remarks'            => 'any page whatsapp link table header',
     ],
     [
@@ -747,6 +814,7 @@ return [
         'th'                 => 'TH Twiter Link',
         'vn'                 => 'VN Twiter Link',
         'kh'                 => 'KH Twiter Link',
+        'module'             => 'Core',
         'remarks'            => 'any page twiter link table header',
     ],
     [
@@ -758,6 +826,7 @@ return [
         'th'                 => 'TH Instagram Link',
         'vn'                 => 'VN Instagram Link',
         'kh'                 => 'KH Instagram Link',
+        'module'             => 'Core',
         'remarks'            => 'any page instagram link table header',
     ],
     [
@@ -769,6 +838,7 @@ return [
         'th'                 => 'TH Telegram Link',
         'vn'                 => 'VN Telegram Link',
         'kh'                 => 'KH Telegram Link',
+        'module'             => 'Core',
         'remarks'            => 'any page telegram link table header',
     ],
     [
@@ -780,6 +850,7 @@ return [
         'th'                 => 'TH Botim Link',
         'vn'                 => 'VN Botim Link',
         'kh'                 => 'KH Botim Link',
+        'module'             => 'Core',
         'remarks'            => 'any page botim link table header',
     ],
     [
@@ -791,6 +862,7 @@ return [
         'th'                 => 'TH Address',
         'vn'                 => 'VN Address',
         'kh'                 => 'KH Address',
+        'module'             => 'Core',
         'remarks'            => 'any page address table header',
     ],
     [
@@ -802,6 +874,7 @@ return [
         'th'                 => 'TH Location',
         'vn'                 => 'VN Location',
         'kh'                 => 'KH Location',
+        'module'             => 'Core',
         'remarks'            => 'any page location table header',
     ],
     [
@@ -813,6 +886,7 @@ return [
         'th'                 => 'TH Copyright',
         'vn'                 => 'VN Copyright',
         'kh'                 => 'KH Copyright',
+        'module'             => 'Core',
         'remarks'            => 'any page copyright table header',
     ],
     [
@@ -824,6 +898,7 @@ return [
         'th'                 => 'TH Save and Apply',
         'vn'                 => 'VN Save and Apply',
         'kh'                 => 'KH Save and Apply',
+        'module'             => 'Core',
         'remarks'            => 'any page save and apply button',
     ],
     [
@@ -835,6 +910,7 @@ return [
         'th'                 => 'TH New Color Pattern',
         'vn'                 => 'VN New Color Pattern',
         'kh'                 => 'KH New Color Pattern',
+        'module'             => 'Core',
         'remarks'            => 'any page new color pattern button',
     ],
     [
@@ -846,6 +922,7 @@ return [
         'th'                 => 'TH Update and Apply',
         'vn'                 => 'VN Update and Apply',
         'kh'                 => 'KH Update and Apply',
+        'module'             => 'Core',
         'remarks'            => 'any page update and apply button',
     ],
     [
@@ -857,6 +934,7 @@ return [
         'th'                 => 'TH Choose a Color Pattern',
         'vn'                 => 'VN Choose a Color Pattern',
         'kh'                 => 'KH Choose a Color Pattern',
+        'module'             => 'Core',
         'remarks'            => 'any page choose a color pattern label',
     ],
     [
@@ -868,6 +946,7 @@ return [
         'th'                 => 'TH Top Bar First Color',
         'vn'                 => 'VN Top Bar First Color',
         'kh'                 => 'KH Top Bar First Color',
+        'module'             => 'Core',
         'remarks'            => 'any page top bar first color label',
     ],
     [
@@ -879,6 +958,7 @@ return [
         'th'                 => 'TH Top Bar Second Color',
         'vn'                 => 'VN Top Bar Second Color',
         'kh'                 => 'KH Top Bar Second Color',
+        'module'             => 'Core',
         'remarks'            => 'any page top bar second color label',
     ],
     [
@@ -890,6 +970,7 @@ return [
         'th'                 => 'TH Sidebar First Color',
         'vn'                 => 'VN Sidebar First Color',
         'kh'                 => 'KH Sidebar First Color',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar first color label',
     ],
     [
@@ -901,6 +982,7 @@ return [
         'th'                 => 'TH Sidebar Second Color',
         'vn'                 => 'VN Sidebar Second Color',
         'kh'                 => 'KH Sidebar Second Color',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar second color label',
     ],
     [
@@ -912,6 +994,7 @@ return [
         'th'                 => 'TH Sidebar Menu Hover Color',
         'vn'                 => 'VN Sidebar Menu Hover Color',
         'kh'                 => 'KH Sidebar Menu Hover Color',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar menu hover color label',
     ],
     [
@@ -923,6 +1006,7 @@ return [
         'th'                 => 'TH Sidebar & Topbar Text Color',
         'vn'                 => 'VN Sidebar & Topbar Text Color',
         'kh'                 => 'KH Sidebar & Topbar Text Color',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar & topbar text color label',
     ],
     [
@@ -934,6 +1018,7 @@ return [
         'th'                 => 'TH Sidebar & Topbar Text Hover Color',
         'vn'                 => 'VN Sidebar & Topbar Text Hover Color',
         'kh'                 => 'KH Sidebar & Topbar Text Hover Color',
+        'module'             => 'Core',
         'remarks'            => 'any page sidebar and topbar text hover color label',
     ],
     [
@@ -945,6 +1030,7 @@ return [
         'th'                 => 'TH Card Header Color',
         'vn'                 => 'VN Card Header Color',
         'kh'                 => 'KH Card Header Color',
+        'module'             => 'Core',
         'remarks'            => 'any page card header color label',
     ],
     [
@@ -956,6 +1042,7 @@ return [
         'th'                 => 'TH Card Header Text Color',
         'vn'                 => 'VN Card Header Text Color',
         'kh'                 => 'KH Card Header Text Color',
+        'module'             => 'Core',
         'remarks'            => 'any page card header textr label',
     ],
     [
@@ -967,6 +1054,7 @@ return [
         'th'                 => 'TH Card Body Color',
         'vn'                 => 'VN Card Body Color',
         'kh'                 => 'KH Card Body Color',
+        'module'             => 'Core',
         'remarks'            => 'any page card body color label',
     ],
     [
@@ -978,6 +1066,7 @@ return [
         'th'                 => 'TH Card Text Color',
         'vn'                 => 'VN Card Text Color',
         'kh'                 => 'KH Card Text Color',
+        'module'             => 'Core',
         'remarks'            => 'any page card text color label',
     ],
     [
@@ -989,6 +1078,7 @@ return [
         'th'                 => 'TH Table Heder BG Color',
         'vn'                 => 'VN Table Heder BG Color',
         'kh'                 => 'KH Table Heder BG Color',
+        'module'             => 'Core',
         'remarks'            => 'any page table heder BG color label',
     ],
     [
@@ -1000,6 +1090,7 @@ return [
         'th'                 => 'TH Table Header Text Color',
         'vn'                 => 'VN Table Header Text Color',
         'kh'                 => 'KH Table Header Text Color',
+        'module'             => 'Core',
         'remarks'            => 'any page table header text color label',
     ],
     [
@@ -1011,6 +1102,7 @@ return [
         'th'                 => 'TH Table Body Text Color',
         'vn'                 => 'VN Table Body Text Color',
         'kh'                 => 'KH Table Body Text Color',
+        'module'             => 'Core',
         'remarks'            => 'any page table body text color label',
     ],
     [
@@ -1022,6 +1114,7 @@ return [
         'th'                 => 'TH Table Border Color',
         'vn'                 => 'VN Table Border Color',
         'kh'                 => 'KH Table Border Color',
+        'module'             => 'Core',
         'remarks'            => 'any page table border color label',
     ],
     [
@@ -1033,6 +1126,7 @@ return [
         'th'                 => 'TH Success Button Color',
         'vn'                 => 'VN Success Button Color',
         'kh'                 => 'KH Success Button Color',
+        'module'             => 'Core',
         'remarks'            => 'any page success button color label',
     ],
     [
@@ -1044,6 +1138,7 @@ return [
         'th'                 => 'TH Danger Button Color',
         'vn'                 => 'VN Danger Button Color',
         'kh'                 => 'KH Danger Button Color',
+        'module'             => 'Core',
         'remarks'            => 'any page danger button color label',
     ],
     [
@@ -1055,6 +1150,7 @@ return [
         'th'                 => 'TH Info Button Color',
         'vn'                 => 'VN Info Button Color',
         'kh'                 => 'KH Info Button Color',
+        'module'             => 'Core',
         'remarks'            => 'any page info button color label',
     ],
     [
@@ -1066,6 +1162,7 @@ return [
         'th'                 => 'TH Warning Button Color',
         'vn'                 => 'VN Warning Button Color',
         'kh'                 => 'KH Warning Button Color',
+        'module'             => 'Core',
         'remarks'            => 'any page warning button color label',
     ],
     [
@@ -1077,6 +1174,7 @@ return [
         'th'                 => 'TH Primary Button Color',
         'vn'                 => 'VN Primary Button Color',
         'kh'                 => 'KH Primary Button Color',
+        'module'             => 'Core',
         'remarks'            => 'any page primary button color label',
     ],
     [
@@ -1088,6 +1186,7 @@ return [
         'th'                 => 'TH Secondary Button Color',
         'vn'                 => 'VN Secondary Button Color',
         'kh'                 => 'KH Secondary Button Color',
+        'module'             => 'Core',
         'remarks'            => 'any page secondary button color label',
     ],
     [
@@ -1099,6 +1198,7 @@ return [
         'th'                 => 'TH Dark Button Color',
         'vn'                 => 'VN Dark Button Color',
         'kh'                 => 'KH Dark Button Color',
+        'module'             => 'Core',
         'remarks'            => 'any page dark button color label',
     ],
     [
@@ -1110,6 +1210,7 @@ return [
         'th'                 => 'TH BAR COLOR',
         'vn'                 => 'VN BAR COLOR',
         'kh'                 => 'KH BAR COLOR',
+        'module'             => 'Core',
         'remarks'            => 'any page bar color',
     ],
     [
@@ -1121,6 +1222,7 @@ return [
         'th'                 => 'TH CARD COLOR',
         'vn'                 => 'VN CARD COLOR',
         'kh'                 => 'KH CARD COLOR',
+        'module'             => 'Core',
         'remarks'            => 'any page card color',
     ],
     [
@@ -1132,6 +1234,7 @@ return [
         'th'                 => 'TH TABLE COLOR',
         'vn'                 => 'VN TABLE COLOR',
         'kh'                 => 'KH TABLE COLOR',
+        'module'             => 'Core',
         'remarks'            => 'any page table color',
     ],
     [
@@ -1143,6 +1246,7 @@ return [
         'th'                 => 'TH BUTTON COLOR',
         'vn'                 => 'VN BUTTON COLOR',
         'kh'                 => 'KH BUTTON COLOR',
+        'module'             => 'Core',
         'remarks'            => 'any page button color',
     ],
     [
@@ -1154,6 +1258,7 @@ return [
         'th'                 => 'TH INPUT COLOR',
         'vn'                 => 'VN INPUT COLOR',
         'kh'                 => 'KH INPUT COLOR',
+        'module'             => 'Core',
         'remarks'            => 'any page input color',
     ],
     [
@@ -1165,6 +1270,7 @@ return [
         'th'                 => 'TH Input Border Color',
         'vn'                 => 'VN Input Border Color',
         'kh'                 => 'KH Input Border Color',
+        'module'             => 'Core',
         'remarks'            => 'any page input border color label',
     ],
     [
@@ -1176,6 +1282,7 @@ return [
         'th'                 => 'TH BACKGROUND',
         'vn'                 => 'VN BACKGROUND',
         'kh'                 => 'KH BACKGROUND',
+        'module'             => 'Core',
         'remarks'            => 'any page background color',
     ],
         [
@@ -1187,6 +1294,7 @@ return [
         'th'                 => 'TH EU ICS-2/ENS',
         'vn'                 => 'VN EU ICS-2/ENS',
         'kh'                 => 'KH EU ICS-2/ENS',
+        'module'             => 'Core',
         'remarks'            => 'any page EU ICS-2/ENS menu',
     ],
     [
@@ -1198,6 +1306,7 @@ return [
         'th'                 => 'TH ICS2 (HBL ENS)',
         'vn'                 => 'VN ICS2 (HBL ENS)',
         'kh'                 => 'KH ICS2 (HBL ENS)',
+        'module'             => 'Core',
         'remarks'            => 'any page card header',
     ],
     [
@@ -1209,6 +1318,7 @@ return [
         'th'                 => 'TH ICS2 (HBL ENS) CREATE NEW',
         'vn'                 => 'VN ICS2 (HBL ENS) CREATE NEW',
         'kh'                 => 'KH ICS2 (HBL ENS) CREATE NEW',
+        'module'             => 'Core',
         'remarks'            => 'any page save ics2 hbl ens create new header text',
     ],
     [
@@ -1220,6 +1330,7 @@ return [
         'th'                 => 'TH BORDER DASHED',
         'vn'                 => 'VN BORDER DASHED',
         'kh'                 => 'KH BORDER DASHED',
+        'module'             => 'Core',
         'remarks'            => 'any page border dashed color',
     ],
     [
@@ -1231,6 +1342,7 @@ return [
         'th'                 => 'TH INPUT FOCUS BG',
         'vn'                 => 'VN INPUT FOCUS BG',
         'kh'                 => 'KH INPUT FOCUS BG',
+        'module'             => 'Core',
         'remarks'            => 'any page input focus background color label',
     ],
     [
@@ -1242,6 +1354,7 @@ return [
         'th'                 => 'TH Input Focus Border Color',
         'vn'                 => 'VN Input Focus Border Color',
         'kh'                 => 'KH Input Focus Border Color',
+        'module'             => 'Core',
         'remarks'            => 'any page input focus border color label',
     ],
     [
@@ -1253,6 +1366,7 @@ return [
         'th'                 => 'TH Input Focus Background Color',
         'vn'                 => 'VN Input Focus Background Color',
         'kh'                 => 'Kh Input Focus Background Color',
+        'module'             => 'Core',
         'remarks'            => 'any page input focus background color label',
     ],
     [
@@ -1264,6 +1378,7 @@ return [
         'th'                 => 'TH Input Focus Active Border Color',
         'vn'                 => 'VN Input Focus Active Border Color',
         'kh'                 => 'KH Input Focus Active Border Color',
+        'module'             => 'Core',
         'remarks'            => 'any page Input Focus Active Border Color label',
     ],
     [
@@ -1275,6 +1390,7 @@ return [
         'th'                 => 'TH Input Suggestions Box Background Color',
         'vn'                 => 'VN Input Suggestions Box Background Color',
         'kh'                 => 'KH Input Suggestions Box Background Color',
+        'module'             => 'Core',
         'remarks'            => 'any page Input Suggestions Box Background Color label',
     ],
     [
@@ -1286,6 +1402,7 @@ return [
         'th'                 => 'TH Input Search Spinner Color',
         'vn'                 => 'VN Input Search Spinner Color',
         'kh'                 => 'KH Input Search Spinner Color',
+        'module'             => 'Core',
         'remarks'            => 'any page input search spinner color label',
     ],
     [
@@ -1297,6 +1414,7 @@ return [
         'th'                 => 'TH ACTUAL SHIPPER/BUYER',
         'vn'                 => 'VN ACTUAL SHIPPER/BUYER',
         'kh'                 => 'KH ACTUAL SHIPPER/BUYER',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page shipper buyer title',
     ],
     [
@@ -1308,6 +1426,7 @@ return [
         'th'                 => 'TH ACTUAL CONSIGNEE/SELLER',
         'vn'                 => 'VN ACTUAL CONSIGNEE/SELLER',
         'kh'                 => 'KH ACTUAL CONSIGNEE/SELLER',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page consignee seller title',
     ],
     [
@@ -1319,6 +1438,7 @@ return [
         'th'                 => 'TH ULTIMATE NOTIFY PARTY',
         'vn'                 => 'VN ULTIMATE NOTIFY PARTY',
         'kh'                 => 'KH ULTIMATE NOTIFY PARTY',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page ultimate notify party title',
     ],
     [
@@ -1330,6 +1450,7 @@ return [
         'th'                 => 'TH NEW HBL FILE',
         'vn'                 => 'VN NEW HBL FILE',
         'kh'                 => 'KH NEW HBL FILE',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page new hbl file button',
     ],
     [
@@ -1341,6 +1462,7 @@ return [
         'th'                 => 'TH BILL',
         'vn'                 => 'VN BILL',
         'kh'                 => 'KH BILL',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page bill label',
     ],
     [
@@ -1352,6 +1474,7 @@ return [
         'th'                 => 'TH POL',
         'vn'                 => 'VN POL',
         'kh'                 => 'KH POL',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page pol label',
     ],
     [
@@ -1363,6 +1486,7 @@ return [
         'th'                 => 'TH Name',
         'vn'                 => 'VN Name',
         'kh'                 => 'KH Name',
+        'module'             => 'Core',
         'remarks'            => 'any page name lable',
     ],
     [
@@ -1374,6 +1498,7 @@ return [
         'th'                 => 'TH HBL',
         'vn'                 => 'VN HBL',
         'kh'                 => 'KH HBL',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page hbl lable',
     ],
     [
@@ -1385,6 +1510,7 @@ return [
         'th'                 => 'TH POD',
         'vn'                 => 'VN POD',
         'kh'                 => 'KH POD',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page pod lable',
     ],
     [
@@ -1396,6 +1522,7 @@ return [
         'th'                 => 'TH Address',
         'vn'                 => 'VN Address',
         'kh'                 => 'KH Address',
+        'module'             => 'Core',
         'remarks'            => 'any page address lable',
     ],
     [
@@ -1517,6 +1644,7 @@ return [
         'th'                 => 'TH LIC/BIN/EORI',
         'vn'                 => 'VN LIC/BIN/EORI',
         'kh'                 => 'KH LIC/BIN/EORI',
+        'module'             => 'Core',
         'remarks'            => 'ics ens page lic/bin/eori lable',
     ],
     [
@@ -1528,6 +1656,7 @@ return [
         'th'                 => 'TH CONTAINER',
         'vn'                 => 'VN CONTAINER',
         'kh'                 => 'KH CONTAINER',
+        'module'             => 'Core',
         'remarks'            => 'any page container table header',
     ],
     [
@@ -1539,6 +1668,7 @@ return [
         'th'                 => 'TH SIZE',
         'vn'                 => 'VN SIZE',
         'kh'                 => 'KH SIZE',
+        'module'             => 'Core',
         'remarks'            => 'any page size table header',
     ],
     [
@@ -1550,6 +1680,7 @@ return [
         'th'                 => 'TH SEAL',
         'vn'                 => 'VN SEAL',
         'kh'                 => 'KH SEAL',
+        'module'             => 'Core',
         'remarks'            => 'any page seal table header',
     ],
     [
@@ -1561,6 +1692,7 @@ return [
         'th'                 => 'TH QTY',
         'vn'                 => 'VN QTY',
         'kh'                 => 'KH QTY',
+        'module'             => 'Core',
         'remarks'            => 'any page qty table header',
     ],
     [
@@ -1572,6 +1704,7 @@ return [
         'th'                 => 'TH PKG',
         'vn'                 => 'VN PKG',
         'kh'                 => 'Kh PKG',
+        'module'             => 'Core',
         'remarks'            => 'any page package table header',
     ],
     [
@@ -1583,6 +1716,7 @@ return [
         'th'                 => 'TH KG',
         'vn'                 => 'VN KG',
         'kh'                 => 'KH KG',
+        'module'             => 'Core',
         'remarks'            => 'any page kg table header',
     ],
     [
@@ -1594,6 +1728,7 @@ return [
         'th'                 => 'TH CBM',
         'vn'                 => 'VN CBM',
         'kh'                 => 'KH CBM',
+        'module'             => 'Core',
         'remarks'            => 'any page cmb table header',
     ],
     [
@@ -1605,6 +1740,7 @@ return [
         'th'                 => 'TH HS CODE',
         'vn'                 => 'VN HS CODE',
         'kh'                 => 'KH HS CODE',
+        'module'             => 'Core',
         'remarks'            => 'any page hs code table header',
     ],
     [
@@ -1616,6 +1752,7 @@ return [
         'th'                 => 'TH UN/DG',
         'vn'                 => 'CN UN/DG',
         'kh'                 => 'KH UN/DG',
+        'module'             => 'Core',
         'remarks'            => 'any page un/dg table header',
     ],
     [
@@ -1737,6 +1874,7 @@ return [
         'th'                 => 'TH MARKS',
         'vn'                 => 'VN MARKS',
         'kh'                 => 'KH MARKS',
+        'module'             => 'Core',
         'remarks'            => 'any page marks table header',
     ],
     [
@@ -1748,6 +1886,7 @@ return [
         'th'                 => 'TH CLEAR DESCRIPTION',
         'vn'                 => 'VN CLEAR DESCRIPTION',
         'kh'                 => 'KH CLEAR DESCRIPTION',
+        'module'             => 'Core',
         'remarks'            => 'any page clear description table header',
     ],
     [
@@ -1759,6 +1898,7 @@ return [
         'th'                 => 'TH Save',
         'vn'                 => 'VN Save',
         'kh'                 => 'KH Save',
+        'module'             => 'Core',
         'remarks'            => 'any page save title',
     ],
     [
@@ -1770,6 +1910,7 @@ return [
         'th'                 => 'TH Copy',
         'vn'                 => 'VN Copy',
         'kh'                 => 'KH Copy',
+        'module'             => 'Core',
         'remarks'            => 'any page copy title',
     ],
     [
@@ -1781,6 +1922,7 @@ return [
         'th'                 => 'TH Add',
         'vn'                 => 'VN Add',
         'kh'                 => 'KH Add',
+        'module'             => 'Core',
         'remarks'            => 'any page add title',
     ],
     [
@@ -1792,6 +1934,7 @@ return [
         'th'                 => 'TH Delete',
         'vn'                 => 'VN Delete',
         'kh'                 => 'KH Delete',
+        'module'             => 'Core',
         'remarks'            => 'any page delete title',
     ],
     [
@@ -1803,6 +1946,7 @@ return [
         'th'                 => 'TH Filter By',
         'vn'                 => 'VN Filter By',
         'kh'                 => 'KH Filter By',
+        'module'             => 'Core',
         'remarks'            => 'any page filter by lable',
     ],
     [
@@ -1814,6 +1958,7 @@ return [
         'th'                 => 'TH From',
         'vn'                 => 'VN From',
         'kh'                 => 'KH From',
+        'module'             => 'Core',
         'remarks'            => 'any page from date lable',
     ],
     [
@@ -1825,6 +1970,7 @@ return [
         'th'                 => 'TH To',
         'vn'                 => 'VN To',
         'kh'                 => 'KH To',
+        'module'             => 'Core',
         'remarks'            => 'any page to date lable',
     ],
     [
@@ -1836,6 +1982,7 @@ return [
         'th'                 => 'TH Liner',
         'vn'                 => 'VN Liner',
         'kh'                 => 'KH Liner',
+        'module'             => 'Core',
         'remarks'            => 'any page liner lable',
     ],
     [
@@ -1847,6 +1994,7 @@ return [
         'th'                 => 'TH Keyword',
         'vn'                 => 'VN Keyword',
         'kh'                 => 'KH Keyword',
+        'module'             => 'Core',
         'remarks'            => 'any page keyword lable',
     ],
     [
@@ -1858,6 +2006,7 @@ return [
         'th'                 => 'TH Company',
         'vn'                 => 'VN Company',
         'kh'                 => 'KH Company',
+        'module'             => 'Core',
         'remarks'            => 'any page company lable',
     ],
     [
@@ -1869,6 +2018,7 @@ return [
         'th'                 => 'TH Status',
         'vn'                 => 'VN Status',
         'kh'                 => 'KH Status',
+        'module'             => 'Core',
         'remarks'            => 'any page status lable',
     ],
     [
@@ -1880,6 +2030,7 @@ return [
         'th'                 => 'TH LOAD',
         'vn'                 => 'VN LOAD',
         'kh'                 => 'KH LOAD',
+        'module'             => 'Core',
         'remarks'            => 'any page load lable',
     ],
     [
@@ -1891,6 +2042,7 @@ return [
         'th'                 => 'TH List will be loaded here',
         'vn'                 => 'VN List will be loaded here',
         'kh'                 => 'KH List will be loaded here',
+        'module'             => 'Core',
         'remarks'            => 'any page data load message',
     ],
     [
@@ -1902,6 +2054,7 @@ return [
         'th'                 => 'TH No data found',
         'vn'                 => 'VN No data found',
         'kh'                 => 'KH No data found',
+        'module'             => 'Core',
         'remarks'            => 'any page data empty message',
     ],
     [
@@ -1913,6 +2066,7 @@ return [
         'th'                 => 'TH Please try different filters or check back later',
         'vn'                 => 'VN Please try different filters or check back later',
         'kh'                 => 'KH Please try different filters or check back later',
+        'module'             => 'Core',
         'remarks'            => 'any page try message',
     ],
     [
@@ -1924,6 +2078,7 @@ return [
         'th'                 => 'TH Party Name Only',
         'vn'                 => 'VN Party Name Only',
         'kh'                 => 'KH Party Name Only',
+        'module'             => 'Core',
         'remarks'            => 'any page party name only placeholder',
     ],
     [
@@ -1935,6 +2090,7 @@ return [
         'th'                 => 'TH Country',
         'vn'                 => 'VN Country',
         'kh'                 => 'KH Country',
+        'module'             => 'Core',
         'remarks'            => 'any page country placeholder',
     ],
     [
@@ -1946,6 +2102,7 @@ return [
         'th'                 => 'TH City',
         'vn'                 => 'VN City',
         'kh'                 => 'KH City',
+        'module'             => 'Core',
         'remarks'            => 'any page city placeholder',
     ],
     [
@@ -1957,6 +2114,7 @@ return [
         'th'                 => 'TH Phone',
         'vn'                 => 'VN Phone',
         'kh'                 => 'KH Phone',
+        'module'             => 'Core',
         'remarks'            => 'any page phone placeholder',
     ],
     [
@@ -1968,6 +2126,7 @@ return [
         'th'                 => 'TH Postal/Zip',
         'vn'                 => 'VN Postal/Zip',
         'kh'                 => 'KH Postal/Zip',
+        'module'             => 'Core',
         'remarks'            => 'any page postal/zip placeholder',
     ],
     [
@@ -1979,6 +2138,7 @@ return [
         'th'                 => 'TH Email',
         'vn'                 => 'VN Email',
         'kh'                 => 'KH Email',
+        'module'             => 'Core',
         'remarks'            => 'any page email placeholder',
     ],
     [
@@ -1990,6 +2150,7 @@ return [
         'th'                 => 'TH License/ BIN/ VAT/ TAX/ EORI',
         'vn'                 => 'VN License/ BIN/ VAT/ TAX/ EORI',
         'kh'                 => 'KH License/ BIN/ VAT/ TAX/ EORI',
+        'module'             => 'Core',
         'remarks'            => 'any page license placeholder',
     ],
     [
@@ -2001,6 +2162,7 @@ return [
         'th'                 => 'TH Updated successfully',
         'vn'                 => 'VN Updated successfully',
         'kh'                 => 'KH Updated successfully',
+        'module'             => 'Core',
         'remarks'            => 'any page any page form update message',
     ],
     [
@@ -2012,6 +2174,7 @@ return [
         'th'                 => 'TH Inserted successfully!',
         'vn'                 => 'VN Inserted successfully!',
         'kh'                 => 'KH Inserted successfully!',
+        'module'             => 'Core',
         'remarks'            => 'any page form submit message',
     ],
     [
@@ -2023,6 +2186,7 @@ return [
         'th'                 => 'TH Deleted Successfully!',
         'vn'                 => 'VN Deleted Successfully!',
         'kh'                 => 'KH Deleted Successfully!',
+        'module'             => 'Core',
         'remarks'            => 'any page fetch data delete message',
     ],
     [
@@ -2034,6 +2198,7 @@ return [
         'th'                 => 'TH Booking & Documentation',
         'vn'                 => 'VN Booking & Documentation',
         'kh'                 => 'CN Booking & Documentation',
+        'module'             => 'Core',
         'remarks'            => 'Apply for booking & documentation menu',
     ],
     [
@@ -2045,6 +2210,7 @@ return [
         'th'                 => 'TH Non Vessel Operated Common Carrier',
         'vn'                 => 'VN Non Vessel Operated Common Carrier',
         'kh'                 => 'KH Non Vessel Operated Common Carrier',
+        'module'             => 'Core',
         'remarks'            => 'নন ভেসেল অপারেটেড কমন ক্যারিয়ার',
     ],
     [
@@ -2056,6 +2222,7 @@ return [
         'th'                 => 'TH DOC',
         'vn'                 => 'VN DOC',
         'kh'                 => 'KH DOC',
+        'module'             => 'Core',
         'remarks'            => 'Menu Title',
     ],
     [
@@ -2067,6 +2234,7 @@ return [
         'th'                 => 'TH LOG',
         'vn'                 => 'VN LOG',
         'kh'                 => 'KH LOG',
+        'module'             => 'Core',
         'remarks'            => 'Menu Title',
     ],
     [
@@ -2078,6 +2246,7 @@ return [
         'th'                 => 'TH ACC',
         'vn'                 => 'VN ACC',
         'kh'                 => 'KH ACC',
+        'module'             => 'Core',
         'remarks'            => 'Menu Title',
     ],
     [
@@ -2089,6 +2258,7 @@ return [
         'th'                 => 'การจองและเอกสาร',
         'vn'                 => 'Đặt chỗ & Tài liệu',
         'kh'                 => 'ការកក់ និងឯកសារ',
+        'module'             => 'Core',
         'remarks'            => 'Tooltip Title',
     ],
     [
@@ -2100,6 +2270,7 @@ return [
         'th'                 => 'สถานะคลังสินค้าและสินค้า',
         'vn'                 => 'Tình trạng Kho & Hàng hóa',
         'kh'                 => 'ស្ថានភាពឃ្លាំង និងទំនិញ',
+        'module'             => 'Core',
         'remarks'            => 'Tooltip Title',
     ],
     [
@@ -2111,6 +2282,7 @@ return [
     'th'                 => 'การบัญชี',
     'vn'                 => 'Kế toán',
     'kh'                 => 'គណនេយ្យ',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2122,6 +2294,7 @@ return [
     'th'                 => 'ศุลกากร / นายหน้าศุลกากร',
     'vn'                 => 'Hải quan / Môi giới',
     'kh'                 => 'អគ្គនាយកដ្ឋានគយ / ភ្នាក់ងារទំនិញ',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2133,6 +2306,7 @@ return [
     'th'                 => 'ทรัพยากรบุคคลและรหัสผู้ใช้',
     'vn'                 => 'Nhân sự & Mã người dùng',
     'kh'                 => 'ធនធានមនុស្ស និងលេខសម្គាល់អ្នកប្រើប្រាស់',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2144,6 +2318,7 @@ return [
     'th'                 => 'การเรียกเก็บเงินผู้โดยสาร',
     'vn'                 => 'Thanh toán hành khách',
     'kh'                 => 'វិក័យប័ត្រអ្នកដំណើរ',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2155,6 +2330,7 @@ return [
     'th'                 => 'การเรียกเก็บเงินสายการบินและ GSA',
     'vn'                 => 'hanh toán hàng không & GSA',
     'kh'                 => 'វិក័យប័ត្រអាកាសចរណ៍ និង GSA',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2166,6 +2342,7 @@ return [
     'th'                 => 'คลังสินค้า',
     'vn'                 => 'Nhà kho',
     'kh'                 => 'ឃ្លាំង',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2177,6 +2354,7 @@ return [
     'th'                 => 'การขนส่งทางรถบรรทุก (เจ้าของฟลีท)',
     'vn'                 => 'Vận tải đường bộ (Chủ đội xe)',
     'kh'                 => 'ការដឹកជញ្ជូន (ម្ចាស់ជំរុំឡាន)',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2188,6 +2366,7 @@ return [
     'th'                 => 'ผู้ส่งพัสดุ',
     'vn'                 => 'Chuyển phát nhanh',
     'kh'                 => 'ក្រុមហ៊ុនដឹកជញ្ជូន',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
 [
@@ -2199,6 +2378,7 @@ return [
     'th'                 => 'การจัดการคำสั่งซื้อ',
     'vn'                 => 'Quản lý đơn đặt hàng',
     'kh'                 => 'ការគ្រប់គ្រងបញ្ជាទិញ',
+    'module'             => 'Core',
     'remarks'            => 'Tooltip Title',
 ],
  [
@@ -2210,6 +2390,7 @@ return [
         'th'                 => 'ศุลกากร / นายหน้าศุลกากร',
         'vn'                 => 'Hải quan / Môi giới',
         'kh'                 => 'អគ្គនាយកដ្ឋានគយ / ភ្នាក់ងារទំនិញ',
+        'module'             => 'Core',
         'remarks'            => 'Tooltip Title',
     ],
     [
@@ -2221,6 +2402,7 @@ return [
         'th'                 => 'TH NVO',
         'vn'                 => 'VN NVO',
         'kh'                 => 'KH NVO',
+        'module'             => 'Core',
         'remarks'            => 'Menu Title',
     ],
     [
@@ -2232,6 +2414,7 @@ return [
         'th'                 => 'TH Are you sure?',
         'vn'                 => 'VN Are you sure?',
         'kh'                 => 'KH Are you sure?',
+        'module'             => 'Core',
         'remarks'            => 'any page delete confirm title message',
     ],
     [
@@ -2243,6 +2426,7 @@ return [
         'th'                 => 'TH You want to delete this item?',
         'vn'                 => 'VN You want to delete this item?',
         'kh'                 => 'KH You want to delete this item?',
+        'module'             => 'Core',
         'remarks'            => 'any page delete confirm text message',
     ],
     [
@@ -2254,6 +2438,7 @@ return [
         'th'                 => 'TH Yes, delete it!',
         'vn'                 => 'VN Yes, delete it!',
         'kh'                 => 'KH Yes, delete it!',
+        'module'             => 'Core',
         'remarks'            => 'any page delete successful message',
     ],
     [
@@ -2265,6 +2450,7 @@ return [
         'th'                 => 'TH cancel',
         'vn'                 => 'VN cancel',
         'kh'                 => 'KH cancel',
+        'module'             => 'Core',
         'remarks'            => 'any page cancel button',
     ],
     [
@@ -2276,6 +2462,7 @@ return [
         'th'                 => 'TH Validation Error',
         'vn'                 => 'VN Validation Error',
         'kh'                 => 'KH Validation Error',
+        'module'             => 'Core',
         'remarks'            => 'any page validation title message',
     ],
     [
@@ -2287,6 +2474,7 @@ return [
         'th'                 => 'TH Oops! Something went wrong',
         'vn'                 => 'VN Oops! Something went wrong',
         'kh'                 => 'KH Oops! Something went wrong',
+        'module'             => 'Core',
         'remarks'            => 'any page error title message',
     ],
     [
@@ -2298,6 +2486,7 @@ return [
         'th'                 => 'TH Please try again later or contact support if the issue persists.',
         'vn'                 => 'VN Please try again later or contact support if the issue persists.',
         'kh'                 => 'KH Please try again later or contact support if the issue persists.',
+        'module'             => 'Core',
         'remarks'            => 'any page error message',
     ],
     [
@@ -2309,6 +2498,7 @@ return [
         'th'                 => 'TH Active Successfully!',
         'vn'                 => 'VN Active Successfully!',
         'kh'                 => 'KH Active Successfully!',
+        'module'             => 'Core',
         'remarks'            => 'any page active success message',
     ],
     [
@@ -2320,6 +2510,7 @@ return [
         'th'                 => 'TH Deactivated Successfully!',
         'vn'                 => 'VN Deactivated Successfully!',
         'kh'                 => 'KH Deactivated Successfully!',
+        'module'             => 'Core',
         'remarks'            => 'any page deactive success message',
     ],
 ];
