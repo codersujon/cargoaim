@@ -10,4 +10,10 @@ class CustomsfilingLanguageSeeder extends CoreLanguageSeeder
     {
         parent::__construct('Customsfiling');
     }
+
+    public function run(): void
+    {
+        // Avoid full module loop, just seed this module only
+        $this->seedModuleTranslation($this->module_name);
+    }
 }
