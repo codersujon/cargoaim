@@ -1,22 +1,25 @@
-<style>
-    .is-invalid {
-        border-color: red !important;
-    }
-    .invalid-feedback {
-        display: block;
-        color: red;
-        font-size: 13px;
-    }
+    <style>
+        .is-invalid {
+            border-color: red !important;
+        }
+        .invalid-feedback {
+            display: block;
+            color: red;
+            font-size: 13px;
+        }
 
-    .form-control.is-invalid, .was-validated .form-control:invalid {
-        padding-right: calc(0em + 0rem)!important;
-        background-image: none!important;
-    }
-    .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"] {
-        --osen-form-select-bg-icon: none!important;
-        padding-right: 0rem!important;
-    }
-</style>
+        .form-control.is-invalid, .was-validated .form-control:invalid {
+            padding-right: calc(0em + 0rem)!important;
+            background-image: none!important;
+        }
+        .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"] {
+            --osen-form-select-bg-icon: none!important;
+            padding-right: 0rem!important;
+        }
+        input[readonly] {
+            background-color: #f0f0f0;
+        }
+    </style>
     <!-- The Modal -->
     <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
         aria-hidden="true">
@@ -98,6 +101,7 @@
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
                                                     <div style="flex: 1; position: relative;">
+
                                                         <input type="text" name="shipper_name" id="shipper_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
                                                         
                                                         <div id="shipper_loader" class="circle-dot-loader" style="display: none;">
@@ -120,6 +124,9 @@
                                             <!-- CONSIGNEE -->
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
+
+                                                    <input type="checkbox" id="copy_consignee" name="copy_consignee" value="Bike" style="margin-right: 4px;">
+
                                                     <div style="flex: 1; position: relative;">
                                                         <input type="text" name="consignee_name" id="consignee_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
                                                         
@@ -142,6 +149,9 @@
                                             <!-- NOTIFY -->
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
+
+                                                    <input type="checkbox" id="copy_notify" name="copy_notify" value="Bike" style="margin-right: 4px;">
+
                                                     <div style="flex: 1; position: relative;">
                                                         <input type="text" name="notify_name" id="notify_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
                                                         
@@ -334,7 +344,7 @@
                                                 <span style="margin-right: 2px;">{{ transText('email_lable') }} :</span> 
                                             </th>
                                             <td>
-                                                 <input type="text" name="shipper_email" id="shipper_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off">
+                                                <input type="text" name="shipper_email" id="shipper_email" class="form-control" placeholder="{{ transText('email_placeholder') }}" autocomplete="off">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
@@ -380,13 +390,13 @@
                                                 <span style="margin-right: 2px;">{{ transText('lic_bin_eori_lable') }} :</span> 
                                             </th>
                                             <td>
-                                                 <input type="text" name="shipper_registration" id="shipper_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" style="margin-top: 1px; margin-bottom: 2px;">
+                                                <input type="text" name="shipper_registration" id="shipper_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" style="margin-top: 1px; margin-bottom: 2px;">
                                                         
                                                 <input type="hidden" name="shipper_code" id="shipper_code"  autocomplete="off">
                                             </td>
                                             <td style="width: 20px"></td>
                                             <td>
-                                                 <input type="text" name="consignee_registration" id="consignee_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" style="margin-top: 1px; margin-bottom: 2px;">
+                                                <input type="text" name="consignee_registration" id="consignee_registration" class="form-control" placeholder="{{ transText('license_placeholder') }}" autocomplete="off" style="margin-top: 1px; margin-bottom: 2px;">
                                                         
                                                 <input type="hidden" name="consignee_code" id="consignee_code"  autocomplete="off">
                                             </td>
@@ -459,3 +469,29 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- The Modal End-->
+<script>
+    $(document).ready(function () {
+        function copy_fields(fromPrefix, toPrefix, fields, checked) {
+            fields.forEach(function(field) {
+                const from = `#${fromPrefix}_${field}`;
+                const to = `#${toPrefix}_${field}`;
+                $(to).val(checked ? $(from).val() : '');
+            });
+        }
+
+        const field_list = [
+            'name', 'address', 'country', 'location', 'phone',
+            'zip_code', 'email', 'registration', 'code'
+        ];
+
+        $('#copy_consignee').on('change', function () {
+            copy_fields('shipper', 'consignee', field_list, this.checked);
+        });
+
+        $('#copy_notify').on('change', function () {
+            copy_fields('shipper', 'notify', field_list, this.checked);
+        });
+    });
+</script>
+
+

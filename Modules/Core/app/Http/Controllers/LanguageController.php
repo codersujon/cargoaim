@@ -36,6 +36,7 @@ class LanguageController extends Controller
             'th.required' => 'The Thailand field is required.',
             'vn.required' => 'The Vietnam field is required.',
             'kh.required' => 'The Cambodia field is required.',
+            // 'module.required' => 'The Module field is required.',
             'apply_on_type.required' => 'The Type field is required.',
             'message_id_to_call.required' => 'The Message field is required.',
             'remarks.required' => 'The Remarks field is required.',
@@ -50,6 +51,7 @@ class LanguageController extends Controller
             'th' => 'required|string',
             'vn' => 'required|string',
             'kh' => 'required|string',
+            // 'module' => 'required|string',
             'remarks' => 'required|string',
         ], $customMessages);
 

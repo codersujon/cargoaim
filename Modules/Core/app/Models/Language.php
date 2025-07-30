@@ -24,6 +24,7 @@ class Language extends Model
         'th',
         'vn',
         'kh',
+        'module',
         'remarks',
     ];
 

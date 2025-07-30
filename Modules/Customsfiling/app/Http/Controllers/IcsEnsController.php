@@ -16,7 +16,6 @@ use Illuminate\Database\Query\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Flasher\Laravel\Facade\Flasher;
 
 class IcsEnsController extends Controller
 {

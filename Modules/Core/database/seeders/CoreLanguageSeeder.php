@@ -79,6 +79,7 @@ class CoreLanguageSeeder extends Seeder
                         'th' => $item['th'] ?? null,
                         'vn' => $item['vn'] ?? null,
                         'kh' => $item['kh'] ?? null,
+                        'module' => $item['module'] ?? null,
                         'remarks' => $item['remarks'] ?? null,
                     ]
                 );

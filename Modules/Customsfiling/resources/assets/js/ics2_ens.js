@@ -1,95 +1,27 @@
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+
+// Custom Notyf instance with icon, duration, etc.
+const notyf = new Notyf({
+    duration: 5000, // milliseconds
+    position: {
+        x: 'right',
+        y: 'bottom'
+    },
+    types: [
+        {
+            type: 'error',
+            background: 'indianred',
+            icon: {
+                className: 'fas fa-times-circle',
+                tagName: 'i',
+                color: 'white'
+            }
+        }
+    ]
+});
+
 // Submit function
-// function submitFormWithAjax2(formSelector, url, reloadCallback) {
-//     $(formSelector).on('submit', function (e) {
-//         e.preventDefault();
-
-//         let form = $(this);
-//         let formData = new FormData(this);
-
-//         // 🔸 Remove previous red borders
-//         form.find('.is-invalid').removeClass('is-invalid');
-
-//         $.ajax({
-//             type: "POST",
-//             url: url,
-//             data: formData,
-//             contentType: false,
-//             processData: false,
-//             success: function (res) {
-//                 if (res.success) {
-//                     Swal.fire({
-//                         text: res.message,
-//                         icon: "success",
-//                         timer: 1000,
-//                         showConfirmButton: true
-//                     });
-
-//                     $('#bs-example-modal-lg').modal('hide');
-//                     form[0].reset();
-
-//                     if (typeof reloadCallback === "function") {
-//                         reloadCallback();
-//                     }
-//                 }
-//             },
-//             error: function (xhr) {
-//                 if (xhr.status === 422) {
-//                     let res = xhr.responseJSON;
-//                     let firstErrorInput = null;
-
-//                     if (res.errors) {
-//                         $.each(res.errors, function (key, messages) {
-//                             let parts = key.split('.');
-//                             let baseName = parts[0] + '[]';
-//                             let index = parseInt(parts[1]);
-
-//                             let input = form.find(`[name="${baseName}"]`).eq(index);
-
-//                             if (input.length) {
-//                                 input.addClass('is-invalid');
-
-//                                 if (!firstErrorInput) {
-//                                     firstErrorInput = input;
-//                                 }
-//                             }
-//                         });
-
-//                         if (firstErrorInput) {
-//                             firstErrorInput.focus();
-//                         }
-//                     }
-
-
-//                     // ✅ Show Notyf popup error summary
-//                     const notyf = new Notyf({
-//                         duration: 3000,
-//                         position: {
-//                             x: 'end',
-//                             y: 'bottom'
-//                         }
-//                     });
-
-//                     notyf.error(
-//                         `<b>${window.transText.err_val_ttl_msg}</b><br> ${res.message || 'Please correct the highlighted fields.'}`
-//                     );
-
-
-                    
-
-//                 } else {
-//                     // Other error
-//                     notyf.open({
-//                         type: 'error',
-//                         message: `<b>${window.transText.err_ttl_msg}</b><br> ${window.transText.err_msg}`,
-//                         dangerouslyUseHTMLString: true
-//                     });
-//                 }
-//             }
-//         });
-//     });
-// }
-
-
 function submitFormWithAjax2(formSelector, url, reloadCallback) {
     $(formSelector).on('submit', function (e) {
         e.preventDefault();
@@ -100,6 +32,11 @@ function submitFormWithAjax2(formSelector, url, reloadCallback) {
         // 🔸 Remove previous red borders
         form.find('.is-invalid').removeClass('is-invalid');
 
+        // 🔸 Find the submit button and update UI
+        let submitBtn = form.find('button[type="submit"]');
+        let originalText = submitBtn.html(); // Store original text like "Save"
+        submitBtn.prop('disabled', true).html('Saving...');
+
         $.ajax({
             type: "POST",
             url: url,
@@ -108,13 +45,7 @@ function submitFormWithAjax2(formSelector, url, reloadCallback) {
             processData: false,
             success: function (res) {
                 if (res.success) {
-                    Swal.fire({
-                        text: res.message,
-                        icon: "success",
-                        timer: 1000,
-                        showConfirmButton: true
-                    });
-
+                    notyf.success(res.message);
                     $('#bs-example-modal-lg').modal('hide');
                     form[0].reset();
 
@@ -122,18 +53,21 @@ function submitFormWithAjax2(formSelector, url, reloadCallback) {
                         reloadCallback(); // Table reload function
                     }
                 }
+
+                // 🔄 Re-enable button and restore text
+                submitBtn.prop('disabled', false).html(originalText);
             },
             error: function (xhr) {
+                // 🔄 Re-enable button and restore text
+                submitBtn.prop('disabled', false).html(originalText);
+
                 if (xhr.status === 422) {
                     let res = xhr.responseJSON;
                     let firstErrorInput = null;
 
                     if (res.errors) {
                         $.each(res.errors, function (key, messages) {
-                            // 🔍 Try to find input field regardless of array format
                             let input = form.find(`[name="${key}"]`);
-
-                            // ✅ Support for array inputs like: container_no.0 => container_no[]
                             if (!input.length && key.includes('.')) {
                                 let parts = key.split('.');
                                 let baseName = parts[0] + '[]';
@@ -154,25 +88,30 @@ function submitFormWithAjax2(formSelector, url, reloadCallback) {
                         }
                     }
 
-                    Swal.fire({
-                        icon: 'error',
-                        timer: 1000,
-                        title: window.transText.err_val_ttl_msg,
-                        html: res.message || 'Please correct the highlighted fields.'
+                    const title = window.transText.err_val_ttl_msg;
+                    const msg = res.message || 'Please correct the highlighted fields.';
+                    const fullMessage = `${title}: ${msg}`;
+
+                    notyf.open({
+                        type: 'error',
+                        message: fullMessage
                     });
 
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        timer: 1000,
-                        title: window.transText.err_ttl_msg,
-                        text: window.transText.err_msg
+                    const title = window.transText.err_ttl_msg;
+                    const msg = window.transText.err_msg;
+                    const fullMessage = `${title}: ${msg}`;
+
+                    notyf.open({
+                        type: 'error',
+                        message: fullMessage
                     });
                 }
             }
         });
     });
 }
+
 
 
 

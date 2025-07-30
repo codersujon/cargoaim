@@ -1,6 +1,4 @@
-
-    
-    // CSRF Token setup for all AJAX requests
+   // CSRF Token setup for all AJAX requests
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
@@ -54,12 +52,7 @@
                 processData: false,
                 success: function (res) {
                     if (res.success) {
-                        Swal.fire({
-                            text: res.message,
-                            icon: "success",
-                            timer: 1000,
-                            showConfirmButton: true
-                        });
+                        notyf.success(res.message);
 
                         $('#bs-example-modal-lg').modal('hide');
                         $(formSelector)[0].reset();
@@ -77,20 +70,15 @@
                             errorMessages += `${value[0]}<br>`;
                         });
 
-                        Swal.fire({
-                            icon: 'error',
-                            title: window.transText.err_ttl_msg,
-                            text: window.transText.err_msg
+
+                        const title = window.transText.err_ttl_msg;
+                        const msg = window.transText.err_msg;
+                        const fullMessage = `${title}: ${msg}`;
+
+                        notyf.open({
+                            type: 'error',
+                            message: fullMessage
                         });
-
-                        // const title = window.transText.err_ttl_msg;
-                        // const msg = window.transText.err_msg;
-                        // const fullMessage = `${title}: ${msg}`;
-
-                        // notyf.open({
-                        //     type: 'error',
-                        //     message: fullMessage
-                        // });
 
                     } else {
                         Swal.fire('Error', 'Something went wrong!', 'error');

@@ -159,9 +159,31 @@
     <script src="{{ asset('backend') }}/flatpickr.js"></script>
       
     <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
+
+    {{-- <script>
+        // Custom Notyf instance with icon, duration, etc.
+        const notyf = new Notyf({
+            duration: 5000, // milliseconds
+            position: {
+                x: 'right',
+                y: 'bottom'
+            },
+            types: [
+                {
+                    type: 'error',
+                    background: 'indianred',
+                    icon: {
+                        className: 'fas fa-times-circle',
+                        tagName: 'i',
+                        color: 'white'
+                    }
+                }
+            ]
+        });
+    </script> --}}
     
+
     <script>
-        
         window.transText = {
             err_ttl_msg: @json(transText('err_ttl_msg')),
             err_msg: @json(transText('err_msg')),
@@ -189,10 +211,6 @@
     </script>
 
     @yield('script')
-
-
-
-    @flasher_render
     
 </body>
 

@@ -46,7 +46,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form" name="form" class="form-horizontal" method="POST"
+                    <form id="language_form" name="form" class="form-horizontal" method="POST"
                         action="{{ url('language') }}" enctype="multipart/form-data">
                         @csrf()
 
@@ -249,7 +249,7 @@
             //---- Fetch Data Load End----////
 
             // Form submit call
-            submitFormWithAjax('#form', "{{ url('language') }}", reloadTable);
+            submitFormWithAjax('#language_form', "{{ url('language') }}", reloadTable);
 
 
 

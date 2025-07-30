@@ -1534,6 +1534,7 @@ return [
         'th' => 'TH EORI',
         'vn' => 'VN EORI',
         'kh' => 'KH EORI',
+        'module'             => 'Core',
         'remarks' => 'ics ens page eori label',
     ],
     [
@@ -1545,6 +1546,7 @@ return [
         'th' => 'TH TS1',
         'vn' => 'VN TS1',
         'kh' => 'KH TS1',
+        'module'             => 'Core',
         'remarks' => 'ics ens page ts1 lable',
     ],
     [
@@ -1556,6 +1558,7 @@ return [
         'th' => 'TH Country/City',
         'vn' => 'VN Country/City',
         'kh' => 'KH Country/City',
+        'module'             => 'Core',
         'remarks' => 'any page country/city lable',
     ],
     [
@@ -1567,6 +1570,7 @@ return [
         'th' => 'TH MBL',
         'vn' => 'VN MBL',
         'kh' => 'KH MBL',
+        'module'             => 'Core',
         'remarks' => 'ics ens page mbl lable',
     ],
     [
@@ -1578,6 +1582,7 @@ return [
         'th' => 'TH TS2',
         'vn' => 'VN TS2',
         'kh' => 'KH TS2',
+        'module'             => 'Core',
         'remarks' => 'ics ens page ts2 lable',
     ],
     [
@@ -1589,6 +1594,7 @@ return [
         'th' => 'TH Phone/Postal',
         'vn' => 'VN Phone/Postal',
         'kh' => 'KH Phone/Postal',
+        'module'             => 'Core',
         'remarks' => 'ics ens page phone/postal lable',
     ],
     [
@@ -1600,6 +1606,7 @@ return [
         'th' => 'TH TS3',
         'vn' => 'VN TS3',
         'kh' => 'KH TS3',
+        'module'             => 'Core',
         'remarks' => 'ics ens page ts3 lable',
     ],
     [
@@ -1611,6 +1618,7 @@ return [
         'th' => 'TH Email',
         'vn' => 'VN Email',
         'kh' => 'KH Email',
+        'module'             => 'Core',
         'remarks' => 'any page email lable',
     ],
     [
@@ -1622,6 +1630,7 @@ return [
         'th' => 'TH I/EX',
         'vn' => 'VN I/EX',
         'kh' => 'KH I/EX',
+        'module'             => 'Core',
         'remarks' => 'ics ens page I/EX lable',
     ],
     [
@@ -1633,6 +1642,7 @@ return [
         'th' => 'TH PP/C',
         'vn' => 'VN PP/C',
         'kh' => 'KH PP/C',
+        'module'             => 'Core',
         'remarks' => 'ics ens page pp/c lable',
     ],
     [
@@ -1764,6 +1774,7 @@ return [
         'th' => 'TH MARKS',
         'vn' => 'VN MARKS',
         'kh' => 'KH MARKS',
+        'module'             => 'Core',
         'remarks' => 'any page marks table header',
     ],
     [
@@ -1775,6 +1786,7 @@ return [
         'th' => 'TH CLEAR DESCRIPTION',
         'vn' => 'VN CLEAR DESCRIPTION',
         'kh' => 'KH CLEAR DESCRIPTION',
+        'module'             => 'Core',
         'remarks' => 'any page clear description table header',
     ],
     [
@@ -1786,6 +1798,7 @@ return [
         'th' => 'TH Save',
         'vn' => 'VN Save',
         'kh' => 'KH Save',
+        'module'             => 'Core',
         'remarks' => 'any page save title',
     ],
     [
@@ -1797,6 +1810,7 @@ return [
         'th' => 'TH Copy',
         'vn' => 'VN Copy',
         'kh' => 'KH Copy',
+        'module'             => 'Core',
         'remarks' => 'any page copy title',
     ],
     [
@@ -1808,6 +1822,7 @@ return [
         'th' => 'TH Add',
         'vn' => 'VN Add',
         'kh' => 'KH Add',
+        'module'             => 'Core',
         'remarks' => 'any page add title',
     ],
     [
@@ -1819,6 +1834,7 @@ return [
         'th' => 'TH Delete',
         'vn' => 'VN Delete',
         'kh' => 'KH Delete',
+        'module'             => 'Core',
         'remarks' => 'any page delete title',
     ],
     [
@@ -1830,6 +1846,7 @@ return [
         'th' => 'TH Filter By',
         'vn' => 'VN Filter By',
         'kh' => 'KH Filter By',
+        'module'             => 'Core',
         'remarks' => 'any page filter by lable',
     ],
     [
@@ -1841,6 +1858,7 @@ return [
         'th' => 'TH From',
         'vn' => 'VN From',
         'kh' => 'KH From',
+        'module'             => 'Core',
         'remarks' => 'any page from date lable',
     ],
     [
@@ -1852,6 +1870,7 @@ return [
         'th' => 'TH To',
         'vn' => 'VN To',
         'kh' => 'KH To',
+        'module'             => 'Core',
         'remarks' => 'any page to date lable',
     ],
     [
@@ -1863,6 +1882,7 @@ return [
         'th' => 'TH Liner',
         'vn' => 'VN Liner',
         'kh' => 'KH Liner',
+        'module'             => 'Core',
         'remarks' => 'any page liner lable',
     ],
     [
