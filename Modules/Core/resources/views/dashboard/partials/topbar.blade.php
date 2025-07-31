@@ -411,16 +411,16 @@
                             <span class="align-middle">My Profile</span>
                         </a>
 
+                        <!-- Color Settings -->
+                        <a href="{{ url('color') }}" class="dropdown-item">
+                            <i class="ti ti-palette me-1 fs-17 align-middle"></i>
+                            <span class="align-middle">Theme Color</span>
+                        </a>
 
-                        <!-- item-->
-                        <button class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas">
-                            <i class="ti ti-settings me-1 fs-17 align-middle"></i>
-                            <span class="align-middle">Settings</span>
-                        </button>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <i class="ti ti-lifebuoy me-1 fs-17 align-middle"></i>
-                            <span class="align-middle">Support</span>
+                        <!-- Language Settings -->
+                        <a href="{{ url('language') }}" class="dropdown-item">
+                             <i class="ti ti-language me-1 fs-17 align-middle"></i>
+                            <span class="align-middle">Language Settings</span>
                         </a>
 
                         <div class="dropdown-divider"></div>
