@@ -420,36 +420,36 @@ $(document).ready(function () {
                     response.forEach(function (item) {
                         html += `
                             <tr>
-                                <td class="text-center"><input type="checkbox" name="check_name[]" value="${item.row_id}" /></td>
-                                <td class="text-center">${i++}</td>
-                                <td class="text-center">${item.mbl_no ?? ''}</td>
-                                <td class="text-center">${item.ultimate_hbl_no ?? ''}</td>
-                                <td class="text-center">
+                                <td class="text-center sticky sticky-col-0" style="width: 42px;"><input type="checkbox" name="check_name[]" value="${item.row_id}" /></td>
+                                <td class="text-center sticky sticky-col-1" style="width: 43px;">${i++}</td>
+                                <td class="text-center sticky sticky-col-2" style="width: 136px;">${item.mbl_no ?? ''}</td>
+                                <td class="text-center sticky sticky-col-3" style="width: 138px;">${item.ultimate_hbl_no ?? ''}</td>
+                                <td class="text-center sticky sticky-col-4" style="width: 41px;">
                                     <button type="button" data-id="${item.row_id}" class="btn btn-sm btn-info editBtn" style="margin: 4px 0px">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </button>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center sticky sticky-col-5" style="width: 42px;">
                                     <button type="button" class="btn btn-sm btn-dark copyBtn" data-copy="${item.filing_t_ultimate_hbl_no ?? ''}">
                                         <i class="fa-solid fa-copy"title="Copy"></i>
                                     </button>
                                 </td>
-                                <td class="text-center bg-light">${item.ens_mrn_no ?? ''}</td>
-                                <td class="text-center bg-light">${item.ens_status_code ?? ''}</td>
-                                <td class="text-center bg-light">${item.ens_disposition_code ?? ''}</td>
-                                <td class="text-center">${item.eq_qty ?? '0'}</td>
-                                <td class="text-center">${item.pky_qty ?? '0'}</td>
-                                <td class="text-center">${item.weight_kg ?? '0'}</td>
-                                <td class="text-center">${item.cbm ?? '0'}</td>
-                                <td class="text-center">${item.to_location ?? ''}</td>
-                                <td>${item.shipper_name ?? ''}</td>
-                                <td>${item.consignee_name ?? ''}</td>
-                                <td class="text-center">
+                                <td class="text-center bg-light" style="width: 120px;">${item.ens_mrn_no ?? ''}</td>
+                                <td class="text-center bg-light" style="width: 90px;">${item.ens_status_code ?? ''}</td>
+                                <td class="text-center bg-light" style="width: 90px;">${item.ens_disposition_code ?? ''}</td>
+                                <td class="text-center" style="width: 40px;">${item.eq_qty ?? '0'}</td>
+                                <td class="text-center" style="width: 40px;">${item.pky_qty ?? '0'}</td>
+                                <td class="text-center" style="width: 40px;">${item.weight_kg ?? '0'}</td>
+                                <td class="text-center" style="width: 50px;">${item.cbm ?? '0'}</td>
+                                <td class="text-center" style="width: 90px;">${item.to_location ?? ''}</td>
+                                <td style="width: 400px;">${item.shipper_name ?? ''}</td>
+                                <td style="width: 400px;">${item.consignee_name ?? ''}</td>
+                                <td class="text-center sticky-col-last-2" style="width: 40px;">
                                     <button type="button" class="btn btn-sm btn-info actionBtn" data-id="${item.row_id}">
                                         <i class="fa-solid fa-bolt"></i>
                                     </button>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center sticky-col-last-1" style="width: 40px;">
                                     <button type="button" class="btn btn-sm btn-danger deleteBtn" data-id="${item.row_id}">
                                         <i class="fa-solid fa-trash" title="Delete"></i>
                                     </button>

@@ -10,7 +10,7 @@ return [
         'th'                 => 'TH Save',
         'vn'                 => 'VN Save',
         'kh'                 => 'KH Save',
-        'module'             => 'Core',
+        'module'             => 'Customsfiling',
         'remarks'            => 'any page save button',
     ],
     

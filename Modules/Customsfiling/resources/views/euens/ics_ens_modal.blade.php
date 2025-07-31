@@ -125,8 +125,6 @@
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
 
-                                                    <input type="checkbox" id="copy_consignee" name="copy_consignee" value="Bike" style="margin-right: 4px;">
-
                                                     <div style="flex: 1; position: relative;">
                                                         <input type="text" name="consignee_name" id="consignee_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
                                                         
@@ -150,7 +148,8 @@
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
 
-                                                    <input type="checkbox" id="copy_notify" name="copy_notify" value="Bike" style="margin-right: 4px;">
+                                                    <input type="checkbox" id="copy_notify" name="copy_notify" value="Bike" style="margin-right: 4px; transform: scale(1.4); cursor: pointer;" title="Copy to Consignee">
+
 
                                                     <div style="flex: 1; position: relative;">
                                                         <input type="text" name="notify_name" id="notify_name" class="form-control uppercase-only" placeholder="{{ transText('pno_placeholder') }}" required autocomplete="off">
@@ -484,12 +483,8 @@
             'zip_code', 'email', 'registration', 'code'
         ];
 
-        $('#copy_consignee').on('change', function () {
-            copy_fields('shipper', 'consignee', field_list, this.checked);
-        });
-
         $('#copy_notify').on('change', function () {
-            copy_fields('shipper', 'notify', field_list, this.checked);
+            copy_fields('consignee', 'notify', field_list, this.checked);
         });
     });
 </script>
