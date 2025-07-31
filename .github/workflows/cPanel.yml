@@ -80,6 +80,7 @@ jobs:
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd /home/cargoaim/public_html/cargoaim/test
-            php artisan db:seed --class="Modules\\Core\\Database\\Seeders\\CoreLanguageSeeder"
+            php artisan db:seed --class='Modules\Core\Database\Seeders\MenuTableSeeder' --force
+            php artisan db:seed --class='Modules\Core\Database\Seeders\CoreLanguageSeeder' --force
           EOF
           
