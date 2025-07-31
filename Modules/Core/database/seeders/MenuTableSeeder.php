@@ -4,7 +4,7 @@ namespace Modules\Core\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Core\Models\Menu;
-use Carbon\Carbon;;
+use Carbon\Carbon;
 
 class MenuTableSeeder extends Seeder
 {
@@ -13,39 +13,34 @@ class MenuTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // If already have rows
-        if(Menu::count() > 0){
-            $this->command->info('Menu table already seeded. Skipping...');
-            return;
-        }
-
         $menus = include(__DIR__ . '/data/menus_data.php');
         $routeToId = [];
 
-
-        // First pass: Insert all menus with parent_id = null
+        // First pass: Insert or Update menus with parent_id = null
         foreach ($menus as $menu) {
-            $menuModel = new Menu();
+            $menuData = [
+                'title'         => $menu['title'],
+                'icon'          => $menu['icon'],
+                'url'           => $menu['url'],
+                'params'        => $menu['params'],
+                'order'         => $menu['order'],
+                'permission'    => $menu['permission'],
+                'roles'         => $menu['roles'],
+                'is_active'     => $menu['is_active'],
+                'is_hidden'     => $menu['is_hidden'],
+                'has_children'  => $menu['has_children'],
+                'module'        => $menu['module'],
+                'target'        => $menu['target'],
+                'tooltip_title' => $menu['tooltip_title'] ?? null,
+                'parent_route'  => null,
+                'updated_at'    => Carbon::now(),
+            ];
 
-            $menuModel->title        = $menu['title'];
-            $menuModel->icon         = $menu['icon'];
-            $menuModel->url          = $menu['url'];
-            $menuModel->route        = $menu['route'];
-            $menuModel->params       = $menu['params']; // will auto-cast if model has cast
-            $menuModel->order        = $menu['order'];
-            $menuModel->permission   = $menu['permission'];
-            $menuModel->roles        = $menu['roles'];  // will auto-cast if model has cast
-            $menuModel->is_active    = $menu['is_active'];
-            $menuModel->is_hidden    = $menu['is_hidden'];
-            $menuModel->has_children = $menu['has_children'];
-            $menuModel->module       = $menu['module'];
-            $menuModel->target       = $menu['target'];
-            $menuModel->tooltip_title = $menu['tooltip_title'] ?? null;
-            $menuModel->parent_route = null; // temporary
-            $menuModel->created_at   = Carbon::now();
-            $menuModel->updated_at   = Carbon::now();
-
-            $menuModel->save();
+            // Add created_at only when inserting
+            $menuModel = Menu::updateOrCreate(
+                ['route' => $menu['route']],
+                array_merge(['created_at' => Carbon::now()], $menuData)
+            );
 
             $routeToId[$menu['route']] = $menuModel->id;
         }
