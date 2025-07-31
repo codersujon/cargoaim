@@ -10,9 +10,6 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-
-
-
 /* Global Container Settings */
 .global_container_settings {
     position: fixed;
@@ -21,6 +18,13 @@
     right: 0;
     width: 94.7%;
     z-index: 999;
+}
+
+.global_settings{
+    position: relative;
+    width: 100%;
+    overflow-y: auto;
+    max-height: calc(100vh - 80px); 
 }
 
 @keyframes slideInLeftToRight {

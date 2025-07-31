@@ -3,36 +3,33 @@
 @section('title', "| Language Manage")
 
 @section('content')
-    <div class="row pt-3">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped display" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th>{{ transText('sn_th') }}</th>
-                                    <th>{{ transText('type_th') }}</th>
-                                    <th>{{ transText('message_th') }}</th>
-                                    <th>{{ transText('en_th') }}</th>
-                                    <th>{{ transText('bn_th') }}</th>
-                                    <th>{{ transText('cn_th') }}</th>
-                                    <th>{{ transText('th_th') }}</th>
-                                    <th>{{ transText('vn_th') }}</th>
-                                    <th>{{ transText('kh_th') }} </th>
-                                    <th>{{ transText('remarks_th') }} </th>
-                                    <th>{{ transText('action_th') }} </th>
-                                </tr>
-                            </thead>
-                            <tbody id="dataBody">
-                                <!-- Data will be dynamically inserted here -->
-                            </tbody>
-                        </table>
-                    </div>                
-                </div><!-- end card-body -->
-            </div><!-- end card -->
-        </div>
-        <!-- end col -->
+    <div class="global_container_settings">
+        <div class="card global_settings">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped display" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>{{ transText('sn_th') }}</th>
+                                <th>{{ transText('type_th') }}</th>
+                                <th>{{ transText('message_th') }}</th>
+                                <th>{{ transText('en_th') }}</th>
+                                <th>{{ transText('bn_th') }}</th>
+                                <th>{{ transText('cn_th') }}</th>
+                                <th>{{ transText('th_th') }}</th>
+                                <th>{{ transText('vn_th') }}</th>
+                                <th>{{ transText('kh_th') }} </th>
+                                <th>{{ transText('remarks_th') }} </th>
+                                <th>{{ transText('action_th') }} </th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataBody">
+                            <!-- Data will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>                
+            </div><!-- end card-body -->
+        </div><!-- end card -->
     </div>
     <!-- end row -->
 

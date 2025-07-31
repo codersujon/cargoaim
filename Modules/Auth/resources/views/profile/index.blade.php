@@ -1,70 +1,67 @@
 @extends('core::dashboard.layouts.master')
 
-@section('title', "| {{ transText('profile') }}")
+@section('title', "{{ transText('profile') }}")
 
 @section('content')
-    <div class="row pt-3">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header border-bottom border-dashed">
-                    <h4 class="card-title mb-0 flex-grow-1">{{ transText('profile') }}</h4>
-                </div><!-- end card header -->
+    <div class="global_container_settings">
+        <div class="card global_settings">
+            <div class="card-header border-bottom border-dashed">
+                <h4 class="card-title mb-0 flex-grow-1">{{ transText('profile') }}</h4>
+            </div><!-- end card header -->
 
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tbody>
-                                <tr>
-                                    <th> {{ transText('name_th') }}: </th>
-                                    <td>{{ $data->name ?? '' }}</td>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th> {{ transText('name_th') }}: </th>
+                                <td>{{ $data->name ?? '' }}</td>
 
-                                     <th> {{ transText('contactno_th') }}: </th>
-                                    <td>{{ $data->contact ?? ''}}</td>                                   
-                                </tr>
-                                
-                                <tr>
-                                    <th> {{ transText('faveicon_th') }}: </th>
-                                    <td>
-                                        <img alt="image" src="{{ asset('upload/' . ($data?->fav_icon ?? 'default.png')) }}" width="45">
-                                    </td>
+                                    <th> {{ transText('contactno_th') }}: </th>
+                                <td>{{ $data->contact ?? ''}}</td>                                   
+                            </tr>
+                            
+                            <tr>
+                                <th> {{ transText('faveicon_th') }}: </th>
+                                <td>
+                                    <img alt="image" src="{{ asset('upload/' . ($data?->fav_icon ?? 'default.png')) }}" width="45">
+                                </td>
 
-                                    <th> {{ transText('logo_th') }}: </th>
-                                    <td>
-                                        <img alt="image" src="{{ asset('upload/' . ($data?->logo ?? 'default.png')) }}" width="45">
-                                    </td>                            
-                                </tr>
-                                <tr>
-                                    <th> {{ transText('email_th') }}: </th>
-                                    <td>{{ $data->email ?? ''}}</td>
+                                <th> {{ transText('logo_th') }}: </th>
+                                <td>
+                                    <img alt="image" src="{{ asset('upload/' . ($data?->logo ?? 'default.png')) }}" width="45">
+                                </td>                            
+                            </tr>
+                            <tr>
+                                <th> {{ transText('email_th') }}: </th>
+                                <td>{{ $data->email ?? ''}}</td>
 
-                                    <th>{{ transText('address_th') }}: </th>
-                                    <td>{{ $data->address ?? ''}}</td>
-                                </tr>                                
-                                                           
-                                <tr>
-                                    <th>{{ transText('location_th') }}:</th>
-                                    <td style="word-break: break-word; max-width: 300px; padding: 5px;">
-                                        {{ $data->location ?? ''}}
-                                    </td>
+                                <th>{{ transText('address_th') }}: </th>
+                                <td>{{ $data->address ?? ''}}</td>
+                            </tr>                                
+                                                        
+                            <tr>
+                                <th>{{ transText('location_th') }}:</th>
+                                <td style="word-break: break-word; max-width: 300px; padding: 5px;">
+                                    {{ $data->location ?? ''}}
+                                </td>
 
-                                    <th>{{ transText('copyright_th') }}:</th>
-                                    <td>{{ $data->copyright ?? ''}}</td>
-                                </tr>
+                                <th>{{ transText('copyright_th') }}:</th>
+                                <td>{{ $data->copyright ?? ''}}</td>
+                            </tr>
 
-                                <tr>
-                                    <td colspan="4" class="text-center pt-2">
-                                        <button type="button" id="edit" data-id="{{ $data?->id }}" class="btn btn-primary">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div><!-- end card-body -->
-            </div><!-- end card -->
-        </div>
-        <!-- end col -->
+                            <tr>
+                                <td colspan="4" class="text-center pt-2">
+                                    <button type="button" id="edit" data-id="{{ $data?->id }}" class="btn btn-primary">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end card-body -->
+        </div><!-- end card -->
     </div>
     <!-- end row -->
 
