@@ -80,13 +80,12 @@
         </div><!-- end card header -->
 
         <div class="card-body">
-            <form id="form" name="form" class="form-horizontal" method="POST" action="{{ url('color') }}"
+            <form id="color_form" name="form" class="form-horizontal" method="POST" action="{{ url('color') }}"
                 enctype="multipart/form-data">
                 @csrf()
                 <div class="layout-color-wrapper">
 
                     <input type="hidden" name="id" id="color_id" value="{{ $data->id }}">
-                    <input type="hidden" name="user_info" id="user_info" value="{{ $data->user_info }}">
                     <input type="hidden" name="color_pattern" id="color_patterns" value="{{ $data->color_pattern }}">
 
                     <!-- New Color Pattern -->
@@ -1027,7 +1026,6 @@
                     type: 'GET',
                     success: function (data) {
                         $('#color_id').val(data.id);
-                        $('#user_info').val(data.user_info);
                         $('#color_patterns').val(data.color_pattern);
 
                         let fields = Object.keys(originalColorValues);
@@ -1136,11 +1134,7 @@
         $('#btn_close_color_pattern').on('click', function (e) {
             e.preventDefault(); // রিলোড বন্ধ করবে
 
-            let pid = {
-                {
-                    Js::from($data - > id)
-                }
-            }; // Blade থেকে নিরাপদভাবে ডেটা পাঠানো
+            let pid = @js($data->id); // Blade থেকে নিরাপদভাবে ডেটা পাঠানো
             $('#color_id').val(pid);
             $('#new_pattern').hide();
             $('#btn_update').show();
@@ -1148,6 +1142,7 @@
 
             $('#new_color_pattern').attr('required', false);
         });
+
 
     });
 

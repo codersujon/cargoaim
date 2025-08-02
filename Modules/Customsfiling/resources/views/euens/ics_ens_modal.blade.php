@@ -148,7 +148,7 @@
                                             <td>
                                                 <div style="display: flex; align-items: center; position: relative;">
 
-                                                    <input type="checkbox" id="copy_notify" name="copy_notify" value="Bike" style="margin-right: 4px; transform: scale(1.4); cursor: pointer;" title="Copy to Consignee">
+                                                    <input type="checkbox" id="copy_notify" name="copy_notify" value="Bike" style="margin-right: 4px; transform: scale(1.4); cursor: pointer;" title="Same of Consignee">
 
 
                                                     <div style="flex: 1; position: relative;">

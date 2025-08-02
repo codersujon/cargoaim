@@ -6,7 +6,7 @@ const notyf = new Notyf({
     duration: 5000, // milliseconds
     position: {
         x: 'right',
-        y: 'bottom'
+        y: 'top'
     },
     types: [
         {
@@ -685,7 +685,7 @@ $(document).ready(function () {
                 <td style="width: 60px;"><input type="text" name="weight_kg[]" class="form-control weight_kg" required autocomplete="off"></td>
                 <td style="width: 57px;"><input type="text" name="cbm[]" class="form-control cbm" required autocomplete="off"></td>
                 <td style="width: 65px;"><input type="text" name="hs_code[]" class="form-control hs_code" required autocomplete="off"></td>
-                <td style="width: 50px;"><input type="text" name="un_code_dg[]" class="form-control uppercase-only" required autocomplete="off"></td>
+                <td style="width: 50px;"><input type="text" name="un_code_dg[]" class="form-control uppercase-only" autocomplete="off"></td>
                 <td style="width: 130px;"><input type="text" name="cargo_marks[]" class="form-control uppercase-only" required autocomplete="off"></td>
                 <td><input type="text" name="cargo_description[]" class="form-control uppercase-only" required autocomplete="off"></td>
                 <td><i class="fa-solid fa-floppy-disk m-1 saveIcon" title="Save"></i></td>

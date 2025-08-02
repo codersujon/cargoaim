@@ -59,7 +59,9 @@
 <body>
 
     @php
-        $color = Modules\Core\Models\ColorManage::where('user_info', 'SuperAdmin')->where('active_color', 1)->first();
+        use Illuminate\Support\Facades\Auth;
+        $user = Auth::user();
+        $color = Modules\Core\Models\ColorManage::where('user_info', $user->userId)->where('active_color', 1)->first();
     @endphp
 
     @if($color)

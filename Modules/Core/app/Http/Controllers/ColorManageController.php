@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Core\Models\ColorManage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ColorManageController extends Controller
 {
@@ -14,16 +15,19 @@ class ColorManageController extends Controller
      */
     public function index()
     {
-        $data = ColorManage::where('user_info', 'SuperAdmin')->where('active_color', 1)->first();
-        $colorPatterns = ColorManage::where('user_info', 'SuperAdmin')->orderBy('id', 'asc')->get();
+        $user = Auth::user();
+
+        $data = ColorManage::where('user_info', $user->userId)->where('active_color', 1)->first();
+        $colorPatterns = ColorManage::where('user_info', $user->userId)->orderBy('id', 'asc')->get();
 
         return view('core::color.index', compact('data', 'colorPatterns'));
     }
 
     public function getColorPattern($pattern)
     {
+        $user = Auth::user();
         
-        $data = ColorManage::where('color_pattern', $pattern)->where('user_info', 'SuperAdmin')->first();
+        $data = ColorManage::where('color_pattern', $pattern)->where('user_info', $user->userId)->first();
 
         if ($data) {
             return response()->json($data);
@@ -39,6 +43,8 @@ class ColorManageController extends Controller
 
     public function store(Request $request) 
     {
+       
+
         $validatedData = $request->validate([
             'layout_left_color' => 'required|string',
             'layout_right_color' => 'required|string',
@@ -46,6 +52,8 @@ class ColorManageController extends Controller
         ]);
     
         DB::transaction(function () use ($request) {
+             $user = Auth::user();
+             
             // আগের active pattern কে inactive করা
             ColorManage::where('active_color', 1)->update(['active_color' => 0]);
     
@@ -53,7 +61,7 @@ class ColorManageController extends Controller
             ColorManage::updateOrCreate(
                 ['id' => $request->id],
                 [
-                    'user_info' => $request->user_info,
+                    'user_info' => $user->userId,
                     'color_pattern' => $request->color_pattern,
                     'layout_left_color' => $request->layout_left_color,
                     'layout_right_color' => $request->layout_right_color,
@@ -111,12 +119,14 @@ class ColorManageController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = Auth::user();
+
         if ($request->ajax()) {
             $color = ColorManage::find($id);
     
             if ($color) {
                 $color->update([
-                    'user_info' => 'SuperAdmin',
+                    'user_info' => $user->userId,
                     'layout_left_color' => '#6379c3',
                     'layout_right_color' => '#546ee5',
     
