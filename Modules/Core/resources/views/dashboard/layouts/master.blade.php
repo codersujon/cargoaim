@@ -61,7 +61,18 @@
     @php
         use Illuminate\Support\Facades\Auth;
         $user = Auth::user();
-        $color = Modules\Core\Models\ColorManage::where('user_info', $user->userId)->where('active_color', 1)->first();
+
+        $color = null;
+
+        if ($user && $user->userId) {
+            $color = Modules\Core\Models\ColorManage::where('user_info', $user->userId)->where('active_color', 1)->first();
+        }
+
+        if (!$color) {
+            $color = Modules\Core\Models\ColorManage::where('color_pattern', 'default')->first();
+        }
+
+        
     @endphp
 
     @if($color)

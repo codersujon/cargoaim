@@ -19,6 +19,8 @@ class ColorManageController extends Controller
 
         $data = null;
 
+        // return $user->userId;
+
         if ($user && $user->userId) {
             $data = ColorManage::where('user_info', $user->userId)
                             ->where('active_color', 1)
@@ -28,6 +30,8 @@ class ColorManageController extends Controller
         if (!$data) {
             $data = ColorManage::where('color_pattern', 'default')->first();
         }
+
+        // return $data;
 
         $colorPatterns = ColorManage::where('user_info', $user->userId)->orderBy('id', 'asc')->get();
 
