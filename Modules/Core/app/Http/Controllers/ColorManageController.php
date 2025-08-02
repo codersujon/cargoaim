@@ -17,7 +17,18 @@ class ColorManageController extends Controller
     {
         $user = Auth::user();
 
-        $data = ColorManage::where('user_info', $user->userId)->where('active_color', 1)->first();
+        $data = null;
+
+        if ($user && $user->userId) {
+            $data = ColorManage::where('user_info', $user->userId)
+                            ->where('active_color', 1)
+                            ->first();
+        }
+
+        if (!$data) {
+            $data = ColorManage::where('color_pattern', 'default')->first();
+        }
+
         $colorPatterns = ColorManage::where('user_info', $user->userId)->orderBy('id', 'asc')->get();
 
         return view('core::color.index', compact('data', 'colorPatterns'));
@@ -53,7 +64,7 @@ class ColorManageController extends Controller
     
         DB::transaction(function () use ($request) {
              $user = Auth::user();
-             
+
             // আগের active pattern কে inactive করা
             ColorManage::where('active_color', 1)->update(['active_color' => 0]);
     
