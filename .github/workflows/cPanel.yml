@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - dev-habiba
+      - ics_ens
 
 jobs:
   deploy:
@@ -83,4 +85,14 @@ jobs:
             php artisan db:seed --class='Modules\Core\Database\Seeders\MenuTableSeeder' --force
             php artisan db:seed --class='Modules\Core\Database\Seeders\CoreLanguageSeeder' --force
           EOF
+      
+      - name: 🌐 Health Check
+        run: |
+          echo "Checking https://test.cargoaim.net"
+          STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://test.cargoaim.net)
+          if [ "$STATUS" != "200" ]; then
+            echo "❌ Health check failed with HTTP status $STATUS"
+            exit 1
+          fi
+          echo "✅ Health check passed with status $STATUS"
           
